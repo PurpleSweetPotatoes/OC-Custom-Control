@@ -102,6 +102,7 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
         
     }else {
         if (self.statu == RefreshStatuType_willRefresh) {
+            self.statu = RefreshStatuType_Refreshing;
             if (self.block) {
                 self.block();
             }
@@ -110,7 +111,15 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
 }
 #pragma mark - Refresh Method
 - (void)beginAnimation {
-    self.statu = RefreshStatuType_Refreshing;
+    if (self.statu != RefreshStatuType_Refreshing) {
+        self.statu = RefreshStatuType_Refreshing;
+        [UIView animateWithDuration:0.1 animations:^{
+            self.scrollView.contentOffset = CGPointMake(0, self.origiOffsetY - self.bounds.size.height);
+        }];
+    }
+    [UIView animateWithDuration:0.25 animations:^{
+        self.scrollView.contentInset = UIEdgeInsetsMake( self.bounds.size.height - self.origiOffsetY, 0, 0, 0);
+    }];
     if (self.refreshStr) {
         self.statuLab.text = self.refreshStr;
     }
@@ -118,9 +127,6 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
         self.statuLab.text = [NSBundle refreshStringKey:keyRefresh];
     }
     [self changeHiddenStatus];
-    [UIView animateWithDuration:0.25 animations:^{
-        self.scrollView.contentInset = UIEdgeInsetsMake( self.bounds.size.height - self.origiOffsetY, 0, 0, 0);
-    }];
 }
 - (void)endRefresh {
     self.statu = RefreshStatuType_Pull;
