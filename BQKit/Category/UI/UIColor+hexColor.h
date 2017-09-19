@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (hexColor)
-+ (UIColor *)mainColor;
-+ (UIColor *)textColor;
-+ (UIColor *)lineColor;
-+ (UIColor *)hexColor:(NSInteger)hex;
+@property (nonatomic, readonly, assign) CGFloat red;
+@property (nonatomic, readonly, assign) CGFloat green;
+@property (nonatomic, readonly, assign) CGFloat blue;
+@property (nonatomic, readonly, strong) NSString * hexString;
++ (UIColor *)colorFromHexString:(NSString *)hexString;
 @end

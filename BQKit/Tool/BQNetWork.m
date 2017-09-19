@@ -21,13 +21,13 @@ typedef NS_ENUM(NSUInteger, NetWorkType) {
 
 @implementation BQNetWork
 
-+ (void)postUrl:(NSString *)urlString parameter:(NSDictionary *)parameter compeleted:(void (^)(id _Nullable))handle {
++ (NSURLSessionDataTask *)postUrl:(NSString *)urlString parameter:(NSDictionary *)parameter compeleted:(void (^)(id _Nullable))handle {
     NSMutableURLRequest *request = [self configRequestWithUrl:urlString parameter:parameter netWorkType:POST];
-    [self asyncDataWithRequest:request compeletedHandle:handle];
+    return [self asyncDataWithRequest:request compeletedHandle:handle];
 }
-+ (void)getUrl:(NSString *)urlString parameter:(NSDictionary *)parameter compeleted:(void (^)(id _Nullable))handle {
++ (NSURLSessionDataTask *)getUrl:(NSString *)urlString parameter:(NSDictionary *)parameter compeleted:(void (^)(id _Nullable))handle {
     NSMutableURLRequest *request = [self configRequestWithUrl:urlString parameter:parameter netWorkType:GET];
-    [self asyncDataWithRequest:request compeletedHandle:handle];
+    return [self asyncDataWithRequest:request compeletedHandle:handle];
 }
 
 + (NSMutableURLRequest *)configRequestWithUrl:(NSString *)urlString
@@ -58,30 +58,32 @@ typedef NS_ENUM(NSUInteger, NetWorkType) {
     return request;
 }
 
-+ (void)asyncDataWithRequest:(NSMutableURLRequest *)request
++ (NSURLSessionDataTask *)asyncDataWithRequest:(NSMutableURLRequest *)request
             compeletedHandle:(void (^)(id _Nullable))handle {
     if (![self isExistenceNetwork]) {
         NSLog(@"当前网络无法链接上Internet");
-        return;
+        return nil;
     }
     
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSession * session = [NSURLSession sharedSession];
+    NSURLSessionDataTask * dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [self loadData:data response:response error:error handle:handle];
     }];
     [dataTask resume];
+    return dataTask;
 }
-+ (void)postUploadWithUrl:(NSString *_Nullable)urlString
++ (NSURLSessionUploadTask *)postUploadWithUrl:(NSString *_Nullable)urlString
                 parameter:(NSDictionary *_Nullable)parameter
                  picBlock:(NSDictionary *_Nullable(^_Nullable)())picBlock
                compeleted:(void(^_Nullable)(id _Nullable content))handle; {
     NSURLSession *session = [NSURLSession sharedSession];
     NSMutableURLRequest *request = [self configPostImageURLWithString:urlString parameters:parameter picBlock:picBlock];
     request.HTTPMethod = @"POST";
-    [[session uploadTaskWithRequest:request fromData:request.HTTPBody completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionUploadTask * uploadTask = [session uploadTaskWithRequest:request fromData:request.HTTPBody completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [self loadData:data response:response error:error handle:handle];
-    }] resume];
+    }];
+    [uploadTask  resume];
+    return uploadTask;
 }
 
 + (void)loadData:(NSData * _Nullable)data response:(NSURLResponse * _Nullable)response error:(NSError * _Nullable)error handle:(void(^)(id _Nullable))handle {
