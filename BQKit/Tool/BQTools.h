@@ -12,15 +12,18 @@
 /**  警告消息展示 */
 + (void)showMessageWithTitle:(NSString * _Nullable)title
                      content:(NSString * _Nullable)content;
+
 /**  警告消息展示，带点击回调 */
 + (void)showMessageWithTitle:(NSString * _Nullable)title
                      content:(NSString * _Nullable)content
                handle:(void(^ _Nullable)())clickedBtn;
+
 /**  警告消息展示,自定义按钮名称带按钮事件 */
 + (void)showMessageWithTitle:(NSString * _Nullable)title
                      content:(NSString * _Nullable)content
                 buttonTitles:(NSArray <NSString *> * _Nullable)titles
                clickedHandle:(void(^ _Nullable)(NSInteger index))clickedBtn;
+
 /**  警告消息展示,自定义按钮名称带按钮事件、警告框弹出完成回调 */
 + (void)showMessageWithTitle:(NSString * _Nullable)title
                      content:(NSString * _Nullable)content
@@ -29,10 +32,12 @@
             compeletedHandle:(void(^ _Nullable)())handle;
 
 /**  归档处理操作 */
-+ (void)encodeWithObject:(NSObject * _Nullable)encodeObject withcoder:(NSCoder * _Nullable)aCoder;
++ (void)encodeWithObject:(NSObject * _Nullable)encodeObject
+               withcoder:(NSCoder * _Nullable)aCoder;
 
 /**  解档处理操 */
-+ (void)unencodeWithObject:(NSObject * _Nullable)unarchObject withcoder:(NSCoder * _Nullable)aDecoder;
++ (void)unencodeWithObject:(NSObject * _Nullable)unarchObject
+                 withcoder:(NSCoder * _Nullable)aDecoder;
 
 /**  将对象转化为字符串 */
 + (NSString * _Nullable)jsonStringWithObject:(id _Nullable)object;
@@ -61,8 +66,7 @@
 /**  删除钥匙串数据 */
 + (BOOL)deleteKeyChainValue;
 
-/**  随机色 */
-+ (UIColor * _Nullable)randomColor;
+
 
 @end
 

@@ -14,7 +14,8 @@
     return image;
 }
 
-+ (UIImage *)createCodeImageWithContent:(NSString *)content size:(CGFloat)size {
++ (UIImage *)createCodeImageWithContent:(NSString *)content
+                                   size:(CGFloat)size {
     
     CIImage *image = [self createCodeCIImageWithContent:content];
     //获得生成的二维码坐标信息
@@ -49,15 +50,24 @@
     //6.返回生成好的二维码
     return [UIImage imageWithCGImage:scaledImage];
 }
-+ (UIImage *)createCodeImageWithContent:(NSString *)content size:(CGFloat)size logo:(UIImage *)logo {
+
++ (UIImage *)createCodeImageWithContent:(NSString *)content
+                                   size:(CGFloat)size logo:(UIImage *)logo {
     UIImage *image = [self createCodeImageWithContent:content size:size];
     return [image addlogo:logo];
 }
-+ (UIImage *)createCodeImageWithContent:(NSString *)content size:(CGFloat)size red:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue {
+
++ (UIImage *)createCodeImageWithContent:(NSString *)content
+                                   size:(CGFloat)size
+                                    red:(NSInteger)red
+                                  green:(NSInteger)green
+                                   blue:(NSInteger)blue {
+    
     UIImage *image = [UIImage createCodeImageWithContent:content size:size];
     const int imageWidth = image.size.width;
     const int imageHeight = image.size.height;
     size_t      bytesPerRow = imageWidth * 4;
+    
     uint32_t* rgbImageBuf = (uint32_t*)malloc(bytesPerRow * imageHeight);
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(rgbImageBuf, imageWidth, imageHeight, 8, bytesPerRow, colorSpace,  kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
@@ -94,7 +104,8 @@
     return resultUIImage;
 }
 
-+ (UIImage *)createCodeImageWithContent:(NSString *)content size:(CGFloat)size logo:(UIImage *)logo red:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue {
++ (UIImage *)createCodeImageWithContent:(NSString *)content
+                                   size:(CGFloat)size logo:(UIImage *)logo red:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue {
     UIImage *image = [self createCodeImageWithContent:content size:size red:red green:green blue:blue];
     return [image addlogo:logo];
 }

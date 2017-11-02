@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 /**
  需要支持iOS9及以上
  */
 @interface UIDevice (Authorization)
+
 + (CGFloat)currentVersion;
 #pragma mark - 摄像头是否可用
 // 判断设备是否有摄像头

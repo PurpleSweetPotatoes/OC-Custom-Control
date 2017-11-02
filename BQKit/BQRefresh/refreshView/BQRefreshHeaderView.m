@@ -9,10 +9,6 @@
 #import "BQRefreshHeaderView.h"
 #import "NSBundle+Refresh.h"
 
-static NSString * const keyIdle = @"BQRefreshHeaderIdleText";
-static NSString * const keyWill = @"BQRefreshHeaderPullingText";
-static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
-
 @interface BQRefreshHeaderView()
 @property (nonatomic, strong) UIImageView * pullImgView;
 @property (nonatomic, strong) UIImageView * gifsView;
@@ -23,6 +19,11 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
 @end
 
 @implementation BQRefreshHeaderView
+
+static NSString * const keyIdle = @"BQRefreshHeaderIdleText";
+static NSString * const keyWill = @"BQRefreshHeaderPullingText";
+static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
+
 #pragma mark - Create Method
 + (instancetype)headerWithBlock:(CallBlock)block {
     //头部刷新视图高度
@@ -42,6 +43,7 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
     headerView.refreshStr = refreshStr;
     return headerView;
 }
+
 #pragma mark - Instance Method
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -50,14 +52,18 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
     }
     return self;
 }
+
 - (void)setupUI {
     [self addSubview:self.gifsView];
     [self addSubview:self.pullImgView];
     [self addSubview:self.statuLab];
+    
     self.gifsView.hidden = YES;
 }
+
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
     self.gifsView.center = CGPointMake(self.bounds.size.width * 0.5, 32);
     self.pullImgView.center = self.gifsView.center;
     self.statuLab.frame = CGRectMake(0, 60, self.bounds.size.width, 15);
@@ -65,19 +71,21 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
 
 #pragma mark - KVO Method 
 - (void)contentOffsetDidChange {
+    
     if (self.statu == RefreshStatuType_Refreshing) {
         return;
     }
+    
     if (self.scrollView.isDragging) {
         switch (self.statu) {
             case RefreshStatuType_Pull:
             {
                 if (self.pullStr) {
                     self.statuLab.text = self.pullStr;
-                }
-                else {
+                } else {
                     self.statuLab.text = [NSBundle refreshStringKey:keyIdle];
                 }
+                
                 if ((self.origiOffsetY - self.scrollView.contentOffset.y) > self.bounds.size.height) {
                     self.statu = RefreshStatuType_willRefresh;
                 }
@@ -85,12 +93,13 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
                 break;
             case RefreshStatuType_willRefresh:
             {
+                
                 if (self.willRefreshStr) {
                     self.statuLab.text = self.willRefreshStr;
-                }
-                else {
+                } else {
                     self.statuLab.text = [NSBundle refreshStringKey:keyWill];
                 }
+                
                 if ((self.origiOffsetY - self.scrollView.contentOffset.y) <= self.bounds.size.height){
                     self.statu = RefreshStatuType_Pull;
                 }
@@ -100,7 +109,7 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
                 break;
         }
         
-    }else {
+    } else {
         if (self.statu == RefreshStatuType_willRefresh) {
             self.statu = RefreshStatuType_Refreshing;
             if (self.block) {
@@ -109,36 +118,44 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
         }
     }
 }
+
 #pragma mark - Refresh Method
 - (void)beginAnimation {
+    
     if (self.statu != RefreshStatuType_Refreshing) {
         self.statu = RefreshStatuType_Refreshing;
         [UIView animateWithDuration:0.1 animations:^{
             self.scrollView.contentOffset = CGPointMake(0, self.origiOffsetY - self.bounds.size.height);
         }];
     }
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.contentInset = UIEdgeInsetsMake( self.bounds.size.height - self.origiOffsetY, 0, 0, 0);
     }];
+    
     if (self.refreshStr) {
         self.statuLab.text = self.refreshStr;
-    }
-    else {
+    } else {
         self.statuLab.text = [NSBundle refreshStringKey:keyRefresh];
     }
+    
     [self changeHiddenStatus];
 }
+
 - (void)endRefresh {
     self.statu = RefreshStatuType_Pull;
     [self changeHiddenStatus];
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.scrollView.contentInset = UIEdgeInsetsMake( -self.origiOffsetY, 0, 0, 0);
     }];
 }
+
 - (void)changeHiddenStatus {
     self.gifsView.hidden = !self.gifsView.isHidden;
     self.pullImgView.hidden = !self.pullImgView.isHidden;
 }
+
 #pragma mark - get Method
 - (UIImageView *)pullImgView {
     if (_pullImgView == nil) {
@@ -148,18 +165,18 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
     }
     return _pullImgView;
 }
+
 - (UIImageView *)gifsView {
     if (_gifsView == nil) {
         UIImageView * gifImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
         NSArray* images = [NSBundle animatedGifs];
-        if ([images count] > 1)
-        {
+        
+        if ([images count] > 1) {
             [gifImgView setImage:[UIImage animatedImageWithImages:images duration:(1.0f / 10.0f) * [images count]]];
-        }
-        else if ([images count] == 1)
-        {
+        } else if ([images count] == 1) {
             [gifImgView setImage:[images objectAtIndex:0]];
         }
+        
         _gifsView = gifImgView;
     }
     return _gifsView;

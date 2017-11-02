@@ -11,11 +11,11 @@
 @interface BQRefreshHeaderView : BQRefreshView
 
 + (instancetype)headerWithBlock:(CallBlock)block;
-
 + (instancetype)headerWithPullStr:(NSString *)pullStr
                    willRefreshStr:(NSString *)willRefreshStr
                        refreshStr:(NSString *)refreshStr
                             Block:(CallBlock)block;
+
 - (void)beginAnimation;
 - (void)endRefresh;
 @end

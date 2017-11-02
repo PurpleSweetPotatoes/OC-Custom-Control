@@ -13,8 +13,6 @@
 #import <UIImageView+WebCache.h>
 #endif
 
-static const NSTimeInterval  times = 2.0;
-
 @interface BQBannerView ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView * scrollView;
 @property (nonatomic, strong) UIPageControl * pageControl;
@@ -26,13 +24,8 @@ static const NSTimeInterval  times = 2.0;
 
 @implementation BQBannerView
 
-- (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray<NSString *> *)dataSource
-{
-    self = [self initWithFrame:frame];
-    self.dataSource = dataSource;
-    [self reloadSource];
-    return self;
-}
+static const NSTimeInterval  times = 2.0;
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -45,13 +38,24 @@ static const NSTimeInterval  times = 2.0;
     }
     return self;
 }
+
+- (instancetype)initWithFrame:(CGRect)frame
+                   dataSource:(NSArray<NSString *> *)dataSource {
+    self = [self initWithFrame:frame];
+    self.dataSource = dataSource;
+    [self reloadSource];
+    return self;
+}
+
 - (void)initData {
     NSMutableArray * arr = [NSMutableArray array];
     for (NSInteger i = 0; i < 3; ++i) {
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * self.bounds.size.width, 0, self.bounds.size.width, self.bounds.size.height)];
         [arr addObject:imageView];
     }
+    
     self.imageViewArr = arr;
+    
     self.timer = [CADisplayLink displayLinkWithTarget:self selector:@selector(timeValueChange:)];
     self.timer.frameInterval = 60 * times;
     [self.timer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -66,10 +70,12 @@ static const NSTimeInterval  times = 2.0;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    
     for (UIImageView * imageView in self.imageViewArr) {
         [self.scrollView addSubview:imageView];
     }
     [self addSubview:self.scrollView];
+    
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0 , 60, 20)];
     self.pageControl.center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height - self.pageControl.bounds.size.height * 0.8);
     self.pageControl.userInteractionEnabled = NO;
@@ -78,31 +84,32 @@ static const NSTimeInterval  times = 2.0;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureEvent)];
     [self addGestureRecognizer:tap];
 }
+
 - (void)timeValueChange:(NSTimer *)timer {
     NSInteger index = self.currentIndex + 1;
     self.currentIndex = index % self.dataSource.count;
     [self.scrollView setContentOffset:CGPointMake(self.bounds.size.width * 2, 0) animated:YES];
 }
-- (void)leftScroll {
-    
-}
+
 #pragma mark - timer 
 - (void)beginTime {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(times * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.timer.paused = NO;
     });
 }
+
 #pragma mark - GestureEvent
 - (void)tapGestureEvent {
     if (self.clickBlock) {
         self.clickBlock(self.currentIndex);
     }
 }
-#pragma mark - UIScrollViewDelegate
 
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.timer.paused = YES;
 }
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self beginTime];
     if (scrollView.contentOffset.x != self.bounds.size.width) {
@@ -115,6 +122,7 @@ static const NSTimeInterval  times = 2.0;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     [self imageChage];
 }
+
 - (void)imageChage {
 #ifdef UIImageView
     for (NSInteger i = -1; i < 2; ++ i) {
@@ -124,6 +132,7 @@ static const NSTimeInterval  times = 2.0;
     self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
 #endif
 }
+
 - (void)bannerViewClickEvent:(void (^)(NSInteger))clickBlock {
     self.clickBlock = clickBlock;
 }
@@ -133,21 +142,25 @@ static const NSTimeInterval  times = 2.0;
     [self.timer invalidate];
     self.timer = nil;
 }
+
 - (void)reloadSource {
+    NSAssert(self.dataSource.count, @"The banner dataSource number cannot is zero");
+    
     self.timer.paused = YES;
     self.pageControl.numberOfPages = self.dataSource.count;
-    NSAssert(self.dataSource.count, @"The banner dataSource number cannot is zero");
     self.currentIndex = 0;
     [self imageChage];
+    
     if (self.dataSource.count >= 2) {
         [self beginTime];
         self.scrollView.contentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height);
         self.pageControl.hidden = NO;
-    }else {
+    } else {
         self.scrollView.contentSize = self.bounds.size;
         self.pageControl.hidden = YES;
     }
 }
+
 - (void)setCurrentIndex:(NSInteger)currentIndex {
     _currentIndex = currentIndex;
     self.pageControl.currentPage = currentIndex;

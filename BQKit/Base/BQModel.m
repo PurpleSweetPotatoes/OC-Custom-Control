@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 
 @implementation BQModel
+
 + (NSMutableArray *)mallocWithArray:(NSArray *)array {
     NSMutableArray * models = [NSMutableArray array];
     for (NSDictionary * dict in array) {
@@ -18,13 +19,16 @@
     }
     return models;
 }
+
 + (instancetype)mallocWithDict:(NSDictionary *)infoDict {
-    BQModel * model = [self new];
+    BQModel * model = [[self alloc] init];
+    
     if (infoDict.allKeys.count == 0) {
         return model;
     }
-    unsigned int ivarCount = 0;
+    
     //获取传入类成员变量列表
+    unsigned int ivarCount = 0;
     Ivar *ivarArray = class_copyIvarList(model.class, &ivarCount);
     unsigned int count = ivarCount;
     for (int i = 0; i < count; i ++) {
@@ -37,18 +41,21 @@
         }
     }
     free(ivarArray);
+    
     return model;
 }
+
 - (NSString *)description
 {
-    unsigned int ivarCount = 0;
     //获取传入类成员变量列表
+    unsigned int ivarCount = 0;
     Ivar *ivarArray = class_copyIvarList(self.class, &ivarCount);
     unsigned int count = ivarCount;
+    
     NSMutableString * result = [NSMutableString stringWithFormat:@"\n<%@:%p",NSStringFromClass(self.class),self];
-    if (count > 0) {
-        [result appendString:@"\n"];
-    }
+    
+    if (count > 0) { [result appendString:@"\n"]; }
+    
     for (int i = 0; i < count; i ++) {
         //得到变量名字
         const char *name = ivar_getName(ivarArray[i]);
@@ -58,8 +65,10 @@
         NSString * str = [NSString stringWithFormat:@" %@ : %@\n",ivarKey,value];
         [result appendString:str];
     }
-    [result appendString:@">"];
+    
     free(ivarArray);
+    [result appendString:@">"];
+    
     return result;
 }
 @end

@@ -15,18 +15,21 @@ static NSBundle * localBundle = nil;
 
 
 @implementation NSBundle (Refresh)
+
 + (NSBundle *)refreshBunlde {
     if (refresh == nil) {
         refresh = [self bundleWithPath:[[NSBundle mainBundle] pathForResource:@"BQRefresh" ofType:@"bundle"]];
     }
     return refresh;
 }
+
 + (UIImage *)arrowImage {
     if (img == nil) {
         img = [UIImage imageWithContentsOfFile:[[self refreshBunlde] pathForResource:@"arrow@2x" ofType:@"png"]];
     }
     return img;
 }
+
 + (NSString *)refreshStringKey:(NSString *)key {
     if (localBundle == nil) {
         NSString * language = [NSLocale preferredLanguages].firstObject;
@@ -48,6 +51,7 @@ static NSBundle * localBundle = nil;
     NSString * value = [localBundle localizedStringForKey:key value:@"" table:nil];
     return [[NSBundle mainBundle] localizedStringForKey:key value:value table:nil];
 }
+
 + (UIImage *)animatedFirstImg {
     if (img == nil) {
         CGFloat scale = [UIScreen mainScreen].scale;
@@ -61,7 +65,7 @@ static NSBundle * localBundle = nil;
 {
     NSString * name = @"earth_loading";
     CGFloat scale = [UIScreen mainScreen].scale;
-    NSData *data = nil;
+    NSData * data = nil;
     if (scale > 1.0f)
     {
         NSString *retinaPath = [[self refreshBunlde] pathForResource:[name stringByAppendingString:@"@2x"] ofType:@"gif"];
@@ -72,17 +76,12 @@ static NSBundle * localBundle = nil;
             NSString *path = [[self refreshBunlde] pathForResource:name ofType:@"gif"];
             data = [NSData dataWithContentsOfFile:path];
         }
-    }
-    else
-    {
+    } else {
         NSString *path = [[self refreshBunlde] pathForResource:name ofType:@"gif"];
         data = [NSData dataWithContentsOfFile:path];
     }
     
-    if (!data)
-    {
-        return nil;
-    }
+    if (!data) { return nil;}
     
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
     
@@ -90,16 +89,14 @@ static NSBundle * localBundle = nil;
     
     UIImage *animatedImage;
     NSMutableArray *images = [NSMutableArray array];
+    
     if (count <= 1)
     {
         animatedImage = [UIImage imageWithData:data];
         [images addObject:animatedImage];
-    }
-    else
-    {
+    } else {
         NSTimeInterval duration = 0.0f;
-        for (size_t i = 0; i < count; i++)
-        {
+        for (size_t i = 0; i < count; i++) {
             CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);
             duration += [self frameDurationAtIndex:i source:source];
             [images addObject:[UIImage imageWithCGImage:image scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]];
@@ -120,9 +117,7 @@ static NSBundle * localBundle = nil;
     NSNumber *delayTimeUnclampedProp = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];
     if (delayTimeUnclampedProp) {
         frameDuration = [delayTimeUnclampedProp floatValue];
-    }
-    else {
-        
+    } else {
         NSNumber *delayTimeProp = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];
         if (delayTimeProp) {
             frameDuration = [delayTimeProp floatValue];

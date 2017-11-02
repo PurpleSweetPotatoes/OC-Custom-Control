@@ -30,7 +30,8 @@ typedef NS_ENUM(NSUInteger, ClipSizeType) {
  @param type   裁剪类型
  @param handle 回调方法
  */
-+ (void)showPickerImageWithClipType:(ClipSizeType)type handleImage:(void(^)(UIImage *image))handle;
++ (void)showPickerImageWithClipType:(ClipSizeType)type
+                        handleImage:(void(^)(UIImage *image))handle;
 @end
 
 @interface BQDisImageView : UIView

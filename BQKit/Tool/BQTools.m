@@ -10,23 +10,32 @@
 #import <objc/runtime.h>
 
 @implementation BQTools
-+ (void)showMessageWithTitle:(NSString *)title content:(NSString *)content {
+
++ (void)showMessageWithTitle:(NSString *)title
+                     content:(NSString *)content {
     [self showMessageWithTitle:title content:content handle:nil];
 }
-+ (void)showMessageWithTitle:(NSString *)title content:(NSString *)content handle:(void (^)())clickedBtn {
+
++ (void)showMessageWithTitle:(NSString *)title
+                     content:(NSString *)content
+                      handle:(void (^)())clickedBtn {
     [self showMessageWithTitle:title content:content buttonTitles:@[@"确定"] clickedHandle:clickedBtn];
 }
+
 + (void)showMessageWithTitle:(NSString *)title
                      content:(NSString *)content
                 buttonTitles:(NSArray<NSString *> *)titles
                clickedHandle:(void (^)(NSInteger))clickedBtn
-            compeletedHandle:(void (^)())handle{
+            compeletedHandle:(void (^)())handle {
+    
     if (title == nil) {
         title = @"";
     }
+    
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:title message:content preferredStyle:UIAlertControllerStyleAlert];
     UIViewController *currentVc = [self currentViewController];
     NSInteger index = 0;
+    
     for (NSString *btnTitle in titles) {
         [alertVc addAction:[UIAlertAction actionWithTitle:btnTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (clickedBtn != nil) {
@@ -35,6 +44,7 @@
         }]];
         ++index;
     }
+    
     [currentVc presentViewController:alertVc animated:YES completion:^{
         if (handle != nil) {
             handle();
@@ -133,26 +143,23 @@
     return [NSBundle mainBundle].bundleIdentifier;
 }
 
-+ (UIColor *)randomColor {
-    UIColor * color = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
-    return color;
-}
-
 + (NSMutableArray *)valuesForamtToStringWithArray:(NSArray *)array {
     NSMutableArray * newArray = [NSMutableArray array];
     for (id obj in array) {
         id newObj;
+        
         if ([obj isKindOfClass:[NSNumber class]]) {
             newObj = [NSString stringWithFormat:@"%@",obj];
-        }else if ([obj isKindOfClass:[NSDictionary class]]) {
+        } else if ([obj isKindOfClass:[NSDictionary class]]) {
             newObj = [self valuesForamtToStringWithDict:obj];
-        }else if ([obj isKindOfClass:[NSArray class]]){
+        } else if ([obj isKindOfClass:[NSArray class]]){
             newObj = [self valuesForamtToStringWithArray:obj];
-        }else if ([obj isKindOfClass:[NSNull class]]){
+        } else if ([obj isKindOfClass:[NSNull class]]){
             newObj = @"";
-        }else {
+        } else {
             newObj = obj;
         }
+        
         [newArray addObject:newObj];
     }
     return newArray;
@@ -163,22 +170,23 @@
     [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         NSString *newKey = [NSString stringWithFormat:@"%@",key];
         id newObj;
+        
         if ([obj isKindOfClass:[NSNumber class]]) {
             newObj = [NSString stringWithFormat:@"%@",obj];
-        }else if ([obj isKindOfClass:[NSDictionary class]]) {
+        } else if ([obj isKindOfClass:[NSDictionary class]]) {
             newObj = [self valuesForamtToStringWithDict:obj];
-        }else if ([obj isKindOfClass:[NSArray class]]){
+        } else if ([obj isKindOfClass:[NSArray class]]){
             newObj = [self valuesForamtToStringWithArray:obj];
-        }else if ([obj isKindOfClass:[NSNull class]]){
+        } else if ([obj isKindOfClass:[NSNull class]]){
             newObj = @"";
-        }else {
+        } else {
             newObj = obj;
         }
+        
         newDict[newKey] = newObj;
     }];
     return newDict;
 }
-
 
 + (NSMutableDictionary *)getKeychain {
     NSString * serveice = [self currentBundleIdentifier];
@@ -207,19 +215,22 @@
     CFDataRef result = nil;
     SecItemCopyMatching((CFDictionaryRef)keychainQuery, (CFTypeRef *)&result);
     id data = nil;
+    
     if (result != nil) {
         data = [NSData dataWithData:(__bridge NSData *)result];
         CFRelease(result);
     }
+    
     return data;
 }
 
 + (NSString *)jsonStringWithObject:(id)object {
     NSError * error;
     NSData * data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&error];
+    
     if (!error) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    }else {
+    } else {
         NSLog(@"jsonString format error:%@",error.localizedDescription);
         return nil;
     }

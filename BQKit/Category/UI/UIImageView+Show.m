@@ -18,21 +18,26 @@
 + (void)showImage:(UIImage *)image frame:(CGRect)frame;
 @end;
 
-@implementation UIImageView (Show)
+@implementation UIImageView (Show) <UIGestureRecognizerDelegate>
+
 - (void)canShowImage {
+    
     for (UIGestureRecognizer * sender in self.gestureRecognizers) {
         [self removeGestureRecognizer:sender];
     }
+    
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImageView:)];
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:tap];
 }
 
 - (void)showImageView:(UITapGestureRecognizer *)tap {
+    
     if (!self.image) {
         NSLog(@"no have Image at here!");
         return;
     }
+    
     CGRect imageViewFrame = [self.superview convertRect:self.frame toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
     [BQShowImageView showImage:self.image frame:imageViewFrame];
 }
@@ -42,15 +47,18 @@
 
 @implementation BQShowImageView
 
-+ (void)showImage:(UIImage *)image frame:(CGRect)frame {
++ (void)showImage:(UIImage *)image
+            frame:(CGRect)frame {
     BQShowImageView * showImageView = [[BQShowImageView alloc] initWithOrignframe:frame];
     showImageView.imageView.image = image;
     [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:showImageView];
     [showImageView beginAnimation];
 }
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     //重载方法 防止点击事件传递
 }
+
 - (id)initWithOrignframe:(CGRect)frame{
     self = [super init];
     if (self != nil) {
@@ -62,8 +70,8 @@
     }
     return self;
 }
-#pragma mark - 实例方法
 
+#pragma mark - 实例方法
 - (void)initUI{
     
     self.backView = [[UIView alloc] initWithFrame:self.bounds];
@@ -80,10 +88,12 @@
     self.imageView = imageView;
     [self addSubview:imageView];
 }
+
 - (void)beginAnimation {
     self.backView.alpha = 0;
     CGFloat toWidth = self.bounds.size.width - 10;
     CGFloat toHeight = self.imageView.bounds.size.height * toWidth / self.imageView.bounds.size.width;
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.backView.alpha = 1;
         self.imageView.bounds = CGRectMake(0, 0, toWidth, toHeight);
@@ -91,41 +101,37 @@
         
     }];
 }
+
 #pragma mark - 事件响应方法
-- (void)gestureRecognizerChange:(UIGestureRecognizer*)gesture{
+- (void)gestureRecognizerChange:(UIGestureRecognizer*)gesture {
     // 拖拽
     if ([gesture isKindOfClass:[UIPanGestureRecognizer class]]) {
         UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)gesture;
         static CGPoint startCenter;
         if (pan.state == UIGestureRecognizerStateBegan) {
             startCenter = self.imageView.center;
-        }
-        else if (pan.state == UIGestureRecognizerStateChanged) {
+        } else if (pan.state == UIGestureRecognizerStateChanged) {
             // 此处必须从self.view中获取translation，因为translation和view的transform属性挂钩，若transform改变了则translation也会变
             CGPoint translation = [pan translationInView:self];
             self.imageView.center = CGPointMake(startCenter.x + translation.x, startCenter.y + translation.y);
-        }
-        else if (pan.state == UIGestureRecognizerStateEnded) {
+        } else if (pan.state == UIGestureRecognizerStateEnded) {
             startCenter = CGPointZero;
         }
-    }
-    // 缩放
-    else {
+    } else {// 缩放
         UIPinchGestureRecognizer *pinch = (UIPinchGestureRecognizer *)gesture;
         static CGFloat startScale;
         if (pinch.state == UIGestureRecognizerStateBegan) {
             startScale = pinch.scale;
-        }
-        else if (pinch.state == UIGestureRecognizerStateChanged) {
+        } else if (pinch.state == UIGestureRecognizerStateChanged) {
             CGFloat scale = (pinch.scale - startScale) +1;
             self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
             startScale = pinch.scale;
-        }
-        else if (pinch.state == UIGestureRecognizerStateEnded) {
+        } else if (pinch.state == UIGestureRecognizerStateEnded) {
             startScale = 1;
         }
     }
 }
+
 - (void)removeSelf {
     [UIView animateWithDuration:0.25 animations:^{
         self.imageView.frame = self.orgiFrame;

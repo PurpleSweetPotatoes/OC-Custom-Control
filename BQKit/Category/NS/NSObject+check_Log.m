@@ -16,17 +16,17 @@
         if (obj.allKeys.count > 0) {
             return NO;
         }
-    }else if ([self isKindOfClass:[NSArray class]]) {
+    } else if ([self isKindOfClass:[NSArray class]]) {
         NSArray * obj = (NSArray *)self;
         if (obj.count > 0) {
             return NO;
         }
-    }else if ([self isKindOfClass:[UITextField class]]) {
+    } else if ([self isKindOfClass:[UITextField class]]) {
         UITextField * obj = (UITextField *)self;
         if (obj.text.length > 0) {
             return NO;
         }
-    }else if ([self isKindOfClass:[UITextView class]]) {
+    } else if ([self isKindOfClass:[UITextView class]]) {
         UITextView * obj = (UITextView *)self;
         if (obj.text.length > 0) {
             return NO;
@@ -46,11 +46,13 @@
     // 遍历字典的所有键值对
     __block BOOL hasValue = NO;
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
         if ([obj isKindOfClass:[NSDictionary class]] || [obj isKindOfClass:[NSArray class]]) {
             [str appendFormat:@"\t\"%@\":%@,\n", key, obj];
-        }else {
+        } else {
             [str appendFormat:@"\t\"%@\":\"%@\",\n", key, obj];
         }
+        
         if (hasValue == NO) {
             hasValue = YES;
         }

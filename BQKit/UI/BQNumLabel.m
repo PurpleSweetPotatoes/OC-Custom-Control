@@ -26,23 +26,13 @@
     return self;
 }
 
-#pragma mark - public Method
-
 #pragma mark - private Method
-
 - (void)initUI {
     self.textAlignment = NSTextAlignmentCenter;
     self.backgroundColor = [UIColor redColor];
     self.textColor = [UIColor whiteColor];
     self.clipsToBounds = YES;
 }
-#pragma mark - LoadNetWrokData
-
-#pragma mark - response event
-
-#pragma mark - Delegate Method
-
-#pragma mark - View Create
 
 #pragma mark - set Method
 - (void)setText:(NSString *)text {
@@ -55,6 +45,5 @@
     self.layer.cornerRadius = self.width * 0.5;
     self.center = center;
 }
-#pragma mark - get Method
 
 @end

@@ -20,7 +20,9 @@
  */
 @property (nonatomic, strong) NSArray<NSString *> * dataSource;
 
-- (instancetype)initWithFrame:(CGRect)frame dataSource:(NSArray<NSString *> *)dataSource;
+- (instancetype)initWithFrame:(CGRect)frame
+                   dataSource:(NSArray<NSString *> *)dataSource;
+
 - (void)bannerViewClickEvent:(void(^)(NSInteger index))clickBlock;
 - (void)reloadSource;
 @end

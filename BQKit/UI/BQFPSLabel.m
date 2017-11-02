@@ -35,14 +35,19 @@
 - (void)dealloc {
     [_link invalidate];
 }
+
 - (void)updateCount:(CADisplayLink *)link {
+    
     if (_lastTime == 0) {
         _lastTime = link.timestamp;
         return;
     }
+    
     ++_count;
     NSTimeInterval addTiem = link.timestamp - _lastTime;
+    
     if (addTiem < 1) return;
+    
     int fps = (int)round(_count / addTiem);
     NSString *fpsString = [NSString stringWithFormat:@"%d fps",fps];
     _count = 0;

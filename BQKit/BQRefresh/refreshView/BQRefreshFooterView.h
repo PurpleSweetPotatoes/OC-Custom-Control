@@ -9,9 +9,10 @@
 #import "BQRefreshView.h"
 
 @interface BQRefreshFooterView : BQRefreshView
-+ (instancetype)footerWithBlock:(CallBlock)block;
-- (void)endRefreshNoMore:(BOOL)noMore;
 
++ (instancetype)footerWithBlock:(CallBlock)block;
+
+- (void)endRefreshNoMore:(BOOL)noMore;
 - (void)beginAnimation;
 //重置数据，可上拉加载更多
 - (void)resetData;

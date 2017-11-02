@@ -8,8 +8,6 @@
 
 #import "BQActivityView.h"
 
-static BQActivityView *activiyView;
-
 @interface BQActivityView ()
 @property (nonatomic, strong) CAReplicatorLayer *reaplicator;
 @property (nonatomic, strong) UIView *contentView;
@@ -19,6 +17,8 @@ static BQActivityView *activiyView;
 @end
 
 @implementation BQActivityView
+
+static BQActivityView *activiyView;
 
 + (void)showActiviTy {
     static dispatch_once_t onceToken;

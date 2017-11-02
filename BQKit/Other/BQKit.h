@@ -27,5 +27,7 @@
 #import "NSString+LoginChecking.h"
 #import "BQSegmentView.h"
 #import "BQTextFieldView.h"
+#import "UIView+Frame.h"
+#import "CALayer+Frame.h"
 
 #endif /* BQKit_h */

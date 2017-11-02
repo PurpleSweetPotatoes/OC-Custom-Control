@@ -8,16 +8,17 @@
 
 #import "BQRefreshFooterView.h"
 
-static NSString * const keyIdle = @"BQRefreshAutoFooterIdleText";
-static NSString * const keyRefresh = @"BQRefreshAutoFooterRefreshingText";
-static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
-
 @interface BQRefreshFooterView ()
 @property (nonatomic, strong) UIActivityIndicatorView * activeView;
 @property (nonatomic, assign) BOOL resetContentSize;
 @end
 
 @implementation BQRefreshFooterView
+
+static NSString * const keyIdle = @"BQRefreshAutoFooterIdleText";
+static NSString * const keyRefresh = @"BQRefreshAutoFooterRefreshingText";
+static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
+
 + (instancetype)footerWithBlock:(CallBlock)block {
     //脚部刷新视图高度
     CGFloat height = 50;
@@ -25,6 +26,7 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
     footerView.block = block;
     return footerView;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self != nil) {
@@ -33,12 +35,12 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
     }
     return self;
 }
+
 - (void)setupUI {
-    
     [self addSubview:self.activeView];
     [self addSubview:self.statuLab];
-    self.activeView.hidden = YES;
     
+    self.activeView.hidden = YES;
     self.statuLab.font = [UIFont systemFontOfSize:17.0f];
     self.resetContentSize = NO;
     self.statuLab.text = [NSBundle refreshStringKey:keyIdle];
@@ -48,11 +50,14 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(usingMyBlock)];
     [self addGestureRecognizer:tap];
 }
+
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
     self.activeView.center = CGPointMake(self.bounds.size.width * 0.25, self.bounds.size.height * 0.5);
     self.statuLab.frame = CGRectMake(0, 5, self.bounds.size.width, 40);
 }
+
 #pragma mark - KVO Method 
 - (void)contentOffsetDidChange {
     [super contentOffsetDidChange];
@@ -78,6 +83,7 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
             break;
     }
 }
+
 - (void)contentSizeDidChange {
     if (!self.resetContentSize) {
         self.resetContentSize = YES;
@@ -87,14 +93,15 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
         self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, self.scrollView.contentSize.height + self.bounds.size.height);
         self.resetContentSize = NO;
     }
-    
 }
+
 #pragma mark - Refresh Method
 - (void)usingMyBlock {
     if (self.block) {
         self.block();
     }
 }
+
 - (void)beginAnimation {
     if (self.statu == RefreshStatuType_noMoreData) { return; }
     self.activeView.hidden = !self.activeView.hidden;
@@ -102,6 +109,7 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
     self.statuLab.text = [NSBundle refreshStringKey:keyRefresh];
     self.statu = RefreshStatuType_Refreshing;
 }
+
 - (void)endRefreshNoMore:(BOOL)noMore {
     self.activeView.hidden = !self.activeView.hidden;
     [self.activeView stopAnimating];
@@ -112,14 +120,17 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
         [self resetData];
     }
 }
+
 - (void)resetData {
     self.statu = RefreshStatuType_Pull;
     self.statuLab.text = [NSBundle refreshStringKey: keyIdle];
 }
+
 - (void)setNoMoreData {
     self.statu = RefreshStatuType_noMoreData;
     self.statuLab.text = [NSBundle refreshStringKey: keyNoMore];
 }
+
 #pragma mark - Get Method
 - (UIActivityIndicatorView *)activeView {
     if (_activeView == nil) {

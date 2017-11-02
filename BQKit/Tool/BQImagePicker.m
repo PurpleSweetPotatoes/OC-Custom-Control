@@ -18,6 +18,7 @@
 @end
 
 @implementation BQImagePicker
+
 #pragma mark - Class Method
 +  (instancetype)allocWithZone:(struct _NSZone *)zone {
     static BQImagePicker * imagePicker;
@@ -27,13 +28,16 @@
     });
     return imagePicker;
 }
+
 + (void)showPickerImageWithHandleImage:(void (^)(UIImage *))handle {
     [self showPickerImageWithClipType:ClipSizeTypeNone handleImage:handle];
 }
+
 + (void)showPickerImageWithClipType:(ClipSizeType)type handleImage:(void (^)(UIImage *))handle {
     BQImagePicker * picker = [[self alloc] init];
     picker.handleBlock = handle;
     picker.type = type;
+    
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"选择图像" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -49,9 +53,6 @@
         [[picker currentViewController] presentViewController:alertVc animated:YES completion:nil];
     }
 }
-#pragma mark - create Class
-
-#pragma mark - Live Cycle
 
 #pragma mark - instancetype Method
 - (void)createImagePickerVcWithType:(UIImagePickerControllerSourceType)type{
@@ -59,6 +60,7 @@
     self.picker.allowsEditing = self.type == ClipSizeTypeNone;
     [[self currentViewController] presentViewController:self.picker animated:YES completion:nil];
 }
+
 - (UIViewController *)currentViewController {
     UIViewController * vc = [UIApplication sharedApplication].keyWindow.rootViewController;
     while (vc.presentedViewController) {
@@ -66,39 +68,36 @@
     }
     return vc;
 }
-#pragma mark - LoadNetWrokData
-
-#pragma mark - button Action
 
 #pragma mark - Delegate Method
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     //获取编辑后的图片
     UIImage *image = info[@"UIImagePickerControllerEditedImage"];
+    
     if (!image) {
         image = info[UIImagePickerControllerOriginalImage];
     }
+    
     if (self.type != ClipSizeTypeNone) {
         __weak typeof(self) weakSelf = self;
         [picker dismissViewControllerAnimated:YES completion:^{
             [weakSelf showClipVcWithImage:image];
         }];
-    }else {
+    } else {
         [picker dismissViewControllerAnimated:YES completion:nil];
         if (self.handleBlock != nil) {
             self.handleBlock(image);
         }
     }
 }
+
 - (void)showClipVcWithImage:(UIImage *)image {
     __weak typeof(self) weakSelf = self;
     [BQDisImageView showClipViewWithImage:image clipSize:self.type callBack:^(UIImage *image) {
         weakSelf.handleBlock(image);
     }];
 }
-#pragma mark - View Create
-
-#pragma mark - set Method
 
 #pragma mark - get Method
 - (UIImagePickerController *)picker {
@@ -135,6 +134,7 @@
     disImage.callBack = callBack;
     [[UIApplication sharedApplication].keyWindow addSubview:disImage];
 }
+
 #pragma mark - 创建方法
 - (instancetype)initWithImage:(UIImage *)image clipSize:(ClipSizeType)size{
     self = [super init];
@@ -148,10 +148,10 @@
         if (size == ClipSizeTypeOneScaleOne) {
             width = width * 4 / 3;
             height = width;
-        }else if (size == ClipSizeTypeTwoScaleOne) {
+        } else if (size == ClipSizeTypeTwoScaleOne) {
             height = width;
             width *= 2;
-        }else {
+        } else {
             height = width * 2;
             width *= 3;
         }
@@ -191,7 +191,6 @@
 }
 
 #pragma mark - 实例方法
-
 - (void)initUI{
     
     self.backgroundColor = [UIColor grayColor];
@@ -213,6 +212,7 @@
     [self createBtnWithFrame:CGRectMake(40, height - 70, 50, 30) title:@"取消" tag:100];
     [self createBtnWithFrame:CGRectMake(width - 90, height - 70, 50, 30) title:@"裁剪" tag:101];
 }
+
 - (void)createBtnWithFrame:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag {
     UIButton  * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [backBtn addTarget:self action:@selector(bottomBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -222,6 +222,7 @@
     [backBtn setTitle:title forState:UIControlStateNormal];
     [self addSubview:backBtn];
 }
+
 #pragma mark - 事件响应方法
 - (void)gestureRecognizerChange:(UIGestureRecognizer*)gesture{
     // 拖拽
@@ -230,14 +231,13 @@
         static CGPoint startCenter;
         if (pan.state == UIGestureRecognizerStateBegan) {
             startCenter = self.imageView.center;
-        }
-        else if (pan.state == UIGestureRecognizerStateChanged) {
+        } else if (pan.state == UIGestureRecognizerStateChanged) {
             // 此处必须从self.view中获取translation，因为translation和view的transform属性挂钩，若transform改变了则translation也会变
             CGPoint translation = [pan translationInView:self];
             self.imageView.center = CGPointMake(startCenter.x + translation.x, startCenter.y + translation.y);
-        }
-        else if (pan.state == UIGestureRecognizerStateEnded) {
+        } else if (pan.state == UIGestureRecognizerStateEnded) {
             startCenter = CGPointZero;
+            
             if (self.imageView.frame.origin.x > self.clipLayer.frame.origin.x) {
                 [UIView animateWithDuration:0.1 animations:^{
                     CGRect frame = self.imageView.frame;
@@ -245,6 +245,7 @@
                     self.imageView.frame = frame;
                 }];
             }
+            
             if (CGRectGetMaxX(self.imageView.frame) < CGRectGetMaxX(self.clipLayer.frame)) {
                 [UIView animateWithDuration:0.1 animations:^{
                     CGRect frame = self.imageView.frame;
@@ -252,6 +253,7 @@
                     self.imageView.frame = frame;
                 }];
             }
+            
             if (self.imageView.frame.origin.y > self.clipLayer.frame.origin.y) {
                 [UIView animateWithDuration:0.1 animations:^{
                     CGRect frame = self.imageView.frame;
@@ -259,6 +261,7 @@
                     self.imageView.frame = frame;
                 }];
             }
+            
             if (CGRectGetMaxY(self.imageView.frame) < CGRectGetMaxY(self.clipLayer.frame)) {
                 [UIView animateWithDuration:0.1 animations:^{
                     CGRect frame = self.imageView.frame;
@@ -267,20 +270,16 @@
                 }];
             }
         }
-    }
-    // 缩放
-    else {
+    } else {// 缩放
         UIPinchGestureRecognizer *pinch = (UIPinchGestureRecognizer *)gesture;
         static CGFloat startScale;
         if (pinch.state == UIGestureRecognizerStateBegan) {
             startScale = pinch.scale;
-        }
-        else if (pinch.state == UIGestureRecognizerStateChanged) {
+        } else if (pinch.state == UIGestureRecognizerStateChanged) {
             CGFloat scale = (pinch.scale - startScale) +1;
             self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
             startScale = pinch.scale;
-        }
-        else if (pinch.state == UIGestureRecognizerStateEnded) {
+        } else if (pinch.state == UIGestureRecognizerStateEnded) {
             startScale = 1;
             if (self.imageView.frame.size.width < self.clipLayer.bounds.size.width || self.imageView.frame.size.height < self.clipLayer.bounds.size.height) {
                 
@@ -293,25 +292,25 @@
         }
     }
 }
+
 - (void)bottomBtnAction:(UIButton *)btn {
+    
     if (btn.tag == 101) {
         self.clipLayer.hidden = YES;
         CGFloat scale = [UIScreen mainScreen].scale;
         UIGraphicsBeginImageContextWithOptions(self.bounds.size,NO,scale);
         [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+        
         UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
         UIImage * image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(img.CGImage, CGRectMake(self.clipLayer.frame.origin.x * scale, self.clipLayer.frame.origin.y * scale, self.clipLayer.frame.size.width * scale, self.clipLayer.frame.size.height * scale))];
         UIGraphicsEndImageContext();
+        
         if (self.callBack != nil) {
             self.callBack(image);
         }
     }
+    
     [self removeFromSuperview];
 }
-#pragma mark - Method
-
-#pragma mark - set方法
-
-#pragma mark - get方法
 
 @end

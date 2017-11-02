@@ -10,8 +10,6 @@
 
 @interface BQSegmentView : UIView
 
-
-
 - (instancetype)initWithFrame:(CGRect)frame
                         color:(UIColor *)color;
 

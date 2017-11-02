@@ -8,9 +8,6 @@
 
 #import "BQTextFieldView.h"
 
-static NSTimeInterval DurationLabel = 0.25;
-static NSTimeInterval DurationLayer = 0.3;
-
 @interface BQTextFieldView ()<UITextFieldDelegate>
 {
     BOOL _isShowTitle;
@@ -27,13 +24,21 @@ static NSTimeInterval DurationLayer = 0.3;
 
 @implementation BQTextFieldView
 
-- (instancetype)initWithFrame:(CGRect)frame mainColor:(UIColor *)color title:(NSString *)title hodler:(NSString *)hodler {
+static NSTimeInterval DurationLabel = 0.25;
+static NSTimeInterval DurationLayer = 0.3;
+
+- (instancetype)initWithFrame:(CGRect)frame
+                    mainColor:(UIColor *)color
+                        title:(NSString *)title
+                       hodler:(NSString *)hodler {
     BQTextFieldView * textFieldView = [[BQTextFieldView alloc] initWithFrame:frame mainColor:color];
     textFieldView.title = title;
     textFieldView.hodler = hodler;
     return textFieldView;
 }
-- (instancetype)initWithFrame:(CGRect)frame mainColor:(UIColor *)color {
+
+- (instancetype)initWithFrame:(CGRect)frame
+                    mainColor:(UIColor *)color {
     self = [super initWithFrame:frame];
     if (self) {
         self.mainColor = color;
@@ -42,25 +47,30 @@ static NSTimeInterval DurationLayer = 0.3;
     }
     return self;
 }
+
 - (void)initUI {
+    
     self.bottomColor = [UIColor colorWithWhite:0.859 alpha:1.000];
+    
     UITextField * textField = [[UITextField alloc] initWithFrame:CGRectMake(0, self.bounds.size.height * 0.5, self.bounds.size.width, self.bounds.size.height * 0.5)];
+    textField.delegate = self;
+    textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    [self addSubview:textField];
+    self.textField = textField;
+    
     CAShapeLayer * bottomLineLayer = [CAShapeLayer layer];
     bottomLineLayer.backgroundColor = self.bottomColor.CGColor;
     bottomLineLayer.frame = CGRectMake(0, textField.bounds.size.height - 1, textField.bounds.size.width, 1);
     [textField.layer addSublayer:bottomLineLayer];
-    textField.delegate = self;
-    textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 2)];
     lineView.hidden = YES;
     lineView.center = bottomLineLayer.position;
     lineView.backgroundColor = self.mainColor;
     [textField addSubview:lineView];
     self.lineView = lineView;
-    [self addSubview:textField];
-    self.textField = textField;
-    
+ 
     UILabel * placeLabel = [[UILabel alloc] initWithFrame:textField.frame];
     placeLabel.text = self.title;
     placeLabel.textColor = self.bottomColor;
@@ -70,6 +80,7 @@ static NSTimeInterval DurationLayer = 0.3;
 
 #pragma mark delegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
     if (_isShowTitle == NO) {
         [UIView animateWithDuration:DurationLabel animations:^{
             self.label.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(0.8, 0.8),CGAffineTransformMakeTranslation(-textField.bounds.size.width * 0.1, -textField.bounds.size.height));
@@ -79,23 +90,27 @@ static NSTimeInterval DurationLayer = 0.3;
             _isShowTitle = YES;
         }];
     }
+    
     self.lineView.hidden = NO;
+    
     [UIView animateWithDuration:DurationLayer animations:^{
         self.lineView.transform = CGAffineTransformMakeScale(textField.bounds.size.width, 1);
     }];
     
     return YES;
 }
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (self.label.textColor == self.mainColor && string.length != 0) {
         self.label.textColor = [UIColor blackColor];
-    }else if (textField.text.length == 1 && string.length == 0) {
+    } else if (textField.text.length == 1 && string.length == 0) {
         self.label.textColor = self.mainColor;
     }
     return YES;
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     textField.placeholder = @"";
+    
     if (textField.text.length == 0) {
         [UIView animateWithDuration:DurationLabel animations:^{
             self.label.transform = CGAffineTransformIdentity;
@@ -104,11 +119,13 @@ static NSTimeInterval DurationLayer = 0.3;
             _isShowTitle = NO;
         }];
     }
+    
     [UIView animateWithDuration:DurationLayer animations:^{
         self.lineView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.lineView.hidden = YES;
     }];
+    
     return YES;
 }
 

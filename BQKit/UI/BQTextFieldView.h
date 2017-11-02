@@ -16,6 +16,10 @@
 /**  文本框(代理为本类,提示文字通过hodler设定)*/
 @property (nonatomic, strong) UITextField * textField;
 
-- (instancetype)initWithFrame:(CGRect)frame mainColor:(UIColor *)color;
-- (instancetype)initWithFrame:(CGRect)frame mainColor:(UIColor *)color title:(NSString *)title hodler:(NSString *)hodler;
+- (instancetype)initWithFrame:(CGRect)frame
+                    mainColor:(UIColor *)color;
+- (instancetype)initWithFrame:(CGRect)frame
+                    mainColor:(UIColor *)color
+                        title:(NSString *)title
+                       hodler:(NSString *)hodler;
 @end
