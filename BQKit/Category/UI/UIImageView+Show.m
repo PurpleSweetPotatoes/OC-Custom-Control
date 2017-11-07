@@ -18,7 +18,7 @@
 + (void)showImage:(UIImage *)image frame:(CGRect)frame;
 @end;
 
-@implementation UIImageView (Show) <UIGestureRecognizerDelegate>
+@implementation UIImageView (Show)
 
 - (void)canShowImage {
     

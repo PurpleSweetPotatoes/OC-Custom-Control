@@ -8,7 +8,7 @@
 
 #import "BQNumLabel.h"
 #import "UILabel+adjust.h"
-#import "BQScreenAdaptation.h"
+#import "UIView+Frame.h"
 
 @interface BQNumLabel ()
 
@@ -39,10 +39,10 @@
     [super setText:text];
     CGPoint center = self.center;
     [self adjustWidthForFont];
-    NSInteger width = self.width + 8;
-    self.width = width % 2 == 0 ? width : width + 1;
-    self.height = self.width;
-    self.layer.cornerRadius = self.width * 0.5;
+    NSInteger width = self.sizeW + 8;
+    self.sizeW = width % 2 == 0 ? width : width + 1;
+    self.sizeH = self.sizeW;
+    self.layer.cornerRadius = self.sizeW * 0.5;
     self.center = center;
 }
 

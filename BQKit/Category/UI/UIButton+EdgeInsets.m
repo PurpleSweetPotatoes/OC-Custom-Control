@@ -7,7 +7,7 @@
 //
 
 #import "UIButton+EdgeInsets.h"
-#import "BQScreenAdaptation.h"
+#import "UIView+Frame.h"
 
 static const CGFloat spacing = 5;
 
