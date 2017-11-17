@@ -1,8 +1,8 @@
 //
-//  UIDevice+Authorization.h
+//  UIDevice+Custom.h
 //  TianyaTest
 //
-//  Created by MrBai on 2017/8/21.
+//  Created by MrBai on 2017/11/17.
 //  Copyright © 2017年 MrBai. All rights reserved.
 //
 

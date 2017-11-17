@@ -7,8 +7,8 @@
 //
 
 #import "BQNumLabel.h"
-#import "UILabel+adjust.h"
-#import "UIView+Frame.h"
+#import "UILabel+Custom.h"
+#import "UIView+Custom.h"
 
 @interface BQNumLabel ()
 

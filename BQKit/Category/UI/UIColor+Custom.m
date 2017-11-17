@@ -1,12 +1,12 @@
 //
-//  UIColor+hexColor.m
-//  Test
+//  UIColor+Custom.m
+//  TianyaTest
 //
-//  Created by MrBai on 2017/6/28.
+//  Created by MrBai on 2017/11/17.
 //  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "UIColor+hexColor.h"
+#import "UIColor+Custom.h"
 
 @implementation UIColor (hexColor)
 
@@ -43,7 +43,7 @@
 
 - (NSString *)hexString {
     
-    NSArray *colorArray	= [self rgbaArray];
+    NSArray *colorArray    = [self rgbaArray];
     int r = [colorArray[0] floatValue] * 255;
     int g = [colorArray[1] floatValue] * 255;
     int b = [colorArray[2] floatValue] * 255;
@@ -64,4 +64,5 @@
     
     return @[@(r),@(g),@(b),@(a)];
 }
+
 @end

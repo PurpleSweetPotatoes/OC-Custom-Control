@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BQRefreshHeaderView.h"
-#import "BQRefreshFooterView.h"
+@class BQRefreshHeaderView;
+@class BQRefreshFooterView;
 
 @interface UIScrollView (Refresh)
 @property (nonatomic, strong) BQRefreshHeaderView * bq_headerView;

@@ -1,42 +1,13 @@
 //
-//  NSObject+Check_Log.m
-//  MyCocoPods
+//  NSObject+Custom.m
+//  TianyaTest
 //
-//  Created by baiqiang on 16/10/28.
-//  Copyright © 2016年 baiqiang. All rights reserved.
+//  Created by MrBai on 2017/11/17.
+//  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "NSObject+check_Log.h"
-#import <objc/runtime.h>
-@implementation NSObject (Check_Log)
+#import "NSObject+Custom.h"
 
-- (BOOL)isEmpty {
-    if ([self isKindOfClass:[NSDictionary class]]) {
-        NSDictionary * obj = (NSDictionary *)self;
-        if (obj.allKeys.count > 0) {
-            return NO;
-        }
-    } else if ([self isKindOfClass:[NSArray class]]) {
-        NSArray * obj = (NSArray *)self;
-        if (obj.count > 0) {
-            return NO;
-        }
-    } else if ([self isKindOfClass:[UITextField class]]) {
-        UITextField * obj = (UITextField *)self;
-        if (obj.text.length > 0) {
-            return NO;
-        }
-    } else if ([self isKindOfClass:[UITextView class]]) {
-        UITextView * obj = (UITextView *)self;
-        if (obj.text.length > 0) {
-            return NO;
-        }
-    }
-    return YES;
-}
-@end
-
-//----------------------- 字典数组中文输出调整 ----------
 @implementation NSDictionary (Log)
 - (NSString *)descriptionWithLocale:(id)locale
 {
@@ -93,4 +64,5 @@
     }
     return str;
 }
+
 @end

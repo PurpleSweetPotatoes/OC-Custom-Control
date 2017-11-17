@@ -1,12 +1,12 @@
 //
-//  UIDevice+Authorization.m
+//  UIDevice+Custom.m
 //  TianyaTest
 //
-//  Created by MrBai on 2017/8/21.
+//  Created by MrBai on 2017/11/17.
 //  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "UIDevice+Authorization.h"
+#import "UIDevice+Custom.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AddressBook/AddressBook.h>
 #import <Contacts/Contacts.h>
@@ -144,7 +144,7 @@
                     } else {
                         [self alertNoImagePickerPermission];
                     }
-                }];                
+                }];
                 break;
             }
             default:

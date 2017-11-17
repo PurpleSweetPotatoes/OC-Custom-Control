@@ -1,9 +1,9 @@
 //
-//  UIImageView+Show.h
-//  MyCocoPods
+//  UIImageView+Custom.h
+//  TianyaTest
 //
-//  Created by baiqiang on 17/2/17.
-//  Copyright © 2017年 baiqiang. All rights reserved.
+//  Created by MrBai on 2017/11/17.
+//  Copyright © 2017年 MrBai. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

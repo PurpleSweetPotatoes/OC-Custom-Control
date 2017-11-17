@@ -8,9 +8,9 @@
 
 #import "BQRemoteMsgView.h"
 #import "BQScreenAdaptation.h"
-#import "UIView+Frame.h"
-#import "CALayer+Frame.h"
-#import "UIColor+hexColor.h"
+#import "UIView+Custom.h"
+#import "CALayer+Custom.h"
+#import "UIColor+Custom.h"
 
 @interface BQRemoteMsgView()
 @property (nonatomic, copy) void(^callBack)();

@@ -1,14 +1,14 @@
 //
-//  CALayer+Frame.m
+//  UIView+Custom.m
 //  TianyaTest
 //
-//  Created by MrBai on 2017/11/2.
+//  Created by MrBai on 2017/11/17.
 //  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "CALayer+Frame.h"
+#import "UIView+Custom.h"
 
-@implementation CALayer (Frame)
+@implementation UIView (Frame)
 
 - (void)setOrigin:(CGPoint)origin{
     CGRect rect = self.frame;
@@ -44,13 +44,13 @@
     return self.origin.y;
 }
 
-- (void)setSize:(CGSize)size{
+- (void)setSize:(CGSize)size {
     CGRect rect = self.frame;
     rect.size = size;
     self.frame = rect;
 }
 
-- (CGSize)size{
+- (CGSize)size {
     return self.frame.size;
 }
 
@@ -87,6 +87,7 @@
 }
 
 - (CGFloat)bottom {
-    return self.top + self.sizeH;
+    return self.top + self.sizeW;
 }
+
 @end

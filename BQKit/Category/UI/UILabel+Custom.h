@@ -1,8 +1,8 @@
 //
-//  UILabel+adjust.h
-//  Test
+//  UILabel+Custom.h
+//  TianyaTest
 //
-//  Created by MrBai on 2017/6/28.
+//  Created by MrBai on 2017/11/17.
 //  Copyright © 2017年 MrBai. All rights reserved.
 //
 

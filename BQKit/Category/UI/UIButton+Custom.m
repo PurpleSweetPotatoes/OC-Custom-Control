@@ -1,13 +1,13 @@
 //
-//  UIButton+EdgeInsets.m
-//  MyCocoPods
+//  UIButton+Custom.m
+//  TianyaTest
 //
-//  Created by baiqiang on 17/2/17.
-//  Copyright © 2017年 baiqiang. All rights reserved.
+//  Created by MrBai on 2017/11/17.
+//  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "UIButton+EdgeInsets.h"
-#import "UIView+Frame.h"
+#import "UIButton+Custom.h"
+#import "UIView+Custom.h"
 
 static const CGFloat spacing = 5;
 
@@ -48,4 +48,5 @@ static const CGFloat spacing = 5;
     self.imageEdgeInsets = UIEdgeInsetsMake(imageTop, imageLeft, -imageTop, -imageLeft);
     self.titleEdgeInsets = UIEdgeInsetsMake(titleTop, titleLeft, -titleTop, titleRift);
 }
+
 @end

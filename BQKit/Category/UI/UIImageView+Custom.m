@@ -1,12 +1,12 @@
 //
-//  UIImageView+Show.m
-//  MyCocoPods
+//  UIImageView+Custom.m
+//  TianyaTest
 //
-//  Created by baiqiang on 17/2/17.
-//  Copyright © 2017年 baiqiang. All rights reserved.
+//  Created by MrBai on 2017/11/17.
+//  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "UIImageView+Show.h"
+#import "UIImageView+Custom.h"
 
 @interface BQShowImageView : UIView
 /**  图片视图 */

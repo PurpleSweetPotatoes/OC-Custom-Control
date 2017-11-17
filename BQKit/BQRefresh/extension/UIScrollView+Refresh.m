@@ -7,6 +7,8 @@
 //
 
 #import "UIScrollView+Refresh.h"
+#import "BQRefreshHeaderView.h"
+#import "BQRefreshFooterView.h"
 
 static const NSInteger headerTag = 100105;
 static const NSInteger footerTag = 100106;

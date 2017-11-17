@@ -1,13 +1,12 @@
 //
-//  NSString+Conversion.h
-//  MyCocoPods
+//  NSString+Custom.h
+//  TianyaTest
 //
-//  Created by baiqiang on 17/2/17.
-//  Copyright © 2017年 baiqiang. All rights reserved.
+//  Created by MrBai on 2017/11/17.
+//  Copyright © 2017年 MrBai. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
 
 @interface NSString (Conversion)
 
@@ -76,4 +75,28 @@
 
 /**  @return 128个字符的SHA512散列字符串 */
 - (NSString *)fileSHA512Hash;
+
+@end
+
+
+@interface NSString (LoginChecking)
+
+/**  是否为QQ账号 */
+- (BOOL)isQQ;
+
+/**  是否为电话号码 */
+- (BOOL)isPhoneNumber;
+
+/**  是否为IP地址 */
+- (BOOL)isIPAddress;
+
+/**  是否为邮箱 */
+- (BOOL)isMailbox;
+
+/**  是否为身份证 */
+- (BOOL)isCardId;
+
+/**  是否含有unicode编码 */
+- (BOOL)hasUnicode;
+
 @end
