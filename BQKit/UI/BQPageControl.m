@@ -29,6 +29,8 @@
         }else {
             view.frame = CGRectMake((self.spacing + self.normalSize) * i , (self.bounds.size.height - self.normalSize) * 0.5, self.normalSize, self.normalSize);
         }
+        view.layer.cornerRadius = view.bounds.size.width * 0.5;
+        view.layer.masksToBounds = YES;
     }
 }
 - (CGSize)sizeForNumberOfPages:(NSInteger)pageCount {

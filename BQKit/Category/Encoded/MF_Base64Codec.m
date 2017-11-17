@@ -9,7 +9,8 @@
 #import "MF_Base64Codec.h"
 
 @implementation MF_Base64Codec
-+(NSString *)base64StringFromBase64UrlEncodedString:(NSString *)base64UrlEncodedString
+
++ (NSString *)base64StringFromBase64UrlEncodedString:(NSString *)base64UrlEncodedString
 {
     NSString *s = base64UrlEncodedString;
     s = [s stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
@@ -27,7 +28,7 @@
     return s;
 }
 
-+(NSString *)base64UrlEncodedStringFromBase64String:(NSString *)base64String
++ (NSString *)base64UrlEncodedStringFromBase64String:(NSString *)base64String
 {
     NSString *s = base64String;
     s = [s stringByReplacingOccurrencesOfString:@"=" withString:@""];
@@ -36,7 +37,7 @@
     return s;
 }
 
-+(NSData *)dataFromBase64String:(NSString *)encoding
++ (NSData *)dataFromBase64String:(NSString *)encoding
 {
     NSData *data = nil;
     unsigned char *decodedBytes = NULL;

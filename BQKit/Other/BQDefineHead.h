@@ -6,12 +6,17 @@
 //  Copyright © 2016年 白强. All rights reserved.
 //
 
+#define __WeakSelf __weak typeof(self) weakSelf = self;
+
 /** ---------------- 屏幕宽高 ---------------  */
-#define Screen_Widht [UIScreen mainScreen].bounds.size.width
-#define Screen_height [UIScreen mainScreen].bounds.size.height
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 /** ---------------- 颜色设置 ---------------  */
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r green:g blue:b alpha:a]
 #define RGB(r,g,b) RGBA(r,g,b,1)
+
+/** ---------------- APP版本号 ---------------  */
+#define APPVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 /** ---------------- 输出调试 ---------------  */
 #ifdef DEBUG

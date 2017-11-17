@@ -8,7 +8,7 @@
 
 #import "BQBaseVc.h"
 #import <objc/runtime.h>
-#import "BQTools.h"
+
 
 #define AppMainColor [UIColor cyanColor]
 

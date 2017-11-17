@@ -49,7 +49,7 @@ static BOOL isShow;
 + (void)showRemoteView {
     if (!isShow) {
         isShow = YES;
-        BQRemoteMsgView * view = [[BQRemoteMsgView alloc] initWithFrame:CGRectMake(8, 0, Screen_Widht - 16, 80)];
+        BQRemoteMsgView * view = [[BQRemoteMsgView alloc] initWithFrame:CGRectMake(8, 0, SCREEN_WIDTH - 16, 80)];
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         window.windowLevel = UIWindowLevelStatusBar;
         [window addSubview:view];

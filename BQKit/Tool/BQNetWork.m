@@ -8,8 +8,8 @@
 
 
 #import "BQNetWork.h"
-#import "BQTools.h"
 #import "Reachability.h"
+#import "UIAlertController+Custom.h"
 
 typedef NS_ENUM(NSUInteger, NetWorkType) {
     POST,
@@ -117,12 +117,12 @@ static NSDictionary * _hearders;
             }
             
             if (content == nil) {
-                [BQTools showMessageWithTitle:@"数据信息错误" content:@"无法解析后台返回数据!"];
+                [UIAlertController showWithTitle:@"数据信息错误" content:@"无法解析后台返回数据!"];
             }
             
             handle(content);
         } else {
-            [BQTools showMessageWithTitle:@"提示" content:[self getStringMessageFromErrorInfo:error] buttonTitles:@[@"确定"] clickedHandle:nil];
+            [UIAlertController showWithTitle:@"提示" content:[self getStringMessageFromErrorInfo:error] buttonTitles:@[@"确定"] clickedHandle:nil];
         }
     });
 }

@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface MF_Base64Codec : NSObject
-+(NSData *)dataFromBase64String:(NSString *)base64String;
-+(NSString *)base64StringFromData:(NSData *)data;
-+(NSString *)base64UrlEncodedStringFromBase64String:(NSString *)base64String;
-+(NSString *)base64StringFromBase64UrlEncodedString:(NSString *)base64UrlEncodedString;
++ (NSData *)dataFromBase64String:(NSString *)base64String;
++ (NSString *)base64StringFromData:(NSData *)data;
++ (NSString *)base64UrlEncodedStringFromBase64String:(NSString *)base64String;
++ (NSString *)base64StringFromBase64UrlEncodedString:(NSString *)base64UrlEncodedString;
 @end

@@ -15,7 +15,6 @@
 #import "BQScreenAdaptation.h"
 
 #pragma mark - Tool
-#import "BQTools.h"
 #import "BQWeakProxy.h"
 #import "BQNetWork.h"
 #import "BQImagePicker.h"
@@ -39,6 +38,14 @@
 #import "UIImage+Custom.h"
 #import "UIView+Custom.h"
 #import "CALayer+Custom.h"
+#import "NSDate+Custom.h"
+#import "UIColor+Custom.h"
+#import "UIDevice+Custom.h"
+#import "UILabel+Custom.h"
+#import "NSData+Custom.h"
+#import "NSDictionary+Custom.h"
+#import "NSObject+Custom.h"
+#import "UIAlertController+Custom.h"
 
 
 #endif /* BQKit_h */

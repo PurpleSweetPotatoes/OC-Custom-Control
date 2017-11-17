@@ -7,7 +7,7 @@
 //
 
 #import "BQBannerView.h"
-#import "BQTools.h"
+#import "UIAlertController+Custom.h"
 
 #ifdef UIImageView
 #import <UIImageView+WebCache.h>
@@ -33,7 +33,7 @@ static const NSTimeInterval  times = 2.0;
         [self initData];
         [self initUI];
 #ifndef UIImageView
-        [BQTools showMessageWithTitle:@"提示" content:@"需要配置SDWebImage库支持!"];
+        [UIAlertController showWithTitle:@"提示" content:@"需要配置SDWebImage库支持!"];
 #endif
     }
     return self;
@@ -57,7 +57,11 @@ static const NSTimeInterval  times = 2.0;
     self.imageViewArr = arr;
     
     self.timer = [CADisplayLink displayLinkWithTarget:self selector:@selector(timeValueChange:)];
-    self.timer.frameInterval = 60 * times;
+    if (@available(iOS 10.0, *)) {
+        self.timer.preferredFramesPerSecond = 60 * times;
+    }else {
+        self.timer.frameInterval = 60 * times;
+    }
     [self.timer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 

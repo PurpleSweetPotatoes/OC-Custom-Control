@@ -8,3 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@interface NSObject (Custom)
+
+/**  归档操作 */
+- (void)encodeInfoWithCoder:(NSCoder *)aCoder;
+/**  解档操作 */
+- (void)unencodeWithCoder:(NSCoder *)aDecoder;
+
+/**  将对象转化为字符串 */
+- (NSString *)jsonString;
+
+@end
