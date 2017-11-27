@@ -15,7 +15,9 @@
 @property (nonatomic, strong) UIView *backView;
 /**  原图片位置 */
 @property (nonatomic, assign) CGRect orgiFrame;
+
 + (void)showImage:(UIImage *)image frame:(CGRect)frame;
+
 @end;
 
 @implementation UIImageView (Show)
@@ -29,6 +31,95 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImageView:)];
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:tap];
+}
+
+- (void)setGifImgWithName:(NSString *)name {
+    [self setGifImgWithName:name inBundle:[NSBundle mainBundle]];
+}
+
+- (void)setGifImgWithName:(NSString *)name inBundle:(NSBundle *)bundle {
+    NSData * data = nil;
+    NSString * originPath = [bundle pathForResource:name ofType:@"gif"];
+    
+    CGFloat scale = [UIScreen mainScreen].scale;
+    if (scale > 1.0f) {
+        NSString * retinaPath = [bundle pathForResource:[name stringByAppendingString:@"@2x"] ofType:@"gif"];
+        data = [NSData dataWithContentsOfFile:retinaPath];
+    }
+    
+    if (!data) {
+        data = [NSData dataWithContentsOfFile:originPath];
+    }
+    
+    if (!data) return;
+    
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    
+    size_t count = CGImageSourceGetCount(source);
+    
+    UIImage * animatedImage = nil;
+    
+    if (count <= 1) {
+        animatedImage = [[UIImage alloc] initWithData:data];
+    } else {
+        NSMutableArray *images = [NSMutableArray array];
+        
+        NSTimeInterval duration = 0.0f;
+        
+        for (size_t i = 0; i < count; i++) {
+            CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);
+            if (!image) {
+                continue;
+            }
+            
+            duration += [self.class frameDurationAtIndex:i source:source];
+            
+            [images addObject:[UIImage imageWithCGImage:image scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]];
+            
+            CGImageRelease(image);
+        }
+        
+        if (!duration) {
+            duration = (1.0f / 10.0f) * count;
+        }
+        
+        animatedImage = [UIImage animatedImageWithImages:images duration:duration];
+    }
+    
+    CFRelease(source);
+    self.image = animatedImage;
+}
+
++ (float)frameDurationAtIndex:(NSUInteger)index source:(CGImageSourceRef)source {
+    float frameDuration = 0.1f;
+    CFDictionaryRef cfFrameProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil);
+    NSDictionary *frameProperties = (__bridge NSDictionary *)cfFrameProperties;
+    NSDictionary *gifProperties = frameProperties[(NSString *)kCGImagePropertyGIFDictionary];
+    
+    NSNumber *delayTimeUnclampedProp = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];
+    
+    if (delayTimeUnclampedProp) {
+        frameDuration = [delayTimeUnclampedProp floatValue];
+    } else {
+        
+        NSNumber *delayTimeProp = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];
+        
+        if (delayTimeProp) {
+            frameDuration = [delayTimeProp floatValue];
+        }
+    }
+    
+    // Many annoying ads specify a 0 duration to make an image flash as quickly as possible.
+    // We follow Firefox's behavior and use a duration of 100 ms for any frames that specify
+    // a duration of <= 10 ms. See <rdar://problem/7689300> and <http://webkit.org/b/36082>
+    // for more information.
+    
+    if (frameDuration < 0.011f) {
+        frameDuration = 0.100f;
+    }
+    
+    CFRelease(cfFrameProperties);
+    return frameDuration;
 }
 
 - (void)showImageView:(UITapGestureRecognizer *)tap {

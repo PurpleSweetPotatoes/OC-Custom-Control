@@ -12,7 +12,6 @@
 
 + (NSBundle *)refreshBunlde;
 + (UIImage *)animatedFirstImg;
-+ (NSArray <UIImage *> *)animatedGifs;
 + (NSString *)refreshStringKey:(NSString *)key;
 
 @end

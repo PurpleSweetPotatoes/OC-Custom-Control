@@ -13,4 +13,8 @@
  可通过点击视图对视图进行展示和手势操作
  */
 - (void)canShowImage;
+
+- (void)setGifImgWithName:(NSString *)name;
+
+- (void)setGifImgWithName:(NSString *)name inBundle:(NSBundle *)bundle;
 @end

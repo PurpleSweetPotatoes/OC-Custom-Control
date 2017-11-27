@@ -70,7 +70,7 @@
 
 + (BOOL)authorAddressBook {
     __block BOOL ret = YES;
-    CGFloat version = [self currentVersion];
+    
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     
     CNContactStore * store = [[CNContactStore alloc] init];

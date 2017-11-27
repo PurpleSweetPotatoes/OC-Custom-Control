@@ -8,6 +8,7 @@
 
 #import "BQRefreshHeaderView.h"
 #import "NSBundle+Refresh.h"
+#import "UIImageView+Custom.h"
 
 @interface BQRefreshHeaderView()
 @property (nonatomic, strong) UIImageView * pullImgView;
@@ -169,13 +170,7 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
 - (UIImageView *)gifsView {
     if (_gifsView == nil) {
         UIImageView * gifImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        NSArray* images = [NSBundle animatedGifs];
-        
-        if ([images count] > 1) {
-            [gifImgView setImage:[UIImage animatedImageWithImages:images duration:(1.0f / 10.0f) * [images count]]];
-        } else if ([images count] == 1) {
-            [gifImgView setImage:[images objectAtIndex:0]];
-        }
+        [gifImgView setGifImgWithName:@"earth_loading" inBundle:[NSBundle refreshBunlde]];
         
         _gifsView = gifImgView;
     }
