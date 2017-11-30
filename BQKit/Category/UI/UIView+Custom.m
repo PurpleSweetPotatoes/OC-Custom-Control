@@ -8,6 +8,8 @@
 
 #import "UIView+Custom.h"
 
+static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
+
 @implementation UIView (Frame)
 
 - (void)setOrigin:(CGPoint)origin{
@@ -122,13 +124,26 @@
 }
 
 - (void)setRoundCorners:(UIRectCorner)corners withRadius:(CGFloat)radius {
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                                   byRoundingCorners:corners
-                                                         cornerRadii:CGSizeMake(radius, radius)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = self.bounds;
-    maskLayer.path = maskPath.CGPath;
-    self.layer.mask = maskLayer;
+    
+    UIColor * bgColor = self.backgroundColor;
+    self.backgroundColor = [UIColor clearColor];
+    
+    for (CALayer * layer in [self.layer sublayers]) {
+        if ([layer.name isEqualToString:kBgLayerColor] && [layer isKindOfClass:[CAShapeLayer class]]) {
+            bgColor = [UIColor colorWithCGColor:((CAShapeLayer *)layer).fillColor];
+            [layer removeFromSuperlayer];
+            break;
+        }
+    }
+    
+    UIBezierPath * roundPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
+    CAShapeLayer * roundLayer = [[CAShapeLayer alloc] init];
+    roundLayer.name = kBgLayerColor;
+    roundLayer.frame = self.bounds;
+    roundLayer.path = roundPath.CGPath;
+    roundLayer.fillColor = bgColor.CGColor;
+    
+    [self.layer insertSublayer:roundLayer atIndex:0];
 }
 @end
 
@@ -229,3 +244,4 @@
 }
 
 @end
+
