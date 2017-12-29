@@ -104,3 +104,13 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
 
 + (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(ALAssetsLibraryAssetForURLImageResultBlock)resultBlock;
 @end
+
+@interface UIImage (Screen)
+
+/**
+ 截取当前屏幕,不含状态栏(时间、信号等),
+ 如需要状态栏信息，可直接使用[view snapshotViewAfterScreenUpdates:NO]
+ */
++ (UIImage *)snapshootFromSncreen;
+
+@end
