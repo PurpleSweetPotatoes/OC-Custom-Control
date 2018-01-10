@@ -285,7 +285,7 @@
 }
 
 - (BOOL)isPhoneNumber {
-    return [self match:@"^(13|14|15|17|18)\\d{9}$"];
+    return [self match:@"^((13|14|15|17|18|19)\\d{9})|0\\d{10}$"];
 }
 
 - (BOOL)isIPAddress {
