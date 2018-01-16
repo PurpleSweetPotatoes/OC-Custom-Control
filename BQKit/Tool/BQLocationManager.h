@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLLocation.h>
+#import <CoreLocation/CLPlacemark.h>
 
 /**
  *  info.plist添加字段
@@ -16,9 +18,6 @@
           NSLocationWhenInUseUsageDescription使用期间访问位置
           NSLocationAlwaysUsageDescription始终访问位置
  */
-
-@class CLLocation;
-@class CLPlacemark;
 
 @interface LocationInfo: NSObject
 

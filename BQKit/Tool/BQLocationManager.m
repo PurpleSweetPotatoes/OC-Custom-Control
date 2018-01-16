@@ -7,7 +7,8 @@
 //
 
 #import "BQLocationManager.h"
-#import <MapKit/MapKit.h>
+#import <CoreLocation/CLLocationManager.h>
+#import <CoreLocation/CLGeocoder.h>
 
 @interface BQLocationManager() <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager * clManager;
@@ -35,7 +36,7 @@
     manager.loadSuccess = NO;
     
     //判断系统IOS版本
-    if ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0) {
+    if (@available(iOS 8.0, *)) {
         [manager.clManager requestWhenInUseAuthorization];
     }
     
