@@ -8,73 +8,146 @@
 
 #import "BQTextView.h"
 
-@interface BQTextView ()
-@property (nonatomic, strong) UILabel * placeHolderLabel;
+@interface BQTextView ()<UITextViewDelegate>
+
+@property (nonatomic, copy) void (^maxNumBlock)();
+@property (nonatomic, copy) void (^adjustFrameBlock)();
+@property (nonatomic, assign) CGFloat lastHeight;
 @end
 
 @implementation BQTextView
-
-+ (instancetype)createTextViewWithFrame:(CGRect)frame placeholder:(NSString *)placeholder {
-    BQTextView * textView = [[BQTextView alloc] initWithFrame:frame];
-    textView.placeholder = placeholder;
-    textView.font = [UIFont systemFontOfSize:15];
-    return textView;
+{
+    UILabel * placeHolderLabel;
 }
+@synthesize placeholder = _placeholder;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initUI];
-        self.backgroundColor = [UIColor cyanColor];
+        self.minHeight = 0;
+        self.maxCharNum = 1000000;
+        self.lastHeight = frame.size.height;
+        self.delegate = self;
+        self.font = [UIFont systemFontOfSize:15];
+        [self resigstNotifi];
     }
     return self;
 }
 
-- (void)initUI {
-    UILabel * label = [[UILabel alloc] init];
-    label.font = self.font;
-    label.numberOfLines = 0;
-    label.textColor = [UIColor grayColor];
-    [self addSubview:label];
-    self.placeHolderLabel = label;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:self];
+- (void)resigstNotifi {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPlaceholder) name:UITextViewTextDidChangeNotification object:self];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self changeLabelFrame];
-}
-
-- (void)changeLabelFrame {
-    self.placeHolderLabel.text = self.placeholder;
     
-    if (self.font) {
-        self.placeHolderLabel.font = self.font;
+    CGRect frame = self.frame;
+    frame.size = self.contentSize;
+    if (self.minHeight >= 0 && frame.size.height < self.minHeight) {
+        frame.size.height = self.minHeight;
+    }
+    self.frame = frame;
+    
+    if (self.lastHeight != frame.size.height) {
+        self.lastHeight = frame.size.height;
+        if (self.adjustFrameBlock) {
+            self.adjustFrameBlock();
+        }
     }
     
-    CGFloat y = self.textContainerInset.top;
-    CGFloat x = 5;
-    CGSize size = [self.placeholder boundingRectWithSize:CGSizeMake(self.bounds.size.width - 2 * x, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.placeHolderLabel.font} context:nil].size;
-    self.placeHolderLabel.frame = CGRectMake(x, y, size.width, size.height);
+    CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
+    CGFloat offsetRight = self.textContainerInset.right + self.textContainer.lineFragmentPadding;
+    CGFloat offsetTop = self.textContainerInset.top;
+    CGFloat offsetBottom = self.textContainerInset.bottom;
+    
+    CGSize expectedSize = [placeHolderLabel sizeThatFits:CGSizeMake(CGRectGetWidth(self.frame)-offsetLeft-offsetRight, CGRectGetHeight(self.frame)-offsetTop-offsetBottom)];
+    placeHolderLabel.frame = CGRectMake(offsetLeft, offsetTop, expectedSize.width, expectedSize.height);
 }
 
-- (void)textDidChange {
-    self.placeHolderLabel.hidden = self.hasText;
+
+#pragma mark 回调函数
+
+- (void)didHasMaxNumHanlder:(void (^)())maxNumBlock {
+    self.maxNumBlock = maxNumBlock;
 }
 
-- (void)setFont:(UIFont *)font {
+- (void)didAdjustFrameHandler:(void (^)())adjustFrameBlock {
+    self.adjustFrameBlock = adjustFrameBlock;
+}
+
+#pragma mark Set Method
+
+-(void)setPlaceholder:(NSString *)placeholder {
+    _placeholder = placeholder;
+    
+    if ( placeHolderLabel == nil ) {
+        placeHolderLabel = [[UILabel alloc] init];
+        placeHolderLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight);
+        placeHolderLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        placeHolderLabel.numberOfLines = 0;
+        placeHolderLabel.font = self.font;
+        placeHolderLabel.textAlignment = self.textAlignment;
+        placeHolderLabel.backgroundColor = [UIColor clearColor];
+        placeHolderLabel.textColor = [UIColor colorWithWhite:0.7 alpha:1.0];
+        placeHolderLabel.alpha = 0;
+        [self addSubview:placeHolderLabel];
+    }
+    
+    placeHolderLabel.text = self.placeholder;
+    [self refreshPlaceholder];
+}
+
+- (void)setText:(NSString *)text {
+    [super setText:text];
+    [self refreshPlaceholder];
+}
+
+-(void)setFont:(UIFont *)font {
     [super setFont:font];
-    [self changeLabelFrame];
+    placeHolderLabel.font = self.font;
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
-- (void)setPlaceholder:(NSString *)placeholder {
-    _placeholder = [placeholder copy];
-    [self changeLabelFrame];
+-(void)setTextAlignment:(NSTextAlignment)textAlignment {
+    [super setTextAlignment:textAlignment];
+    placeHolderLabel.textAlignment = textAlignment;
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
-- (void)setPlaceholderColor:(UIColor *)placeholderColor {
-    _placeholderColor = placeholderColor;
-    self.placeHolderLabel.textColor = placeholderColor;
+-(id<UITextViewDelegate>)delegate {
+    [self refreshPlaceholder];
+    return [super delegate];
+}
+
+#pragma mark 刷新占位符
+
+- (void)refreshPlaceholder {
+    if([[self text] length]){
+        [placeHolderLabel setAlpha:0];
+    } else {
+        [placeHolderLabel setAlpha:1];
+    }
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if (text.length == 0 || [textView.text length] < self.maxCharNum) {
+        return YES;
+    }
+    
+    if (self.maxNumBlock) {
+        self.maxNumBlock();
+    }
+    return NO;
 }
 
 - (void)dealloc {

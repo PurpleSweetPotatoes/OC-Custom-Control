@@ -10,9 +10,19 @@
 
 @interface BQTextView : UITextView
 
-@property (nonatomic, copy) NSString * placeholder;
+@property (nonatomic, copy) NSString * placeholder;         ///< 占位字符
+@property (nonatomic, strong) UIColor * placeholderColor;   ///< 占位符颜色
+@property (nonatomic, assign) CGFloat minHeight;            ///< 最小高度
+@property (nonatomic, assign) NSInteger maxCharNum;         ///< 最大字符数
 
-@property (nonatomic, strong) UIColor * placeholderColor;
+/**
+ 设置达到最大字符数后回调方法
+ */
+- (void)didHasMaxNumHanlder:(void(^)())maxNumBlock;
 
-+ (instancetype)createTextViewWithFrame:(CGRect)frame placeholder:(NSString *)placeholder;
+/**
+ 设置自动调整高度后的方法
+ */
+- (void)didAdjustFrameHandler:(void(^)())adjustFrameBlock;
+
 @end
