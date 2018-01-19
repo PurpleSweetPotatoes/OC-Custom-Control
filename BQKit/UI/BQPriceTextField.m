@@ -22,11 +22,21 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.precision = 2;
-        self.delegate = self;
-        self.keyboardType = UIKeyboardTypeDecimalPad;
+        [self configTextFieldInfo];
     }
     return self;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self configTextFieldInfo];
+}
+
+- (void)configTextFieldInfo {
+    self.precision = 2;
+    self.delegate = self;
+    self.keyboardType = UIKeyboardTypeDecimalPad;
+    self.textAlignment = NSTextAlignmentCenter;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -74,7 +84,6 @@
 }
 
 // 限制修改
-
 - (void)setKeyboardType:(UIKeyboardType)keyboardType {
     [super setKeyboardType:UIKeyboardTypeDecimalPad];
 }

@@ -19,16 +19,23 @@
 #import "BQNetWork.h"
 #import "BQImagePicker.h"
 #import "BQRefresh.h"
+#import "BQAddressBook.h"
+#import "Reachability.h"
+#import "BQVideoPlayerView.h"
+#import "BQLocationManager.h"
+#import "UIImageEffects.h"
 
 #pragma mark - Custom UI
 #import "BQMsgView.h"
 #import "BQDefineHead.h"
 #import "BQFPSLabel.h"
 #import "BQSegmentView.h"
-#import "BQTextFieldView.h"
+#import "BQTextView.h"
+#import "BQPriceTextField.h"
 #import "BQBannerView.h"
 #import "BQRemoteMsgView.h"
 #import "BQNumLabel.h"
+#import "BQPageControl.h"
 
 
 #pragma mark - Category
@@ -46,6 +53,8 @@
 #import "NSDictionary+Custom.h"
 #import "NSObject+Custom.h"
 #import "UIAlertController+Custom.h"
+#import "MF_Base64Codec.h"
 
 
 #endif /* BQKit_h */
+

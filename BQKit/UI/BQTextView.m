@@ -24,14 +24,24 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.minHeight = 0;
-        self.maxCharNum = 1000000;
-        self.lastHeight = frame.size.height;
-        self.delegate = self;
-        self.font = [UIFont systemFontOfSize:15];
-        [self resigstNotifi];
+        [self configTextView];
     }
     return self;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self configTextView];
+}
+
+- (void)configTextView {
+    self.minHeight = 34;
+    self.maxCharNum = 1000000;
+    self.lastHeight = self.bounds.size.height;
+    self.delegate = self;
+    self.font = [UIFont systemFontOfSize:15];
+    self.autoAdjustHeight = YES;
+    [self resigstNotifi];
 }
 
 - (void)resigstNotifi {
@@ -41,17 +51,19 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect frame = self.frame;
-    frame.size = self.contentSize;
-    if (self.minHeight >= 0 && frame.size.height < self.minHeight) {
-        frame.size.height = self.minHeight;
-    }
-    self.frame = frame;
-    
-    if (self.lastHeight != frame.size.height) {
-        self.lastHeight = frame.size.height;
-        if (self.adjustFrameBlock) {
-            self.adjustFrameBlock();
+    if (self.autoAdjustHeight) {
+        CGRect frame = self.frame;
+        frame.size = self.contentSize;
+        if (self.minHeight >= 0 && frame.size.height < self.minHeight) {
+            frame.size.height = self.minHeight;
+        }
+        self.frame = frame;
+        
+        if (self.lastHeight != frame.size.height) {
+            self.lastHeight = frame.size.height;
+            if (self.adjustFrameBlock) {
+                self.adjustFrameBlock();
+            }
         }
     }
     
@@ -121,6 +133,12 @@
 -(id<UITextViewDelegate>)delegate {
     [self refreshPlaceholder];
     return [super delegate];
+}
+
+- (void)setMinHeight:(CGFloat)minHeight {
+    if (minHeight >= 34) {
+        _minHeight = minHeight;
+    }
 }
 
 #pragma mark 刷新占位符

@@ -74,6 +74,7 @@
 }
 
 - (NSString *)standardFormatTimeString {
+    
     NSDate *date = [NSDate date];
     NSTimeInterval targetTimeStamp = [self timeIntervalSince1970];
     NSTimeInterval nowTimeStamp = [date timeIntervalSince1970];
@@ -82,9 +83,11 @@
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:self toDate:date options:0];
     
+    NSUInteger toDaySecond = date.hour * 60 * 60 + date.min * 60 + date.second;
+    
     NSString * timeString = @"";
     
-    if (delay <= 86400 || [components day] <= 1) {
+    if (delay <= 86400 + toDaySecond && [components day] <= 1) {
         NSUInteger nowDay = date.day;
         NSUInteger targetDay = self.day;
         if (targetDay == nowDay) { // 同一天
@@ -102,7 +105,7 @@
         } else {
             timeString = @"昨天";
         }
-    } else if (delay < 86400 * 5 || [components day] <= 5) {
+    } else if (delay < 86400 * 5 + toDaySecond) {
         timeString = self.weekDay;
     } else {
         NSUInteger nowYear = date.year;
