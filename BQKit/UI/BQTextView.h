@@ -10,11 +10,12 @@
 
 @interface BQTextView : UITextView
 
-@property (nonatomic, assign) BOOL autoAdjustHeight;    ///< 自动适应高度,默认为YES
 @property (nonatomic, copy) NSString * placeholder;         ///< 占位字符
 @property (nonatomic, strong) UIColor * placeholderColor;   ///< 占位符颜色
-@property (nonatomic, assign) CGFloat minHeight;            ///< 最小高度 34
 @property (nonatomic, assign) NSInteger maxCharNum;         ///< 最大字符数
+
+@property (nonatomic, assign) BOOL autoAdjustHeight;        ///< 自动适应高度,默认为NO
+@property (nonatomic, assign) CGFloat minHeight;            ///< 最小高度34,开启自适应高度时有效
 
 /**
  设置达到最大字符数后回调方法
