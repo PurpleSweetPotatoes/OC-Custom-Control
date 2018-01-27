@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (adjust)
-- (CGFloat)adjustHeightForFont;
-- (CGFloat)adjustWidthForFont;
+
+/**
+ auto fit width with LabelFont and height
+ */
+- (CGFloat)heightToFit;
+
+/**
+ auto fit height with LabelFont and width
+ */
+- (CGFloat)widthToFit;
 @end

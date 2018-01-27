@@ -38,7 +38,7 @@
 - (void)setText:(NSString *)text {
     [super setText:text];
     CGPoint center = self.center;
-    [self adjustWidthForFont];
+    [self widthToFit];
     NSInteger width = self.sizeW + 8;
     self.sizeW = width % 2 == 0 ? width : width + 1;
     self.sizeH = self.sizeW;

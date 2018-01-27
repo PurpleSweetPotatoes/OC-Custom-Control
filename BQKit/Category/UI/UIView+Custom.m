@@ -89,7 +89,7 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
 }
 
 - (CGFloat)bottom {
-    return self.top + self.sizeW;
+    return self.top + self.sizeH;
 }
 
 @end

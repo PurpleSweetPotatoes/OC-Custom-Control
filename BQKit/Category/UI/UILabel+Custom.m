@@ -11,7 +11,7 @@
 
 @implementation UILabel (adjust)
 
-- (CGFloat)adjustHeightForFont {
+- (CGFloat)heightToFit {
     
     if (self.text.length > 0) {
         CGRect rect = [self.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
@@ -21,8 +21,7 @@
     return  self.sizeH;
 }
 
-- (CGFloat)adjustWidthForFont {
-    
+- (CGFloat)widthToFit {
     if (self.text.length > 0) {
         CGRect rect = [self.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
         self.sizeW = rect.size.width;

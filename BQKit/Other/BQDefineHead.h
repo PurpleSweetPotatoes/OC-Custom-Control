@@ -11,6 +11,7 @@
 /** ---------------- 屏幕宽高 ---------------  */
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 /** ---------------- 颜色设置 ---------------  */
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r green:g blue:b alpha:a]
 #define RGB(r,g,b) RGBA(r,g,b,1)

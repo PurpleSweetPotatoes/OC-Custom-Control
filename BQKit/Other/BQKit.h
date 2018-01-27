@@ -49,6 +49,7 @@
 #import "UIColor+Custom.h"
 #import "UIDevice+Custom.h"
 #import "UILabel+Custom.h"
+#import "UITableView+Custom.h"
 #import "NSData+Custom.h"
 #import "NSDictionary+Custom.h"
 #import "NSObject+Custom.h"
