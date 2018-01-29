@@ -29,4 +29,44 @@
     
     return  self.sizeW;
 }
+
+@end
+
+@implementation UILabel (copy)
+
+- (void)addLongGestureCopy {
+    self.userInteractionEnabled = YES;
+    UILongPressGestureRecognizer * gester = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self addGestureRecognizer:gester];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    return (action == @selector(copy:));
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)handleTap:(UIGestureRecognizer*) recognizer {
+    
+    [self becomeFirstResponder];
+    if ( [UIMenuController sharedMenuController].menuVisible == YES) {
+        return;
+    }
+    
+    [[UIMenuController sharedMenuController] setTargetRect:self.frame inView:self.superview];
+    
+    [[UIMenuController sharedMenuController] setMenuVisible:YES animated: YES];
+    
+}
+
+- (void)copy:(id)sender {
+    
+    [self resignFirstResponder];
+    
+    UIPasteboard *pboard = [UIPasteboard generalPasteboard];
+    pboard.string = self.text;
+}
+
 @end

@@ -19,4 +19,14 @@
  auto fit height with LabelFont and width
  */
 - (CGFloat)widthToFit;
+
+@end
+
+@interface UILabel (copy)
+
+/**
+ longGestureCanCopy
+ */
+- (void)addLongGestureCopy;
+
 @end
