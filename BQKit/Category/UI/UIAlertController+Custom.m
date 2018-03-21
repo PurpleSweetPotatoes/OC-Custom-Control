@@ -51,4 +51,20 @@
         }
     }];
 }
+
+- (void)tapGesDismissAlert {
+    
+    if (self.view.superview) {
+        self.view.superview.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(alertBackViewTap:)];
+        [self.view.superview addGestureRecognizer:tap];
+    }
+}
+
+- (void)alertBackViewTap:(UITapGestureRecognizer *)sender {
+    [sender removeTarget:self action:@selector(alertBackViewTap:)];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
+
