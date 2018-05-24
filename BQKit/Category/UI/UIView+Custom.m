@@ -243,5 +243,14 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
     [self.layer addSublayer:gradientLayer];
 }
 
+- (UIImage *)convertToImage {
+    CGSize size = CGSizeMake(self.layer.bounds.size.width, self.layer.bounds.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end
 

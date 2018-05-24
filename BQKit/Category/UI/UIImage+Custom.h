@@ -113,4 +113,5 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
  */
 + (UIImage *)snapshootFromSncreen;
 
+- (void)saveToPhotosWithReslut:(void(^)(NSError *error))reslutBlock;
 @end

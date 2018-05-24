@@ -11,6 +11,7 @@
 #import <AssetsLibrary/ALAssetRepresentation.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <Photos/Photos.h>
+#import <objc/runtime.h>
 
 @implementation UIImage (QRcode)
 
@@ -418,5 +419,13 @@
     
     return image;
 }
-
+- (void)saveToPhotosWithReslut:(void(^)(NSError *error))reslutBlock {
+    //plist文件需要添加 Privacy - Photo Library Additions Usage Description 字段
+    objc_setAssociatedObject(self, "resultBlock", reslutBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    UIImageWriteToSavedPhotosAlbum(self, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    void(^clickedBlock)(NSError *error) = objc_getAssociatedObject(self, "resultBlock");
+    clickedBlock(error);
+}
 @end

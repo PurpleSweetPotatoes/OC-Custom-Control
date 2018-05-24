@@ -55,4 +55,6 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
 
 - (void)addGradientShadow:(GradientShadowDirection)direction inRect:(CGRect)rect startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
 
+- (UIImage *)convertToImage;
+
 @end
