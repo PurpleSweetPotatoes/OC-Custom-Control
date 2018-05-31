@@ -15,8 +15,23 @@ typedef NS_ENUM(NSUInteger, BtnEdgeType) {
     EdgeTypeImageTopLabBottom,
 };
 
-@interface UIButton (EdgeInsets)
+@interface UIButton (Custom)
 
+/** 调整button imgView和lab位置 默认间距为5 */
 - (void)adjustLabAndImageLocation:(BtnEdgeType)type;
+
+/** 调整button imgView和lab位置 */
+- (void)adjustLabAndImageLocation:(BtnEdgeType)type spacing:(CGFloat)spacing;
+
+
+
+/**
+ 设置倒计时功能
+
+ @param time 总时长
+ @param interval 间隔时长
+ @param block 回调
+ */
+- (void)reduceTime:(NSTimeInterval)time interval:(NSTimeInterval)interval callBlock:(void(^)(NSTimeInterval sec))block;
 
 @end

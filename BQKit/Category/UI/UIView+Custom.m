@@ -123,6 +123,11 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
     self.layer.masksToBounds = YES;
 }
 
+- (void)setBorderWidth:(CGFloat)lineWidth color:(UIColor *)color {
+    self.layer.borderColor = color.CGColor;
+    self.layer.borderWidth = lineWidth;
+}
+
 - (void)setRoundCorners:(UIRectCorner)corners withRadius:(CGFloat)radius {
     
     UIColor * bgColor = self.backgroundColor;
