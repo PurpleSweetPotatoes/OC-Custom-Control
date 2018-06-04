@@ -19,7 +19,10 @@
 
 /** ---------------- 颜色设置 ---------------  */
 #define RandomColor ([UIColor randomColor])
-#define RGBHex(hexString) ([UIColor colorFromHexString:hexString])
+#define RGBHexString(hexString) ([UIColor colorFromHexString:hexString])
+#define RGBHex(hex) ([UIColor colorFromHex:hex])
+#define RGBAColor(r, g, b, a) [UIColor colorWithRed:((r)/255.0f) green:((g)/255.0f) blue:((b)/255.0f) alpha:(a)]
+#define RGBColor(r, g, b) RGBAColor((r), (g), (b), 1.0f)
 
 /** ---------------- APP版本号 ---------------  */
 #define AppServion ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
