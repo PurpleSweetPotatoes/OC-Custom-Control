@@ -17,6 +17,7 @@
 #pragma mark - Tool
 #import "BQWeakProxy.h"
 #import "BQNetWork.h"
+#import "BQVideoTool.h"
 #import "BQImagePicker.h"
 #import "BQRefresh.h"
 #import "BQAddressBook.h"

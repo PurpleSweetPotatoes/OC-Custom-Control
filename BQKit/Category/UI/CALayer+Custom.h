@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 @interface CALayer (Frame)
 
@@ -19,5 +20,13 @@
 @property (nonatomic, assign) CGFloat sizeW;
 @property (nonatomic, assign) CGFloat sizeH;
 @property (nonatomic, readonly, assign) CGPoint thisCenter;
+
+
+/** 同cell底部灰线颜色相同 */
++ (instancetype)cellLineLayerWithFrame:(CGRect)frame;
+
+
+/** 线条layer */
++ (instancetype)layerWithFrame:(CGRect)frame color:(UIColor *)backColor;
 
 @end

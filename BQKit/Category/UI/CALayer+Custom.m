@@ -89,4 +89,15 @@
 - (CGFloat)bottom {
     return self.top + self.sizeH;
 }
+
++ (instancetype)cellLineLayerWithFrame:(CGRect)frame {
+    return [self layerWithFrame:frame color:[UIColor colorWithRed:0xca/ 255.0 green:0xc9/ 255.0 blue:0xc9/ 255.0 alpha:1]];
+}
+
++ (instancetype)layerWithFrame:(CGRect)frame color:(UIColor *)backColor {
+    CALayer * lineLayer = [self layer];
+    lineLayer.frame = frame;
+    lineLayer.backgroundColor = backColor.CGColor;
+    return lineLayer;
+}
 @end

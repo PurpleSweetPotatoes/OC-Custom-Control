@@ -8,6 +8,7 @@
 
 #import "UINavigationBar+Awesome.h"
 #import <objc/runtime.h>
+#import "BQDefineHead.h"
 
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
