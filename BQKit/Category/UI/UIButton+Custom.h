@@ -17,6 +17,9 @@ typedef NS_ENUM(NSUInteger, BtnEdgeType) {
 
 @interface UIButton (Custom)
 
+/**设置点击时间间隔*/
+@property (nonatomic, assign) NSTimeInterval timeInterval;
+
 /** 调整button imgView和lab位置 默认间距为5 */
 - (void)adjustLabAndImageLocation:(BtnEdgeType)type;
 
