@@ -9,10 +9,10 @@
 #import "BQTextView.h"
 
 @interface BQTextView ()<UITextViewDelegate>
+{
+    CGFloat _lastHeight;
+}
 
-@property (nonatomic, copy) void (^maxNumBlock)();
-@property (nonatomic, copy) void (^adjustFrameBlock)();
-@property (nonatomic, assign) CGFloat lastHeight;
 @end
 
 @implementation BQTextView
@@ -35,36 +35,32 @@
 }
 
 - (void)configTextView {
-    self.minHeight = 34;
-    self.maxCharNum = 1000000;
-    self.lastHeight = self.bounds.size.height;
+    self.minHeight = self.bounds.size.height;
+    self.maxHeight = self.minHeight;
+    self.maxCharNum = 1000;
     self.delegate = self;
     self.font = [UIFont systemFontOfSize:15];
     self.autoAdjustHeight = YES;
-    [self resigstNotifi];
-}
-
-- (void)resigstNotifi {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPlaceholder) name:UITextViewTextDidChangeNotification object:self];
+    _lastHeight = self.bounds.size.height;
+    
 }
 
 - (void)layoutSubviews {
-    [super layoutSubviews];
     
-    if (self.autoAdjustHeight) {
+    if (self.autoAdjustHeight && self.contentSize.height <= self.maxHeight) {
+        
         CGRect frame = self.frame;
         frame.size = self.contentSize;
-        if (self.minHeight >= 0 && frame.size.height < self.minHeight) {
+        if ((self.minHeight >= 0 && frame.size.height < self.minHeight) || self.text.length == 0) {
             frame.size.height = self.minHeight;
         }
         self.frame = frame;
+        [self lastHeightCompareWithHeight:frame.size.height];
         
-        if (self.lastHeight != frame.size.height) {
-            self.lastHeight = frame.size.height;
-            if (self.adjustFrameBlock) {
-                self.adjustFrameBlock();
-            }
-        }
+    } else if (self.contentSize.height > self.maxHeight) {
+        
+        self.sizeH = self.maxHeight;
+        [self lastHeightCompareWithHeight:self.sizeH];
     }
     
     CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
@@ -74,17 +70,18 @@
     
     CGSize expectedSize = [placeHolderLabel sizeThatFits:CGSizeMake(CGRectGetWidth(self.frame)-offsetLeft-offsetRight, CGRectGetHeight(self.frame)-offsetTop-offsetBottom)];
     placeHolderLabel.frame = CGRectMake(offsetLeft, offsetTop, expectedSize.width, expectedSize.height);
+    
+    [super layoutSubviews];
 }
 
 
-#pragma mark 回调函数
-
-- (void)didHasMaxNumHanlder:(void (^)())maxNumBlock {
-    self.maxNumBlock = maxNumBlock;
-}
-
-- (void)didAdjustFrameHandler:(void (^)())adjustFrameBlock {
-    self.adjustFrameBlock = adjustFrameBlock;
+- (void)lastHeightCompareWithHeight:(CGFloat)height {
+    if (_lastHeight != height) {
+        _lastHeight = height;
+        if ([self.ourDelegate respondsToSelector:@selector(textViewDidAdjustFrame:)]    ) {
+            [self.ourDelegate textViewDidAdjustFrame:self];
+        }
+    }
 }
 
 #pragma mark Set Method
@@ -136,9 +133,7 @@
 }
 
 - (void)setMinHeight:(CGFloat)minHeight {
-    if (minHeight >= 34) {
-        _minHeight = minHeight;
-    }
+    _minHeight = minHeight;
 }
 
 #pragma mark 刷新占位符
@@ -162,13 +157,44 @@
         return YES;
     }
     
-    if (self.maxNumBlock) {
-        self.maxNumBlock();
+    if ([self.ourDelegate respondsToSelector:@selector(textViewDidHasMaxNum:)]) {
+        [self.ourDelegate textViewDidHasMaxNum:self];
     }
+    
     return NO;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (void)textViewDidChange:(UITextView *)textView {
+    [self refreshPlaceholder];
+    if ([self.ourDelegate respondsToSelector:@selector(textViewDidChange:)]) {
+        [self.ourDelegate textViewDidChange:self];
+    }
 }
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if ([self.ourDelegate respondsToSelector:@selector(textViewShouldBeginEditing:)]) {
+        return [self.ourDelegate textViewShouldBeginEditing:self];
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(BQTextView *)textView {
+    if ([self.ourDelegate respondsToSelector:@selector(textViewShouldEndEditing:)]) {
+        return [self.ourDelegate textViewShouldEndEditing:self];
+    }
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(BQTextView *)textView {
+    if ([self.ourDelegate respondsToSelector:@selector(textViewDidBeginEditing:)]) {
+        [self.ourDelegate textViewDidBeginEditing:self];
+    }
+}
+
+- (void)textViewDidEndEditing:(BQTextView *)textView {
+    if ([self.ourDelegate respondsToSelector:@selector(textViewDidEndEditing:)]) {
+        [self.ourDelegate textViewDidEndEditing:self];
+    }
+}
+
 @end
