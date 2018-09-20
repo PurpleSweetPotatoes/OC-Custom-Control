@@ -77,14 +77,44 @@
 }
 
 - (NSString *)jsonString {
+    
     NSError * error;
     NSData * data = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&error];
+    
     if (!error) {
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
         NSLog(@"jsonString format error:%@",error.localizedDescription);
         return @"";
     }
+}
+
++ (BOOL)exchangeMethod:(SEL)target with:(SEL)repalce {
+    Method tragetMethod = class_getInstanceMethod(self, target);
+    Method replaceMethod = class_getInstanceMethod(self, repalce);
+    
+    if (tragetMethod == nil || replaceMethod == nil) {
+        return NO;
+    }
+    
+    method_exchangeImplementations(tragetMethod, replaceMethod);
+    return YES;
+}
+
+- (void)setAssociateValue:(id)value withKey:(void *)key {
+    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setAssociateWeakValue:(id)value withKey:(void *)key {
+    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (void)removeAssociatedValues {
+    objc_removeAssociatedObjects(self);
+}
+
+- (id)getAssociatedValueForKey:(void *)key {
+    return objc_getAssociatedObject(self, key);
 }
 
 @end
