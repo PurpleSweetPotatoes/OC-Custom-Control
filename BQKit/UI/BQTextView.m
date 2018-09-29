@@ -7,6 +7,7 @@
 //
 
 #import "BQTextView.h"
+#import "UIView+Custom.h"
 
 @interface BQTextView ()<UITextViewDelegate>
 {
