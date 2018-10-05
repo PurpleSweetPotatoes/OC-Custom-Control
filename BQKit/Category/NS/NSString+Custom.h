@@ -143,6 +143,12 @@
 /**  是否为身份证 */
 - (BOOL)isCardId;
 
+/**  是否符合密码(无空格和中文字符) */
+- (BOOL)isPassWord;
+
+/**  是否含有中文 */
+- (BOOL)hasChineseCode;
+
 /**  是否含有unicode编码 */
 - (BOOL)hasUnicode;
 
