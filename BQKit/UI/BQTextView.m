@@ -166,6 +166,9 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length > self.maxCharNum) {
+        textView.text = [[textView.text substringToIndex:self.maxCharNum]]
+    }
     [self refreshPlaceholder];
     if ([self.ourDelegate respondsToSelector:@selector(textViewDidChange:)]) {
         [self.ourDelegate textViewDidChange:self];
