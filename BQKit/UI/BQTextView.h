@@ -36,7 +36,6 @@
 @property (nonatomic, assign) NSInteger maxCharNum;         ///< 最大字符数,默认1000
 
 @property (nonatomic, assign) BOOL autoAdjustHeight;        ///< 自动适应高度,默认为NO
-@property (nonatomic, assign) CGFloat minHeight;            ///< 最小高度默认为初始化高度,开启自适应高度时有效,最小高度最好>=32
 @property (nonatomic, assign) CGFloat maxHeight;            ///< 最大高度默认为初始化高度,开启自适应高度时有效
 
 @end

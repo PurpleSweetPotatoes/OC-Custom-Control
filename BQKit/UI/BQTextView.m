@@ -36,8 +36,7 @@
 }
 
 - (void)configTextView {
-    self.minHeight = self.bounds.size.height;
-    self.maxHeight = self.minHeight;
+    self.maxHeight = [UIScreen mainScreen].bounds.size.height;
     self.maxCharNum = 1000;
     self.delegate = self;
     self.font = [UIFont systemFontOfSize:15];
@@ -52,9 +51,6 @@
         
         CGRect frame = self.frame;
         frame.size = self.contentSize;
-        if ((self.minHeight >= 0 && frame.size.height < self.minHeight) || self.text.length == 0) {
-            frame.size.height = self.minHeight;
-        }
         self.frame = frame;
         [self lastHeightCompareWithHeight:frame.size.height];
         
@@ -62,6 +58,7 @@
         
         self.sizeH = self.maxHeight;
         [self lastHeightCompareWithHeight:self.sizeH];
+        
     }
     
     CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
@@ -71,6 +68,22 @@
     
     CGSize expectedSize = [placeHolderLabel sizeThatFits:CGSizeMake(CGRectGetWidth(self.frame)-offsetLeft-offsetRight, CGRectGetHeight(self.frame)-offsetTop-offsetBottom)];
     placeHolderLabel.frame = CGRectMake(offsetLeft, offsetTop, expectedSize.width, expectedSize.height);
+    
+    
+    CGFloat minHeight = placeHolderLabel.sizeH;
+    
+    if (minHeight < self.font.lineHeight) {
+        minHeight = self.font.lineHeight;
+    }
+    
+    if (self.sizeH < minHeight + offsetTop + offsetBottom) {
+        self.sizeH = minHeight + offsetTop + offsetBottom;
+    }
+    
+    
+    
+    
+    
     
     [super layoutSubviews];
 }
@@ -133,10 +146,6 @@
     return [super delegate];
 }
 
-- (void)setMinHeight:(CGFloat)minHeight {
-    _minHeight = minHeight;
-}
-
 #pragma mark 刷新占位符
 
 - (void)refreshPlaceholder {
@@ -167,7 +176,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView.text.length > self.maxCharNum) {
-        textView.text = [[textView.text substringToIndex:self.maxCharNum]]
+        textView.text = [textView.text substringToIndex:self.maxCharNum];
     }
     [self refreshPlaceholder];
     if ([self.ourDelegate respondsToSelector:@selector(textViewDidChange:)]) {
