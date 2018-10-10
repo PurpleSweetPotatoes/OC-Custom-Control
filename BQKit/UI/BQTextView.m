@@ -80,11 +80,6 @@
         self.sizeH = minHeight + offsetTop + offsetBottom;
     }
     
-    
-    
-    
-    
-    
     [super layoutSubviews];
 }
 
@@ -105,7 +100,6 @@
     
     if ( placeHolderLabel == nil ) {
         placeHolderLabel = [[UILabel alloc] init];
-        placeHolderLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight);
         placeHolderLabel.lineBreakMode = NSLineBreakByWordWrapping;
         placeHolderLabel.numberOfLines = 0;
         placeHolderLabel.font = self.font;
@@ -117,6 +111,12 @@
     }
     
     placeHolderLabel.text = self.placeholder;
+    [self refreshPlaceholder];
+}
+
+- (void)setPlaceholderColor:(UIColor *)placeholderColor {
+    _placeholderColor = placeholderColor;
+    placeHolderLabel.textColor = placeholderColor;
     [self refreshPlaceholder];
 }
 
