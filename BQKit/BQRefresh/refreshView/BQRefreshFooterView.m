@@ -65,6 +65,7 @@ static NSString * const keyNoMore = @"BQRefreshAutoFooterNoMoreDataText";
     if (self.statu == RefreshStatuType_Refreshing || self.statu == RefreshStatuType_noMoreData || !self.scrollView.isDragging || (self.origiOffsetY - self.scrollView.contentOffset.y) > 0)  {
         return;
     }
+    
     switch (self.statu) {
         case RefreshStatuType_Pull:
         {

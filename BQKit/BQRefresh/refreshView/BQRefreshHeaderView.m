@@ -125,13 +125,10 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
     
     if (self.statu != RefreshStatuType_Refreshing) {
         self.statu = RefreshStatuType_Refreshing;
-        [UIView animateWithDuration:0.1 animations:^{
-            self.scrollView.contentOffset = CGPointMake(0, self.origiOffsetY - self.bounds.size.height);
-        }];
     }
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.scrollView.contentInset = UIEdgeInsetsMake( self.bounds.size.height - self.origiOffsetY, 0, 0, 0);
+        self.scrollView.contentInset = UIEdgeInsetsMake(self.bounds.size.height, 0, 0, 0);
     }];
     
     if (self.refreshStr) {
@@ -148,7 +145,7 @@ static NSString * const keyRefresh = @"BQRefreshHeaderRefreshingText";
     [self changeHiddenStatus];
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.scrollView.contentInset = UIEdgeInsetsMake( -self.origiOffsetY, 0, 0, 0);
+        self.scrollView.contentInset = UIEdgeInsetsZero;
     }];
 }
 
