@@ -9,6 +9,9 @@
 #import "UITableView+Custom.h"
 #import <objc/runtime.h>
 
+static const NSString * EmptyViewDelegate;
+static const NSUInteger EmptyTag = 'VIEW';
+
 @implementation UITableView (Custom)
 
 - (void)registerCell:(Class)cellClass isNib:(BOOL)isNib {
@@ -129,6 +132,32 @@
     
     NSString * identifier = NSStringFromClass(aClass);
     return [self dequeueReusableHeaderFooterViewWithIdentifier:identifier];
+}
+
+- (void)setEmptyViewDelegate:(id<EmptyViewProtocol>)delegate {
+    objc_setAssociatedObject(self, &EmptyViewDelegate, delegate, OBJC_ASSOCIATION_ASSIGN);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method origin = class_getInstanceMethod(self.class, @selector(layoutSubviews));
+        Method intercept = class_getInstanceMethod(self.class, @selector(bq_layoutSubviews));
+        method_exchangeImplementations(origin, intercept);
+    });
+}
+
+- (void)bq_layoutSubviews {
+    [self bq_layoutSubviews];
+    
+    id<EmptyViewProtocol> delegate = objc_getAssociatedObject(self, &EmptyViewDelegate);
+    
+    UIView * emptyView = [self viewWithTag:EmptyTag];
+    [emptyView removeFromSuperview];
+    
+    if (delegate && [delegate showEmptyView:self]) {
+        UIView * backView = [delegate configEmptyView:self];
+        NSAssert([backView isKindOfClass:[UIView class]], @"configEmptyView should return a view which kind of UIView");
+        backView.tag = EmptyTag;
+        [self addSubview:backView];
+    }
 }
 
 @end

@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EmptyViewProtocol <NSObject>
+
+@required
+- (BOOL)showEmptyView:(UITableView *)tableView;
+- (UIView *)configEmptyView:(UITableView *)tableView;
+
+@end
+
 @interface UITableView (Custom)
 
 /**
@@ -40,6 +48,7 @@
 - (UITableViewHeaderFooterView *)loadHeaderFooterView:(Class)aClass;
 
 
+- (void)setEmptyViewDelegate:(id<EmptyViewProtocol>)delegate;
 
 
 @end
