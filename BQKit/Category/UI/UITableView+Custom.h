@@ -22,6 +22,13 @@
 - (UITableViewCell *)loadCell:(Class)cellClass indexPath:(NSIndexPath *)indexPath;
 
 /**
+ fetch cell real height after config data
+ @param configBlock use set datas
+ @return max in NSLayoutConstraint.value and cell.height
+ */
+- (CGFloat)fetchCellHeightWithIdentifier:(NSString *)identifier configBlock:(void(^)(id cell))configBlock;
+
+/**
  registerHeaderFooterView use className as identifier
  when load can use loadHeaderFooterView:
  */
@@ -31,5 +38,8 @@
  load headerFooterView use className as identifier
  */
 - (UITableViewHeaderFooterView *)loadHeaderFooterView:(Class)aClass;
+
+
+
 
 @end
