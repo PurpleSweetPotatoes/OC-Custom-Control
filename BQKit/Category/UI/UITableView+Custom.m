@@ -52,8 +52,8 @@ static const NSUInteger EmptyTag = 'VIEW';
     return templateCell;
 }
 
-- (CGFloat)fetchCellHeightWithIdentifier:(NSString *)identifier configBlock:(void (^)(id _Nonnull))configBlock {
-    UITableViewCell * cell = [self loadTemplateCellForIdentifier:identifier];
+- (CGFloat)fetchCellHeight:(Class)cellClass configBlock:(void (^)(id _Nonnull))configBlock {
+    UITableViewCell * cell = [self loadTemplateCellForIdentifier:NSStringFromClass(cellClass)];
     if (configBlock) {
         configBlock(cell);
     }

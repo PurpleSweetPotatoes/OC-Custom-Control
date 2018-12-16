@@ -34,7 +34,7 @@
  @param configBlock use set datas
  @return max in NSLayoutConstraint.value and cell.height
  */
-- (CGFloat)fetchCellHeightWithIdentifier:(NSString *)identifier configBlock:(void(^)(id cell))configBlock;
+- (CGFloat)fetchCellHeight:(Class)cellClass configBlock:(void(^)(id cell))configBlock;
 
 /**
  registerHeaderFooterView use className as identifier
