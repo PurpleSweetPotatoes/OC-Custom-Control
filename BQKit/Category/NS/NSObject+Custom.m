@@ -121,7 +121,7 @@
 
 
 @implementation NSDictionary (Log)
-- (NSString *)descriptionWithLocale:(id)locale {
+- (NSString *)description {
     return [self jsonString];
 }
 
@@ -130,7 +130,7 @@
 
 @implementation NSArray (Log)
 
-- (NSString *)descriptionWithLocale:(id)locale {
+- (NSString *)description {
     return [self jsonString];
 }
 
