@@ -85,7 +85,7 @@
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     } else {
         NSLog(@"jsonString format error:%@",error.localizedDescription);
-        return [self description];
+        return error.localizedDescription;
     }
 }
 
@@ -119,10 +119,21 @@
 
 @end
 
+#ifdef DEBUG
 
 @implementation NSDictionary (Log)
-- (NSString *)description {
-    return [self jsonString];
+
++ (void)load {
+    [self exchangeMethod:@selector(description) with:@selector(bq_description)];
+    [self exchangeMethod:@selector(descriptionWithLocale:) with:@selector(bq_descriptionWithLocale:)];
+}
+
+- (NSString *)bq_description {
+    return [NSString stringWithCString:[[self bq_description] UTF8String] encoding:NSNonLossyASCIIStringEncoding];
+}
+
+- (NSString *)bq_descriptionWithLocale:(id)locale {
+    return [NSString stringWithCString:[[self bq_descriptionWithLocale:locale] UTF8String] encoding:NSNonLossyASCIIStringEncoding];
 }
 
 @end
@@ -130,8 +141,19 @@
 
 @implementation NSArray (Log)
 
-- (NSString *)description {
-    return [self jsonString];
++ (void)load {
+    [self exchangeMethod:@selector(description) with:@selector(bq_description)];
+    [self exchangeMethod:@selector(descriptionWithLocale:) with:@selector(bq_descriptionWithLocale:)];
+}
+
+- (NSString *)bq_description {
+    return [NSString stringWithCString:[[self bq_description] UTF8String] encoding:NSNonLossyASCIIStringEncoding];
+}
+
+- (NSString *)bq_descriptionWithLocale:(id)locale {
+    return [NSString stringWithCString:[[self bq_descriptionWithLocale:locale] UTF8String] encoding:NSNonLossyASCIIStringEncoding];
 }
 
 @end
+
+#endif
