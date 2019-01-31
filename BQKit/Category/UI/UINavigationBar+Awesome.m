@@ -10,8 +10,6 @@
 #import <objc/runtime.h>
 #import "BQDefineHead.h"
 
-#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-
 @implementation UINavigationBar (Awesome)
 static char overlayKey;
 
@@ -28,8 +26,9 @@ static char overlayKey;
 - (void)lt_setBackgroundColor:(UIColor *)backgroundColor
 {
     if (!self.overlay) {
+        
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + (iPhoneX?44:20))];
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + KStatuHeight)];
         self.overlay.userInteractionEnabled = NO;
         self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth;    // Should not set `UIViewAutoresizingFlexibleHeight`
         [[self.subviews firstObject] insertSubview:self.overlay atIndex:0];

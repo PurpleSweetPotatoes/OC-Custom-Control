@@ -190,6 +190,19 @@
     
 }
 
++ (UIImage *)roundImageWithImage:(UIImage *)image {
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextAddEllipseInRect(context,CGRectMake(0,0,image.size.width,image.size.width));
+    CGContextClip(context);
+    CGContextDrawImage(context, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return  newImage;
+}
+
 + (NSData *)compressImageWithImage:(UIImage *)image aimLength:(NSInteger)length accurancyOfLength:(NSInteger)accuracy maxCircleNum:(int)maxCircleNum{
     NSData * imageData = UIImageJPEGRepresentation(image, 1);
     CGFloat scale = image.size.height/image.size.width;

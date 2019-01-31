@@ -7,15 +7,13 @@
 //
 
 
-/*!
- *  将前一个参数转为__weak类型的指针，第二个参数就是__weak型的
- */
-#define TYWeakify(tgt,src) (__weak __typeof(src) tgt = src)
-#define __WeakSelf (__weak typeof(self) weakSelf = self)
+/*  弱引用和强引用 */
+#define WeakSelf __weak typeof(self) weakSelf = self
+#define StrongSelf __weak typeof(weakSelf) strongSelf = weakSelf
 
 /** ---------------- 屏幕宽高 ---------------  */
-#define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
-#define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
+#define KScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define KScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
 /** ---------------- 颜色设置 ---------------  */
 #define RandomColor ([UIColor randomColor])
@@ -28,16 +26,22 @@
 #define AppServion ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
 
 /** ---------------- 手机型号 ---------------  */
-#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
-#define iPhone5  ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define isPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 
+#define IS_IPHONE_X ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
 
-#define kNavHeight (iPhoneX ? 68 : 44)
-#define kNavBottom (kNavHeight + 20)
-#define kTabHeight (iPhoneX ? 83.f : 49.f)
+#define IS_IPHONE_Xr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
 
+#define IS_IPHONE_Xs ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) &&!isPad : NO)
 
+#define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
+
+#define ISIPHONEX_OVER (IS_IPHONE_X == YES || IS_IPHONE_Xr == YES || IS_IPHONE_Xs == YES || IS_IPHONE_Xs_Max == YES)
+
+#define KStatuHeight (ISIPHONEX_OVER ? 44.0 : 20.0)
+#define KNavBottom (ISIPHONEX_OVER ? 88.0 : 64.0)
+#define KTabHeight (ISIPHONEX_OVER ? 83.0 : 49.0)
 
 /** ---------------- 输出调试 ---------------  */
 #ifdef DEBUG

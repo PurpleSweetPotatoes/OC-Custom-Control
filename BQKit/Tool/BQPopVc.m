@@ -19,21 +19,21 @@
 
 #pragma mark - Class Method
 
-+ (void)showViewWihtHandle:(void(^)(id objc))handle {
-    [self showViewWihtDictInfo:nil handle:handle];
++ (instancetype)showViewWithfromVc:(UIViewController *)fromVc Handle:(void(^)(id objc))handle {
+    return [self showViewWihtDictInfo:nil fromVc:fromVc handle:handle];
 }
 
-+ (void)showViewWihtDictInfo:(NSDictionary *)dictInfo handle:(void(^)(id objc))handle {
++ (instancetype)showViewWihtDictInfo:(NSDictionary *)dictInfo fromVc:(UIViewController *)fromVc handle:(void(^)(id objc))handle {
     BQPopVc * popVc = [[self alloc] init];
     popVc.showTime = 0.25;
     popVc.hideTime = 0.25;
     popVc.dicInfo = dictInfo;
     popVc.handle = handle;
     popVc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    UIViewController * rootVc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    [rootVc presentViewController:popVc animated:NO completion:^{
+    [fromVc presentViewController:popVc animated:NO completion:^{
         [popVc animationShow];
     }];
+    return popVc;
 }
 
 #pragma mark - Live Cycle
@@ -87,14 +87,6 @@
     }
 }
 
-- (void)willUseHandleMethod {
-    _objc = nil;
-}
-
-- (void)configHandleObjc:(id)objc {
-    _objc = objc;
-}
-
 #pragma mark - hide Method
 
 - (void)tapgestureAction:(UIGestureRecognizer *)sender {
@@ -114,7 +106,6 @@
 - (void)actionHanleMethod {
     
     if (self.handle) {
-        [self willUseHandleMethod];
         self.handle(_objc);
     }
 }

@@ -22,9 +22,9 @@
 
 #pragma mark - Main
 
-+ (void)showViewWihtHandle:(void(^)(id objc))handle;
++ (instancetype)showViewWithfromVc:(UIViewController *)fromVc Handle:(void(^)(id objc))handle;
 
-+ (void)showViewWihtDictInfo:(NSDictionary *)dictInfo handle:(void(^)(id objc))handle;
++ (instancetype)showViewWihtDictInfo:(NSDictionary *)dictInfo fromVc:(UIViewController *)fromVc handle:(void(^)(id objc))handle;
 
 #pragma mark - subClass
 
@@ -39,10 +39,5 @@
 - (void)animationShow;
 
 - (void)animationHide;
-
-/** in this func use configHandleObjc: */
-- (void)willUseHandleMethod;
-
-- (void)configHandleObjc:(id)objc;
 
 @end

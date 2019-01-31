@@ -78,7 +78,7 @@
     CGFloat font = width / 375 * 15;
     CGRect contentRect = [self.content boundingRectWithSize:CGSizeMake(width - 130, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil];
     CGRect titleRect = [self.title boundingRectWithSize:CGSizeMake(width - 100, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font + 2]} context:nil];
-    NSLog(@"\ntitle %@\n content %@",NSStringFromCGRect(contentRect),NSStringFromCGRect(titleRect));
+
     self.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.5];
     
     UIView *backView = [[UIView alloc] init];

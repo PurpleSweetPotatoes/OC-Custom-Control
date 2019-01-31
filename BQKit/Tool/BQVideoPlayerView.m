@@ -199,7 +199,6 @@ static  CGFloat    const kLrMargin = 10;  //左右间隔
     
 }
 
-
 //格式化时间
 - (NSString*)getFormatDate:(NSTimeInterval)time {
     int seconds = (int)time % 60;
@@ -228,7 +227,6 @@ static  CGFloat    const kLrMargin = 10;  //左右间隔
         NSString *currentFormat = [weakSelf getFormatDate:current];
         weakSelf.currentTimeLab.text = [NSString stringWithFormat:@"%@",currentFormat];
     }];
-    
 }
 
 //触摸关闭全屏

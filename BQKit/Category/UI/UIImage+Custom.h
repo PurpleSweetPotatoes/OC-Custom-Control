@@ -63,16 +63,22 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
  *  width > 0，根据width进行压缩
  *  width <= 0,根据原图尺寸最小值进行压缩
  */
-+(UIImage *)imageWithImage:(UIImage *)image aimWidth:(NSInteger)width;
++ (UIImage *)imageWithImage:(UIImage *)image aimWidth:(NSInteger)width;
 
 /**
  *  裁剪成正方形
  *  根据原图尺寸最小值进行剪切
  */
-+(UIImage *)rectImageWithImage:(UIImage *)image;
++ (UIImage *)rectImageWithImage:(UIImage *)image;
+
+
+/**
+ 裁剪为圆形(请保证图片宽高相同)
+ */
++ (UIImage *)roundImageWithImage:(UIImage *)image;
 
 /** 指定尺寸压缩 */
-+(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 
 /**
  *  质量不变，压缩到指定大小
@@ -116,4 +122,5 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
 - (void)saveToPhotosWithReslut:(void(^)(NSError *error))reslutBlock;
 
 - (UIImage *)imageWithColor:(UIColor *)color;
+
 @end
