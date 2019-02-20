@@ -14,6 +14,10 @@
 @interface UIDevice (Authorization)
 
 + (CGFloat)currentVersion;
++ (NSString *)ip4Address;
++ (NSString *)ip6Address;
++ (NSDictionary *)getIPAddresses;
+
 #pragma mark - 摄像头是否可用
 // 判断设备是否有摄像头
 + (BOOL)isCameraAvailable;
