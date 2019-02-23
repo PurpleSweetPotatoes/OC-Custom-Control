@@ -20,3 +20,8 @@
 + (BOOL)deleteKeyChainValue;
 
 @end
+
+@interface NSData (Number)
+- (int)kkl_intValue;
++ (instancetype)dataWithInt:(int)i;
+@end
