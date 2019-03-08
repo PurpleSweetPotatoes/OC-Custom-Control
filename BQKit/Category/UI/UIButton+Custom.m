@@ -17,6 +17,24 @@
 
 @implementation UIButton (Custom)
 
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SEL selA = @selector(sendAction:to:forEvent:);
+        SEL selB = @selector(mySendAction:to:forEvent:);
+        Method methodA =   class_getInstanceMethod(self,selA);
+        Method methodB = class_getInstanceMethod(self, selB);
+        BOOL isAdd = class_addMethod(self, selA, method_getImplementation(methodB), method_getTypeEncoding(methodB));
+        if (isAdd) {
+            class_replaceMethod(self, selB, method_getImplementation(methodA), method_getTypeEncoding(methodA));
+        }else{
+            method_exchangeImplementations(methodA, methodB);
+        }
+    });
+}
+
+#pragma mark - 图片文字排版
+
 - (void)adjustLabAndImageLocation:(BtnEdgeType)type {
     [self adjustLabAndImageLocation:type spacing:5];
 }
@@ -39,6 +57,10 @@
     CGFloat titleRift = 0;
     
     if (type == EdgeTypeImageTopLabBottom) {
+        spacing = (self.frame.size.height - imgView.frame.size.height - titleLab.frame.size.height) / 3;
+        if (spacing < 0) {
+            spacing = 0;
+        }
         imageLeft = (width - imgView.frame.size.width) * 0.5 - imgView.frame.origin.x;
         imageTop = spacing - imgView.frame.origin.y;
         titleLeft = (width - titleLab.frame.size.width) * 0.5 - titleLab.frame.origin.x - titleLab.frame.origin.x;
@@ -57,6 +79,8 @@
     self.imageEdgeInsets = UIEdgeInsetsMake(imageTop, imageLeft, -imageTop, -imageLeft);
     self.titleEdgeInsets = UIEdgeInsetsMake(titleTop, titleLeft, -titleTop, titleRift);
 }
+
+#pragma mark - 时间倒计时
 
 - (void)reduceTime:(NSTimeInterval)time interval:(NSTimeInterval)interval callBlock:(void(^)(NSTimeInterval sec))block {
     
@@ -89,31 +113,16 @@
     dispatch_resume(timer);
 }
 
-+ (void)load{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        SEL selA = @selector(sendAction:to:forEvent:);
-        SEL selB = @selector(mySendAction:to:forEvent:);
-        Method methodA =   class_getInstanceMethod(self,selA);
-        Method methodB = class_getInstanceMethod(self, selB);
-        //将 methodB的实现 添加到系统方法中 也就是说 将 methodA方法指针添加成 方法methodB的  返回值表示是否添加成功
-        BOOL isAdd = class_addMethod(self, selA, method_getImplementation(methodB), method_getTypeEncoding(methodB));
-        //添加成功了 说明 本类中不存在methodB 所以此时必须将方法b的实现指针换成方法A的，否则 b方法将没有实现。
-        if (isAdd) {
-            class_replaceMethod(self, selB, method_getImplementation(methodA), method_getTypeEncoding(methodA));
-        }else{
-            //添加失败了 说明本类中 有methodB的实现，此时只需要将 methodA和methodB的IMP互换一下即可。
-            method_exchangeImplementations(methodA, methodB);
-        }
-    });
-}
+#pragma mark - 配置点击间隔
+
 - (NSTimeInterval)timeInterval{
     return [objc_getAssociatedObject(self, _cmd) doubleValue];
 }
+
 - (void)setTimeInterval:(NSTimeInterval)timeInterval{
     objc_setAssociatedObject(self, @selector(timeInterval), @(timeInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
 }
+
 //当我们按钮点击事件 sendAction 时  将会执行  mySendAction
 - (void)mySendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event{
     if (self.timeInterval <= 0)
@@ -149,6 +158,43 @@
 
 - (void)resetState{
     [self setIsIgnoreEvent:NO];
+}
+
+#pragma mark - 扩大点击返回
+
+- (void)setHitTestEdgeInsets:(UIEdgeInsets)hitTestEdgeInsets
+{
+    NSValue *value = [NSValue value:&hitTestEdgeInsets withObjCType:@encode(UIEdgeInsets)];
+    objc_setAssociatedObject(self, @selector(hitTestEdgeInsets), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIEdgeInsets)hitTestEdgeInsets
+{
+    NSValue *value = objc_getAssociatedObject(self, _cmd);
+    if(value)
+    {
+        UIEdgeInsets edgeInsets;
+        [value getValue:&edgeInsets];
+        return edgeInsets;
+    }
+    else
+    {
+        return UIEdgeInsetsZero;
+    }
+}
+
+//扩大点击区域
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if(UIEdgeInsetsEqualToEdgeInsets(self.hitTestEdgeInsets, UIEdgeInsetsZero) || !self.enabled || self.hidden)
+    {
+        return [super pointInside:point withEvent:event];
+    }
+    
+    CGRect relativeFrame = self.bounds;
+    CGRect hitFrame = UIEdgeInsetsInsetRect(relativeFrame, self.hitTestEdgeInsets);
+    
+    return CGRectContainsPoint(hitFrame, point);
 }
 
 @end
