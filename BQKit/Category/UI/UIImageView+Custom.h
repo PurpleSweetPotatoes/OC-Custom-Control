@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageView (Show) <UIGestureRecognizerDelegate>
+@interface UIImageView (Custom)
 /**
  可通过点击视图对视图进行展示和手势操作
  */

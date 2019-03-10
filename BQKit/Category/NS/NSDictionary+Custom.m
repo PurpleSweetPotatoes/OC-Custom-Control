@@ -8,7 +8,7 @@
 
 #import "NSDictionary+Custom.h"
 
-@implementation NSDictionary (safe)
+@implementation NSDictionary (Custom)
 
 - (id)safeObjectForKey:(id)key {
     id result = [self objectForKey:key];

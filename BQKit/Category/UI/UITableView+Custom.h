@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol EmptyViewProtocol <NSObject>
+@protocol UITableViewNoDataProtocol <NSObject>
 
 @required
-- (BOOL)showEmptyView:(UITableView *)tableView;
-- (UIView *)configEmptyView:(UITableView *)tableView;
+- (BOOL)noDataCanShow:(UITableView *)tableView;
+- (UIView *)configNoDataShowView:(UITableView *)tableView;
 
 @end
 
 @interface UITableView (Custom)
+
+@property (nonatomic, weak) id<UITableViewNoDataProtocol>  noDataDelegate;
 
 /**
  registerCell use className as identifier
@@ -46,9 +48,5 @@
  load headerFooterView use className as identifier
  */
 - (UITableViewHeaderFooterView *)loadHeaderFooterView:(Class)aClass;
-
-
-- (void)setEmptyViewDelegate:(id<EmptyViewProtocol>)delegate;
-
 
 @end

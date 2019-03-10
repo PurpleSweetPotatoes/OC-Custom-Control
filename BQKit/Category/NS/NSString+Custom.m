@@ -10,8 +10,10 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import "MF_Base64Codec.h"
 
-@implementation NSString (Conversion)
+@implementation NSString (Custom)
+
 #pragma mark - 散列函数
+
 - (NSString *)md5String {
     const char *str = self.UTF8String;
     unsigned char buffer[CC_MD5_DIGEST_LENGTH];
@@ -274,11 +276,7 @@
     return nil;
 }
 
-@end
-
-
-
-@implementation NSString (LoginChecking)
+#pragma mark - 正则验证
 
 - (BOOL)isQQ {
     return [self match:@"^[1-9]\\d{4,10}"];
@@ -356,7 +354,7 @@
     }];
     return returnValue;
 }
-@end
+
 
 #pragma mark - Utilities for NSStrings containing HTML
 
@@ -709,9 +707,6 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     }
     return val;
 }
-
-
-@implementation NSString (GTMNSStringHTMLAdditions)
 
 - (NSString *)gtm_stringByEscapingHTMLUsingTable:(HTMLEscapeMap*)table
                                           ofSize:(NSUInteger)size

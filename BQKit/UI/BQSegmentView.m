@@ -22,7 +22,7 @@
 /**  未锁的回调方法 */
 @property (nonatomic, copy) void (^callBack)(NSInteger index);
 /**  被锁的回调方法 */
-@property (nonatomic, copy) void(^lockCallBack)();
+@property (nonatomic, copy) VoidBlock lockCallBack;
 @end
 
 @implementation BQSegmentView
@@ -127,7 +127,7 @@
     self.callBack = block;
 }
 
-- (void)lockIndex:(NSInteger)index ClickedUsingBlock:(void (^)())block {
+- (void)lockIndex:(NSInteger)index ClickedUsingBlock:(VoidBlock)block {
     self.lockIndex = index;
     self.lockCallBack = block;
 }

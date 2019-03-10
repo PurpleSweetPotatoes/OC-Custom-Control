@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIColor (hexColor)
+@interface UIColor (Custom)
 
 @property (nonatomic, readonly, assign) CGFloat red;
 @property (nonatomic, readonly, assign) CGFloat green;

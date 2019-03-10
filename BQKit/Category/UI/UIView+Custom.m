@@ -7,10 +7,17 @@
 //
 
 #import "UIView+Custom.h"
+#import "objc/runtime.h"
 
-static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
 
-@implementation UIView (Frame)
+@interface UIView()
+
+@property (nonatomic, strong) CAShapeLayer * bgColorLayer;
+@property (nonatomic, assign) UIRectCorner  corners;
+
+@end
+
+@implementation UIView (Custom)
 
 - (void)setOrigin:(CGPoint)origin{
     CGRect rect = self.frame;
@@ -92,10 +99,24 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
     return self.top + self.sizeH;
 }
 
-@end
+#pragma mark - 圆角
 
+- (void)bq_setFrame:(CGRect)frame {
+    [self bq_setFrame:frame];
+    if (self.bgColorLayer) {
+        self.bgColorLayer.frame = self.bounds;
+        [self configBgLayer];
+    }
+}
 
-@implementation UIView (Radius)
+- (void)bq_setBackgroundColor:(UIColor *)backgroundColor {
+    if (self.bgColorLayer.superlayer) {
+        [self bq_setBackgroundColor:[UIColor clearColor]];
+        self.bgColorLayer.backgroundColor = backgroundColor.CGColor;
+    } else {
+        [self bq_setBackgroundColor:backgroundColor];
+    }
+}
 
 - (void)roundCorner:(CGFloat)radius {
     self.layer.cornerRadius = radius;
@@ -128,32 +149,40 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
     self.layer.borderWidth = lineWidth;
 }
 
-- (void)setRoundCorners:(UIRectCorner)corners withRadius:(CGFloat)radius {
+- (void)setLayerRoundCorners:(UIRectCorner)corners withRadius:(CGFloat)radius {
     
-    UIColor * bgColor = self.backgroundColor;
-    self.backgroundColor = [UIColor clearColor];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[self class] exchangeMethod:@selector(setBackgroundColor:) with:@selector(bq_setBackgroundColor:)];
+        [[self class] exchangeMethod:@selector(setFrame:) with:@selector(bq_setFrame:)];
+    });
     
-    for (CALayer * layer in [self.layer sublayers]) {
-        if ([layer.name isEqualToString:kBgLayerColor] && [layer isKindOfClass:[CAShapeLayer class]]) {
-            bgColor = [UIColor colorWithCGColor:((CAShapeLayer *)layer).fillColor];
-            [layer removeFromSuperlayer];
-            break;
-        }
-    }
-    
-    UIBezierPath * roundPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
-    CAShapeLayer * roundLayer = [[CAShapeLayer alloc] init];
-    roundLayer.name = kBgLayerColor;
-    roundLayer.frame = self.bounds;
-    roundLayer.path = roundPath.CGPath;
-    roundLayer.fillColor = bgColor.CGColor;
-    
-    [self.layer insertSublayer:roundLayer atIndex:0];
+    self.layer.cornerRadius = radius;
+    self.corners = corners;
+    [self configBgLayer];
 }
-@end
 
+- (void)removeLayerRoundCorners {
+    self.layer.cornerRadius = 0;
+    [self.bgColorLayer removeFromSuperlayer];
+    self.backgroundColor = [UIColor colorWithCGColor:self.bgColorLayer.backgroundColor];
+}
 
-@implementation UIView (Shadow)
+- (void)configBgLayer {
+    
+    CGColorRef bgColor = self.bgColorLayer ? self.bgColorLayer.fillColor : self.backgroundColor.CGColor;
+    
+    [self.bgColorLayer removeFromSuperlayer];
+    self.bgColorLayer = [CAShapeLayer layer];
+    UIBezierPath * roundPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:self.corners cornerRadii:CGSizeMake(self.layer.cornerRadius, self.layer.cornerRadius)];
+    NSLog(@"配置新layer == %ld",self.corners);
+    self.bgColorLayer.frame = self.bounds;
+    self.bgColorLayer.path = roundPath.CGPath;
+    self.bgColorLayer.fillColor = bgColor;
+    [self.layer insertSublayer:self.bgColorLayer atIndex:0];
+}
+
+#pragma mark - 阴影
 
 - (void)addGradientShadow:(GradientShadowDirection)direction withLength:(CGFloat)length {
     CGRect rect;
@@ -248,6 +277,8 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
     [self.layer addSublayer:gradientLayer];
 }
 
+#pragma mark - 截图
+
 - (UIImage *)convertToImage {
     CGSize size = CGSizeMake(self.layer.bounds.size.width, self.layer.bounds.size.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
@@ -257,24 +288,25 @@ static NSString * const kBgLayerColor = @"UIViewRoundLayerColor";
     return image;
 }
 
-@end
 
-@implementation UIView (Tailor)
+#pragma mark - Associate
 
-- (UIView *)tailorWithFrame:(CGRect)frame {
-    
-    if (CGRectGetMaxX(frame) > self.sizeW || CGRectGetMaxY(frame) > self.sizeH) {
-        return nil;
-    }
-    
-    CGFloat scale = [UIScreen mainScreen].scale;
-    UIImage * img = [self convertToImage];
+- (UIRectCorner)corners {
+    return [objc_getAssociatedObject(self, _cmd) unsignedIntegerValue];
+}
 
-    UIImage * image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(img.CGImage, CGRectMake(frame.origin.x * scale, frame.origin.y * scale, frame.size.width * scale, frame.size.height * scale))];
+- (void)setCorners:(UIRectCorner)corners {
+    NSNumber * num = [NSNumber numberWithUnsignedInteger:corners];
+    objc_setAssociatedObject(self, @selector(corners), num, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
-    UIView * view = [[UIView alloc] initWithFrame:frame];
-    view.layer.contents = (__bridge id)image.CGImage;
-    return view;
+- (CAShapeLayer *)bgColorLayer {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setBgColorLayer:(CAShapeLayer *)bgColorLayer {
+    objc_setAssociatedObject(self, @selector(bgColorLayer), bgColorLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
+

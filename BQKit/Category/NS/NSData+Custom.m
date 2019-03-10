@@ -8,7 +8,9 @@
 
 #import "NSData+Custom.h"
 
-@implementation NSData (KeyChain)
+@implementation NSData (Custom)
+
+#pragma mark - 钥匙串
 
 - (BOOL)saveToKeychain {
     NSMutableDictionary * keychainQuery = [self.class getKeychain];
@@ -46,7 +48,7 @@
     return statu == noErr;
 }
 
-@end
+#pragma mark - Data from int
 
 // 大端转小端
 #define KKL_NTOH(z) sizeof(z) > 4 ? ntohll(z) : ntohl(z)
@@ -70,9 +72,6 @@ data = [NSMutableData dataWithBytes:&i length:sizeof(type)]; \
 targetType value; \
 [data getBytes:&value length:sizeof(targetType)]; \
 return value;
-
-
-@implementation NSData (Number)
 
 - (int)kkl_intValue {
     KKL_CONVERT_DATA(uint32_t, int);
@@ -99,7 +98,7 @@ return value;
     return [self dataWithInt:z];
 }
 
-- (instancetype)dataWithLong:(long)l {
++ (instancetype)dataWithLong:(long)l {
     uint64_t z = KKL_NTOH(l);
     NSData *data = [NSData dataWithBytes:&z length:sizeof(l)];
     return data;

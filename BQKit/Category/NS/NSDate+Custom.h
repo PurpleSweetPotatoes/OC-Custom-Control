@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, NSDateTimeStyle) {
     NSDateTimeStyle_YMDHMS,//yyyy-MM-dd HH:mm:ss,
 };
 
-@interface NSDate (time)
+@interface NSDate (Custom)
 
 @property (nonatomic, assign, readonly) NSInteger year;
 @property (nonatomic, assign, readonly) NSInteger month;

@@ -8,7 +8,7 @@
 
 #import "CALayer+Custom.h"
 
-@implementation CALayer (Frame)
+@implementation CALayer (Custom)
 
 - (void)setOrigin:(CGPoint)origin{
     CGRect rect = self.frame;
@@ -16,7 +16,7 @@
     self.frame = rect;
 }
 
-- (CGPoint)thisCenter {
+- (CGPoint)sizeCenter {
     return CGPointMake(self.sizeW * 0.5,self.sizeH * 0.5);
 }
 
@@ -91,7 +91,7 @@
 }
 
 + (instancetype)cellLineLayerWithFrame:(CGRect)frame {
-    return [self layerWithFrame:frame color:[UIColor colorWithRed:0xca/ 255.0 green:0xc9/ 255.0 blue:0xc9/ 255.0 alpha:1]];
+    return [self layerWithFrame:frame color:[UIColor colorFromHexString:@"c9c9c9"]];
 }
 
 + (instancetype)layerWithFrame:(CGRect)frame color:(UIColor *)backColor {

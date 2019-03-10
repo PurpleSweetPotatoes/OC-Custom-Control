@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BQDefineHead.h"
 
 @interface BQRemoteMsgView : UIView
 /**
@@ -17,5 +18,5 @@
  */
 + (void)showRemoteMsgWithTitle:(NSString *)title
                        content:(NSString *)content
-                        handle:(void(^)())handle;
+                        handle:(VoidBlock)handle;
 @end

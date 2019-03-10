@@ -37,7 +37,8 @@
 #import "BQRemoteMsgView.h"
 #import "BQNumLabel.h"
 #import "BQPageControl.h"
-
+#import "BQPopVc.h"
+#import "BQActivityView.h"
 
 #pragma mark - Category
 #import "NSString+Custom.h"

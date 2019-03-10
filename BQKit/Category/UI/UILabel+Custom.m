@@ -9,30 +9,33 @@
 #import "UILabel+Custom.h"
 #import "UIView+Custom.h"
 
-@implementation UILabel (adjust)
+@implementation UILabel (Custom)
 
 - (CGFloat)heightToFit {
-    
+    return [self heightToFitWithSpace:0];
+}
+
+- (CGFloat)heightToFitWithSpace:(CGFloat)space {
     if (self.text.length > 0) {
         CGRect rect = [self.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
-        self.sizeH = rect.size.height;
+        self.sizeH = rect.size.height + space;
     }
     
     return  self.sizeH;
 }
 
 - (CGFloat)widthToFit {
+    return [self widthToFitWithSpace:0];
+}
+
+- (CGFloat)widthToFitWithSpace:(CGFloat)space {
     if (self.text.length > 0) {
         CGRect rect = [self.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
-        self.sizeW = rect.size.width;
+        self.sizeW = rect.size.width + space;
     }
     
     return  self.sizeW;
 }
-
-@end
-
-@implementation UILabel (copy)
 
 - (void)addLongGestureCopy {
     self.userInteractionEnabled = YES;

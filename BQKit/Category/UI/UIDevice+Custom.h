@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BQDefineHead.h"
 
-/**
- 需要支持iOS9及以上
- */
-@interface UIDevice (Authorization)
+/** 需要支持iOS9及以上 */
+@interface UIDevice (Custom)
 
 + (CGFloat)currentVersion;
 + (NSString *)ip4Address;
@@ -46,11 +45,11 @@
 
 #pragma mark - 权限获取
 // 准备相机权限
-+ (void)prepareCamera:(void(^)(void))finishCallback;
++ (void)prepareCamera:(VoidBlock)finishCallback;
 
 // 准备麦克风权限
-+ (void)prepareMicrophone:(void(^)(void))finishCallback;
++ (void)prepareMicrophone:(VoidBlock)finishCallback;
 
 // 准备相册权限
-+ (void)prepareImagePicker:(void(^)(void))finishCallback;
++ (void)prepareImagePicker:(VoidBlock)finishCallback;
 @end

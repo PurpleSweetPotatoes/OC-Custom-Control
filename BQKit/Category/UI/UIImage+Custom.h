@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
+typedef void (^PHAssetForURLImageResultBlock)(UIImage * image);
 
-@interface UIImage (QRcode)
+@interface UIImage (Custom)
+
+#pragma mark - 二维码
 
 /**
  *  二维码生成
@@ -54,10 +56,7 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
  */
 + (UIImage *)createCodeImageWithContent:(NSString *)content size:(CGFloat)size logo:(UIImage *)logo red:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue;
 
-@end
-
-
-@interface UIImage (Zip)
+#pragma mark - 压缩
 
 /** 裁剪成正方形
  *  width > 0，根据width进行压缩
@@ -97,21 +96,19 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
  */
 + (NSData *)compressImageWithImage:(UIImage *)image aimWidth:(CGFloat)width aimLength:(NSInteger)length accuracyOfLength:(NSInteger)accuracy;
 
-@end
-
-
-@interface UIImage (UIImagePickerControllerDidFinishPickingMedia)
+#pragma mark - 图片选择器
 
 + (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)info;
 
-+ (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(ALAssetsLibraryAssetForURLImageResultBlock)resultBlock;
++ (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(nullable PHAssetForURLImageResultBlock)resultBlock;
 
 + (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info;
 
-+ (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(ALAssetsLibraryAssetForURLImageResultBlock)resultBlock;
-@end
++ (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(nullable PHAssetForURLImageResultBlock)resultBlock;
 
-@interface UIImage (Screen)
++ (UIImage *)adjustImageOrientation:(UIImage*)image;
+
+#pragma mark - 屏幕、保存
 
 /**
  截取当前屏幕,不含状态栏(时间、信号等),
@@ -120,6 +117,8 @@ typedef void (^ALAssetsLibraryAssetForURLImageResultBlock)(UIImage * image);
 + (UIImage *)snapshootFromSncreen;
 
 - (void)saveToPhotosWithReslut:(void(^)(NSError *error))reslutBlock;
+
+#pragma mark - icon变色
 
 - (UIImage *)imageWithColor:(UIColor *)color;
 

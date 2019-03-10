@@ -8,7 +8,7 @@
 
 #import "UIColor+Custom.h"
 
-@implementation UIColor (hexColor)
+@implementation UIColor (Custom)
 
 + (UIColor *)randomColor {
     CGFloat red = arc4random() % 256 / 255.0;

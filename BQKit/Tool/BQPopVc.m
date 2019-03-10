@@ -11,7 +11,6 @@
 @interface BQPopVc ()
 
 @property (nonatomic, copy) void(^handle)(id objc);         ///<  结束时的回调函数
-@property (nonatomic, strong) id  objc;                     ///<  回调参数
 @property (nonatomic, strong) UIView * backView;            ///<  黑色透明
 @end
 

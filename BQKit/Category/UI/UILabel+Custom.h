@@ -8,25 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UILabel (adjust)
+@interface UILabel (Custom)
 
-/**
- auto fit width with LabelFont and height
- */
+/** auto fit width with LabelFont and height */
 - (CGFloat)heightToFit;
 
-/**
- auto fit height with LabelFont and width
- */
+- (CGFloat)heightToFitWithSpace:(CGFloat)space;
+
+/** auto fit height with LabelFont and width */
 - (CGFloat)widthToFit;
 
-@end
+- (CGFloat)widthToFitWithSpace:(CGFloat)space;
 
-@interface UILabel (copy)
-
-/**
- longGestureCanCopy
- */
+/** longGestureCanCopy */
 - (void)addLongGestureCopy;
 
 @end

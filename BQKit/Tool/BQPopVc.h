@@ -32,7 +32,7 @@
 @property (nonatomic, assign) BOOL needBackView;                ///<  background black View， default is YES
 @property (nonatomic, assign) NSTimeInterval showTime;          ///<  animationShowTime, default is 0.25
 @property (nonatomic, assign) NSTimeInterval hideTime;          ///<  anmationHideTime default is 0.25
-
+@property (nonatomic, strong) id  objc;                         ///<  回调参数
 /** subClass can override, need use super func */
 - (void)setUpUI;
 

@@ -9,7 +9,6 @@
 #import "UITableView+Custom.h"
 #import <objc/runtime.h>
 
-static const NSString * EmptyViewDelegate;
 static const NSUInteger EmptyTag = 'VIEW';
 
 @implementation UITableView (Custom)
@@ -134,26 +133,31 @@ static const NSUInteger EmptyTag = 'VIEW';
     return [self dequeueReusableHeaderFooterViewWithIdentifier:identifier];
 }
 
-- (void)setEmptyViewDelegate:(id<EmptyViewProtocol>)delegate {
-    objc_setAssociatedObject(self, &EmptyViewDelegate, delegate, OBJC_ASSOCIATION_ASSIGN);
+- (id<UITableViewNoDataProtocol>)noDataDelegate {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setNoDataDelegate:(id<UITableViewNoDataProtocol>)noDataDelegate {
+    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Method origin = class_getInstanceMethod(self.class, @selector(layoutSubviews));
-        Method intercept = class_getInstanceMethod(self.class, @selector(bq_layoutSubviews));
-        method_exchangeImplementations(origin, intercept);
+        [[self class] exchangeMethod:@selector(layoutSubviews) with:@selector(bq_layoutSubviews)];
     });
+    
+    objc_setAssociatedObject(self, @selector(noDataDelegate), noDataDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
+
 
 - (void)bq_layoutSubviews {
     [self bq_layoutSubviews];
-    
-    id<EmptyViewProtocol> delegate = objc_getAssociatedObject(self, &EmptyViewDelegate);
-    
+
     UIView * emptyView = [self viewWithTag:EmptyTag];
     [emptyView removeFromSuperview];
     
-    if (delegate && [delegate showEmptyView:self]) {
-        UIView * backView = [delegate configEmptyView:self];
+    id<UITableViewNoDataProtocol> delegate = self.noDataDelegate;
+    
+    if ([delegate noDataCanShow:self]) {
+        UIView * backView = [delegate configNoDataShowView:self];
         NSAssert([backView isKindOfClass:[UIView class]], @"configEmptyView should return a view which kind of UIView");
         backView.tag = EmptyTag;
         [self addSubview:backView];

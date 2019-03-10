@@ -20,7 +20,7 @@
 
 @end;
 
-@implementation UIImageView (Show)
+@implementation UIImageView (Custom)
 
 - (void)canShowImage {
     
@@ -38,6 +38,7 @@
 }
 
 - (void)setGifImgWithName:(NSString *)name inBundle:(NSBundle *)bundle {
+    
     NSData * data = nil;
     NSString * originPath = [bundle pathForResource:name ofType:@"gif"];
     
@@ -133,6 +134,7 @@
     [BQShowImageView showImage:self.image frame:imageViewFrame];
 }
 @end
+
 
 #pragma mark ---- 展示UIImageView视图
 

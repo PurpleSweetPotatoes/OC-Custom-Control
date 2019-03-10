@@ -24,7 +24,7 @@
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
 
-@implementation UIDevice (Authorization)
+@implementation UIDevice (Custom)
 
 + (CGFloat)currentVersion {
     return [[[UIDevice currentDevice] systemVersion] floatValue];
@@ -160,7 +160,7 @@
 }
 
 #pragma mark - 权限获取
-+ (void)prepareCamera:(void(^)(void))finishCallback {
++ (void)prepareCamera:(VoidBlock)finishCallback {
     // 检测是否已获取摄像头权限
     NSString *mediaType = AVMediaTypeVideo;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
@@ -186,7 +186,7 @@
     }
 }
 
-+ (void)prepareMicrophone:(void(^)(void))finishCallback {
++ (void)prepareMicrophone:(VoidBlock)finishCallback {
     // 请求使用麦克风权限
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
         if (!granted) {
@@ -201,7 +201,7 @@
     }];
 }
 
-+ (void)prepareImagePicker:(void (^)(void))finishCallback {
++ (void)prepareImagePicker:(VoidBlock)finishCallback {
     if ([self isPhotoLibraryAvailable]) {
         
         PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];

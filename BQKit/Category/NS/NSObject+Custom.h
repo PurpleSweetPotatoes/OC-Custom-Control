@@ -27,11 +27,4 @@
 /**  将对象转化为字符串 */
 - (NSString *)jsonString;
 
-#pragma mark - Associate value to Instance
-
-- (void)setAssociateValue:(nullable id)value withKey:(void *)key;
-- (void)setAssociateWeakValue:(nullable id)value withKey:(void *)key;
-- (nullable id)getAssociatedValueForKey:(void *)key;
-- (void)removeAssociatedValues;
-
 @end

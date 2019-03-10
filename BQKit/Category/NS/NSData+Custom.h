@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSData (KeyChain)
+@interface NSData (Custom)
+
+#pragma mark - 钥匙串
 
 /**  利用钥匙串保存数据 */
 - (BOOL)saveToKeychain;
@@ -19,9 +21,14 @@
 /**  删除钥匙串数据 */
 + (BOOL)deleteKeyChainValue;
 
-@end
+#pragma mark - Data from int
 
-@interface NSData (Number)
 - (int)kkl_intValue;
+- (long)kkl_longValue;
+- (float)kkl_floatValue;
+
 + (instancetype)dataWithInt:(int)i;
++ (instancetype)dataWithFloat:(float)f;
++ (instancetype)dataWithLong:(long)l;
+
 @end

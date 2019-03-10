@@ -24,7 +24,7 @@
 }
 
 + (void)showInfo:(NSString *)info
-   completeBlock:(void (^)())callblock {
+   completeBlock:(VoidBlock)callblock {
     [self showTitle:nil info:info completeBlock:callblock];
 }
 
@@ -35,7 +35,7 @@
 
 + (void)showTitle:(NSString *)title
              info:(NSString *)info
-    completeBlock:(void (^)())callblock {
+    completeBlock:(VoidBlock)callblock {
     
     BQMsgView * popView = [[BQMsgView alloc] initWithFrame:[UIScreen mainScreen].bounds title:title info:info] ;
     [[UIApplication sharedApplication].keyWindow addSubview:popView];

@@ -101,21 +101,6 @@
     return YES;
 }
 
-- (void)setAssociateValue:(id)value withKey:(void *)key {
-    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (void)setAssociateWeakValue:(id)value withKey:(void *)key {
-    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_ASSIGN);
-}
-
-- (void)removeAssociatedValues {
-    objc_removeAssociatedObjects(self);
-}
-
-- (id)getAssociatedValueForKey:(void *)key {
-    return objc_getAssociatedObject(self, key);
-}
 
 @end
 

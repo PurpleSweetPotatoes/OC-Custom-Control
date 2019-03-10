@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BQDefineHead.h"
 
 @interface BQSegmentView : UIView
 
@@ -30,6 +31,5 @@
  @param index 锁住的按钮
  @param block 锁住后按钮点击回调方法
  */
-- (void)lockIndex:(NSInteger)index
-ClickedUsingBlock:(void(^)())block;
+- (void)lockIndex:(NSInteger)index ClickedUsingBlock:(VoidBlock)block;
 @end

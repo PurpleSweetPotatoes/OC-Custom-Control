@@ -9,11 +9,20 @@
 #import "UIAlertController+Custom.h"
 
 @implementation UIAlertController (Custom)
+
++ (void)showWithTitle:(NSString *)title {
+    [self showWithTitle:title content:nil];
+}
+
++ (void)showWithContent:(NSString *)content {
+    [self showWithTitle:nil content:content];
+}
+
 + (void)showWithTitle:(NSString *)title content:(NSString *)content {
     [self showWithTitle:title content:content handle:nil];
 }
 
-+ (void)showWithTitle:(NSString *)title content:(NSString *)content handle:(void (^)())clickedBtn {
++ (void)showWithTitle:(NSString *)title content:(NSString *)content handle:(void(^)(NSInteger))clickedBtn {
     [self showWithTitle:title content:content buttonTitles:@[@"确定"] clickedHandle:clickedBtn];
 }
 
@@ -21,7 +30,7 @@
     [self showWithTitle:title content:content buttonTitles:titles clickedHandle:clickedBtn compeletedHandle:nil];
 }
 
-+ (void)showWithTitle:(NSString *)title content:(NSString *)content buttonTitles:(NSArray<NSString *> *)titles clickedHandle:(void (^)(NSInteger))clickedBtn compeletedHandle:(void (^)())handle {
++ (void)showWithTitle:(NSString *)title content:(NSString *)content buttonTitles:(NSArray<NSString *> *)titles clickedHandle:(void (^)(NSInteger))clickedBtn compeletedHandle:(void (^)(void))handle {
     
     if (title == nil) {
         title = @"";

@@ -9,7 +9,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
-@interface CALayer (Frame)
+@interface CALayer (Custom)
+
+#pragma mark - Frame
 
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGSize size;
@@ -19,8 +21,9 @@
 @property (nonatomic, assign) CGFloat bottom;
 @property (nonatomic, assign) CGFloat sizeW;
 @property (nonatomic, assign) CGFloat sizeH;
-@property (nonatomic, readonly, assign) CGPoint thisCenter;
+@property (nonatomic, readonly, assign) CGPoint sizeCenter;
 
+#pragma mark - Create
 
 /** 同cell底部灰线颜色相同 */
 + (instancetype)cellLineLayerWithFrame:(CGRect)frame;

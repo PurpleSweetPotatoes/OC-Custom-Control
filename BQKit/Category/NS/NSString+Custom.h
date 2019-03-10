@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Conversion)
+@interface NSString (Custom)
 
 #pragma mark - Base64Code
 /**  base64编码 */
@@ -76,11 +76,7 @@
 /**  @return 128个字符的SHA512散列字符串 */
 - (NSString *)fileSHA512Hash;
 
-@end
-
-
-/// Utilities for NSStrings containing HTML
-@interface NSString (GTMNSStringHTMLAdditions)
+#pragma mark - NSStrings containing HTML
 
 /// Get a string where internal characters that need escaping for HTML are escaped
 //
@@ -123,10 +119,7 @@
 //
 - (NSString *)gtm_stringByUnescapingFromHTML;
 
-@end
-
-
-@interface NSString (LoginChecking)
+#pragma mark - 正则验证
 
 /**  是否为QQ账号 */
 - (BOOL)isQQ;

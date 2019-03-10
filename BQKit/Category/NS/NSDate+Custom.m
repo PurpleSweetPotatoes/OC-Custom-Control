@@ -8,7 +8,7 @@
 
 #import "NSDate+Custom.h"
 
-@implementation NSDate (time)
+@implementation NSDate (Custom)
 
 - (NSString *)getFormatteTimestamp {
     return [NSString stringWithFormat:@"%.lf",self.timeIntervalSince1970];

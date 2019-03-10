@@ -13,7 +13,7 @@
 #import "UIColor+Custom.h"
 
 @interface BQRemoteMsgView()
-@property (nonatomic, copy) void(^callBack)();
+@property (nonatomic, copy) VoidBlock callBack;
 @end
 
 @implementation BQRemoteMsgView
@@ -23,7 +23,7 @@ static BOOL isShow;
 
 + (void)showRemoteMsgWithTitle:(NSString *)title
                        content:(NSString *)content
-                        handle:(void (^)())handle {
+                        handle:(VoidBlock)handle {
     if (title.length == 0 || content.length == 0 || handle == nil) {
         return;
     }

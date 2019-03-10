@@ -13,7 +13,7 @@
 #import <Photos/Photos.h>
 #import <objc/runtime.h>
 
-@implementation UIImage (QRcode)
+@implementation UIImage (Custom)
 
 + (UIImage *)createCodeImageWithContent:(NSString *)content {
     UIImage *image = [UIImage imageWithCIImage:[self createCodeCIImageWithContent:content]];
@@ -139,10 +139,7 @@
     return resultImage;
 }
 
-@end
-
-
-@implementation UIImage (Zip)
+#pragma mark - 压缩
 
 + (UIImage *)imageWithImage:(UIImage *)image aimWidth:(NSInteger)width{
     if (!image) {
@@ -309,16 +306,13 @@
     }
 }
 
-@end
-
-
-@implementation UIImage (UIImagePickerControllerDidFinishPickingMedia)
+#pragma mark - 图片选择器
 
 + (UIImage*)originalImageFromImagePickerMediaInfo:(NSDictionary*)info {
     return [UIImage imageFromImagePickerMediaInfo:info imageType:UIImagePickerControllerOriginalImage resultBlock:nil];
 }
 
-+ (UIImage*)originalImageFromImagePickerMediaInfo:(NSDictionary*)info resultBlock:(ALAssetsLibraryAssetForURLImageResultBlock)resultBlock {
++ (UIImage*)originalImageFromImagePickerMediaInfo:(NSDictionary*)info resultBlock:(PHAssetForURLImageResultBlock)resultBlock {
     return [UIImage imageFromImagePickerMediaInfo:info imageType:UIImagePickerControllerOriginalImage resultBlock:resultBlock];
 }
 
@@ -326,11 +320,11 @@
     return [UIImage imageFromImagePickerMediaInfo:info imageType:UIImagePickerControllerEditedImage resultBlock:nil];
 }
 
-+ (UIImage*)editedImageFromImagePickerMediaInfo:(NSDictionary*)info resultBlock:(ALAssetsLibraryAssetForURLImageResultBlock)resultBlock {
++ (UIImage*)editedImageFromImagePickerMediaInfo:(NSDictionary*)info resultBlock:(PHAssetForURLImageResultBlock)resultBlock {
     return [UIImage imageFromImagePickerMediaInfo:info imageType:UIImagePickerControllerEditedImage resultBlock:resultBlock];
 }
 
-+ (UIImage*)imageFromImagePickerMediaInfo:(NSDictionary*)info imageType:(NSString*)imageType resultBlock:(ALAssetsLibraryAssetForURLImageResultBlock)resultBlock {
++ (UIImage*)imageFromImagePickerMediaInfo:(NSDictionary*)info imageType:(NSString*)imageType resultBlock:(PHAssetForURLImageResultBlock)resultBlock {
     UIImage* image=nil;
     
     NSString* mediaType=[info objectForKey:UIImagePickerControllerMediaType];
@@ -346,7 +340,6 @@
                 PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
                 options.version = PHImageRequestOptionsVersionCurrent;
                 options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-//                options.synchronous = YES;
                 [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData * imageData,NSString * dataUTI,UIImageOrientation orientation,NSDictionary *info) {
                     if (imageData) {
                         UIImage * resultImage = [[UIImage alloc] initWithData:imageData] ;
@@ -383,9 +376,8 @@
     
     return image;
 }
-@end
 
-@implementation UIImage (Screen)
+#pragma mark - 屏幕、保存
 
 + (UIImage *)snapshootFromSncreen {
     CGSize imageSize = CGSizeZero;
@@ -443,6 +435,8 @@
     void(^clickedBlock)(NSError *error) = objc_getAssociatedObject(self, "resultBlock");
     clickedBlock(error);
 }
+
+#pragma mark - icon变色
 
 - (UIImage *)imageWithColor:(UIColor *)color
 {

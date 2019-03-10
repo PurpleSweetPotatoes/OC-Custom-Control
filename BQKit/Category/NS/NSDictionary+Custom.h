@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (safe)
+@interface NSDictionary (Custom)
 
 - (id)safeObjectForKey:(id)key;
 

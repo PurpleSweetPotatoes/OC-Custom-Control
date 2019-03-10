@@ -7,6 +7,8 @@
 //
 
 
+typedef void (^VoidBlock)(void);
+
 /*  弱引用和强引用 */
 #define WeakSelf __weak typeof(self) weakSelf = self
 #define StrongSelf __weak typeof(weakSelf) strongSelf = weakSelf
@@ -48,4 +50,6 @@
 #define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
 #define NSLog(...)
+
+
 #endif

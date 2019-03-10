@@ -7,18 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BQDefineHead.h"
 
 @interface BQMsgView : UIView
 
 + (void)showInfo:(NSString *)info;
 
 + (void)showInfo:(NSString *)info
-   completeBlock:(void(^)())callblock;
+   completeBlock:(VoidBlock)callblock;
 
 + (void)showTitle:(NSString *)title
              info:(NSString *)info;
 
 + (void)showTitle:(NSString *)title
              info:(NSString *)info
-    completeBlock:(void(^)())callblock;
+    completeBlock:(VoidBlock)callblock;
 @end
