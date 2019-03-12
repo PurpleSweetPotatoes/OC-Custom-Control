@@ -39,6 +39,7 @@
 #import "BQPageControl.h"
 #import "BQPopVc.h"
 #import "BQActivityView.h"
+#import "BQSwipeSubTableVc.h"
 
 #pragma mark - Category
 #import "NSString+Custom.h"
