@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIView * headerView;
 @property (nonatomic, strong) UIView * barView;
 @property (nonatomic, strong) NSArray<UIViewController<BQSwipTableViewDelegate> *> * tabArrs;
+@property (nonatomic, assign) CGFloat  navBottom;
 
 - (void)resetTabArrs:(NSArray<UIViewController<BQSwipTableViewDelegate> *> *)tabArrs;
 

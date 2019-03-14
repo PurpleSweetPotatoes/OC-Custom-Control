@@ -11,10 +11,13 @@
 @interface BQSwipeSubTableVc ()
 
 @property (nonatomic, strong) UIView * disPalyHeaderView;
+@property (nonatomic, strong) UIView * tempHeaderView;
+@property (nonatomic, assign) CGFloat  disPalyHeaderTop;
 @property (nonatomic, assign) NSInteger  currentTabIndex;
 @property (nonatomic, assign) BOOL  isFirst;
 @property (nonatomic, copy) void(^switchBlock)(NSInteger index);
-@property (nonatomic, assign) CGFloat  navBottom;
+
+
 @end
 
 @implementation BQSwipeSubTableVc
@@ -24,12 +27,12 @@
     // Do any additional setup after loading the view.
     self.isFirst = YES;
     self.currentTabIndex = 0;
-    self.navBottom = self.navigationController ? KNavBottom : 0;
     [self setUpUI];
 }
 
 - (void)setUpUI {
     self.disPalyHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.sizeW, 0)];
+    
     if (self.headerView) {
         [self.disPalyHeaderView addSubview:self.headerView];
         self.disPalyHeaderView.sizeH = self.headerView.bottom;
@@ -37,11 +40,14 @@
     
     if (self.barView) {
         self.barView.top = self.headerView.bottom;
-        [self.disPalyHeaderView addSubview:self.barView];
+        [self.view addSubview:self.barView];
         self.disPalyHeaderView.sizeH = self.barView.bottom;
     }
     
-    [self.view addSubview:self.disPalyHeaderView];
+    self.tempHeaderView = [self.headerView tailorWithFrame:CGRectMake(0, 0, self.view.sizeW, self.headerView.sizeH)];
+    self.tempHeaderView.hidden = YES;
+    self.tempHeaderView.userInteractionEnabled = NO;
+    [self.view addSubview:self.tempHeaderView];
     
     [self configTabArrs];
 }
@@ -59,6 +65,7 @@
         [self addChildViewController:tVc];
         [self.view addSubview:tVc.view];
         tVc.view.left = self.view.sizeW;
+        
         if (self.navBottom == 0) {
             tVc.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
@@ -75,8 +82,11 @@
     UIViewController<BQSwipTableViewDelegate> * curVc = self.tabArrs[self.currentTabIndex];
     curVc.view.left = 0;
     curVc.needScrollBlock = YES;
-    
-    [self.view bringSubviewToFront:self.disPalyHeaderView];
+    curVc.tableView.tableHeaderView = self.disPalyHeaderView;
+
+    [self.view bringSubviewToFront:self.tempHeaderView];
+    [self.view bringSubviewToFront:self.barView];
+
 }
 
 - (void)resetTabArrs:(NSArray<UIViewController<BQSwipTableViewDelegate> *> *)tabArrs {
@@ -92,38 +102,35 @@
 }
 
 - (void)updateDisplayViewFrame:(CGFloat)offsetY {
+
+    if (offsetY >= self.headerView.sizeH - self.navBottom) {
+        
+        if (self.barView.top != self.headerView.sizeH + self.navBottom - self.headerView.sizeH) {
+            [self resetTableOffset:self.headerView.sizeH - self.navBottom];
+            self.barView.top = self.headerView.sizeH + self.navBottom - self.headerView.sizeH;
+            self.tempHeaderView.top = self.barView.top - self.tempHeaderView.sizeH;
+        }
+        
+    } else {
+        [self resetTableOffset:offsetY];
+        self.isFirst = NO;
+        self.barView.top = self.headerView.sizeH - offsetY;
+        self.tempHeaderView.top = self.barView.top - self.tempHeaderView.sizeH;
+    }
+}
+
+- (void)resetTableOffset:(CGFloat)offsetY {
     
-    if (!self.headerView) {
+    if (!self.headerView || self.isFirst) { //第一次进入配置contentOffset会出现偏移错误
         return;
     }
     
-    if (offsetY >= self.headerView.sizeH - self.navBottom) {
-        
-        if (self.disPalyHeaderView.top != self.navBottom - self.headerView.sizeH) {
-            for (NSInteger i = 0; i < self.tabArrs.count; i++) {
-                if (i == self.currentTabIndex) {
-                    continue;
-                } else {
-                    [self.tabArrs[i].tableView setContentOffset:CGPointMake(0, self.headerView.sizeH - self.navBottom) animated:NO];
-                }
-            }
+    for (NSInteger i = 0; i < self.tabArrs.count; i++) {
+        if (i == self.currentTabIndex) {
+            continue;
+        } else {
+            [self.tabArrs[i].tableView setContentOffset:CGPointMake(0, offsetY) animated:NO];
         }
-        self.disPalyHeaderView.top = self.navBottom - self.headerView.sizeH;
-        
-    } else {
-        
-        if (!self.isFirst) { //第一次进入contentOffset会出现偏移错误
-            for (NSInteger i = 0; i < self.tabArrs.count; i++) {
-                if (i == self.currentTabIndex) {
-                    continue;
-                } else {
-                    [self.tabArrs[i].tableView setContentOffset:CGPointMake(0, offsetY) animated:NO];
-                }
-            }
-        }
-        
-        self.isFirst = NO;
-        self.disPalyHeaderView.top = -offsetY;
     }
 }
 
@@ -131,13 +138,16 @@
     
     if (index >= 0 && index < self.tabArrs.count && index != self.currentTabIndex) {
         
-        UIViewController<BQSwipTableViewDelegate> * tabVc = self.tabArrs[index];
-        tabVc.view.left = 0;
-        tabVc.needScrollBlock = YES;
-        
         UIViewController<BQSwipTableViewDelegate> * currentTabVc = self.tabArrs[self.currentTabIndex];
         currentTabVc.needScrollBlock = NO;
         currentTabVc.view.right = 0;
+        currentTabVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.sizeH)];
+        
+        UIViewController<BQSwipTableViewDelegate> * tabVc = self.tabArrs[index];
+        tabVc.view.left = 0;
+        tabVc.needScrollBlock = YES;
+        tabVc.tableView.tableHeaderView = self.disPalyHeaderView;
+        
         
         self.currentTabIndex = index;
     }
@@ -166,14 +176,20 @@
 
 - (void)changeVcFrom:(UIViewController<BQSwipTableViewDelegate> *)fromVc to:(UIViewController<BQSwipTableViewDelegate> *)toVc swipRight:(BOOL)swipRight {
     
+    self.tempHeaderView.hidden = NO;
     fromVc.needScrollBlock = NO;
-    toVc.needScrollBlock = YES;
+    fromVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.sizeH)];
     
+    toVc.needScrollBlock = YES;
+//    toVc.tableView.tableHeaderView = self.disPalyHeaderView;
     toVc.view.left = swipRight ? -self.view.sizeW: self.view.sizeW;
     
     [UIView animateWithDuration:0.25 animations:^{
         fromVc.view.left = swipRight ? self.view.sizeW : -self.view.sizeW;
         toVc.view.left = 0;
+    } completion:^(BOOL finished) {
+        toVc.tableView.tableHeaderView = self.disPalyHeaderView;
+        self.tempHeaderView.hidden = YES;
     }];
     
     if (self.switchBlock) {

@@ -64,4 +64,7 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
  /** View to Image */
 - (UIImage *)convertToImage;
 
+/** 范围内裁剪 */
+- (UIView *)tailorWithFrame:(CGRect)frame;
+
 @end

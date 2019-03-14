@@ -288,7 +288,22 @@
     return image;
 }
 
-
+- (UIView *)tailorWithFrame:(CGRect)frame {
+    
+    if (CGRectGetMaxX(frame) > self.sizeW || CGRectGetMaxY(frame) > self.sizeH) {
+        return nil;
+    }
+    
+    CGFloat scale = [UIScreen mainScreen].scale;
+    UIImage * img = [self convertToImage];
+    
+    UIImage * image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(img.CGImage, CGRectMake(frame.origin.x * scale, frame.origin.y * scale, frame.size.width * scale, frame.size.height * scale))];
+    
+    UIView * view = [[UIView alloc] initWithFrame:frame];
+    view.layer.contents = (__bridge id)image.CGImage;
+    return view;
+    
+}
 #pragma mark - Associate
 
 - (UIRectCorner)corners {
