@@ -304,6 +304,28 @@
     return view;
     
 }
+
+- (UIViewController *)viewController {
+    UIResponder *next = [self nextResponder];
+    do {
+        if ([next isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)next;
+        }
+        next = [next nextResponder];
+    } while (next != nil);
+    return nil;
+}
+
+- (UIViewController *)currentController {
+    UIView * supView = self;
+    while (supView.superview) {
+        supView = supView.superview;
+    }
+    return [supView viewController];
+}
+
+
+
 #pragma mark - Associate
 
 - (UIRectCorner)corners {

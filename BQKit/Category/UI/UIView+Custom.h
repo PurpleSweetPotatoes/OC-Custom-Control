@@ -67,4 +67,10 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
 /** 范围内裁剪 */
 - (UIView *)tailorWithFrame:(CGRect)frame;
 
+
+/** 视图的控制器 */
+- (UIViewController *)viewController;
+/** 主界面视图的控制器 */
+- (UIViewController *)currentController;
+
 @end
