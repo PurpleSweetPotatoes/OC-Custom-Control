@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 ltebean. All rights reserved.
 //
 
-#import "UINavigationBar+Awesome.h"
+#import "UINavigationBar+Custom.h"
 #import <objc/runtime.h>
 #import "BQDefineHead.h"
 

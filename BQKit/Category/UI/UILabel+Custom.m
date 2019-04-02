@@ -16,11 +16,16 @@
 }
 
 - (CGFloat)heightToFitWithSpace:(CGFloat)space {
-    if (self.text.length > 0) {
-        CGRect rect = [self.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
-        self.sizeH = rect.size.height + space;
+    
+    CGRect rect = CGRectZero;
+    
+    if (self.attributedText.length > 0) {
+        rect = [self.attributedText boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    } else if (self.text.length > 0) {
+        rect = [self.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
     }
     
+    self.sizeH = ceil(rect.size.height + space);
     return  self.sizeH;
 }
 
@@ -29,11 +34,16 @@
 }
 
 - (CGFloat)widthToFitWithSpace:(CGFloat)space {
-    if (self.text.length > 0) {
-        CGRect rect = [self.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
-        self.sizeW = rect.size.width + space;
+    
+    CGRect rect = CGRectZero;
+    
+    if (self.attributedText.length > 0) {
+        rect = [self.attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    } else if (self.text.length > 0) {
+        rect = [self.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
     }
     
+    self.sizeW = ceil(rect.size.width + space);
     return  self.sizeW;
 }
 

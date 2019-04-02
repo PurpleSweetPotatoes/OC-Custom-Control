@@ -71,6 +71,6 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
 /** 视图的控制器 */
 - (UIViewController *)viewController;
 /** 主界面视图的控制器 */
-- (UIViewController *)currentController;
+- (UIViewController *)currentMainController;
 
 @end

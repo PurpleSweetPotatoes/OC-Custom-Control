@@ -316,7 +316,7 @@
     return nil;
 }
 
-- (UIViewController *)currentController {
+- (UIViewController *)currentMainController {
     UIView * supView = self;
     while (supView.superview) {
         supView = supView.superview;
