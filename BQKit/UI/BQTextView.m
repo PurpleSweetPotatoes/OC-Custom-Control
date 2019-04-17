@@ -7,7 +7,6 @@
 //
 
 #import "BQTextView.h"
-#import "UIView+Custom.h"
 
 @interface BQTextView ()<UITextViewDelegate>
 {
@@ -38,6 +37,7 @@
 - (void)configTextView {
     self.maxHeight = [UIScreen mainScreen].bounds.size.height;
     self.maxCharNum = 1000;
+    self.minHeight = -1;
     self.delegate = self;
     self.font = [UIFont systemFontOfSize:15];
     self.autoAdjustHeight = YES;
@@ -47,18 +47,12 @@
 
 - (void)layoutSubviews {
     
-    if (self.autoAdjustHeight && self.contentSize.height <= self.maxHeight) {
-        
-        CGRect frame = self.frame;
-        frame.size = self.contentSize;
-        self.frame = frame;
-        [self lastHeightCompareWithHeight:frame.size.height];
-        
-    } else if (self.contentSize.height > self.maxHeight) {
-        
-        self.sizeH = self.maxHeight;
-        [self lastHeightCompareWithHeight:self.sizeH];
-        
+    [super layoutSubviews];
+    
+    if (self.autoAdjustHeight && self.contentSize.height <= self.maxHeight && self.contentSize.height > self.minHeight) {
+        [self lastHeightCompareWithHeight:self.contentSize.height];
+    } else if (self.contentSize.height < self.minHeight) {
+        [self lastHeightCompareWithHeight:self.minHeight];
     }
     
     CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
@@ -76,15 +70,11 @@
         minHeight = self.font.lineHeight;
     }
     
-    if (self.sizeH < minHeight + offsetTop + offsetBottom) {
-        self.sizeH = minHeight + offsetTop + offsetBottom;
-    }
-    
-    [super layoutSubviews];
 }
 
 
 - (void)lastHeightCompareWithHeight:(CGFloat)height {
+    self.sizeH = height;
     if (_lastHeight != height) {
         _lastHeight = height;
         if ([self.ourDelegate respondsToSelector:@selector(textViewDidAdjustFrame:)]    ) {
@@ -162,6 +152,13 @@
 #pragma mark - UITextViewDelegate
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if (self.returnKeyType == UIReturnKeySend && [text isEqualToString:@"\n"]) {
+        if ([self.ourDelegate respondsToSelector:@selector(textViewShouldSend)]) {
+            [self.ourDelegate textViewShouldSend];
+        }
+        return NO;
+    }
     
     if (text.length == 0 || [textView.text length] < self.maxCharNum) {
         return YES;
