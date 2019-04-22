@@ -53,11 +53,9 @@
                 UIViewController * vc = [[class alloc] init];
                 vc.tabBarItem = item;
                 vc.title = title;
-                vc.view.backgroundColor = [UIColor clearColor];
                 if (needNaVc) {
                     vc = [[UINavigationController alloc] initWithRootViewController:vc];
                 }
-                [((UINavigationController *)vc).navigationBar lt_setBackgroundColor:[UIColor clearColor]];
                 [vcs addObject:vc];
             }
         }
