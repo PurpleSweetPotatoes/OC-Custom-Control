@@ -11,14 +11,15 @@
 @interface BQTextView ()<UITextViewDelegate>
 {
     CGFloat _lastHeight;
+    UILabel * placeHolderLabel;
 }
+
+@property (nonatomic, assign) CGFloat  minHeight;
 
 @end
 
 @implementation BQTextView
-{
-    UILabel * placeHolderLabel;
-}
+
 @synthesize placeholder = _placeholder;
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -40,7 +41,7 @@
     self.minHeight = -1;
     self.delegate = self;
     self.font = [UIFont systemFontOfSize:15];
-    self.autoAdjustHeight = YES;
+    self.autoAdjustHeight = NO;
     _lastHeight = self.bounds.size.height;
     
 }
@@ -49,27 +50,24 @@
     
     [super layoutSubviews];
     
-    if (self.autoAdjustHeight && self.contentSize.height <= self.maxHeight && self.contentSize.height > self.minHeight) {
-        [self lastHeightCompareWithHeight:self.contentSize.height];
-    } else if (self.contentSize.height < self.minHeight) {
-        [self lastHeightCompareWithHeight:self.minHeight];
+    if (self.autoAdjustHeight) {
+        
+        if (self.contentSize.height <= self.maxHeight && self.contentSize.height > self.minHeight) {
+            [self lastHeightCompareWithHeight:self.contentSize.height];
+        } else if (self.contentSize.height <= self.minHeight) {
+            [self lastHeightCompareWithHeight:self.minHeight];
+        }
+        
+        if (self.sizeH < self.minHeight) {
+            self.sizeH = self.minHeight;
+        }
     }
     
-    CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
-    CGFloat offsetRight = self.textContainerInset.right + self.textContainer.lineFragmentPadding;
-    CGFloat offsetTop = self.textContainerInset.top;
-    CGFloat offsetBottom = self.textContainerInset.bottom;
-    
-    CGSize expectedSize = [placeHolderLabel sizeThatFits:CGSizeMake(CGRectGetWidth(self.frame)-offsetLeft-offsetRight, CGRectGetHeight(self.frame)-offsetTop-offsetBottom)];
-    placeHolderLabel.frame = CGRectMake(offsetLeft, offsetTop, expectedSize.width, expectedSize.height);
-    
-    
-    CGFloat minHeight = placeHolderLabel.sizeH;
-    
-    if (minHeight < self.font.lineHeight) {
-        minHeight = self.font.lineHeight;
+    if (placeHolderLabel.alpha != 0) {
+        CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
+        CGFloat offsetRight = self.textContainerInset.right + self.textContainer.lineFragmentPadding;
+        placeHolderLabel.frame = CGRectMake(offsetLeft, 0, self.sizeW - offsetLeft - offsetRight, self.minHeight < self.sizeH ? self.minHeight : self.sizeH);
     }
-    
 }
 
 
@@ -118,6 +116,8 @@
 -(void)setFont:(UIFont *)font {
     [super setFont:font];
     placeHolderLabel.font = self.font;
+    CGRect rect = [@"行" boundingRectWithSize:CGSizeMake(100, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+    self.minHeight = ceil(self.textContainerInset.top + self.textContainerInset.bottom + rect.size.height);
     
     [self setNeedsLayout];
     [self layoutIfNeeded];
