@@ -32,6 +32,9 @@ static NSString * const kNormalImg  = @"kNormalImg";
  */
 + (instancetype)createVcWithInfo:(NSArray *)infos needNaVc:(BOOL)needNaVc;
 
+
+- (void)configVcWithInfo:(NSArray *)infos;
+- (void)configVcWithInfo:(NSArray *)infos needNaVc:(BOOL)needNaVc;
 @end
 
 NS_ASSUME_NONNULL_END

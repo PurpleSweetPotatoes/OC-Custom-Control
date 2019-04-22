@@ -17,8 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)configLeftImg:(NSString *)imgName;
 - (void)configRightImg:(NSString *)imgName;
 
+
+- (BOOL)hasTapAction;
 // use this method textFeild will con't edit
-- (void)addTapAction:(void(^)(BQSearchView * searchView))handler;
+- (void)addTapAction:(nullable void(^)(BQSearchView * searchView))handler;
 - (void)removeTapAction;
 
 @end

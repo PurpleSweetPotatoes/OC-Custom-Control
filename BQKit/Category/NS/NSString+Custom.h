@@ -145,4 +145,7 @@
 /**  是否含有unicode编码 */
 - (BOOL)hasUnicode;
 
+/** string字面转化为Data */
+- (NSMutableData*)convertBytesToData;
+
 @end

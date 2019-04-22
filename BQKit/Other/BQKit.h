@@ -40,6 +40,8 @@
 #import "BQPopVc.h"
 #import "BQActivityView.h"
 #import "BQSwipeSubTableVc.h"
+#import "BQSearchView.h"
+#import "BQAlertSheetView.h"
 
 #pragma mark - Category
 #import "NSString+Custom.h"
@@ -61,5 +63,6 @@
 #import "UICollectionView+Custom.h"
 #import "UINavigationBar+Custom.h"
 #import "UITabBarController+Custom.h"
+#import "NSAttributedString+Custom.h"
 #endif /* BQKit_h */
 

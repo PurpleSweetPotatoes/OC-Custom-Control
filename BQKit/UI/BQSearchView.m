@@ -9,6 +9,9 @@
 #import "BQSearchView.h"
 
 @interface BQSearchView ()
+<
+UITextFieldDelegate
+>
 @property (nonatomic, strong) UIImageView * leftImgView;
 @property (nonatomic, strong) UIImageView * rightImgView;
 @property (nonatomic, copy) void (^tapAction)(BQSearchView * _Nonnull);
@@ -35,24 +38,35 @@
     self.backgroundColor = [UIColor whiteColor];
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.font = [UIFont systemFontOfSize:15];
-    
-    [self configLeftImg:@""];
+    self.returnKeyType = UIReturnKeyDone;
+    self.delegate = self;
+    [self configLeftImg:@"search_normal_icon"];
     [self configRightImg:@""];
 }
 
 - (void)configLeftImg:(NSString *)imgName {
     self.leftImgView.image = [UIImage imageNamed:imgName];
+    self.leftView = self.leftImgView;
     self.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)configRightImg:(NSString *)imgName {
     self.rightImgView.image = [UIImage imageNamed:imgName];
+    self.rightView = self.rightImgView;
     self.rightViewMode = UITextFieldViewModeAlways;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string isEqualToString:@"\n"]) {
+        [textField endEditing:YES];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Action
 
-- (void)addTapAction:(void (^)(BQSearchView * _Nonnull))handler {
+- (void)addTapAction:(nullable void (^)(BQSearchView * _Nonnull))handler {
     self.tapAction = handler;
     
     [self addTarget:self action:@selector(tapUpInsideAction:) forControlEvents:UIControlEventEditingDidBegin];
@@ -60,8 +74,12 @@
 }
 
 - (void)removeTapAction {
-    self.tapAction = nil;
-    [self removeTarget:self action:@selector(tapUpInsideAction:) forControlEvents:UIControlEventEditingDidBegin];
+    
+    if (self.tapAction) {
+        self.tapAction = nil;
+        [self removeTarget:self action:@selector(tapUpInsideAction:) forControlEvents:UIControlEventEditingDidBegin];
+    }
+    
 }
 
 - (void)tapUpInsideAction:(id) sender {
@@ -112,6 +130,10 @@
         _rightImgView = imgView;
     }
     return _rightImgView;
+}
+
+- (BOOL)hasTapAction {
+    return self.tapAction ? YES : NO;
 }
 
 @end

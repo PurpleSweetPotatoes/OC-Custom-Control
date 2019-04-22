@@ -11,6 +11,7 @@
 @interface BQPopVc ()
 
 @property (nonatomic, copy) void(^handle)(id objc);         ///<  结束时的回调函数
+@property (nonatomic, strong) id  objc;                     ///<  回调参数
 @property (nonatomic, strong) UIView * backView;            ///<  黑色透明
 @end
 
@@ -18,21 +19,19 @@
 
 #pragma mark - Class Method
 
-+ (instancetype)showViewWithfromVc:(UIViewController *)fromVc Handle:(void(^)(id objc))handle {
-    return [self showViewWihtDictInfo:nil fromVc:fromVc handle:handle];
-}
-
-+ (instancetype)showViewWihtDictInfo:(NSDictionary *)dictInfo fromVc:(UIViewController *)fromVc handle:(void(^)(id objc))handle {
++ (instancetype)createVcWithHandle:(void(^)(id objc))handle {
     BQPopVc * popVc = [[self alloc] init];
+    popVc.needBackView = YES;
     popVc.showTime = 0.25;
     popVc.hideTime = 0.25;
-    popVc.dicInfo = dictInfo;
     popVc.handle = handle;
     popVc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [fromVc presentViewController:popVc animated:NO completion:^{
-        [popVc animationShow];
-    }];
     return popVc;
+}
+
++ (void)showViewWithfromVc:(UIViewController *)fromVc Handle:(void(^)(id objc))handle {
+    BQPopVc * popVc = [self createVcWithHandle:handle];
+    [popVc showFromVc:fromVc];
 }
 
 #pragma mark - Live Cycle
@@ -41,24 +40,24 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-    self.needBackView = YES;
-    
+
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapgestureAction:)];
-    [self.view addGestureRecognizer:tap];
     
-    
-    [self setUpUI];
+    if (self.needBackView) {
+        [self.view addSubview:self.backView];
+        [self.backView addGestureRecognizer:tap];
+    } else {
+        [self.view addGestureRecognizer:tap];
+    }
     
 }
 
-
-
 #pragma mark - public Method
 
-- (void)setUpUI {
-    
-    [self.view addSubview:self.backView];
-
+- (void)showFromVc:(UIViewController *)fromVc {
+    [fromVc presentViewController:self animated:NO completion:^{
+        [self animationShow];
+    }];
 }
 
 - (void)animationShow {

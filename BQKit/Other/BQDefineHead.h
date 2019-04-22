@@ -7,7 +7,7 @@
 //
 
 
-typedef void (^VoidBlock)(void);
+typedef void(^VoidBlock)(void);
 
 /*  弱引用和强引用 */
 #define WeakSelf __weak typeof(self) weakSelf = self
@@ -25,7 +25,7 @@ typedef void (^VoidBlock)(void);
 #define RGBColor(r, g, b) RGBAColor((r), (g), (b), 1.0f)
 
 /** ---------------- APP版本号 ---------------  */
-#define AppServion ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
+#define AppVersion ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
 
 /** ---------------- 手机型号 ---------------  */
 
@@ -50,6 +50,4 @@ typedef void (^VoidBlock)(void);
 #define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
 #else
 #define NSLog(...)
-
-
 #endif

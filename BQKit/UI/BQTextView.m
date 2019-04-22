@@ -153,7 +153,8 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    if (self.returnKeyType == UIReturnKeySend && [text isEqualToString:@"\n"]) {
+    if ((self.returnKeyType == UIReturnKeySend || self.returnKeyType == UIReturnKeyDone) && [text isEqualToString:@"\n"]) {
+        [textView endEditing:YES];
         if ([self.ourDelegate respondsToSelector:@selector(textViewShouldSend)]) {
             [self.ourDelegate textViewShouldSend];
         }

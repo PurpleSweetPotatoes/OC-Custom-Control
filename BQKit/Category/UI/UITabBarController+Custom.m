@@ -18,6 +18,16 @@
 + (instancetype)createVcWithInfo:(NSArray *)infos needNaVc:(BOOL)needNaVc {
 
     UITabBarController * tabbarVc = [[UITabBarController alloc] init];
+    [tabbarVc configVcWithInfo:infos needNaVc:needNaVc];
+    return tabbarVc;
+}
+
+- (void)configVcWithInfo:(NSArray *)infos {
+    [self configVcWithInfo:infos needNaVc:YES];
+}
+
+- (void)configVcWithInfo:(NSArray *)infos needNaVc:(BOOL)needNaVc {
+    
     NSMutableArray * vcs = [NSMutableArray arrayWithCapacity:infos.count];
     
     if (infos.count > 0) {
@@ -43,17 +53,17 @@
                 UIViewController * vc = [[class alloc] init];
                 vc.tabBarItem = item;
                 vc.title = title;
+                vc.view.backgroundColor = [UIColor clearColor];
                 if (needNaVc) {
                     vc = [[UINavigationController alloc] initWithRootViewController:vc];
                 }
+                [((UINavigationController *)vc).navigationBar lt_setBackgroundColor:[UIColor clearColor]];
                 [vcs addObject:vc];
             }
         }
     }
+    self.viewControllers = vcs;
     
-    tabbarVc.viewControllers = vcs;
-    
-    return tabbarVc;
 }
 
 

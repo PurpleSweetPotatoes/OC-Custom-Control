@@ -10,6 +10,13 @@
 
 @implementation NSDate (Custom)
 
++ (instancetype)locaDate {
+    NSDate * date = [NSDate date];
+    NSTimeZone * zone = [NSTimeZone systemTimeZone];
+    date = [NSDate dateWithTimeIntervalSinceNow:[zone secondsFromGMTForDate:date]];
+    return date;
+}
+
 - (NSString *)getFormatteTimestamp {
     return [NSString stringWithFormat:@"%.lf",self.timeIntervalSince1970];
 }
@@ -75,9 +82,10 @@
 
 - (NSString *)standardFormatTimeString {
     
-    NSDate *date = [NSDate date];
-    NSTimeInterval targetTimeStamp = [self timeIntervalSince1970];
+    NSDate *date = [NSDate locaDate];
     NSTimeInterval nowTimeStamp = [date timeIntervalSince1970];
+    
+    NSTimeInterval targetTimeStamp = [self timeIntervalSince1970];
     NSTimeInterval delay = nowTimeStamp - targetTimeStamp;
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];

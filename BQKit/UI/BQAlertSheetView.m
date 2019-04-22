@@ -32,7 +32,7 @@
 
 - (void)didMoveToSuperview {
     CGRect frame = self.bottomView.frame;
-    frame.origin.y = self.bounds.size.height - self.bottomView.bounds.size.height;
+    frame.origin.y = self.bounds.size.height - self.bottomView.bounds.size.height - 10;
     
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 1;
@@ -43,27 +43,26 @@
 - (void)setUpUI {
     self.alpha = 0;
     self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-    CGFloat rowHeight = 44;
+    CGFloat rowHeight = 40;
     CGFloat height = rowHeight * (self.titles.count + 1) + 4 + 1 * self.titles.count;
     
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, height)];
+    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(20, self.bounds.size.height, self.bounds.size.width - 40, height)];
+    [self.bottomView roundCorner:10];
     [self addSubview:self.bottomView];
     
     for (NSInteger i = 0; i < self.titles.count; i++) {
         
-        UIButton * btn  = [self createTitleBtnWithFrame:CGRectMake(0, i * (rowHeight + 1), self.bounds.size.width, rowHeight) title:self.titles[i] tag:i];
+        UIButton * btn  = [self createTitleBtnWithFrame:CGRectMake(0, i * (rowHeight + 1), self.bottomView.sizeW, rowHeight) title:self.titles[i] tag:i];
         
-        if (i != 0) {
-            CAShapeLayer * lineLayer = [CAShapeLayer layer];
-            lineLayer.frame = CGRectMake(0, CGRectGetMaxY(btn.frame), self.bounds.size.width, 1 + (i == (self.titles.count - 1)?4:0));
-            lineLayer.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1].CGColor;
-            [self.bottomView.layer addSublayer:lineLayer];
-        }
+        CAShapeLayer * lineLayer = [CAShapeLayer layer];
+        lineLayer.frame = CGRectMake(0, CGRectGetMaxY(btn.frame), self.bounds.size.width, 1 + (i == (self.titles.count - 1)?4:0));
+        lineLayer.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1].CGColor;
+        [self.bottomView.layer addSublayer:lineLayer];
         
         [self.bottomView addSubview:btn];
     }
     
-    UIButton * btn = [self createTitleBtnWithFrame:CGRectMake(0, height - rowHeight, self.bounds.size.width, rowHeight) title:@"取消" tag:100];
+    UIButton * btn = [self createTitleBtnWithFrame:CGRectMake(0, height - rowHeight, self.bottomView.sizeW, rowHeight) title:@"取消" tag:100];
     [self.bottomView addSubview:btn];
 }
 
