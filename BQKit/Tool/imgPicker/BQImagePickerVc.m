@@ -29,7 +29,6 @@ BQImgPickCellDelegate
 @property (nonatomic, assign) CGSize targetSize;
 @end
 
-
 static NSString * const kImagePickerCell = @"BQImgPickerCell";
 
 @implementation BQImagePickerVc
@@ -88,6 +87,7 @@ static NSString * const kImagePickerCell = @"BQImgPickerCell";
     PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
     options.synchronous = YES;
     options.resizeMode = PHImageRequestOptionsResizeModeExact;
+    options.networkAccessAllowed = YES;
     self.options = options;
     
     self.targetSize = CGSizeMake(self.view.bounds.size.width * [UIScreen mainScreen].scale, self.view.bounds.size.height * [UIScreen mainScreen].scale);
@@ -111,7 +111,7 @@ static NSString * const kImagePickerCell = @"BQImgPickerCell";
         self.currentNum -= 1;
     } else if (self.currentNum == self.maxSelecd) {
         //to do any thing
-        NSLog(@"已达到最大选择数量");
+        [BQMsgView showInfo:@"已达到最大选择数"];
         return NO;
     } else {
         self.currentNum += 1;
@@ -123,13 +123,14 @@ static NSString * const kImagePickerCell = @"BQImgPickerCell";
     }
     
     __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    static dispatch_queue_t load_image_queue;
+    if (!load_image_queue) {
+        load_image_queue = dispatch_queue_create("BQImagePickerVcLoadImgQueue", 0);
+    }
+    dispatch_async(load_image_queue, ^{
         [weakSelf loadImgWithAsset:assetModel];
-        if (assetModel.selected) {
-            [weakSelf.backArr addObject:assetModel.image];
-        }
     });
-
+    
     return YES;
 }
 
@@ -210,8 +211,13 @@ static NSString * const kImagePickerCell = @"BQImgPickerCell";
 
 - (void)loadImgWithAsset:(PHAsset *)asset {
     CGSize size = asset.selected ? self.targetSize : self.itemSize;
+    WeakSelf;
     [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:self.options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         asset.image = result;
+        if (asset.selected && result) {
+            NSLog(@"添加");
+            [weakSelf.backArr addObject:result];
+        }
     }];
 }
 

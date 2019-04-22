@@ -11,13 +11,16 @@
 @interface BQPopVc ()
 
 @property (nonatomic, copy) void(^handle)(id objc);         ///<  结束时的回调函数
-@property (nonatomic, strong) id  objc;                     ///<  回调参数
 @property (nonatomic, strong) UIView * backView;            ///<  黑色透明
 @end
 
 @implementation BQPopVc
 
 #pragma mark - Class Method
+
+- (void)dealloc {
+    NSLog(@"%@ 被释放了", self);
+}
 
 + (instancetype)createVcWithHandle:(void(^)(id objc))handle {
     BQPopVc * popVc = [[self alloc] init];
@@ -40,7 +43,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-
+    
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapgestureAction:)];
     
     if (self.needBackView) {
@@ -103,21 +106,10 @@
 
 - (void)actionHanleMethod {
     
-    if (self.handle) {
-        self.handle(_objc);
+    if (self.handle && self.objc) {
+        self.handle(self.objc);
     }
 }
-
-#pragma mark - set Method
-
-- (void)setNeedBackView:(BOOL)needBackView {
-    
-    _needBackView = needBackView;
-    if (!needBackView) {
-        [self.backView removeFromSuperview];
-    }
-}
-
 
 #pragma mark - get Method
 

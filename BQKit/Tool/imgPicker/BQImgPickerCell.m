@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIImageView * imageView;
 @property (nonatomic, assign) CGFloat targetWidth;         ///<  获取的宽度
 @property (nonatomic, strong) PHImageRequestOptions * options;
+@property (nonatomic, strong) UIButton * selectBtn;
 @end
 
 @implementation BQImgPickerCell
@@ -69,7 +70,7 @@
     UIGraphicsEndImageContext();
     [selectBtn setImage:normalImg forState:UIControlStateNormal];
     [selectBtn setImage:selectImg forState:UIControlStateSelected];
-
+    self.selectBtn = selectBtn;
     self.options = [[PHImageRequestOptions alloc] init];
     self.options.resizeMode = PHImageRequestOptionsResizeModeExact;
     
@@ -88,6 +89,8 @@
     _assetModel = assetModel;
     
     self.imageView.image = nil;
+    
+    self.selectBtn.selected = assetModel.selected;
     
     if (self.assetModel.image) {
         self.imageView.image = self.assetModel.image;

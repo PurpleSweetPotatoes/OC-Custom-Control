@@ -21,6 +21,14 @@
  */
 + (void)exportVideoWithUrl:(NSString *)urlPath presetName:(NSString *)presetName completeHandle:(void(^)(NSString * exportUrl))handle;
 
+/**
+ 使用PHAsset导出视频元数据
+ 
+ @param videoAsset 视频Asset
+ @param complete 完成后回调
+ */
++ (void)exportVideoAsset:(PHAsset *)videoAsset
+                complete:(ExportVideoAssetBlock)complete;
 
 /**
  获取视频第一帧图片

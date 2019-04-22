@@ -38,6 +38,31 @@
     }];
 }
 
++ (void)exportVideoAsset:(PHAsset *)videoAsset
+                complete:(ExportVideoAssetBlock)complete {
+    
+    NSArray *assetResources = [PHAssetResource assetResourcesForAsset:videoAsset];
+    PHAssetResource *resource;
+    for (PHAssetResource *assetRes in assetResources) {
+        if (assetRes.type == PHAssetResourceTypePairedVideo ||
+            assetRes.type == PHAssetResourceTypeVideo) {
+            resource = assetRes;
+        }
+    }
+    
+    PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+    options.version = PHImageRequestOptionsVersionCurrent;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.networkAccessAllowed = YES;
+    
+    NSMutableData * videoData = [NSMutableData data];
+    [[PHAssetResourceManager defaultManager] requestDataForAssetResource:resource options:nil dataReceivedHandler:^(NSData * _Nonnull data) {
+        [videoData appendData:data];
+    } completionHandler:^(NSError * _Nullable error) {
+        complete(videoData, error);
+    }];
+}
+
 + (UIImage *)getFirstVideoImage:(NSString *)urlPath {
     
     AVURLAsset *urlAsset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:urlPath]];
