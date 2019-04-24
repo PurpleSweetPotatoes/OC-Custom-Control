@@ -316,16 +316,6 @@
     return nil;
 }
 
-- (UIViewController *)currentMainController {
-    UIView * supView = self;
-    while (supView.superview) {
-        supView = supView.superview;
-    }
-    return [supView viewController];
-}
-
-
-
 #pragma mark - Associate
 
 - (UIRectCorner)corners {

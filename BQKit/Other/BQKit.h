@@ -64,5 +64,7 @@
 #import "UINavigationBar+Custom.h"
 #import "UITabBarController+Custom.h"
 #import "NSAttributedString+Custom.h"
+#import "UIViewController+Custom.h"
+
 #endif /* BQKit_h */
 
