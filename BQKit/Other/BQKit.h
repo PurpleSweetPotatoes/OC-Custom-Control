@@ -42,6 +42,7 @@
 #import "BQSwipeSubTableVc.h"
 #import "BQSearchView.h"
 #import "BQAlertSheetView.h"
+#import "BQCirLabel.h"
 
 #pragma mark - Category
 #import "NSString+Custom.h"
