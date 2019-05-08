@@ -9,8 +9,6 @@
 #import "BQPopVc.h"
 
 @interface BQPopVc ()
-
-@property (nonatomic, copy) void(^handle)(id objc);         ///<  结束时的回调函数
 @property (nonatomic, strong) UIView * backView;            ///<  黑色透明
 @end
 
@@ -22,18 +20,17 @@
     NSLog(@"%@ 被释放了", self);
 }
 
-+ (instancetype)createVcWithHandle:(void(^)(id objc))handle {
++ (instancetype)createVc {
     BQPopVc * popVc = [[self alloc] init];
     popVc.needBackView = YES;
     popVc.showTime = 0.25;
     popVc.hideTime = 0.25;
-    popVc.handle = handle;
     popVc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     return popVc;
 }
 
-+ (void)showViewWithfromVc:(UIViewController *)fromVc Handle:(void(^)(id objc))handle {
-    BQPopVc * popVc = [self createVcWithHandle:handle];
++ (void)showViewWithfromVc:(UIViewController *)fromVc {
+    BQPopVc * popVc = [self createVc];
     [popVc showFromVc:fromVc];
 }
 
@@ -43,14 +40,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-    
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapgestureAction:)];
-    
+
     if (self.needBackView) {
         [self.view addSubview:self.backView];
-        [self.backView addGestureRecognizer:tap];
-    } else {
-        [self.view addGestureRecognizer:tap];
     }
     
 }
@@ -73,51 +65,25 @@
 - (void)animationHide {
     
     if (self.needBackView) {
-        
         [UIView animateWithDuration:self.hideTime animations:^{
             self.backView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self dismissSelf];
         }];
-        
-    } else {
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.hideTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissSelf];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.hideTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:NO completion:nil];
         });
-    }
 }
 
-#pragma mark - hide Method
 
-- (void)tapgestureAction:(UIGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
-        [self animationHide];
-    }
-}
-
-- (void)dismissSelf {
-    
-    __weak typeof(self) weakSelf = self;
-    [self dismissViewControllerAnimated:NO completion:^{
-        [weakSelf actionHanleMethod];
-    }];
-}
-
-- (void)actionHanleMethod {
-    
-    if (self.handle && self.objc) {
-        self.handle(self.objc);
-    }
-}
 
 #pragma mark - get Method
 
 - (UIView *)backView {
     if (_backView == nil) {
         UIView * backView = [[UIView alloc] initWithFrame:self.view.bounds];
-        UIColor * color = [UIColor blackColor];
-        backView.backgroundColor = [color colorWithAlphaComponent:0.25];
+        UIColor * color = [UIColor colorFromHexString:@"282520"];
+        backView.backgroundColor = [color colorWithAlphaComponent:0.6];
         backView.alpha = 0;
         _backView = backView;
     }

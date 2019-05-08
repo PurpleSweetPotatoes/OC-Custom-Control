@@ -10,6 +10,8 @@
 
 @interface UILabel (Custom)
 
++ (instancetype)createWithFrame:(CGRect)frame title:(NSString *)title font:(UIFont *)font textColor:(UIColor *)textColor;
+
 /** auto fit width with LabelFont and height */
 - (CGFloat)heightToFit;
 

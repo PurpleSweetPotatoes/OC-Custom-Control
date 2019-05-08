@@ -12,29 +12,25 @@
 /**
  can use for something has more views popView
  inherit BQPopVc and override funcs
- setUpUI ==> config your views
  animationShow ==> config your views animation when view will apper
  animationHide ==> config your views animation when view will disapper
- willUseHandleMethod ==> when will callback handle, you can config something for handle
- 
  */
 @interface BQPopVc : UIViewController
 
 #pragma mark - Main
 
-+ (instancetype)createVcWithHandle:(void(^)(id objc))handle;
++ (instancetype)createVc;
 
-+ (void)showViewWithfromVc:(UIViewController *)fromVc Handle:(void(^)(id objc))handle;
++ (void)showViewWithfromVc:(UIViewController *)fromVc;
 
 #pragma mark - subClass
-
 @property (nonatomic, assign) BOOL needBackView;                ///<  background black View， default is YES
 @property (nonatomic, assign) NSTimeInterval showTime;          ///<  animationShowTime, default is 0.25
 @property (nonatomic, assign) NSTimeInterval hideTime;          ///<  anmationHideTime default is 0.25
 
-/** subClass can override, need use super func */
-
 - (void)showFromVc:(UIViewController *)fromVc;
+
+/** subClass can override, need use super func */
 
 - (void)animationShow;
 

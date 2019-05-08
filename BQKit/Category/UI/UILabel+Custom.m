@@ -11,6 +11,14 @@
 
 @implementation UILabel (Custom)
 
++ (instancetype)createWithFrame:(CGRect)frame title:(NSString *)title font:(UIFont *)font textColor:(UIColor *)textColor {
+    UILabel * lab = [[UILabel alloc] initWithFrame:frame];
+    lab.text = title;
+    lab.font = font;
+    lab.textColor = textColor;
+    return lab;
+}
+
 - (CGFloat)heightToFit {
     return [self heightToFitWithSpace:0];
 }
