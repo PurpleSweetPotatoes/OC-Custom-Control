@@ -55,6 +55,15 @@
     }];
 }
 
+- (void)showVc {
+    UIViewController * vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+    }
+    
+    [self showFromVc:vc];
+}
+
 - (void)animationShow {
     
     [UIView animateWithDuration:self.showTime animations:^{

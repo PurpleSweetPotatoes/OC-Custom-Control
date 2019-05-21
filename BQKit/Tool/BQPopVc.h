@@ -30,6 +30,8 @@
 
 - (void)showFromVc:(UIViewController *)fromVc;
 
+- (void)showVc;
+
 /** subClass can override, need use super func */
 
 - (void)animationShow;

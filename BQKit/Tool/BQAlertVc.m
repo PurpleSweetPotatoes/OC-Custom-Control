@@ -137,7 +137,11 @@
 }
 
 - (void)showVc {
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:self animated:NO completion:^{
+    UIViewController * vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+    }
+    [vc presentViewController:self animated:NO completion:^{
         [self animationShow];
     }];
 }
