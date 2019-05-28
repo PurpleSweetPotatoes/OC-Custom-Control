@@ -30,6 +30,7 @@
     objc.runTimes = 0;
     objc.target = target;
     objc.selector = selector;
+    objc.isRun = YES;
     objc.timer = [NSTimer scheduledTimerWithTimeInterval:time target:[BQWeakProxy proxyWithTarget:objc] selector:@selector(timeScheduleAction:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:objc.timer forMode:NSRunLoopCommonModes];
     [objc pause];

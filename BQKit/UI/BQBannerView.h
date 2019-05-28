@@ -8,21 +8,31 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-/**
- 如包含导航栏，导致显示不正确。需要设置控制器automaticallyAdjustsScrollViewInsets属性为NO
- 需要依赖SDWebImage框架
- */
+@class BQBannerView;
+
+@protocol BQBannerViewDelegate <NSObject>
+
+@optional
+
+- (void)bannerView:(BQBannerView *)view clickIndex:(NSInteger)index;
+
+- (void)bannerView:(BQBannerView *)view scorllToIndex:(NSInteger)index;
+
+@end
+
+/** 需要依赖SDWebImage框架 */
 @interface BQBannerView : UIView
 
-/**
- 变化image数组资源后 需要调用reloadSource方法
- */
-@property (nonatomic, strong) NSArray<NSString *> * dataSource;
+@property (nonatomic, weak) id<BQBannerViewDelegate> delegate;
+@property (nonatomic, assign) NSTimeInterval  times;                ///< 默认2s
+@property (nonatomic, strong) NSArray<NSString *> * imgUrlArr;      ///< 数据源
+@property (nonatomic, readonly, assign) NSInteger  currentIndex;
 
-- (instancetype)initWithFrame:(CGRect)frame
-                   dataSource:(NSArray<NSString *> *)dataSource;
+@property (nonatomic, strong) UIPageControl * pageControl;
 
-- (void)bannerViewClickEvent:(void(^)(NSInteger index))clickBlock;
-- (void)reloadSource;
 @end
+
+
+NS_ASSUME_NONNULL_END
