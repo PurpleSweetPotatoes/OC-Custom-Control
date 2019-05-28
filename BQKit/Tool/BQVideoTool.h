@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
+typedef void(^ExportVideoAssetBlock)(NSData * data, NSError * error);
 
 /** 视频处理类 */
 @interface BQVideoTool : NSObject

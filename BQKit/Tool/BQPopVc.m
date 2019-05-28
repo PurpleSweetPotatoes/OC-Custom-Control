@@ -9,7 +9,7 @@
 #import "BQPopVc.h"
 
 @interface BQPopVc ()
-@property (nonatomic, strong) UIView * backView;            ///<  黑色透明
+
 @end
 
 @implementation BQPopVc
@@ -22,7 +22,6 @@
 
 + (instancetype)createVc {
     BQPopVc * popVc = [[self alloc] init];
-    popVc.needBackView = YES;
     popVc.showTime = 0.25;
     popVc.hideTime = 0.25;
     popVc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -40,11 +39,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-
-    if (self.needBackView) {
+    if (self.backView) {
         [self.view addSubview:self.backView];
     }
-    
 }
 
 #pragma mark - public Method
@@ -73,7 +70,7 @@
 
 - (void)animationHide {
     
-    if (self.needBackView) {
+    if (self.backView) {
         [UIView animateWithDuration:self.hideTime animations:^{
             self.backView.alpha = 0;
         }];

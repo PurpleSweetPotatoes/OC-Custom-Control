@@ -7,7 +7,6 @@
 //
 
 #import "BQRemoteMsgView.h"
-#import "BQScreenAdaptation.h"
 #import "UIView+Custom.h"
 #import "CALayer+Custom.h"
 #import "UIColor+Custom.h"

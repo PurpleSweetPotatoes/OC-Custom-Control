@@ -24,6 +24,7 @@
 #import "BQLocationManager.h"
 #import "UIImageEffects.h"
 #import "BQDatePickerView.h"
+#import "BQTimer.h"
 
 #pragma mark - Custom UI
 #import "BQMsgView.h"

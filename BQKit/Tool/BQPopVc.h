@@ -24,7 +24,7 @@
 + (void)showViewWithfromVc:(UIViewController *)fromVc;
 
 #pragma mark - subClass
-@property (nonatomic, assign) BOOL needBackView;                ///<  background black View， default is YES
+@property (nonatomic, strong) UIView * backView;                ///<  background black View
 @property (nonatomic, assign) NSTimeInterval showTime;          ///<  animationShowTime, default is 0.25
 @property (nonatomic, assign) NSTimeInterval hideTime;          ///<  anmationHideTime default is 0.25
 
