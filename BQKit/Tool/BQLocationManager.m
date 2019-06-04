@@ -7,10 +7,14 @@
 //
 
 #import "BQLocationManager.h"
+
 #import <CoreLocation/CLLocationManager.h>
 #import <CoreLocation/CLGeocoder.h>
 
-@interface BQLocationManager() <CLLocationManagerDelegate>
+@interface BQLocationManager()
+<
+CLLocationManagerDelegate
+>
 @property (nonatomic, strong) CLLocationManager * clManager;
 @property (nonatomic, strong) CLGeocoder * clGeocoder;
 @property (nonatomic, assign) BOOL loadSuccess;
@@ -21,6 +25,8 @@
 
 #pragma mark - Class Method
 
+
+
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     static BQLocationManager * location;
     static dispatch_once_t onceToken;
@@ -28,6 +34,10 @@
         location = [super allocWithZone:zone];
     });
     return location;
+}
+
++ (instancetype)shareManager {
+    return [[BQLocationManager alloc] init];
 }
 
 + (void)startLoadLocationCallBack:(void (^)(LocationInfo *, NSError *))callBack {
@@ -44,32 +54,64 @@
     manager.callBlock = callBack;
 }
 
++ (void)loadLocationWithlocation:(CLLocation *)location
+                        callBack:(void(^)(LocationInfo * locationInfo, NSError * error))callBack {
+    BQLocationManager * manager = [[BQLocationManager alloc] init];
+    manager.callBlock = callBack;
+    [manager reverseLocationWithLocation:location];
+}
+
++ (void)loadLocationWithAddress:(NSString *)address
+                       callBack:(void(^)(LocationInfo * locationInfo, NSError * error))callBack {
+    BQLocationManager * manager = [[BQLocationManager alloc] init];
+    manager.callBlock = callBack;
+    [manager geocodeAddressString:address];
+}
+
 #pragma mark - instancetype Method
 - (void)reverseLocationWithLocation:(CLLocation *) location {
-    
+    WeakSelf;
     [self.clGeocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        LocationInfo * info = [[LocationInfo alloc] init];
-        info.location = location;
-        
-        for (CLPlacemark *place in placemarks) {
-            //通过CLPlacemark可以输出用户位置信息
-            if (place.name != nil) {
-                info.address = place.name;
-            }
-            
-            if (place.locality != nil) {
-                info.city = place.locality;
-            }
-            
-            if (place != nil) {
-                info.place = place;
-            }
-        }
-        
-        if (self.callBlock != nil) {
-            self.callBlock(info, nil);
+        if (error) {
+            weakSelf.callBlock(nil, error);
+        } else {
+            [weakSelf prcoessPlacemMarks:placemarks];
         }
     }];
+}
+
+- (void)geocodeAddressString:(NSString *)address {
+    WeakSelf;
+    [self.clGeocoder geocodeAddressString:address completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error) {
+            weakSelf.callBlock(nil, error);
+        } else {
+            [weakSelf prcoessPlacemMarks:placemarks];
+        }
+    }];
+}
+
+- (void)prcoessPlacemMarks:(NSArray<CLPlacemark *> *) placemarks {
+    LocationInfo * info = [[LocationInfo alloc] init];
+    info.location = [placemarks firstObject].location;
+    for (CLPlacemark *place in placemarks) {
+        //通过CLPlacemark可以输出用户位置信息
+        if (place.name != nil) {
+            info.address = place.name;
+        }
+        
+        if (place.locality != nil) {
+            info.city = place.locality;
+        }
+        
+        if (place != nil) {
+            info.place = place;
+        }
+    }
+    
+    if (self.callBlock != nil) {
+        self.callBlock(info, nil);
+    }
 }
 
 #pragma mark - Delegate Method
