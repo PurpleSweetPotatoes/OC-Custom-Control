@@ -39,11 +39,6 @@ typedef void(^VoidBlock)(void);
 
 #define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !IS_PAD : NO)
 
-#define ISIPHONEX_OVER (IS_IPHONE_X == YES || IS_IPHONE_Xr == YES || IS_IPHONE_Xs == YES || IS_IPHONE_Xs_Max == YES)
-
-#define KStatuHeight (ISIPHONEX_OVER ? 44.0 : 20.0)
-#define KNavBottom (ISIPHONEX_OVER ? 88.0 : 64.0)
-#define KTabHeight (ISIPHONEX_OVER ? 83.0 : 49.0)
 
 /** ---------------- 输出调试 ---------------  */
 #ifdef DEBUG

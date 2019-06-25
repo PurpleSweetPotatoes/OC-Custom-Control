@@ -27,27 +27,49 @@
 }
 
 + (UIViewController *)currentDisPalyVc {
-    
     UIViewController * output = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-    while (output.presentedViewController) {
-        output = output.presentedViewController;
-    }
-    
-    if ([output isKindOfClass:[UITabBarController class]]) {
-        UITabBarController * tabVc = (UITabBarController *)output;
-        output = tabVc.viewControllers[tabVc.selectedIndex];
-        
-        while (output.presentedViewController) {
-            output = output.presentedViewController;
-        }
-        
-    }
-    
+    output = [self vcTypeChoose:output];
+    output = [self getTopVcInSupVc:output];
     return output;
 }
 
++ (UIViewController *)vcTypeChoose:(UIViewController *)mainVc {
+    UIViewController * outputVc;
+    if ([mainVc isKindOfClass:[UITabBarController class]]) {
+        UITabBarController * tabVc = (UITabBarController *)mainVc;
+        if (tabVc.viewControllers.count > 0) {
+            outputVc = [self vcTypeChoose:tabVc.viewControllers[tabVc.selectedIndex]];
+        } else {
+            outputVc = tabVc;
+        }
+    } else if ([mainVc isKindOfClass:[UINavigationController class]]) {
+        UINavigationController * navVc = (UINavigationController *)mainVc;
+        if (navVc.viewControllers.count > 0) {
+            outputVc = [self vcTypeChoose:navVc.visibleViewController];
+        } else {
+            outputVc = navVc;
+        }
+    } else {
+        outputVc = mainVc;
+    }
+    return outputVc;
+}
 
++ (UIViewController *)getTopVcInSupVc:(UIViewController *)vc {
+    UIViewController * outputVc = vc;
+    while (outputVc.presentedViewController) {
+        outputVc = outputVc.presentedViewController;
+    }
+    return outputVc;
+}
+
+- (CGFloat)navbarBottom {
+    return CGRectGetMaxY(self.navigationController.navigationBar.frame);
+}
+
+- (CGFloat)tabbarHeight {
+    return self.tabBarController.tabBar.bounds.size.height;
+}
 
 #pragma mark - Associate Object
 

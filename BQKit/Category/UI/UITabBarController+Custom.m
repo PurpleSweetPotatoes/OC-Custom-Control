@@ -54,7 +54,7 @@
                 vc.tabBarItem = item;
                 vc.title = title;
                 if (needNaVc) {
-                    vc = [[UINavigationController alloc] initWithRootViewController:vc];
+                    vc = [[HBDNavigationController alloc] initWithRootViewController:vc];
                 }
                 [vcs addObject:vc];
             }

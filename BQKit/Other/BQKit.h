@@ -62,10 +62,13 @@
 #import "UIAlertController+Custom.h"
 #import "MF_Base64Codec.h"
 #import "UICollectionView+Custom.h"
-#import "UINavigationBar+Custom.h"
 #import "UITabBarController+Custom.h"
 #import "NSAttributedString+Custom.h"
 #import "UIViewController+Custom.h"
+
+#import "HBDNavigationController.h"
+#import "HBDNavigationBar.h"
+#import "UIViewController+HBD.h"
 
 #endif /* BQKit_h */
 
