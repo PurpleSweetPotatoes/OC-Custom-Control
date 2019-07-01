@@ -25,7 +25,6 @@
 #import "UIImageEffects.h"
 #import "BQDatePickerView.h"
 #import "BQTimer.h"
-#import "BQPlayer.h"
 
 #pragma mark - Custom UI
 #import "BQMsgView.h"
@@ -44,6 +43,7 @@
 #import "BQSearchView.h"
 #import "BQAlertSheetView.h"
 #import "BQCirLabel.h"
+#import "BQPlayerView.h"
 
 #pragma mark - Category
 #import "NSString+Custom.h"
