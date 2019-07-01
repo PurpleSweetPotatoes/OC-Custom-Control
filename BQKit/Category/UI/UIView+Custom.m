@@ -60,7 +60,7 @@
 }
 
 - (CGSize)size {
-    return self.frame.size;
+    return self.bounds.size;
 }
 
 - (void)setSizeW:(CGFloat)width{
