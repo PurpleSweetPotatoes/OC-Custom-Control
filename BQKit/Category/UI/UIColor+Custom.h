@@ -19,4 +19,6 @@
 + (UIColor *)colorFromHex:(NSInteger)hex;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 
+- (NSString *)toRGB565;
+
 @end

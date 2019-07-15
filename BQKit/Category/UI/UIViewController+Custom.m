@@ -64,7 +64,10 @@
 }
 
 - (CGFloat)navbarBottom {
-    return CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    if (self.navigationController) {
+        return self.navigationController.navigationBar.sizeH + [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    return 0;
 }
 
 - (CGFloat)tabbarHeight {

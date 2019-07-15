@@ -33,6 +33,14 @@
     return  [self colorFromHex:rgbValue];
 }
 
+- (NSString *)toRGB565 {
+    unsigned short B = ((int)(self.blue * 255) >> 3) & 0x001F;
+    unsigned short G = ((int)(self.green * 255) << 5) & 0x07E0;
+    unsigned short R = ((int)(self.red * 255) << 11) & 0xF800;
+    NSString * rgb565 = [NSString stringWithFormat:@"%x",(unsigned short)(R | G | B)];
+    return rgb565;
+}
+
 - (CGFloat)red {
     return [[self rgbaArray][0] floatValue];
 }
