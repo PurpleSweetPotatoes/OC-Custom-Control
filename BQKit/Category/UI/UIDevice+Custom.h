@@ -13,6 +13,7 @@
 @interface UIDevice (Custom)
 
 + (CGFloat)currentVersion;
++ (BOOL)supportVesion:(CGFloat)vesion;
 + (NSString *)ip4Address;
 + (NSString *)ip6Address;
 + (NSDictionary *)getIPAddresses;

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * disTitle;
 @property (nonatomic, strong) UIButton * centerBtn;
 @property (nonatomic, strong) BQSliderView * sliederView;
+@property (nonatomic, strong) UIButton * fullBtn;
 
 - (void)disPlayStatusChange;
 

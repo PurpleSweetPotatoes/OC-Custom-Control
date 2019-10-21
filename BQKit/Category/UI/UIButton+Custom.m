@@ -124,70 +124,58 @@
 }
 
 //当我们按钮点击事件 sendAction 时  将会执行  mySendAction
-- (void)mySendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event{
-    if (self.timeInterval <= 0)
-    {
+- (void)mySendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
+    
+    if (self.timeInterval <= 0) {
         //不需要被hook
         [self mySendAction:action to:target forEvent:event];
         return;
+    } else if (self.isIgnoreEvent) {
+        return;
+    } else if (self.timeInterval > 0) {
+        [self performSelector:@selector(resetState) withObject:nil afterDelay:self.timeInterval];
     }
-    if ([NSStringFromClass(self.class) isEqualToString:@"UIButton"])
-    {
-        if (self.isIgnoreEvent)
-        {
-            return;
-        }
-        else if (self.timeInterval > 0)
-        {
-            [self performSelector:@selector(resetState) withObject:nil afterDelay:self.timeInterval];
-        }
-    }
-    //此处 methodA和methodB方法IMP互换了，实际上执行 sendAction；所以不会死循环
+    
     self.isIgnoreEvent = YES;
     [self mySendAction:action to:target forEvent:event];
 }
+
 //runtime 动态绑定 属性
-- (void)setIsIgnoreEvent:(BOOL)isIgnoreEvent{
+- (void)setIsIgnoreEvent:(BOOL)isIgnoreEvent {
     // 注意BOOL类型 需要用OBJC_ASSOCIATION_RETAIN_NONATOMIC 不要用错，否则set方法会赋值出错
     objc_setAssociatedObject(self, @selector(isIgnoreEvent), @(isIgnoreEvent), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (BOOL)isIgnoreEvent{
+
+- (BOOL)isIgnoreEvent {
     //_cmd == @select(isIgnore); 和set方法里一致
     return [objc_getAssociatedObject(self, _cmd) boolValue];
 }
 
-- (void)resetState{
+- (void)resetState {
     [self setIsIgnoreEvent:NO];
 }
 
 #pragma mark - 扩大点击返回
 
-- (void)setHitTestEdgeInsets:(UIEdgeInsets)hitTestEdgeInsets
-{
+- (void)setHitTestEdgeInsets:(UIEdgeInsets)hitTestEdgeInsets {
     NSValue *value = [NSValue value:&hitTestEdgeInsets withObjCType:@encode(UIEdgeInsets)];
     objc_setAssociatedObject(self, @selector(hitTestEdgeInsets), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIEdgeInsets)hitTestEdgeInsets
-{
+- (UIEdgeInsets)hitTestEdgeInsets {
     NSValue *value = objc_getAssociatedObject(self, _cmd);
-    if(value)
-    {
+    if (value) {
         UIEdgeInsets edgeInsets;
         [value getValue:&edgeInsets];
         return edgeInsets;
-    }
-    else
-    {
+    } else {
         return UIEdgeInsetsZero;
     }
 }
 
 //扩大点击区域
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
-{
-    if(UIEdgeInsetsEqualToEdgeInsets(self.hitTestEdgeInsets, UIEdgeInsetsZero) || !self.enabled || self.hidden)
-    {
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (UIEdgeInsetsEqualToEdgeInsets(self.hitTestEdgeInsets, UIEdgeInsetsZero) || !self.enabled || self.hidden) {
         return [super pointInside:point withEvent:event];
     }
     

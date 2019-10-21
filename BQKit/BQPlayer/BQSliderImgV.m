@@ -8,6 +8,7 @@
 
 #import "BQSliderImgV.h"
 #import "NSBundle+BQPlayer.h"
+#import "UIView+Custom.h"
 
 @interface BQSliderImgV ()
 @property (nonatomic, strong) UIImageView * imgV;

@@ -8,8 +8,6 @@
 
 #import "BQSudokuView.h"
 
-#import <UIImageView+WebCache.h>
-
 @interface BQSudokuView ()
 @property (nonatomic, strong) NSArray * imgVArr;
 @property (nonatomic, assign) CGFloat  itemHeight;
@@ -57,7 +55,7 @@
 
 - (void)reloadData {
     UIView * disView = nil;
-    NSInteger count = [self.delegate numofDisPlayerImage:self];
+    NSInteger count = [self.delegate numOfImgsInSudokuView:self];
     
     for (NSInteger i = 0; i < 9; i++) {
         UIImageView * imgV = self.imgVArr[i];

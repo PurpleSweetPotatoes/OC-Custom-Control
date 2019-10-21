@@ -30,6 +30,10 @@
     return [[[UIDevice currentDevice] systemVersion] floatValue];
 }
 
++ (BOOL)supportVesion:(CGFloat)vesion {
+    return [self currentVersion] >= vesion;
+}
+
 + (NSString *)ip4Address {
     return [self getIPAddress:YES];
 }

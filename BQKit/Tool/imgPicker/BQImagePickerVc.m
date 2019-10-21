@@ -11,6 +11,7 @@
 #import "PHAsset+Picker.h"
 
 #import "BQImgPickerCell.h"
+#import "BQMsgView.h"
 
 @interface BQImagePickerVc ()
 <

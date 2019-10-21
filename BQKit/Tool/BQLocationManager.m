@@ -7,6 +7,7 @@
 //
 
 #import "BQLocationManager.h"
+#import "BQDefineHead.h"
 
 #import <CoreLocation/CLLocationManager.h>
 #import <CoreLocation/CLGeocoder.h>

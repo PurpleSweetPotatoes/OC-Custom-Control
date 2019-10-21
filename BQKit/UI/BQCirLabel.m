@@ -7,6 +7,7 @@
 //
 
 #import "BQCirLabel.h"
+#import "UIColor+Custom.h"
 
 @interface BQCirLabel()
 @property (nonatomic, strong) CAShapeLayer * cirBgLayer;

@@ -8,6 +8,7 @@
 
 #import "BQPlayerCtrlView.h"
 #import "NSBundle+BQPlayer.h"
+#import "UIView+Custom.h"
 
 @interface BQPlayerCtrlView ()
 <
@@ -17,7 +18,7 @@ BQSliderViewDelegate
 @property (nonatomic, strong) UIView * bottomToolView;
 @property (nonatomic, strong) UILabel * titleLab;
 @property (nonatomic, assign) BOOL  isDisplay;
-@property (nonatomic, strong) UIButton * fullBtn;
+
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "BQAlertSheetView.h"
+#import "UIView+Custom.h"
 
 @interface BQAlertSheetView ()
 @property (nonatomic, strong) UIView * bottomView;              ///<  底部动画View

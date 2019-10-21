@@ -7,6 +7,7 @@
 //
 
 #import "CALayer+Custom.h"
+#import "UIColor+Custom.h"
 
 @implementation CALayer (Custom)
 

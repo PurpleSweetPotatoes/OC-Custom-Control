@@ -7,6 +7,7 @@
 //
 
 #import "UITabBarController+Custom.h"
+#import "HBDNavigationController.h"
 
 @implementation UITabBarController (Custom)
 

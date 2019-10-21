@@ -8,7 +8,9 @@
 
 #import "BQSliderView.h"
 #import "NSBundle+BQPlayer.h"
-
+#import "UIView+Custom.h"
+#import "UILabel+Custom.h"
+#import "CALayer+Custom.h"
 
 @interface BQSliderView ()
 @property (nonatomic, strong) CALayer * bgLayer;

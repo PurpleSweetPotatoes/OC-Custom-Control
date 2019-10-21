@@ -10,8 +10,6 @@
 #import "UIAlertController+Custom.h"
 #import "BQTimer.h"
 
-#import <UIImageView+WebCache.h>
-
 @interface BQBannerView ()
 <
 UIScrollViewDelegate
@@ -20,7 +18,7 @@ UIScrollViewDelegate
 @property (nonatomic, strong) UIScrollView * contentView;
 
 @property (nonatomic, strong) NSArray<UIImageView *> * imgVArr;
-
+@property (nonatomic, assign) NSInteger  count;
 @property (nonatomic, assign) NSInteger  currentIndex;
 @property (nonatomic, strong) BQTimer * timer;
 @end
@@ -37,8 +35,12 @@ UIScrollViewDelegate
     return self;
 }
 
+- (void)didMoveToSuperview {
+    [self reloadData];
+}
+
 - (void)initData {
-    _imgUrlArr = @[];
+    self.count = 0;
     self.times = 2;
 }
 
@@ -75,12 +77,24 @@ UIScrollViewDelegate
     return scrollView;
 }
 
+- (void)reloadData {
+    self.count = [self.delegate numOfImgsInBannerView:self];
+    self.pageControl.numberOfPages = self.count;
+    self.pageControl.hidden = self.count <= 1;
+    self.currentIndex = 0;
+    self.contentView.userInteractionEnabled = self.count > 1;
+    [self imageChage];
+    if (self.count > 1) {
+        [self.timer start];
+    }
+}
+
 #pragma mark - Private Method
 
 - (void)imageChage {
     for (NSInteger i = -1; i < 2; ++ i) {
-        NSInteger index = (self.currentIndex + i + self.imgUrlArr.count) % self.imgUrlArr.count;
-        [self.imgVArr[i+1] sd_setImageWithURL:[NSURL URLWithString:self.imgUrlArr[index]]];
+        NSInteger index = (self.currentIndex + i + self.count) % self.count;
+        [self.delegate bannerView:self configImgV:self.imgVArr[i+1] index:index];
     }
     [self.contentView setContentOffset:CGPointMake(self.contentView.bounds.size.width, 0) animated:NO];
 }
@@ -112,7 +126,7 @@ UIScrollViewDelegate
     [self.timer start];
     if (scrollView.contentOffset.x != self.bounds.size.width) {
         NSInteger index = scrollView.contentOffset.x > self.bounds.size.width ? 1 : -1;
-        self.currentIndex = self.currentIndex + index + self.imgUrlArr.count;
+        self.currentIndex = self.currentIndex + index + self.count;
         [self imageChage];
         if ([self.delegate respondsToSelector:@selector(bannerView:scorllToIndex:)]) {
             [self.delegate bannerView:self scorllToIndex:self.currentIndex];
@@ -126,21 +140,8 @@ UIScrollViewDelegate
 
 #pragma mark - Set
 
-- (void)setImgUrlArr:(NSArray<NSString *> *)imgUrlArr {
-    _imgUrlArr = imgUrlArr;
-    
-    self.pageControl.numberOfPages = imgUrlArr.count;
-    self.pageControl.hidden = imgUrlArr.count <= 1;
-    self.currentIndex = 0;
-    self.contentView.userInteractionEnabled = imgUrlArr.count > 1;
-    [self imageChage];
-    if (imgUrlArr.count > 1) {
-        [self.timer start];
-    }
-}
-
 - (void)setCurrentIndex:(NSInteger)currentIndex {
-    _currentIndex = currentIndex % self.imgUrlArr.count;
+    _currentIndex = currentIndex % self.count;
     self.pageControl.currentPage = _currentIndex;
 }
 
@@ -151,7 +152,7 @@ UIScrollViewDelegate
     
     self.timer = [BQTimer configWithScheduleTime:times target:self selector:@selector(timeValueChange:)];
 
-    if (self.imgUrlArr.count > 1) {
+    if (self.count > 1) {
         [self.timer start];
     }
 }

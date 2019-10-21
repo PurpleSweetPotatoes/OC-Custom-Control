@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+Custom.h"
+#import "UIView+Custom.h"
 #import <objc/runtime.h>
 
 

@@ -14,14 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol BQSudokuViewDelegate <NSObject>
 
-- (NSInteger)numofDisPlayerImage:(BQSudokuView *)view;
+- (NSInteger)numOfImgsInSudokuView:(BQSudokuView *)sudokuView;
 
-- (void)sudokuView:(BQSudokuView *)view
+- (void)sudokuView:(BQSudokuView *)sudokuView
         configImgV:(UIImageView *)imageView
              index:(NSInteger)index;
 
 @optional
-- (void)sudokuView:(BQSudokuView *)view clickIndex:(NSInteger)index;
+- (void)sudokuView:(BQSudokuView *)sudokuView clickIndex:(NSInteger)index;
 
 @end
 
@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
                      itemSpace:(CGFloat)itemSpace NS_DESIGNATED_INITIALIZER;
 
 - (void)reloadData;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,7 @@
 //
 
 #import "UIApplication+Custom.h"
-
+#import "NSObject+Custom.h"
 
 @implementation UIApplication (Custom)
 

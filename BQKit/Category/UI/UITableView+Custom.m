@@ -7,6 +7,7 @@
 //
 
 #import "UITableView+Custom.h"
+#import "NSObject+Custom.h"
 #import <objc/runtime.h>
 
 static const NSUInteger EmptyTag = 'VIEW';

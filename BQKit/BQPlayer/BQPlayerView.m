@@ -11,6 +11,7 @@
 #import "BQSliderImgV.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import "UIView+Custom.h"
 
 static NSString * const kNotifiPlayStatus = @"status";
 static NSString * const kNotifiBufferLoad = @"loadedTimeRanges";

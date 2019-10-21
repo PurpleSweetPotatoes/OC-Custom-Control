@@ -8,6 +8,11 @@
 
 #import "BQAlertVc.h"
 #import "UIImage+Custom.h"
+#import "BQDefineHead.h"
+#import "UIView+Custom.h"
+#import "UIColor+Custom.h"
+#import "UILabel+Custom.h"
+#import "CALayer+Custom.h"
 
 @interface BQAlertVc ()
 
