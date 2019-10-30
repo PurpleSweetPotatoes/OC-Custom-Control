@@ -31,12 +31,12 @@ typedef NS_ENUM(NSInteger, BQDatePickerViewMode) {
 
 @interface BQDatePickerView : UIView
 
-@property (nonatomic, assign)BQDatePickerViewMode pickerViewMode;   ///< 时间格式
+@property (nonatomic, readonly, assign)BQDatePickerViewMode pickerViewMode;   ///< 时间格式，默认年月日
 @property(nonatomic, strong)id<BQDatePickerViewDelegate>delegate; 
 @property(nonatomic, copy)NSString * centerTitle;                   ///< 中心标题
-@property(nonatomic, strong)NSDate *currentDate;                    ///< 当前时间, 必须先设置pickerViewMode才有效
+@property(nonatomic, strong)NSDate *currentDate;                    ///< 当前时间
 
-+ (instancetype)createDatePickerView;
++ (instancetype)configDateView:(BQDatePickerViewMode)dateMode;
 
 /** 显示 */
 - (void)showDateTimePickerView;

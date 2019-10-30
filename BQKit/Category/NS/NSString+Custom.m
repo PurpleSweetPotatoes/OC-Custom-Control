@@ -867,4 +867,15 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return data;
 }
 
+#pragma mark - url编码
+
+- (NSString *)urlEncoded {
+    if ([self hasChineseCode]) {
+        NSMutableCharacterSet * set = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+        [set addCharactersInString:@"#"];
+        return [self stringByAddingPercentEncodingWithAllowedCharacters:set];
+    }
+    return self;
+}
+
 @end

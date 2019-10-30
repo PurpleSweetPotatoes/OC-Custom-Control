@@ -27,10 +27,12 @@
 }
 
 - (NSString *)getTimeStringFormat:(NSString*)formatStr {
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+
+    static NSDateFormatter * dateFormatter;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+    }
     [dateFormatter setDateFormat:formatStr];
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    [dateFormatter setLocale:usLocale];
     NSString* dateString = [dateFormatter stringFromDate:self];
     return dateString;
 }

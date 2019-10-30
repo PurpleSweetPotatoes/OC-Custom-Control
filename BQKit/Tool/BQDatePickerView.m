@@ -27,6 +27,7 @@ UIPickerViewDelegate
     NSInteger _selectedMinute;
     NSInteger _selectedSecond;
 }
+@property (nonatomic, assign)BQDatePickerViewMode pickerViewMode;
 @property (nonatomic,strong) UIView * bgView;                   ///< 背景View
 @property (nonatomic,strong) UIView * bottomView;               ///< 下部视图
 @property (nonatomic,strong) UIPickerView * pickerView;
@@ -42,10 +43,11 @@ UIPickerViewDelegate
 
 #pragma mark - Life cycle
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame
+                         mode:(BQDatePickerViewMode)dateModel {
     self = [super initWithFrame:frame];
     if (self) {
-
+        self.pickerViewMode = dateModel;
         [self setUpData];
         
         [self setUpUI];
@@ -58,9 +60,8 @@ UIPickerViewDelegate
 
 #pragma mark - Public method
 
-+ (instancetype)createDatePickerView {
-    BQDatePickerView * pickerView = [[BQDatePickerView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    return pickerView;
++ (instancetype)configDateView:(BQDatePickerViewMode)dateMode {
+    return [[BQDatePickerView alloc] initWithFrame:[UIScreen mainScreen].bounds mode:dateMode];
 }
 
 - (void)showDateTimePickerView {
@@ -364,6 +365,7 @@ UIPickerViewDelegate
 #pragma mark - Instance method
 
 - (void)setUpData {
+    self.pickerViewMode = BQDatePickerViewModeDate;
     self.columnArray = @[@(1),@(2),@(3),@(4),@(5),@(6),@(2),@(3),@(2)];
     
     _dayRange = 0;

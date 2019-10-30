@@ -148,4 +148,7 @@
 /** string字面转化为Data */
 - (NSMutableData*)convertBytesToData;
 
+/** url编码*/
+- (NSString *)urlEncoded;
+
 @end
