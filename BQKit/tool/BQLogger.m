@@ -22,21 +22,14 @@ void UncaughtExceptionHandler(NSException *exception);
 
 @implementation BQLogger
 
-static BQLogger * logger;
-
 + (instancetype)shareLog {
-    if (logger == nil) {
-        logger = [[BQLogger alloc] init];
-    }
-    return logger;
-}
-
-+ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    static BQLogger * logger;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
-        logger = [super allocWithZone:zone];
+        logger = [[BQLogger alloc] init];
         logger.logQueue = dispatch_queue_create("com.MrBai.LoggerQueue", DISPATCH_QUEUE_SERIAL);
+        logger.maxFileSize = 1024 * 1024 * 2;
+        logger.cleanSecond = 60 * 60 * 24 * 3;
     });
     return logger;
 }
@@ -63,38 +56,39 @@ static BQLogger * logger;
         
     NSFileManager * fileManager = [NSFileManager defaultManager];
     NSString * filePath = [self logFilePath];
-    if ([fileManager fileExistsAtPath:filePath]) {
-        NSDictionary * fileDic = [fileManager attributesOfItemAtPath:filePath error:nil];
-        NSInteger size = [fileDic fileSize];
-        NSDate * createDate = [fileDic fileCreationDate];
-        if (log.clearHandle && (size >= maxFileSize || cleanSecond + [createDate timeIntervalSinceNow] <= 0)) {
-            log.clearHandle(filePath);
-            if (log.fileHandle) {
-                if (@available(iOS 13.0, *)) {
-                    [log.fileHandle closeAndReturnError:nil];
-                } else {
-                    [log.fileHandle closeFile];
-                }
-                log.fileHandle = nil;
-            }
-            [BQLogger clearLogFile];
-        }
-        
-        if (log.fileHandle == nil) {
-            log.fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-        }
-        
-        [log.fileHandle seekToEndOfFile];
-        [log.fileHandle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
-    } else {
-        [content writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        [self clearLogFile];
     }
+    
+    NSDictionary * fileDic = [fileManager attributesOfItemAtPath:filePath error:nil];
+    NSInteger size = [fileDic fileSize];
+    NSDate * createDate = [fileDic fileCreationDate];
+    
+    // 文件超过阈值进行处理
+    if (log.clearHandle && (size >= log.maxFileSize || log.cleanSecond + [createDate timeIntervalSinceNow] <= 0)) {
+        log.clearHandle(filePath);
+        if (log.fileHandle) {
+            if (@available(iOS 13.0, *)) {
+                [log.fileHandle closeAndReturnError:nil];
+            } else {
+                [log.fileHandle closeFile];
+            }
+            log.fileHandle = nil;
+        }
+        [BQLogger clearLogFile];
+    }
+        
+    if (log.fileHandle == nil) {
+        log.fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    }
+    
+    [log.fileHandle seekToEndOfFile];
+    [log.fileHandle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 #pragma mark - crash Method
 
 + (void)loadCrashReport:(CrashBlock)handle {
-
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     NSString * info = [NSString stringWithContentsOfFile:[self errorLogPath]  encoding:NSUTF8StringEncoding error:nil];
     if ([info isKindOfClass:[NSString class]] && info.length > 0) {
@@ -104,10 +98,11 @@ static BQLogger * logger;
 }
 
 + (void)saveCrashInfo:(NSString *)crashInfo {
-    [crashInfo writeToFile:[BQLogger errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [crashInfo writeToFile:[self errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 #pragma mark - 文件位置
+
 + (NSString *)logFilePath {
     NSString * doucoment = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     return [doucoment stringByAppendingPathComponent:@"logInfo.log"];
@@ -148,11 +143,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     [BQLogger saveCrashInfo:content];
 }
 
-void BQLogInfo(NSString * content, NSString * fileName, NSInteger line) {
-    
+void BQLogInfo(NSString * content, NSString * function, NSString * fileName, NSInteger line) {
     if ([BQLogger shareLog].logInfo || [BQLogger shareLog].saveLocal) {
         
-        NSString * logInfo = [NSString stringWithFormat:@"%@ %@ at %ld line:\n%@\n", currentTimeStr(), fileName, line, content];
+        NSString * logInfo = [NSString stringWithFormat:@"%@ %@ at %@ %ld line:\n%@\n", currentTimeStr(), [function stringByReplacingOccurrencesOfString:@"-" withString:@""], fileName, line, content];
         
         if ([BQLogger shareLog].logInfo) {
             printf("%s",[logInfo UTF8String]);

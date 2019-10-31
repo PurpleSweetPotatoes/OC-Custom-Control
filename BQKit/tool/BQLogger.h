@@ -12,16 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+void BQLogInfo(NSString * content, NSString * function, NSString * fileName, NSInteger line);
 
-// 默认大小2M
-static const NSInteger maxFileSize = 1024 * 1024 * 2;
-
-// 文件清理周期
-static const NSTimeInterval cleanSecond = 60 * 60 * 24 * 3;
-
-void BQLogInfo(NSString * content, NSString * fileName, NSInteger line);
-
-#define Log(FORMAT, ...) BQLogInfo([NSString stringWithFormat:FORMAT, ##__VA_ARGS__], [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__)
+#define Log(FORMAT, ...) BQLogInfo([NSString stringWithFormat:FORMAT, ##__VA_ARGS__], [NSString stringWithUTF8String:__FUNCTION__],[[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__)
 
 typedef NS_OPTIONS(NSUInteger, LoggerType) {
     LoggerType_log          = 1 << 0,   ///<  本地输出
@@ -30,18 +23,26 @@ typedef NS_OPTIONS(NSUInteger, LoggerType) {
 typedef void(^CrashBlock)(NSString * reason);
 typedef void(^ClearBlock)(NSString * filePath);
 
+
+
 @interface BQLogger : NSObject
 
+@property (nonatomic, assign) NSInteger maxFileSize; ///<  文件默认大小2M
+@property (nonatomic, assign) NSTimeInterval cleanSecond; ///< 文件默认清理周期3天
+
+/// 开始后使用Log输出
 + (void)start:(LoggerType)options;
+
++ (instancetype)shareLog;
 
 + (NSString *)logFilePath;
 
 + (BOOL)clearLogFile;
 
-/// 开启本地记录，大小或时间超限后调用回调
+/// 开启本地记录，文件大小或时间超限后调用回调
 + (void)clearLogFileHandle:(ClearBlock)handle;
 
-/// 开启crash记录，crash内容保存至本地，下次启动时回调函数
+/// 开启crash记录，并读取上次crash原因
 + (void)loadCrashReport:(CrashBlock)handle;
 
 @end
