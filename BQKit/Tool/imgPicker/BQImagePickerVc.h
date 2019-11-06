@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^PickerCompletedBlock)(id objc);
+typedef void(^PickerCompletedBlock)(NSArray * arr);
 
 /*
  使用相册需在info.plist文件中添加

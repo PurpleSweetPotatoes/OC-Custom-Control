@@ -16,9 +16,23 @@
 }
 
 - (void)bq_sendEvent:(UIEvent *)event {
-//    NSLog(@"事件发送:%@",event);
     [self bq_sendEvent:event];
 }
 
++ (NSString *)appBundleName {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+}
+
++ (NSString *)appBundleID {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+}
+
++ (NSString *)appVersion {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+}
+
++ (NSString *)appBuildVersion {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
 
 @end

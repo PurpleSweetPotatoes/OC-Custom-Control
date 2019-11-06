@@ -17,15 +17,6 @@ typedef void(^VoidBlock)(void);
 #define KScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define KScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
-/** ---------------- 颜色设置 ---------------  */
-#define RandomColor ([UIColor randomColor])
-#define RGBHexString(hexString) ([UIColor colorFromHexString:hexString])
-#define RGBHex(hex) ([UIColor colorFromHex:hex])
-#define RGBAColor(r, g, b, a) [UIColor colorWithRed:((r)/255.0f) green:((g)/255.0f) blue:((b)/255.0f) alpha:(a)]
-#define RGBColor(r, g, b) RGBAColor((r), (g), (b), 1.0f)
-
-/** ---------------- APP版本号 ---------------  */
-#define AppVersion ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
 
 /** ---------------- 手机型号 ---------------  */
 
@@ -39,6 +30,9 @@ typedef void(^VoidBlock)(void);
 
 #define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !IS_PAD : NO)
 
+#define IS_IPHONE_11 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !IS_PAD : NO)
+#define IS_IPHONE_11Pro ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !IS_PAD : NO)
+#define IS_IPHONE_11ProMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !IS_PAD : NO)
 
 /** ---------------- 输出调试 ---------------  */
 #ifdef DEBUG
@@ -46,3 +40,16 @@ typedef void(^VoidBlock)(void);
 #else
 #define NSLog(...)
 #endif
+
+
+#pragma mark - C 函数
+
+static inline NSString* currentTimeStr() {
+    static NSDateFormatter * dateForamt;
+    if (dateForamt == nil) {
+        dateForamt = [[NSDateFormatter alloc] init];
+        [dateForamt setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSString * dateStr = [dateForamt stringFromDate:[NSDate date]];
+    return dateStr;
+}

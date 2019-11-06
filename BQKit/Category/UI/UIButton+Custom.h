@@ -8,13 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, BtnEdgeType) {
-    EdgeTypeCenter,
-    EdgeTypeLeft,
-    EdgeTypeRight,
-    EdgeTypeImageTopLabBottom,
-};
-
 @interface UIButton (Custom)
 
 /**设置点击时间间隔*/
@@ -22,12 +15,6 @@ typedef NS_ENUM(NSUInteger, BtnEdgeType) {
 
 /**设置点击范围,外扩为负,内缩为正*/
 @property (nonatomic,assign) UIEdgeInsets hitTestEdgeInsets;
-
-/** 调整button imgView和lab位置 默认间距为5, 如果为上图下字类型，间距根据按钮高度等分 */
-- (void)adjustLabAndImageLocation:(BtnEdgeType)type;
-
-/** 调整button imgView和lab位置 */
-- (void)adjustLabAndImageLocation:(BtnEdgeType)type spacing:(CGFloat)spacing;
 
 /**
  设置倒计时功能

@@ -9,6 +9,7 @@
     
 
 #import "BQLogger.h"
+#import "BQDefineHead.h"
 
 void UncaughtExceptionHandler(NSException *exception);
 
@@ -94,11 +95,8 @@ void UncaughtExceptionHandler(NSException *exception);
     if ([info isKindOfClass:[NSString class]] && info.length > 0) {
         handle(info);
     }
-    [self saveCrashInfo:@""];
-}
-
-+ (void)saveCrashInfo:(NSString *)crashInfo {
-    [crashInfo writeToFile:[self errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    [@"" writeToFile:[self errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 #pragma mark - 文件位置
@@ -117,16 +115,6 @@ void UncaughtExceptionHandler(NSException *exception);
 
 #pragma mark - C函数
 
-static inline NSString* currentTimeStr() {
-    static NSDateFormatter * dateForamt;
-    if (dateForamt == nil) {
-        dateForamt = [[NSDateFormatter alloc] init];
-        [dateForamt setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    }
-    NSString * dateStr = [dateForamt stringFromDate:[NSDate date]];
-    return dateStr;
-}
-
 void UncaughtExceptionHandler(NSException *exception) {
     
     NSString * disPlayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -140,7 +128,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSString * reason = [exception reason];
     NSArray * callStack = [exception callStackSymbols];
     NSString * content = [NSString stringWithFormat:@"\n%@\n%@ %@\ncallStackSymbols:\n%@",deviceInfo, name, reason, [callStack componentsJoinedByString:@"\n"]];
-    [BQLogger saveCrashInfo:content];
+    [content writeToFile:[BQLogger errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 void BQLogInfo(NSString * content, NSString * function, NSString * fileName, NSInteger line) {
