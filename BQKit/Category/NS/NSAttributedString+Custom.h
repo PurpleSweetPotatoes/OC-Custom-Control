@@ -19,14 +19,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 图片Attribute */
 + (instancetype)imgStrWithImg:(UIImage *)img
-                         font:(UIFont *)font;
+                         imgH:(CGFloat)imgH;
 
 /** 图片Attribute, spac: 图片向上偏移量 */
 + (instancetype)imgStrWithImg:(UIImage *)img
-                         font:(UIFont *)font
+                         imgH:(CGFloat)imgH
+                         spac:(CGFloat)spac;
+@end
+
+@interface NSMutableAttributedString (Custom)
+
+/** 初始化attributeStr */
++ (instancetype)attributStrWithText:(NSString *)text
+                               font:(UIFont *)font
+                              color:(UIColor *)color;
+
+/** 图片Attribute */
++ (instancetype)imgStrWithImg:(UIImage *)img
+                         imgH:(CGFloat)imgH;
+
+/** 图片Attribute, spac: 图片向上偏移量 */
++ (instancetype)imgStrWithImg:(UIImage *)img
+                         imgH:(CGFloat)imgH
                          spac:(CGFloat)spac;
 
-
 @end
+
 
 NS_ASSUME_NONNULL_END
