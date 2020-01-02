@@ -10,6 +10,10 @@
 
 @interface NSDictionary (Custom)
 
++ (instancetype)encodeFromStr:(NSString *)str;
+
++ (instancetype)encodeFromData:(NSData *)data;
+
 - (id)safeObjectForKey:(id)key;
 
 - (id)safeValueForKey:(NSString *)key;

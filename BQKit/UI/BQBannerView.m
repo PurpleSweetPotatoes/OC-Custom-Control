@@ -1,5 +1,5 @@
 //
-//  BQBannerView.m
+//  BQ12View.m
 //  Test
 //
 //  Created by MAC on 16/12/19.

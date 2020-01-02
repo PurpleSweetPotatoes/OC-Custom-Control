@@ -10,6 +10,14 @@
 
 @implementation NSDictionary (Custom)
 
++ (instancetype)encodeFromStr:(NSString *)str {
+    return [self encodeFromData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
++ (instancetype)encodeFromData:(NSData *)data {
+    return  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+}
+
 - (id)safeObjectForKey:(id)key {
     id result = [self objectForKey:key];
     

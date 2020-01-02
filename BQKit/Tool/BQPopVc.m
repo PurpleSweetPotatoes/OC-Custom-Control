@@ -89,7 +89,7 @@
 - (UIView *)backView {
     if (_backView == nil) {
         UIView * backView = [[UIView alloc] initWithFrame:self.view.bounds];
-        UIColor * color = [UIColor colorFromHexString:@"282520"];
+        UIColor * color = [UIColor hexStringColor:@"282520"];
         backView.backgroundColor = [color colorWithAlphaComponent:0.6];
         backView.alpha = 0;
         _backView = backView;

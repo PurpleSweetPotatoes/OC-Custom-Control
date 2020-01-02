@@ -16,8 +16,8 @@
 @property (nonatomic, readonly, strong) NSString * hexString;
 
 + (UIColor *)randomColor;
-+ (UIColor *)colorFromHex:(NSInteger)hex;
-+ (UIColor *)colorFromHexString:(NSString *)hexString;
++ (UIColor *)hexColor:(NSInteger)hex;
++ (UIColor *)hexStringColor:(NSString *)hexString;
 
 - (NSString *)toRGB565;
 

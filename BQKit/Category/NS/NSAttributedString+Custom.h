@@ -14,16 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 初始化attributeStr */
 + (instancetype)attributStrWithText:(NSString *)text
-                               font:(UIFont *)font
+                           fontSize:(CGFloat)fontSize
                               color:(UIColor *)color;
 
 /** 图片Attribute */
 + (instancetype)imgStrWithImg:(UIImage *)img
-                         imgH:(CGFloat)imgH;
+                     fontSize:(CGFloat)fontSize;
 
 /** 图片Attribute, spac: 图片向上偏移量 */
 + (instancetype)imgStrWithImg:(UIImage *)img
-                         imgH:(CGFloat)imgH
+                     fontSize:(CGFloat)fontSize
                          spac:(CGFloat)spac;
 @end
 
@@ -31,16 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 初始化attributeStr */
 + (instancetype)attributStrWithText:(NSString *)text
-                               font:(UIFont *)font
+                           fontSize:(CGFloat)fontSize
                               color:(UIColor *)color;
 
 /** 图片Attribute */
 + (instancetype)imgStrWithImg:(UIImage *)img
-                         imgH:(CGFloat)imgH;
+                     fontSize:(CGFloat)fontSize;
 
 /** 图片Attribute, spac: 图片向上偏移量 */
 + (instancetype)imgStrWithImg:(UIImage *)img
-                         imgH:(CGFloat)imgH
+                     fontSize:(CGFloat)fontSize
                          spac:(CGFloat)spac;
 
 @end

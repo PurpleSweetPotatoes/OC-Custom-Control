@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
 #pragma mark - 圆角
 
 /** 设置View的圆角 */
-- (void)roundCorner:(CGFloat)radius;
+- (void)setRadius:(CGFloat)radius;
 
 /** 使图片变成圆形 */
 - (void)toRound;

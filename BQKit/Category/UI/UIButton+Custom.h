@@ -25,4 +25,8 @@
  */
 - (void)reduceTime:(NSTimeInterval)time interval:(NSTimeInterval)interval callBlock:(void(^)(NSTimeInterval sec))block;
 
++ (instancetype)buttonWithFrame:(CGRect)frame
+                          title:(NSString *)title
+                      bordWidth:(CGFloat)width
+                          color:(UIColor *)color;
 @end

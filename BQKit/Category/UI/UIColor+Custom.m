@@ -18,19 +18,19 @@
     return [UIColor colorWithRed:red green:green blue:blue alpha:1];
 }
 
-+ (UIColor *)colorFromHex:(NSInteger)hex {
++ (UIColor *)hexColor:(NSInteger)hex {
     CGFloat red = ((hex & 0xFF0000) >> 16) / 255.0;
     CGFloat green = ((hex & 0xFF00) >> 8) / 255.0;
     CGFloat blue = (hex & 0xFF) / 255.0;
     return [self colorWithRed:red green:green blue:blue alpha:1];
 }
 
-+ (UIColor *)colorFromHexString:(NSString *)hexString {
++ (UIColor *)hexStringColor:(NSString *)hexString {
     unsigned rgbValue = 0;
     hexString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
     [scanner scanHexInt:&rgbValue];
-    return  [self colorFromHex:rgbValue];
+    return  [self hexColor:rgbValue];
 }
 
 - (NSString *)toRGB565 {

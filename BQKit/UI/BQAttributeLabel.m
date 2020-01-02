@@ -29,6 +29,7 @@
 - (void)addTapBlockWithText:(NSString *)text {
     
     NSRange textRange = [[self.attributedText string] rangeOfString:text];
+    NSLog(@"%@",NSStringFromRange(textRange));
     
     if (!self.hasTapGesture) {
         self.userInteractionEnabled = YES;

@@ -10,8 +10,8 @@
 typedef void(^VoidBlock)(void);
 
 /*  弱引用和强引用 */
-#define WeakSelf __weak typeof(self) weakSelf = self
-#define StrongSelf __weak typeof(weakSelf) strongSelf = weakSelf
+#define WeakSelf __weak typeof(self) weakSelf = self;
+#define StrongSelf __weak typeof(weakSelf) strongSelf = weakSelf;
 
 /** ---------------- 屏幕宽高 ---------------  */
 #define KScreenWidth ([UIScreen mainScreen].bounds.size.width)

@@ -10,12 +10,25 @@
 
 @interface UILabel (Custom)
 
-+ (instancetype)createWithFrame:(CGRect)frame title:(NSString *)title font:(UIFont *)font textColor:(UIColor *)textColor;
++ (instancetype)labWithFrame:(CGRect)frame
+                       title:(NSString *)title
+                        font:(UIFont *)font
+                   textColor:(UIColor *)textColor;
+
++ (instancetype)labWithFrame:(CGRect)frame
+                       title:(NSString *)title
+                    fontSize:(CGFloat)fontSize
+                   textColor:(UIColor *)textColor;
 
 /** auto fit width with LabelFont and height */
+
 - (CGFloat)heightToFit;
 
+- (CGFloat)heightToFitIsAttr;
+
 - (CGFloat)heightToFitWithSpace:(CGFloat)space;
+
+- (CGFloat)heightToFitIsAttrWithSpace:(CGFloat)space;
 
 /** auto fit height with LabelFont and width */
 - (CGFloat)widthToFit;

@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _cirBgColor = [UIColor colorFromHexString:@"f2f2f2"];
+        _cirBgColor = [UIColor hexStringColor:@"f2f2f2"];
         _cirShowColor = [UIColor blueColor];
         _cirpercentNum = 0;
         _cirWidth = 10;

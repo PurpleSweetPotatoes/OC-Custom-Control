@@ -358,7 +358,7 @@ UIPickerViewDelegate
     [btn setTitle:title forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor clearColor];
     btn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [btn setTitleColor:[UIColor colorFromHexString:@"0d8bf5"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor hexStringColor:@"0d8bf5"] forState:UIControlStateNormal];
     return btn;
 }
 

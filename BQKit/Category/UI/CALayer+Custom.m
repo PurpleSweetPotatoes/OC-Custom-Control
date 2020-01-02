@@ -91,8 +91,16 @@
     return self.top + self.sizeH;
 }
 
+- (UIImage *)convertToImage {
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0);
+    [self renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 + (instancetype)cellLineLayerWithFrame:(CGRect)frame {
-    return [self layerWithFrame:frame color:[UIColor colorFromHexString:@"c9c9c9"]];
+    return [self layerWithFrame:frame color:[UIColor hexStringColor:@"c9c9c9"]];
 }
 
 + (instancetype)layerWithFrame:(CGRect)frame color:(UIColor *)backColor {
@@ -100,5 +108,18 @@
     lineLayer.frame = frame;
     lineLayer.backgroundColor = backColor.CGColor;
     return lineLayer;
+}
+
+/** 带圆角layer */
++ (CAShapeLayer *)roundLayerWithFrame:(CGRect)frame
+                                color:(UIColor *)color
+                               radius:(CGFloat)radius
+                             corner:(UIRectCorner)corner {
+    CAShapeLayer * shapLayer = [CAShapeLayer layer];
+    shapLayer.frame = frame;
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:shapLayer.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
+    shapLayer.fillColor = color.CGColor;
+    shapLayer.path = path.CGPath;
+    return shapLayer;
 }
 @end

@@ -48,7 +48,7 @@
     CGFloat height = rowHeight * (self.titles.count + 1) + 4 + 1 * self.titles.count;
     
     self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(20, self.bounds.size.height, self.bounds.size.width - 40, height)];
-    [self.bottomView roundCorner:10];
+    [self.bottomView setRadius:10];
     [self addSubview:self.bottomView];
     
     for (NSInteger i = 0; i < self.titles.count; i++) {

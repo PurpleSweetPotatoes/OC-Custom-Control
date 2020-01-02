@@ -119,7 +119,7 @@
     }
 }
 
-- (void)roundCorner:(CGFloat)radius {
+- (void)setRadius:(CGFloat)radius {
     self.layer.cornerRadius = radius;
     self.layer.masksToBounds = YES;
     self.layer.allowsEdgeAntialiasing = YES;
@@ -176,7 +176,6 @@
     [self.bgColorLayer removeFromSuperlayer];
     self.bgColorLayer = [CAShapeLayer layer];
     UIBezierPath * roundPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:self.corners cornerRadii:CGSizeMake(self.layer.cornerRadius, self.layer.cornerRadius)];
-    NSLog(@"配置新layer == %ld",self.corners);
     self.bgColorLayer.frame = self.bounds;
     self.bgColorLayer.path = roundPath.CGPath;
     self.bgColorLayer.fillColor = bgColor;

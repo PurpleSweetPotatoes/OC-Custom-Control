@@ -28,8 +28,16 @@
 /** 同cell底部灰线颜色相同 */
 + (instancetype)cellLineLayerWithFrame:(CGRect)frame;
 
-
 /** 线条layer */
-+ (instancetype)layerWithFrame:(CGRect)frame color:(UIColor *)backColor;
++ (instancetype)layerWithFrame:(CGRect)frame
+                         color:(UIColor *)backColor;
+
+/** 带圆角layer */
++ (CAShapeLayer *)roundLayerWithFrame:(CGRect)frame
+                                color:(UIColor *)color
+                               radius:(CGFloat)radius
+                             corner:(UIRectCorner)corner;
+
+- (UIImage *)convertToImage;
 
 @end

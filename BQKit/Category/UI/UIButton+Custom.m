@@ -33,6 +33,19 @@
     });
 }
 
++ (instancetype)buttonWithFrame:(CGRect)frame
+                          title:(NSString *)title
+                      bordWidth:(CGFloat)width
+                          color:(UIColor *)color {
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = frame;
+    btn.layer.cornerRadius = btn.bounds.size.height * 0.5;
+    btn.layer.borderWidth = width;
+    btn.layer.borderColor = color.CGColor;
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:color forState:UIControlStateNormal];
+    return btn;
+}
 #pragma mark - 时间倒计时
 
 - (void)reduceTime:(NSTimeInterval)time interval:(NSTimeInterval)interval callBlock:(void(^)(NSTimeInterval sec))block {
