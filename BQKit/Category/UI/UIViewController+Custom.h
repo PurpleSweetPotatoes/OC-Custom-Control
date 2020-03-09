@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, StatusColorType) {
 
 + (UIViewController *)currentDisPalyVc;
 
+- (void)setNavBarLeftItem:(UIBarButtonItem *)item;
+
 @end
 
 NS_ASSUME_NONNULL_END

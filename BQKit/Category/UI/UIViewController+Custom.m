@@ -75,6 +75,14 @@
     return self.tabBarController.tabBar.bounds.size.height;
 }
 
+- (void)setNavBarLeftItem:(UIBarButtonItem *)item {
+    self.navigationItem.leftBarButtonItem = item;
+    if (self.navigationController.viewControllers.count > 1) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
+
 #pragma mark - Associate Object
 
 - (StatusColorType)statuType {

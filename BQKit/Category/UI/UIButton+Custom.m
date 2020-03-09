@@ -33,19 +33,6 @@
     });
 }
 
-+ (instancetype)buttonWithFrame:(CGRect)frame
-                          title:(NSString *)title
-                      bordWidth:(CGFloat)width
-                          color:(UIColor *)color {
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = frame;
-    btn.layer.cornerRadius = btn.bounds.size.height * 0.5;
-    btn.layer.borderWidth = width;
-    btn.layer.borderColor = color.CGColor;
-    [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:color forState:UIControlStateNormal];
-    return btn;
-}
 #pragma mark - 时间倒计时
 
 - (void)reduceTime:(NSTimeInterval)time interval:(NSTimeInterval)interval callBlock:(void(^)(NSTimeInterval sec))block {
@@ -149,6 +136,48 @@
     CGRect hitFrame = UIEdgeInsetsInsetRect(relativeFrame, self.hitTestEdgeInsets);
     
     return CGRectContainsPoint(hitFrame, point);
+}
+
+#pragma mark - 图文排列
+
+- (void)configImagePosition:(BtnImgPosition)postion spacing:(CGFloat)spacing {
+    CGFloat imageWith = self.imageView.image.size.width;
+        CGFloat imageHeight = self.imageView.image.size.height;
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        CGFloat labelWidth = [self.titleLabel.text sizeWithFont:self.titleLabel.font].width;
+        CGFloat labelHeight = [self.titleLabel.text sizeWithFont:self.titleLabel.font].height;
+    #pragma clang diagnostic pop
+        
+        CGFloat imageOffsetX = (imageWith + labelWidth) / 2 - imageWith / 2;//image中心移动的x距离
+        CGFloat imageOffsetY = imageHeight / 2 + spacing / 2;//image中心移动的y距离
+        CGFloat labelOffsetX = (imageWith + labelWidth / 2) - (imageWith + labelWidth) / 2;//label中心移动的x距离
+        CGFloat labelOffsetY = labelHeight / 2 + spacing / 2;//label中心移动的y距离
+        
+        switch (postion) {
+            case BtnImgPosition_Left:
+                self.imageEdgeInsets = UIEdgeInsetsMake(0, -spacing/2, 0, spacing/2);
+                self.titleEdgeInsets = UIEdgeInsetsMake(0, spacing/2, 0, -spacing/2);
+                break;
+                
+            case BtnImgPosition_Right:
+                self.imageEdgeInsets = UIEdgeInsetsMake(0, labelWidth + spacing/2, 0, -(labelWidth + spacing/2));
+                self.titleEdgeInsets = UIEdgeInsetsMake(0, -(imageHeight + spacing/2), 0, imageHeight + spacing/2);
+                break;
+                
+            case BtnImgPosition_Top:
+                self.imageEdgeInsets = UIEdgeInsetsMake(-imageOffsetY, imageOffsetX, imageOffsetY, -imageOffsetX);
+                self.titleEdgeInsets = UIEdgeInsetsMake(labelOffsetY, -labelOffsetX, -labelOffsetY, labelOffsetX);
+                break;
+                
+            case BtnImgPosition_Bottom:
+                self.imageEdgeInsets = UIEdgeInsetsMake(imageOffsetY, imageOffsetX, -imageOffsetY, -imageOffsetX);
+                self.titleEdgeInsets = UIEdgeInsetsMake(-labelOffsetY, -labelOffsetX, labelOffsetY, labelOffsetX);
+                break;
+                
+            default:
+                break;
+        }
 }
 
 @end

@@ -842,4 +842,47 @@
     return [self addImageToImage:blurredFrame atRect:frame];
 }
 
++ (UIImage *)arrowImgWithFrame:(CGRect)frame direction:(BQArrowDirection)direction {
+    UIGraphicsBeginImageContext(frame.size);
+    CGContextRef ct = UIGraphicsGetCurrentContext();
+    CGFloat width = frame.size.width;
+    CGFloat height = frame.size.height;
+    CGPoint startPoint, centerPoint, endPoint;
+    CGFloat line = 2;
+    switch (direction) {
+        case BQArrowDirection_Top:
+            startPoint = CGPointMake(line, height - line);
+            centerPoint = CGPointMake(width * 0.5, line);
+            endPoint = CGPointMake(width - line, height - line);
+            break;
+        case BQArrowDirection_bottom:
+            startPoint = CGPointMake(line, line);
+            centerPoint = CGPointMake(width * 0.5, height - line);
+            endPoint = CGPointMake(width - line, line);
+            break;
+        case BQArrowDirection_Left:
+            startPoint = CGPointMake(width - line, line);
+            centerPoint = CGPointMake(line, height * 0.5);
+            endPoint = CGPointMake(width - line, height - line);
+            break;
+        case BQArrowDirection_Right:
+            startPoint = CGPointMake(line, line);
+            centerPoint = CGPointMake(width - line, height * 0.5);
+            endPoint = CGPointMake(line, height - line);
+            break;
+        default:
+            break;
+    }
+    CGContextSetLineJoin(ct, kCGLineJoinRound);
+    CGContextSetLineCap(ct, kCGLineCapRound);
+    CGContextMoveToPoint(ct, startPoint.x, startPoint.y);
+    CGContextAddLineToPoint(ct, centerPoint.x, centerPoint.y);
+    CGContextAddLineToPoint(ct, endPoint.x, endPoint.y);
+    CGContextSetLineWidth(ct, 3);
+    CGContextSetStrokeColorWithColor(ct, [UIColor blackColor].CGColor);
+    CGContextStrokePath(ct);
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
 @end

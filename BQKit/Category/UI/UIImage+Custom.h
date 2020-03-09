@@ -10,6 +10,13 @@
 
 typedef void (^PHAssetForURLImageResultBlock)(UIImage * image);
 
+typedef NS_ENUM(NSUInteger, BQArrowDirection) {
+    BQArrowDirection_Top,             ///< 上箭头
+    BQArrowDirection_bottom,          ///< 下箭头
+    BQArrowDirection_Left,            ///< 左箭头
+    BQArrowDirection_Right,           ///< 右箭头
+};
+
 @interface UIImage (Custom)
 
 #pragma mark - 二维码
@@ -202,5 +209,10 @@ typedef void (^PHAssetForURLImageResultBlock)(UIImage * image);
  *  @return Cropped image
  */
 - (UIImage *)croppedImageAtFrame:(CGRect)frame;
+
+/**
+ * 生成箭头图片,建议宽高比为14:22
+ */
++ (UIImage *)arrowImgWithFrame:(CGRect)frame direction:(BQArrowDirection)direction;
 
 @end
