@@ -169,15 +169,15 @@
     NSString *mediaType = AVMediaTypeVideo;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
     
-    if(authStatus == AVAuthorizationStatusAuthorized) {
-        [self prepareMicrophone:finishCallback];
+    if (authStatus == AVAuthorizationStatusAuthorized) {
+        finishCallback();
     } else if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
         [self alertNoCameraPermission];
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
             if(granted) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self prepareMicrophone:finishCallback];
+                    finishCallback();
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -186,7 +186,7 @@
             }
         }];
     } else {
-        NSLog(@"%@", @"请求摄像头权限发生其他未知错误");
+        [UIAlertController showWithTitle:@"请求摄像头权限发生其他未知错误"];
     }
 }
 
@@ -241,21 +241,38 @@
 
 #pragma mark - Alerts
 + (void)alertWithTitle:(NSString *)title message:(NSString *)message {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    NSString * msg = [NSString stringWithFormat:@"请在“[设置]-[%@]-%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],message];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:cancleAction];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+    
+    UIAlertAction * setAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (@available(iOS 10.0, *)) {
+            NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        } else {
+            NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"prefs:root=%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]]];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }];
+    [alertController addAction:setAction];
+    
+    UIViewController * vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+    }
+    [vc presentViewController:alertController animated:YES completion:nil];
 }
 
 + (void)alertNoCameraPermission {
-    [self alertWithTitle:@"应用没有使用手机摄像头的权限" message:@"请在“[设置]-[隐私]-[相机]”里允许应用使用"];
+    [self alertWithTitle:@"应用没有使用手机摄像头的权限" message:@"[相机]”里允许应用使用"];
 }
 
 + (void)alertNoMicrophonePermission {
-    [self alertWithTitle:@"应用没有使用手机麦克风的权限" message:@"请在“[设置]-[隐私]-[麦克风]”里允许应用使用"];
+    [self alertWithTitle:@"应用没有使用手机麦克风的权限" message:@"[麦克风]”里允许应用使用"];
 }
 
 + (void)alertNoImagePickerPermission {
-    [self alertWithTitle:@"应用没有使用手机相册的权限" message:@"请在“[设置]-[隐私]-[照片]”里允许应用使用"];
+    [self alertWithTitle:@"应用没有使用手机相册的权限" message:@"[照片]”里允许应用使用"];
 }
 @end

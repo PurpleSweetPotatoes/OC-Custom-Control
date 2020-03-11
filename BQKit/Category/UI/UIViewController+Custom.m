@@ -10,6 +10,10 @@
 #import "UIView+Custom.h"
 #import <objc/runtime.h>
 
+@interface UIViewController()
+@property (nonatomic, strong) UIView * barBgView;
+@property (nonatomic, strong) CALayer * showadLine;
+@end
 
 @implementation UIViewController (Custom)
 
@@ -83,16 +87,71 @@
     }
 }
 
+#pragma mark - 导航栏配色
+
++ (void)startConfigNavBar {
+    UIImage * img = [[UIImage alloc] init];
+    [[UINavigationBar appearance] setShadowImage:img];
+    [[UINavigationBar appearance] setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)bq_configsetShadowLine:(BOOL)hide {
+    if (self.showadLine == nil) {
+        self.showadLine = [CALayer layerWithFrame:CGRectMake(0, self.barBgView.sizeH - 1, self.barBgView.sizeW, 1) color:[UIColor colorFromHexString:@"d2d2d2"]];
+        [self.view.layer addSublayer:self.showadLine];
+    }
+
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    self.showadLine.hidden = hide;
+    [CATransaction commit];
+}
+
+
+- (void)bq_setNavBarBackgroundColor:(UIColor *)color {
+    if (self.navigationController) {
+        if (self.barBgView == nil) {
+            self.barBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, self.navbarBottom)];
+            [self.view addSubview:self.barBgView];
+        }
+        self.barBgView.backgroundColor = color;
+    }
+}
+
+- (void)bq_setNavBarGgViewAlpha:(CGFloat)alpha {
+    self.barBgView.alpha = alpha;
+}
+
 #pragma mark - Associate Object
 
 - (StatusColorType)statuType {
-    return [objc_getAssociatedObject(self, @selector(statuType)) intValue];
+    return [objc_getAssociatedObject(self, _cmd) intValue];
 }
 
 - (void)setStatuType:(StatusColorType)statuType {
     objc_setAssociatedObject(self, @selector(statuType), @(statuType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+
+- (UIView *)barBgView {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setBarBgView:(UIView *)barBgView {
+    objc_setAssociatedObject(self, @selector(barBgView), barBgView, OBJC_ASSOCIATION_RETAIN);
+}
+
+
+
+
+- (CALayer *)showadLine {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setShowadLine:(CALayer *)showadLine {
+    objc_setAssociatedObject(self, @selector(showadLine), showadLine, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

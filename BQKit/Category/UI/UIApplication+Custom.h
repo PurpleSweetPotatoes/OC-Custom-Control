@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIApplication (Custom)
 
++ (NSString *)appName;
+
 + (NSString *)appBundleName;
 
 + (NSString *)appBundleID;

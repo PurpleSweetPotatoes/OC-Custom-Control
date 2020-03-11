@@ -25,6 +25,19 @@ typedef NS_ENUM(NSUInteger, StatusColorType) {
 
 - (void)setNavBarLeftItem:(UIBarButtonItem *)item;
 
+#pragma mark - 配置导航栏颜色
+
++ (void)startConfigNavBar;
+
+
+/// 必须先设置barView颜色
+- (void)bq_configsetShadowLine:(BOOL)hide;
+
+/// 在所有界面添加完成后使用保证视图在最上层
+- (void)bq_setNavBarBackgroundColor:(UIColor *)color;
+
+- (void)bq_setNavBarGgViewAlpha:(CGFloat)alpha;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,6 +19,10 @@
     [self bq_sendEvent:event];
 }
 
++ (NSString *)appName {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+}
+
 + (NSString *)appBundleName {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
 }
