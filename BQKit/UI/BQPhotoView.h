@@ -18,14 +18,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// 自定义图片浏览视图，支持手势操作
 @interface BQPhotoView : UIView
-@property (nonatomic, weak) id<BQPhotoViewDelegate> delegate;
-@property (nonatomic, strong) UIImageView * imgV;
+@property (nonatomic, weak) id<BQPhotoViewDelegate> delegate;   ///< 图片点击回调
+@property (nonatomic, strong) UIImageView * imgV;               ///< 图片展示视图
 
+/// 展示视图
+/// @param img 对应图片
 + (void)show:(UIImage *)img;
 
+/// 配置图片
+/// @param img 对应图片
 - (void)setImage:(UIImage *)img;
 
+/// 恢复默认状态
 - (void)resetNormal;
 @end
 

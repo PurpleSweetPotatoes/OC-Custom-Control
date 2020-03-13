@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/// 自定义圆环文本
 @interface BQCirLabel : UILabel
 @property (nonatomic, strong) UIColor * cirBgColor;                 ///< 圆环背景色
 @property (nonatomic, strong) UIColor * cirShowColor;               ///< 圆环进度颜色

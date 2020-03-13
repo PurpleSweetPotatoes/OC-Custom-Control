@@ -17,6 +17,9 @@ typedef void(^PickerCompletedBlock)(NSArray * arr);
  使用相册需在info.plist文件中添加
  NSPhotoLibraryUsageDescription字段
 */
+
+
+/// 自定义多图片选择器
 @interface BQImagePickerVc : UIViewController
 @property (nonatomic, assign) NSInteger  maxSelecd;                     ///< 最大选择数,默认为1
 @property (nonatomic, assign) PHAssetCollectionSubtype  sourceType;           ///< 资源类型，默认为PHAssetCollectionSubtypeSmartAlbumUserLibrary

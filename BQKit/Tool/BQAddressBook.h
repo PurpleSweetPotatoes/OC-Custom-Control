@@ -15,15 +15,11 @@
 /*
  需要在info.plist文件中添加 Privacy - Contacts Usage Description字段
  */
-
 @interface BQAddressBook : NSObject
 
-/**
- 加载通讯录数据,iOS9后由于异步读取会多次调用AddressBooksBlock
-
- @param AddressBooksBlock 回调方法
- */
-+ (void)loadAddressBooksInfo:(void(^)(NSArray *phionArr))AddressBooksBlock;
+/// 加载通讯录数据,iOS9后由于异步读取会多次调用AddressBooksBlock
+/// @param AddressBooksBlock 回调方法
++ (void)loadAddressBooksInfo:(void(^)(NSArray *phoneArr))AddressBooksBlock;
 
 
 /**

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BQAlertSheetView : UIView
 
+/// 自定义底部弹出视图
+@interface BQAlertSheetView : UIView
 
 /**
  底部弹出窗口

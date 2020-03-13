@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 页面fps刷新监控Lab
 @interface BQFPSLabel : UILabel
 
 @end

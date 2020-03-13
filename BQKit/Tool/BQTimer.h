@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/// 自定义定时器
 @interface BQTimer : NSObject
 
 @property (nonatomic, assign) NSInteger runTimes;                   ///< 运行次数

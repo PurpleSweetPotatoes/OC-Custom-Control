@@ -11,8 +11,13 @@
 @protocol UITableViewNoDataProtocol <NSObject>
 
 @required
-- (BOOL)noDataCanShow:(UITableView *)tableView;
-- (UIView *)configNoDataShowView:(UITableView *)tableView;
+/// 是否展示空视图
+/// @param tableView 对应tableView
+- (BOOL)showEmtpyView:(UITableView *)tableView;
+
+/// 配置空视图
+/// @param tableView 对应tableview
+- (UIView *)configEmptyView:(UITableView *)tableView;
 
 @end
 

@@ -24,9 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param arr 输入框集合
 + (NSString *)checkContent:(NSArray <UITextField *> *)arr;
 
+/// 增加输入框左间距(插入左边空视图)
+/// @param space 间距
 - (void)addLeftSpace:(CGFloat)space;
+
+/// 增加输入框右间距(插入右边空视图)
+/// @param space 间距
 - (void)addRightSpace:(CGFloat)space;
 
+/// 添加更多视图
 - (void)addRightMoreImg;
 
 @end

@@ -18,24 +18,32 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-
 /**
+ 自定义属性文字Lab,可添加对应文字点击事件
  设置NSAttributeString时，添加点击事件则必须指定String的font
  */
 @interface BQAttributeLabel : UILabel
 
 @property (nonatomic, weak) id<BQAttributeLabelDelegate>  delegate;
 
+/// 对文字添加点击事件
+/// @param text 响应的文字
 - (void)addTapBlockWithText:(NSString *)text;
 
+/// 对范围添加点击事件
+/// @param text 响应的范围
 - (void)addTapBlockWithRange:(NSRange)range;
 
+/// 移除文字点击事件
+/// @param text 响应的文字
 - (void)removeTapBlockWithText:(NSString *)text;
 
+/// 移除范围点击事件
+/// @param text 响应的范围
 - (void)removeTapBlockWithRange:(NSRange)range;
 
+/// 移除所有点击事件
 - (void)removeTapBlocks;
-
 
 @end
 

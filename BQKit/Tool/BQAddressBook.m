@@ -24,7 +24,7 @@
     }
 }
 
-+ (void)loadAddressBooksInfo:(void(^)(NSArray *phionArr))AddressBooksBlock {
++ (void)loadAddressBooksInfo:(void(^)(NSArray *phoneArr))AddressBooksBlock {
     
     if (@available(iOS 9.0, *)) {
         [self loadNewAddressBooks:AddressBooksBlock];

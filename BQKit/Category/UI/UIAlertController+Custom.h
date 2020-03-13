@@ -11,8 +11,12 @@
 
 @interface UIAlertController (Custom)
 
+/// 警告消息展示
+/// @param title 标题
 + (void)showWithTitle:(NSString *)title;
 
+/// 警告消息展示
+/// @param content 文本
 + (void)showWithContent:(NSString *)content;
 
 /**  警告消息展示 */

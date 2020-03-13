@@ -63,7 +63,7 @@
     self.blurImgV = imgV;
     
     UIView * backView = [[UIView alloc] initWithFrame:self.view.bounds];
-    UIColor * color = [UIColor hexStringColor:@"282520"];
+    UIColor * color = [UIColor hexstr:@"282520"];
     backView.backgroundColor = [color colorWithAlphaComponent:0.6];
     [self.blurImgV addSubview:backView];
     
@@ -85,7 +85,7 @@
         titleLab.font = [UIFont systemFontOfSize:17 weight:UIFontWeightMedium];
         titleLab.numberOfLines = 0;
         titleLab.textAlignment = NSTextAlignmentCenter;
-        titleLab.textColor = [UIColor hexStringColor:@"282520"];
+        titleLab.textColor = [UIColor hexstr:@"282520"];
         [titleLab heightToFit];
         titleLab.center = CGPointMake(self.disPlayerView.sizeW * 0.5, 25 + titleLab.sizeH * 0.5);
         [self.disPlayerView addSubview:titleLab];
@@ -95,7 +95,7 @@
         contentLab.numberOfLines = 0;
         contentLab.font = [UIFont systemFontOfSize:13];
         contentLab.textAlignment = NSTextAlignmentCenter;
-        contentLab.textColor = [UIColor hexStringColor:@"282520"];
+        contentLab.textColor = [UIColor hexstr:@"282520"];
         [contentLab heightToFit];
         contentLab.center = CGPointMake(self.disPlayerView.sizeW * 0.5, titleLab.bottom + 15 + contentLab.sizeH * 0.5);
         [self.disPlayerView addSubview:contentLab];
@@ -133,7 +133,7 @@
     btn.titleLabel.font = [UIFont systemFontOfSize:20];
     [btn addTarget:self action:@selector(alertBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor hexStringColor:type == 0 ? @"1a237e":@"8e0000"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor hexstr:type == 0 ? @"1a237e":@"8e0000"] forState:UIControlStateNormal];
     [self.btnArr addObject:btn];
     
     if (handle) {
@@ -179,7 +179,7 @@
 - (UIView *)disPlayerView {
     if (_disPlayerView == nil) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 270, 30)];
-        view.backgroundColor = [UIColor hexStringColor:@"fcfcfc"];
+        view.backgroundColor = [UIColor hexstr:@"fcfcfc"];
         view.layer.cornerRadius = 16;
         view.alpha = 0;
         _disPlayerView = view;

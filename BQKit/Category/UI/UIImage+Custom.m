@@ -842,13 +842,12 @@
     return [self addImageToImage:blurredFrame atRect:frame];
 }
 
-+ (UIImage *)arrowImgWithFrame:(CGRect)frame direction:(BQArrowDirection)direction {
++ (UIImage *)arrowImgWithFrame:(CGRect)frame color:(UIColor *)color lineWidth:(CGFloat)line direction:(BQArrowDirection)direction {
     UIGraphicsBeginImageContext(frame.size);
     CGContextRef ct = UIGraphicsGetCurrentContext();
     CGFloat width = frame.size.width;
     CGFloat height = frame.size.height;
     CGPoint startPoint, centerPoint, endPoint;
-    CGFloat line = 2;
     switch (direction) {
         case BQArrowDirection_Top:
             startPoint = CGPointMake(line, height - line);
@@ -879,7 +878,7 @@
     CGContextAddLineToPoint(ct, centerPoint.x, centerPoint.y);
     CGContextAddLineToPoint(ct, endPoint.x, endPoint.y);
     CGContextSetLineWidth(ct, 3);
-    CGContextSetStrokeColorWithColor(ct, [UIColor blackColor].CGColor);
+    CGContextSetStrokeColorWithColor(ct, color.CGColor);
     CGContextStrokePath(ct);
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

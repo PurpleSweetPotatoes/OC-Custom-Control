@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 自定义图片浏览器
 @interface BQPhotoBrowserView : UIView
 
 + (void)show:(NSArray <UIImage *> *)imgs;

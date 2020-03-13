@@ -16,9 +16,10 @@
 @property (nonatomic, readonly, strong) NSString * hexString;
 
 + (UIColor *)randomColor;
-+ (UIColor *)hexColor:(NSInteger)hex;
-+ (UIColor *)hexStringColor:(NSString *)hexString;
++ (UIColor *)hex:(NSInteger)hex;
++ (UIColor *)hexstr:(NSString *)hexString;
 
+/// 转化为rgb565数据
 - (NSString *)toRGB565;
 
 @end

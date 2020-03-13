@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WKWebView (Custom)
 
-
 /** 文本大小自适应 */
 - (void)textAutoFit;
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 自定义活动指示器
 @interface BQActivityView : UIView
 /**  显示活动指示器 */
 + (void)showActiviTy;

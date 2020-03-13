@@ -98,7 +98,7 @@
 }
 
 - (void)addRightMoreImg {
-    UIImage * img = [UIImage arrowImgWithFrame:CGRectMake(0, 0, 10, 15) color:[UIColor colorFromHexString:@"c7c7cc"] lineWidth:1 direction:BQArrowDirection_Right];
+    UIImage * img = [UIImage arrowImgWithFrame:CGRectMake(0, 0, 10, 15) color:[UIColor hexstr:@"c7c7cc"] lineWidth:2 direction:BQArrowDirection_Right];
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, img.size.height, self.bounds.size.height)];
     CALayer * layer = [CALayer layer];
     layer.frame = CGRectMake(img.size.height - img.size.width, (self.bounds.size.height - img.size.height) * 0.5, img.size.width, img.size.height);

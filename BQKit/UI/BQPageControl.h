@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 自定义标签控制器
 @interface BQPageControl : UIPageControl
 /** 点之间的间距 */
 @property (nonatomic, assign) CGFloat spacing;

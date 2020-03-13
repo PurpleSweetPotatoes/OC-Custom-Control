@@ -29,14 +29,15 @@
 
 @end
 
+
+/// 自定义多行文字编辑视图,支持自动调整高度和提示文案
 @interface BQTextView : UITextView
 
-@property (nonatomic, weak) id<BQTextViewDelegate> ourDelegate;
+@property (nonatomic, weak) id<BQTextViewDelegate> ourDelegate; ///< 文本编辑代理
 
 @property (nonatomic, copy) NSString * placeholder;         ///< 占位字符
 @property (nonatomic, strong) UIColor * placeholderColor;   ///< 占位符颜色
 @property (nonatomic, assign) NSInteger maxCharNum;         ///< 最大字符数,默认1000
-
 @property (nonatomic, assign) BOOL autoAdjustHeight;        ///< 自动适应高度,默认为NO
 @property (nonatomic, assign) CGFloat maxHeight;            ///< 最大高度默认为初始化高度,开启自适应高度时有效
 

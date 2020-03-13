@@ -38,6 +38,8 @@
                                radius:(CGFloat)radius
                              corner:(UIRectCorner)corner;
 
+
+/// 转化为图片
 - (UIImage *)convertToImage;
 
 @end

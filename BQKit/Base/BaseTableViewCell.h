@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseTableViewCell : UITableViewCell
-@property (nonatomic, strong) CALayer * lineLayer;
+@property (nonatomic, strong) CALayer * lineLayer;          ///< cell底部线条
 @end
 
 NS_ASSUME_NONNULL_END

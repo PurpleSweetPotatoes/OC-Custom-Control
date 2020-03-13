@@ -100,7 +100,7 @@
 }
 
 + (instancetype)cellLineLayerWithFrame:(CGRect)frame {
-    return [self layerWithFrame:frame color:[UIColor hexStringColor:@"c9c9c9"]];
+    return [self layerWithFrame:frame color:[UIColor hexstr:@"c9c9c9"]];
 }
 
 + (instancetype)layerWithFrame:(CGRect)frame color:(UIColor *)backColor {

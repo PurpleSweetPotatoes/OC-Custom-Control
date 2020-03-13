@@ -12,14 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIApplication (Custom)
 
+/// 应用展示名称
 + (NSString *)appName;
 
+/// 应用标示名称
 + (NSString *)appBundleName;
 
+/// 应用标识
 + (NSString *)appBundleID;
 
+/// 应用版本号
 + (NSString *)appVersion;
 
+/// 应用构建号
 + (NSString *)appBuildVersion;
 
 @end

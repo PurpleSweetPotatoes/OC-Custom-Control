@@ -77,7 +77,6 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
  */
 + (UIImage *)rectImageWithImage:(UIImage *)image;
 
-
 /**
  裁剪为圆形(请保证图片宽高相同)
  */
@@ -105,14 +104,26 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 
 #pragma mark - 图片选择器
 
+/// 根据系统返回的图片字典信息获取源图片
+/// @param info 系统图片信息
 + (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)info;
 
+/// 根据系统返回的图片字典信息获取源图片
+/// @param info 系统图片信息
+/// @param resultBlock 未获取到图片回调处理
 + (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(nullable PHAssetForURLImageResultBlock)resultBlock;
 
+/// 根据系统返回的图片字典信息获取编辑后的图片
+/// @param info 系统图片信息
 + (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info;
 
+/// 根据系统返回的图片字典信息获取编辑后的图片
+/// @param info 系统图片信息
+/// @param resultBlock 未获取到图片回调处理
 + (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(nullable PHAssetForURLImageResultBlock)resultBlock;
 
+/// 图片方向调整，调整为正向
+/// @param image 源图片
 + (UIImage *)adjustImageOrientation:(UIImage*)image;
 
 #pragma mark - 屏幕、保存
@@ -123,10 +134,16 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
  */
 + (UIImage *)snapshootFromSncreen;
 
+
+/// 保存图片至相册，需开通相册权限
+/// @param reslutBlock 图片保存结果
 - (void)saveToPhotosWithReslut:(void(^)(NSError *error))reslutBlock;
 
 #pragma mark - icon变色
 
+
+/// 改变icon颜色
+/// @param color 颜色
 - (UIImage *)imageWithColor:(UIColor *)color;
 
 #pragma mark - Blur Image
@@ -213,6 +230,6 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 /**
  * 生成箭头图片,建议宽高比为14:22
  */
-+ (UIImage *)arrowImgWithFrame:(CGRect)frame direction:(BQArrowDirection)direction;
++ (UIImage *)arrowImgWithFrame:(CGRect)frame color:(UIColor *)color lineWidth:(CGFloat)line direction:(BQArrowDirection)direction;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "BQSudokuView.h"
 
+
+
 @interface BQSudokuView ()
 @property (nonatomic, strong) NSArray * imgVArr;
 @property (nonatomic, assign) CGFloat  itemHeight;

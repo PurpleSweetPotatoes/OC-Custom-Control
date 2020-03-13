@@ -25,17 +25,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+
+/// 左右滑动视图控制器
 @interface BQSwipeSubTableVc : UIViewController
 
-@property (nonatomic, strong) UIView * headerView;
-@property (nonatomic, strong) UIView * barView;
-@property (nonatomic, strong) NSArray<UIViewController<BQSwipTableViewDelegate> *> * tabArrs;
-@property (nonatomic, assign) CGFloat  navBottom;
+@property (nonatomic, strong) UIView * headerView;              ///< 头部视图，所有子视图公用
+@property (nonatomic, strong) UIView * barView;                 ///< 导航按钮栏
+@property (nonatomic, strong) NSArray<UIViewController<BQSwipTableViewDelegate> *> * tabArrs;   ///< 子控制器数组
+@property (nonatomic, assign) CGFloat  navBottom;               ///< 导航栏底部高度
 
+/// 重载子控制器视图
+/// @param tabArrs 子控制器数组
 - (void)resetTabArrs:(NSArray<UIViewController<BQSwipTableViewDelegate> *> *)tabArrs;
 
+/// 切换子控制器视图
+/// @param index 切换到第几个视图
 - (void)switchToTabVc:(NSInteger)index;
 
+/// 子控制器将要切换
+/// @param changeBlock 将切换到第几个视图
 - (void)tabVcWillSwitchToIndex:(void(^)(NSInteger index))changeBlock;
 
 @end

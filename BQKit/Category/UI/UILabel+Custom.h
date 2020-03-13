@@ -10,32 +10,55 @@
 
 @interface UILabel (Custom)
 
+/// 快速创建文本视图
+/// @param frame 位置
+/// @param title 文本
+/// @param font 字体
+/// @param textColor 颜色
 + (instancetype)labWithFrame:(CGRect)frame
                        title:(NSString *)title
                         font:(UIFont *)font
                    textColor:(UIColor *)textColor;
 
+/// 快速创建文本视图
+/// @param frame 位置
+/// @param title 文本
+/// @param fontSize 字体大小
+/// @param textColor 颜色
 + (instancetype)labWithFrame:(CGRect)frame
                        title:(NSString *)title
                     fontSize:(CGFloat)fontSize
                    textColor:(UIColor *)textColor;
 
-/** auto fit width with LabelFont and height */
-
+/// 根据文本自动调节高度
 - (CGFloat)heightToFit;
 
-- (CGFloat)heightToFitIsAttr;
-
+/// 根据文本自动调节高度
+/// @param space 追加高度
 - (CGFloat)heightToFitWithSpace:(CGFloat)space;
 
+/// 根据属性文本自动调节高度
+- (CGFloat)heightToFitIsAttr;
+
+/// 根据属性文本自动调节高度
+/// @param space 追加高度
 - (CGFloat)heightToFitIsAttrWithSpace:(CGFloat)space;
 
-/** auto fit height with LabelFont and width */
+/// 根据文本自动调节宽度
 - (CGFloat)widthToFit;
 
+/// 根据文本自动调节宽度
+/// @param space 追加宽度
 - (CGFloat)widthToFitWithSpace:(CGFloat)space;
 
-/** longGestureCanCopy */
+/// 根据属性文本自动调节宽度
+- (CGFloat)widthToFitIsAttr;
+
+/// 根据属性文本自动调节宽度
+/// @param space 追加宽度
+- (CGFloat)widthToFitIsAttrWithSpace:(CGFloat)space;
+
+/// 添加长按复制弹框
 - (void)addLongGestureCopy;
 
 @end

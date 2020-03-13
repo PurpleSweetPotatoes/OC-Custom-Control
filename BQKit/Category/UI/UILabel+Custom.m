@@ -38,14 +38,30 @@
 }
 
 - (CGFloat)heightToFitIsAttrWithSpace:(CGFloat)space {
-    return [self heightLayout:YES space:space];
+    return [self layout:YES space:space isHeight:YES];
 }
 
 - (CGFloat)heightToFitWithSpace:(CGFloat)space {
-    return [self heightLayout:NO space:space];
+    return [self layout:NO space:space isHeight:YES];
 }
 
-- (CGFloat)heightLayout:(BOOL)isAttr space:(CGFloat)space {
+- (CGFloat)widthToFit {
+    return [self widthToFitWithSpace:0];
+}
+
+- (CGFloat)widthToFitIsAttr {
+    return [self heightToFitIsAttrWithSpace:0];
+}
+
+- (CGFloat)widthToFitIsAttrWithSpace:(CGFloat)space {
+    return [self layout:YES space:space isHeight:NO];
+}
+
+- (CGFloat)widthToFitWithSpace:(CGFloat)space {
+    return [self layout:NO space:space isHeight:NO];
+}
+
+- (CGFloat)layout:(BOOL)isAttr space:(CGFloat)space isHeight:(BOOL)isHeight {
     CGRect rect = CGRectZero;
 
     if (isAttr) {
@@ -57,32 +73,19 @@
         rect = [self.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
     }
     
-    if (self.numberOfLines != 0) {
-        rect.size.height = MIN(rect.size.height, self.font.lineHeight * self.numberOfLines);
+    if (isHeight) {
+        if (self.numberOfLines != 0) {
+            rect.size.height = MIN(rect.size.height, self.font.lineHeight * self.numberOfLines);
+        }
+        self.sizeH = ceil(rect.size.height + space);
+        return self.sizeH;
+    } else {
+        self.sizeW = ceil(rect.size.width + space);
+        return self.sizeW;
     }
-    
-    self.sizeH = ceil(rect.size.height + space);
-
-    return  self.sizeH;
 }
 
-- (CGFloat)widthToFit {
-    return [self widthToFitWithSpace:0];
-}
 
-- (CGFloat)widthToFitWithSpace:(CGFloat)space {
-    
-    CGRect rect = CGRectZero;
-    
-    if (self.attributedText.length > 0) {
-        rect = [self.attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-    } else if (self.text.length > 0) {
-        rect = [self.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, self.bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
-    }
-    
-    self.sizeW = ceil(rect.size.width + space);
-    return  self.sizeW;
-}
 
 - (void)addLongGestureCopy {
     self.userInteractionEnabled = YES;

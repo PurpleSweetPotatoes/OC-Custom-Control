@@ -50,7 +50,7 @@ TOCropViewControllerDelegate
         [fromVc presentViewController:homec animated:YES completion:nil];
     } else {
         UIImagePickerController *PickerImage = [[UIImagePickerController alloc]init];
-        PickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        PickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         PickerImage.modalPresentationStyle = UIModalPresentationFullScreen;
         ImgCropTool * tool = [self shareTool];
         tool.fromVc = fromVc;

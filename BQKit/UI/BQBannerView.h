@@ -30,14 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+
+/// 无限滚动广告视图
 @interface BQBannerView : UIView
 
-@property (nonatomic, weak) id<BQBannerViewDelegate> delegate;
-@property (nonatomic, assign) NSTimeInterval  times;                ///< 默认2s
-@property (nonatomic, readonly, assign) NSInteger  currentIndex;
+@property (nonatomic, weak) id<BQBannerViewDelegate> delegate;      ///< 响应代理
+@property (nonatomic, assign) NSTimeInterval  times;                ///< 广告展示时间，默认2s
+@property (nonatomic, readonly, assign) NSInteger  currentIndex;    ///< 当前广告下标
+@property (nonatomic, strong) UIPageControl * pageControl;          ///< 标签控制器
 
-@property (nonatomic, strong) UIPageControl * pageControl;
-
+/// 重载广告视图
 - (void)reloadData;
 
 @end

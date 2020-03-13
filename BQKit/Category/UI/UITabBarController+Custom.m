@@ -7,7 +7,6 @@
 //
 
 #import "UITabBarController+Custom.h"
-#import "HBDNavigationController.h"
 
 @implementation UITabBarController (Custom)
 
@@ -55,7 +54,7 @@
                 vc.tabBarItem = item;
                 vc.title = title;
                 if (needNaVc) {
-                    vc = [[HBDNavigationController alloc] initWithRootViewController:vc];
+                    vc = [[UINavigationController alloc] initWithRootViewController:vc];
                 }
                 [vcs addObject:vc];
             }

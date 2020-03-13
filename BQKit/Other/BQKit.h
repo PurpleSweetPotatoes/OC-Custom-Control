@@ -16,7 +16,6 @@
 #import "BQWeakProxy.h"
 #import "BQNetWork.h"
 #import "BQVideoTool.h"
-#import "BQRefresh.h"
 #import "BQAddressBook.h"
 #import "Reachability.h"
 #import "BQLocationManager.h"
@@ -28,7 +27,6 @@
 #import "BQDefineHead.h"
 #import "BQFPSLabel.h"
 #import "BQTextView.h"
-#import "BQPriceTextField.h"
 #import "BQBannerView.h"
 #import "BQPageControl.h"
 #import "BQPopVc.h"
@@ -63,9 +61,6 @@
 #import "NSAttributedString+Custom.h"
 #import "UIViewController+Custom.h"
 
-#import "HBDNavigationController.h"
-#import "HBDNavigationBar.h"
-#import "UIViewController+HBD.h"
 
 #endif /* BQKit_h */
 

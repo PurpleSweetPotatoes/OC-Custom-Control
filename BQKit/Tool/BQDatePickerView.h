@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, BQDatePickerViewMode) {
 
 @end
 
+
+/// 自定义时间选择器
 @interface BQDatePickerView : UIView
 
 @property (nonatomic, readonly, assign)BQDatePickerViewMode pickerViewMode;   ///< 时间格式，默认年月日
