@@ -55,7 +55,6 @@
 #import "NSMutableArray+Custom.h"
 #import "NSObject+Custom.h"
 #import "UIAlertController+Custom.h"
-#import "MF_Base64Codec.h"
 #import "UICollectionView+Custom.h"
 #import "UITabBarController+Custom.h"
 #import "NSAttributedString+Custom.h"

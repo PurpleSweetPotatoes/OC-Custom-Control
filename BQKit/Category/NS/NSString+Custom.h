@@ -14,6 +14,9 @@
 /**  base64编码 */
 - (NSString *)base64String;
 
+/**  data to base64编码字符串 */
++ (NSString *)base64StringFromData:(NSData *)data;
+
 /**  base64Url编码 */
 - (NSString *)base64UrlEncodedString;
 

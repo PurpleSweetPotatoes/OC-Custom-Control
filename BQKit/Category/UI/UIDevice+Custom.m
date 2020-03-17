@@ -26,12 +26,12 @@
 
 @implementation UIDevice (Custom)
 
-+ (CGFloat)currentVersion {
-    return [[[UIDevice currentDevice] systemVersion] floatValue];
++ (NSString *)currentVersion {
+    return [[UIDevice currentDevice] systemVersion];
 }
 
 + (BOOL)supportVesion:(CGFloat)vesion {
-    return [self currentVersion] >= vesion;
+    return [[self currentVersion] floatValue] >= vesion;
 }
 
 + (NSString *)ip4Address {
@@ -247,11 +247,10 @@
     [alertController addAction:cancleAction];
     
     UIAlertAction * setAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if (@available(iOS 10.0, *)) {
-            NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         } else {
-            NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"prefs:root=%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]]];
             [[UIApplication sharedApplication] openURL:url];
         }
     }];

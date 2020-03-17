@@ -12,7 +12,7 @@
 @interface UIDevice (Custom)
 
 /// 系统版本号
-+ (CGFloat)currentVersion;
++ (NSString *)currentVersion;
 
 /// 是否支持版本号
 /// @param vesion 版本号
