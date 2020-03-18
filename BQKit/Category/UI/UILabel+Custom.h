@@ -58,6 +58,9 @@
 /// @param space 追加宽度
 - (CGFloat)widthToFitIsAttrWithSpace:(CGFloat)space;
 
+
+- (void)configText:(NSString *)text lineSpace:(CGFloat)space;
+
 /// 添加长按复制弹框
 - (void)addLongGestureCopy;
 

@@ -63,14 +63,15 @@
 
 - (CGFloat)layout:(BOOL)isAttr space:(CGFloat)space isHeight:(BOOL)isHeight {
     CGRect rect = CGRectZero;
-
+    CGSize size = CGSizeMake(isHeight ? self.bounds.size.width : CGFLOAT_MAX, isHeight ? CGFLOAT_MAX : self.bounds.size.height);
     if (isAttr) {
-        rect = [self.attributedText boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+        
+        rect = [self.attributedText boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
     } else {
         if (self.text == nil) {
             self.text = @"";
         }
-        rect = [self.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
+        rect = [self.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
     }
     
     if (isHeight) {
@@ -85,7 +86,22 @@
     }
 }
 
+- (void)configText:(NSString *)text lineSpace:(CGFloat)space {
+    self.numberOfLines = 0;
+    NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
+    style.alignment = self.textAlignment;
+    style.lineSpacing = space;
+    NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+    dic[NSFontAttributeName] = self.font;
+    dic[NSForegroundColorAttributeName] = self.textColor;
+    dic[NSParagraphStyleAttributeName] = style;
+    NSAttributedString * attr = [[NSAttributedString alloc] initWithString:text attributes:dic];
+    self.attributedText = attr;
+    [self heightToFitIsAttr];
+}
 
+
+#pragma mark - 长按复制弹框
 
 - (void)addLongGestureCopy {
     self.userInteractionEnabled = YES;
@@ -113,6 +129,7 @@
     [[UIMenuController sharedMenuController] setMenuVisible:YES animated: YES];
     
 }
+
 
 - (void)copy:(id)sender {
     
