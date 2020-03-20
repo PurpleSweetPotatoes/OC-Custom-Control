@@ -1068,4 +1068,11 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return self;
 }
 
+- (NSString *)deleteCharset:(NSString *)regular {
+    if (self.length > 0 && regular.length > 0) {
+        NSRegularExpression * regularExpress = [NSRegularExpression regularExpressionWithPattern:regular options:NSRegularExpressionCaseInsensitive error:nil];//这个正则可以去掉所有特殊字符和标点
+        return [regularExpress stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, [self length]) withTemplate:@""];
+    }
+    return @"";
+}
 @end

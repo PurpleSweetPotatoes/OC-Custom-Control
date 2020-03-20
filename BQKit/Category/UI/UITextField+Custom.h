@@ -11,14 +11,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, InputTextType) {
+    InputTextType_Every,      ///> 任意类型
+    InputTextType_Num,        ///> 数字类型
+    InputTextType_Char,       ///> 字符类型
+    InputTextType_NumChar,    ///> 数字+字符
+    InputTextType_Chinese     ///> 中文
+};
+
 @interface UITextField (Custom)
 
-@property (nonatomic, assign) NSInteger  maxLength;         ///< 文本最大长度,默认无限制
+/*
+ 配置检查规则，需要调用startCheckConfig方法
+ */
 
-/// 创建价格输入框
-/// @param frame 位置
-/// @param precision 小数位数
-+ (instancetype)priceTfWithFrame:(CGRect)frame precision:(NSInteger)precision;
+@property (nonatomic, assign) BOOL  upText;                 ///< 全大写
+@property (nonatomic, assign) BOOL  lowText;                ///< 全小写
+@property (nonatomic, assign) InputTextType  type;          ///< 限制输入文本类型
+@property (nonatomic, assign) NSInteger  maxLength;         ///< 文本最大长度,默认无限制
+@property (nonatomic, assign) NSInteger  precision;         ///< 小数点位数(数字加小数点文本)
 
 /// 检查是否有值
 /// @param arr 输入框集合
@@ -34,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 添加更多视图
 - (void)addRightMoreImg;
+
+/// 配置规则限制需要开启检查
+- (void)startCheckConfig;
 
 @end
 

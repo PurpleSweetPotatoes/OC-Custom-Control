@@ -58,7 +58,9 @@
 /// @param space 追加宽度
 - (CGFloat)widthToFitIsAttrWithSpace:(CGFloat)space;
 
-
+/// 配置文本并设置行高
+/// @param text 文本
+/// @param space 行高
 - (void)configText:(NSString *)text lineSpace:(CGFloat)space;
 
 /// 添加长按复制弹框

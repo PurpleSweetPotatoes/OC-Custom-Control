@@ -154,4 +154,8 @@
 /** url编码*/
 - (NSString *)urlEncoded;
 
+/// 删除对应字符串
+/// @param regular 正则规则
+- (NSString *)deleteCharset:(NSString *)regular;
+
 @end
