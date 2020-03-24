@@ -123,8 +123,8 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 + (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)info resultBlock:(nullable PHAssetForURLImageResultBlock)resultBlock;
 
 /// 图片方向调整，调整为正向
-/// @param image 源图片
-+ (UIImage *)adjustImageOrientation:(UIImage*)image;
+/// @param aImage 源图片
++ (UIImage *)adjustImageOrientation:(UIImage*)aImage;
 
 #pragma mark - 屏幕、保存
 
