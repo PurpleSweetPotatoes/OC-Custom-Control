@@ -29,6 +29,11 @@ typedef NS_ENUM(NSUInteger, NSDateTimeStyle) {
 
 + (instancetype)locaDate;
 
+/// 字符串转时间
+/// @param string 时间字符串
+/// @param style 转化类型yyyy MM dd HH mm ss 组合
++ (NSDate *)dateFromString:(NSString *)string style:(NSString *)style;
+
 - (NSString *)getFormatteTimestamp;
 
 - (NSString *)getTimeString:(NSDateTimeStyle)style;

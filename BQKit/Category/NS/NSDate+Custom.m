@@ -8,6 +8,8 @@
 
 #import "NSDate+Custom.h"
 
+static NSDateFormatter * _dateFormatter;
+
 @implementation NSDate (Custom)
 
 + (instancetype)locaDate {
@@ -16,6 +18,20 @@
     date = [NSDate dateWithTimeIntervalSinceNow:[zone secondsFromGMTForDate:date]];
     return date;
 }
+
++ (void)setFormatterStyle:(NSString *)style {
+    if (_dateFormatter == nil) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+    }
+    [_dateFormatter setDateFormat:style];
+}
+
++ (NSDate *)dateFromString:(NSString *)string style:(NSString *)style {
+    [NSDate setFormatterStyle:style];
+    return [_dateFormatter dateFromString:string];
+}
+
+
 
 - (NSString *)getFormatteTimestamp {
     return [NSString stringWithFormat:@"%.lf",self.timeIntervalSince1970];
@@ -27,14 +43,8 @@
 }
 
 - (NSString *)getTimeStringFormat:(NSString*)formatStr {
-
-    static NSDateFormatter * dateFormatter;
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-    }
-    [dateFormatter setDateFormat:formatStr];
-    NSString* dateString = [dateFormatter stringFromDate:self];
-    return dateString;
+    [NSDate setFormatterStyle:formatStr];
+    return [_dateFormatter stringFromDate:self];
 }
 
 - (NSInteger)year {
