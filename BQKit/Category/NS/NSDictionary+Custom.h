@@ -14,8 +14,13 @@
 
 + (instancetype)encodeFromData:(NSData *)data;
 
-- (id)safeObjectForKey:(id)key;
+- (NSString *)stringValueForKey:(NSString *)key;
 
-- (id)safeValueForKey:(NSString *)key;
+- (NSDictionary *)dicValueForKey:(NSString *)key;
 
+- (NSArray *)arrayValueForKey:(NSString *)key;
+
+- (NSInteger)intValueForKey:(NSString *)key;
+
+- (BOOL)boolValueForKey:(NSString *)key;
 @end
