@@ -94,11 +94,11 @@
         [self.openUrls addObject:[self urlCode:urlString]];
     }
     
-//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
-//        [arr addObject:@"谷歌地图"];
-//        NSString * urlString = [NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%@,%@&directionsmode=driving",@"导航功能",@"",self.latitude, self.longitude];
-//        [self.openUrls addObject:[self urlCode:urlString]];
-//    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+        [arr addObject:@"谷歌地图"];
+        NSString * urlString = [NSString stringWithFormat:@"comgooglemaps://?x-source=%@&x-success=%@&saddr=&daddr=%@,%@&directionsmode=driving",@"导航功能",@"",self.latitude, self.longitude];
+        [self.openUrls addObject:[self urlCode:urlString]];
+    }
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
         [arr addObject:@"百度地图"];

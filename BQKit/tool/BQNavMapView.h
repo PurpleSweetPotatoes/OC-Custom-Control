@@ -16,7 +16,7 @@
  <array>
      <string>iosamap</string>  高德
      <string>baidumap</string>  百度
-     <string>comgooglemaps</string>  谷歌，暂时无法使用
+     <string>comgooglemaps</string>  谷歌
      <string>qqmap</string> 腾讯
  </array>
  */

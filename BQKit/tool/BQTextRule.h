@@ -1,8 +1,8 @@
 // *******************************************
-//  File Name:      BQTextRule.h       
+//  File Name:      BQTextRule.h
 //  Author:         MrBai
 //  Created Date:   2020/3/21 9:47 AM
-//    
+//
 //  Copyright © 2020 baiqiang
 //  All rights reserved
 // *******************************************
