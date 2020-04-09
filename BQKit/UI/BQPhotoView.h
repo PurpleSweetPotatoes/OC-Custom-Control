@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 展示视图
 /// @param img 对应图片
-+ (void)show:(UIImage *)img;
++ (instancetype)show:(UIImage *)img;
 
 /// 配置图片
 /// @param img 对应图片
@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 恢复默认状态
 - (void)resetNormal;
+
+/// 配置进度指示器 0 ~ 1
+- (void)setProgressNum:(CGFloat)num;
 @end
 
 NS_ASSUME_NONNULL_END

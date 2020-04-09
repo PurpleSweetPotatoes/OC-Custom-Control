@@ -9,8 +9,6 @@
     
 
 #import "BQPhotoBrowserView.h"
-#import "BQPhotoView.h"
-#import "UIImage+Custom.h"
 
 @interface BQPhotoBrowserView ()
 <
@@ -18,34 +16,45 @@ UICollectionViewDataSource,
 UICollectionViewDelegate,
 BQPhotoViewDelegate
 >
-@property (nonatomic, strong) NSArray<UIImage *> * imgs;
 @property (nonatomic, strong) UICollectionView * collectV;
 @property (nonatomic, assign) NSInteger  index;
 @property (nonatomic, strong) UILabel * numLab;
-
+@property (nonatomic, assign) NSInteger  num;
 @end
 
 
 
 @interface BQPhotoBrowserCollectionCell : UICollectionViewCell
 @property (nonatomic, strong) BQPhotoView * photoView;
+
 @end
 
 @implementation BQPhotoBrowserView
 
 
 #pragma mark - *** Public method
-
-+ (void)show:(NSArray <UIImage *> *)imgs {
-    for (UIImage * img in imgs) {
-        NSAssert([img isKindOfClass:[UIImage class]], @"This Array must contains UIImage");
-    }
-    BQPhotoBrowserView * browserV = [[BQPhotoBrowserView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    browserV.imgs = imgs;
-    [browserV.collectV reloadData];
-    [browserV scrollViewDidScroll:browserV.collectV];
-    browserV.numLab.hidden = imgs.count <= 1;
++ (instancetype)showWithDelegate:(id<BQPhotoBrowserViewDelegate>)delegate {
+    BQPhotoBrowserView * browserV = [BQPhotoBrowserView configViewWithFrame:[UIScreen mainScreen].bounds delegate:delegate];
     [[UIApplication sharedApplication].keyWindow addSubview:browserV];
+    return browserV;
+}
+
++ (instancetype)configViewWithFrame:(CGRect)frame delegate:(id<BQPhotoBrowserViewDelegate>)delegate {
+    if (delegate == nil) {
+        return nil;
+    }
+    BQPhotoBrowserView * browserV = [[BQPhotoBrowserView alloc] initWithFrame:frame];
+    browserV.delegate = delegate;
+    [browserV reLoadData];
+    return browserV;
+}
+
+
+- (void)reLoadData {
+    self.num = [self.delegate numberOfBrowser];
+    self.numLab.hidden = self.num == 0;
+    [self scrollViewDidScroll:self.collectV];
+    [self.collectV reloadData];
 }
 
 #pragma mark - *** Life cycle
@@ -53,7 +62,8 @@ BQPhotoViewDelegate
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _imgs = @[];
+        self.num = 0;
+        self.tapBack = YES;
         [self configUI];
     }
     return self;
@@ -64,20 +74,23 @@ BQPhotoViewDelegate
 #pragma mark - *** Event Action
 - (void)downBtnAction:(UIButton *)sender {
     NSLog(@"图片保存");
-    [self.imgs[self.index] saveToPhotosWithReslut:^(NSError *error) {
-        [BQMsgView showInfo:@"图片保存成功"];
-    }];
+    BQPhotoBrowserCollectionCell * cell = (BQPhotoBrowserCollectionCell *)[self.collectV cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.index inSection:0]];
+    if (cell.photoView.imgV.image) {
+        [cell.photoView.imgV.image saveToPhotosWithReslut:^(NSError *error) {
+            [BQMsgView showInfo:@"图片保存成功"];
+        }];
+    }
 }
 #pragma mark - *** Delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.imgs.count;
+    return self.num;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BQPhotoBrowserCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BQPhotoBrowserCollectionCell" forIndexPath:indexPath];
     cell.photoView.delegate = self;
-    [cell.photoView setImage:self.imgs[indexPath.row]];
+    [self.delegate browserConfigImgV:cell.photoView index:indexPath.row];
     return cell;
 }
 
@@ -91,12 +104,14 @@ BQPhotoViewDelegate
     self.index = (NSInteger)((scrollView.contentOffset.x + scrollView.bounds.size.width * 0.5) / scrollView.bounds.size.width);
     
     if (!self.numLab.hidden) {
-        self.numLab.text = [NSString stringWithFormat:@"%ld / %ld",self.index + 1, self.imgs.count];
+        self.numLab.text = [NSString stringWithFormat:@"%zd / %zd",self.index + 1, self.num];
     }
 }
 
 - (void)photoTapAction {
-    [self removeFromSuperview];
+    if (self.tapBack) {
+        [self removeFromSuperview];
+    }
 }
 
 #pragma mark - *** Instance method
@@ -120,7 +135,8 @@ BQPhotoViewDelegate
     [self addSubview:collectV];
     self.collectV = collectV;
     
-    self.numLab = [[UILabel alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 60) * 0.5, [UIScreen mainScreen].bounds.size.height - 80, 60, 30)];
+    self.numLab = [[UILabel alloc] initWithFrame:CGRectMake((self.bounds.size.width - 60) * 0.5, self.bounds.size.height - 80, 80, 30)];
+    self.numLab.font = [UIFont systemFontOfSize:14];
     self.numLab.layer.cornerRadius = 15;
     self.numLab.layer.masksToBounds = YES;
     self.numLab.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
@@ -137,7 +153,6 @@ BQPhotoViewDelegate
     [btn addTarget:self action:@selector(downBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     btn.backgroundColor = self.numLab.backgroundColor;
     [self addSubview:btn];
-    
     
 }
 
@@ -190,7 +205,7 @@ BQPhotoViewDelegate
 
 
 - (void)configUI {
-    BQPhotoView * photoView = [[BQPhotoView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    BQPhotoView * photoView = [[BQPhotoView alloc] initWithFrame:self.bounds];
     [self.contentView addSubview:photoView];
     self.photoView = photoView;
 }

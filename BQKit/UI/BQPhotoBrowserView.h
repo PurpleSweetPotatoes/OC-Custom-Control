@@ -9,13 +9,30 @@
     
 
 #import <UIKit/UIKit.h>
+#import "BQPhotoView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol BQPhotoBrowserViewDelegate <NSObject>
+
+- (NSInteger)numberOfBrowser;
+
+- (void)browserConfigImgV:(BQPhotoView *)photoV index:(NSInteger)index;
+
+@end
 
 /// 自定义图片浏览器
 @interface BQPhotoBrowserView : UIView
 
-+ (void)show:(NSArray <UIImage *> *)imgs;
++ (instancetype)showWithDelegate:(id<BQPhotoBrowserViewDelegate>)delegate;
+
++ (instancetype)configViewWithFrame:(CGRect)frame delegate:(id<BQPhotoBrowserViewDelegate>)delegate;
+
+@property (nonatomic, weak) id<BQPhotoBrowserViewDelegate>  delegate;
+
+@property (nonatomic, assign) BOOL tapBack;         ///< 单击返回，默认YES
+
+- (void)reLoadData;
 
 @end
 

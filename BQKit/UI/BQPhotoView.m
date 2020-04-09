@@ -9,6 +9,7 @@
     
 
 #import "BQPhotoView.h"
+#import "BQCirLabel.h"
 
 @interface BQPhotoView ()
 <
@@ -16,6 +17,7 @@ UIScrollViewDelegate
 >
 @property (nonatomic, strong) UIView * bgView;
 @property (nonatomic, strong) UIScrollView * scrV;
+@property (nonatomic, strong) BQCirLabel * cirLab;              ///< 进度指示器, 默认隐藏
 @end
 
 @implementation BQPhotoView
@@ -23,13 +25,17 @@ UIScrollViewDelegate
 
 #pragma mark - *** Public method
 
-+ (void)show:(UIImage *)img {
++ (instancetype)show:(UIImage *)img {
     BQPhotoView * view = [[BQPhotoView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [view setImage:img];
     [[UIApplication sharedApplication].keyWindow addSubview:view];
+    return view;
 }
 
 - (void)setImage:(UIImage *)img {
+    if (img == nil) {
+        return;
+    }
     [self resetNormal];
     self.imgV.image = img;
     CGSize imgSize = img.size;
@@ -41,6 +47,16 @@ UIScrollViewDelegate
 - (void)resetNormal {
     if (self.scrV.zoomScale > self.scrV.minimumZoomScale) {
         [self.scrV setZoomScale:self.scrV.minimumZoomScale animated:NO];
+    }
+}
+
+- (void)setProgressNum:(CGFloat)num {
+    if (num > 0 && num < 1) {
+        self.cirLab.cirpercentNum = num;
+        self.cirLab.text = [NSString stringWithFormat:@"%zd%%",(NSInteger)(num * 100)];
+        self.cirLab.hidden = NO;
+    } else {
+        self.cirLab.hidden = YES;
     }
 }
 #pragma mark - *** Life cycle
@@ -58,8 +74,8 @@ UIScrollViewDelegate
 #pragma mark - *** Event Action
 
 - (void)singTapAction:(UITapGestureRecognizer *)sender {
-    [self.scrV setZoomScale:self.scrV.minimumZoomScale animated:NO];
     if ([self.delegate respondsToSelector:@selector(photoTapAction)]) {
+        [self.scrV setZoomScale:self.scrV.minimumZoomScale animated:YES];
         [self.delegate photoTapAction];
     } else {
         [self removeFromSuperview];
@@ -110,6 +126,16 @@ UIScrollViewDelegate
     [singTap requireGestureRecognizerToFail:doubleTap];
     [self addGestureRecognizer:doubleTap];
     
+    self.cirLab = [[BQCirLabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    self.cirLab.center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
+    self.cirLab.font = [UIFont systemFontOfSize:10];
+    
+    self.cirLab.cirWidth = 4;
+    self.cirLab.cirBgColor = [UIColor clearColor];
+    self.cirLab.cirShowColor = [UIColor whiteColor];
+    self.cirLab.textColor = self.cirLab.cirShowColor;
+    self.cirLab.hidden = YES;
+    [self addSubview:self.cirLab];
 }
 
 #pragma mark - *** Set
@@ -131,7 +157,7 @@ UIScrollViewDelegate
         scrV.showsVerticalScrollIndicator = NO;
         scrV.showsHorizontalScrollIndicator = NO;
         scrV.clipsToBounds = YES;
-        scrV.maximumZoomScale = 2.0;
+        scrV.maximumZoomScale = 2.5;
         scrV.minimumZoomScale = 1.0;
         scrV.delegate = self;
         _scrV = scrV;

@@ -29,7 +29,7 @@
 }
 
 - (void)textFieldTextDidChange:(UITextField *)tf {
-    if (!tf.rule || tf.text.length == 0) return;
+    if (!tf.rule || tf.text.length == 0 || tf.markedTextRange != nil) return;
     
     switch (self.type) {
         case BQTextRuleType_Num:
@@ -49,6 +49,10 @@
             break;
         default:
             break;
+    }
+    
+    if (self.clearSpace) {
+        tf.text = [tf.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     }
     
     if (self.maxLength > 0 && tf.text.length > self.maxLength) {
