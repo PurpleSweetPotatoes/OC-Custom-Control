@@ -431,34 +431,48 @@
     return s;
 }
 
-#pragma mark - AES加密
+#pragma mark - AES加密解密
 
-- (NSString *)aes256EncryptWithKey:(NSString *)key {
+- (NSString *)aes128EncryptWithKey:(NSString *)key iv:(NSString *)iv {
     NSData * data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSString base64StringFromData:[self aes:kCCKeySizeAES256 Type:kCCEncrypt key:key data:data]];
+    return [NSString base64StringFromData:[self aes:kCCKeySizeAES128 Type:kCCEncrypt key:key iv:iv data:data]];
 }
 
-- (NSData *)aes256DencryptWithKey:(NSString *)key {
-    return [self aes:kCCKeySizeAES256 Type:kCCDecrypt key:key data:[self base64Data]];
-}
-
-- (NSString *)aes128EncryptWithKey:(NSString *)key {
+- (NSString *)aes256EncryptWithKey:(NSString *)key iv:(NSString *)iv {
     NSData * data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    return [NSString base64StringFromData:[self aes:kCCKeySizeAES128 Type:kCCEncrypt key:key data:data] ];
+    return [NSString base64StringFromData:[self aes:kCCKeySizeAES256 Type:kCCEncrypt key:key iv:iv data:data]];
 }
 
-- (NSData *)aes128DencryptWithKey:(NSString *)key {
-    return [self aes:kCCKeySizeAES128 Type:kCCDecrypt key:key data:[self base64Data]];
+- (NSString *)aes128DencryptWithKey:(NSString *)key iv:(NSString *)iv {
+    NSData * data = [self aes:kCCKeySizeAES128 Type:kCCDecrypt key:key iv:(NSString *)iv data:[self base64Data]];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
-- (NSData *)aes:(size_t)num Type:(CCOperation)type key:(NSString *)key data:(NSData *)data {
+- (NSString *)aes256DencryptWithKey:(NSString *)key iv:(NSString *)iv {
+    NSData * data = [self aes:kCCKeySizeAES256 Type:kCCDecrypt key:key iv:(NSString *)iv data:[self base64Data]];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+- (NSData *)aes:(size_t)num Type:(CCOperation)type key:(NSString *)key iv:(NSString *)iv data:(NSData *)data {
+    
     char keyPtr[num + 1];
     bzero(keyPtr, sizeof(keyPtr));
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    // 偏移量
+    char ivPtr[kCCBlockSizeAES128 + 1];
+    bzero(ivPtr, sizeof(ivPtr));
+    [iv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
+    
+    CCOptions option = kCCOptionPKCS7Padding | kCCOptionECBMode;
+    if (iv.length > 0) {
+        option = kCCOptionPKCS7Padding ;
+    }
+    
     size_t bufferSize = data.length + kCCBlockSizeAES128;
     void * buffer = malloc(bufferSize);
     size_t numBytesEncrypted = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(type, kCCAlgorithmAES128, kCCOptionPKCS7Padding | kCCOptionECBMode, keyPtr, num, NULL, data.bytes, data.length, buffer, bufferSize, &numBytesEncrypted);
+    CCCryptorStatus cryptStatus = CCCrypt(type, kCCAlgorithmAES128, option, keyPtr, num, ivPtr, data.bytes, data.length, buffer, bufferSize, &numBytesEncrypted);
     if (cryptStatus == kCCSuccess) {
         return [NSData dataWithBytes:buffer length:numBytesEncrypted];
     }
@@ -1076,3 +1090,4 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return @"";
 }
 @end
+

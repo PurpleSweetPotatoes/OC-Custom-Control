@@ -76,7 +76,7 @@
         cirShowLayer.lineCap = kCALineCapRound;
         cirShowLayer.fillColor = [UIColor clearColor].CGColor;
         
-        UIBezierPath * path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.width * 0.5) radius:(self.bounds.size.width - self.cirWidth) * 0.5 startAngle:-0.5 * M_PI endAngle:1.5 * M_PI * self.cirpercentNum clockwise:true];
+        UIBezierPath * path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.width * 0.5) radius:(self.bounds.size.width - self.cirWidth) * 0.5 startAngle:-0.5 * M_PI endAngle:2 * M_PI * self.cirpercentNum - 0.5 * M_PI clockwise:true];
         cirShowLayer.path = path.CGPath;
         [self.layer addSublayer:cirShowLayer];
         self.cirShowLayer = cirShowLayer;

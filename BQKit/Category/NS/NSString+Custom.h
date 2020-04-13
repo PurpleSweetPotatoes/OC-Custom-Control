@@ -31,17 +31,20 @@
 - (NSString *)md5String;
 
 #pragma mark - AES加密
+
+// iv为偏移量，只有CBC模式加密才有便宜，传入iv值默认为CBC模式
+
 /**  @return AES128加密字符串 */
-- (NSString *)aes128EncryptWithKey:(NSString *)key;
+- (NSString *)aes128EncryptWithKey:(NSString *)key iv:(NSString *)iv;
 
 /**  @return AES256加密字符串 */
-- (NSString *)aes256EncryptWithKey:(NSString *)key;
+- (NSString *)aes256EncryptWithKey:(NSString *)key iv:(NSString *)iv;
 
 /**  @return AES128解密数据 */
-- (NSData *)aes128DencryptWithKey:(NSString *)key;
+- (NSString *)aes128DencryptWithKey:(NSString *)key iv:(NSString *)iv;
 
 /**  @return AES256解密数据 */
-- (NSData *)aes256DencryptWithKey:(NSString *)key;
+- (NSString *)aes256DencryptWithKey:(NSString *)key iv:(NSString *)iv;
 
 #pragma mark - 散列函数
 /**  @return 32个字符的SHA1散列字符串 */
@@ -159,3 +162,4 @@
 - (NSString *)deleteCharset:(NSString *)regular;
 
 @end
+
