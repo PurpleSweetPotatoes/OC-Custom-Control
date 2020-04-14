@@ -232,4 +232,7 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
  */
 + (UIImage *)arrowImgWithFrame:(CGRect)frame color:(UIColor *)color lineWidth:(CGFloat)line direction:(BQArrowDirection)direction;
 
+#pragma mark - 视屏流转换
+
++ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 @end
