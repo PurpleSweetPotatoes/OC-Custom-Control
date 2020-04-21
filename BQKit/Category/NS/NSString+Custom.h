@@ -30,7 +30,7 @@
 /**  @return 32个字符的MD5散列字符串 */
 - (NSString *)md5String;
 
-#pragma mark - AES加密
+#pragma mark - AES加密解密
 
 // iv为偏移量，只有CBC模式加密才有便宜，传入iv值默认为CBC模式
 
@@ -154,12 +154,23 @@
 /** string字面转化为Data */
 - (NSMutableData*)convertBytesToData;
 
-/** url编码*/
-- (NSString *)urlEncoded;
 
 /// 删除对应字符串
 /// @param regular 正则规则
 - (NSString *)deleteCharset:(NSString *)regular;
 
+#pragma mark - url编码解码
+
+/** url编码*/
+- (NSString *)urlEncoded;
+
+/** url解码*/
+- (NSString *)urlDecoded;
+
+/** url参数(get)*/
+- (NSDictionary *)urlGetParams;
+
+/** 字符串转字典*/
+- (NSDictionary *)jsonDic;
 @end
 

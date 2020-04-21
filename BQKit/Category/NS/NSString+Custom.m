@@ -1071,7 +1071,7 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return data;
 }
 
-#pragma mark - url编码
+#pragma mark - url编码解码
 
 - (NSString *)urlEncoded {
     if ([self hasChineseCode]) {
@@ -1088,6 +1088,38 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
         return [regularExpress stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, [self length]) withTemplate:@""];
     }
     return @"";
+}
+
+- (NSString *)urlDecoded {
+    return (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapes(NULL, (__bridge CFStringRef)self, CFSTR(""));
+}
+
+/** url参数(get)*/
+- (NSDictionary *)urlGetParams {
+    
+    NSArray * arr = [self componentsSeparatedByString:@"?"];
+    if (arr.count < 2) {
+        return @{};
+    }
+    
+    NSString * paramsStr = [arr lastObject];
+    NSArray * paramsArr = [paramsStr componentsSeparatedByString:@"&"];
+
+    NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+    
+    for (NSString * result in paramsArr) {
+        NSArray * resultArr = [result componentsSeparatedByString:@"="];
+        if (resultArr.count >= 1) {
+            dic[resultArr.firstObject] = resultArr.count > 1 ? resultArr.lastObject : @"";
+        }
+    }
+    return [dic copy];
+}
+
+- (NSDictionary *)jsonDic {
+    NSString *jsonString = self;
+    NSData *JSONData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    return [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
 }
 @end
 
