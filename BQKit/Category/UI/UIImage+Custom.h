@@ -234,5 +234,5 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 
 #pragma mark - 视屏流转换
 
-+ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+- (CVPixelBufferRef)converToPixelBuffer;
 @end
