@@ -1,8 +1,8 @@
 // *******************************************
-//  File Name:      BQPhotoBrowserView.m       
+//  File Name:      BQPhotoBrowserView.m
 //  Author:         MrBai
 //  Created Date:   2020/3/4 2:27 PM
-//    
+//
 //  Copyright © 2020 baiqiang
 //  All rights reserved
 // *******************************************
@@ -17,7 +17,6 @@ UICollectionViewDelegate,
 BQPhotoViewDelegate
 >
 @property (nonatomic, strong) UICollectionView * collectV;
-@property (nonatomic, assign) NSInteger  index;
 @property (nonatomic, strong) UILabel * numLab;
 @property (nonatomic, assign) NSInteger  num;
 @end
@@ -49,6 +48,10 @@ BQPhotoViewDelegate
     return browserV;
 }
 
+- (void)scrollToIndex:(NSInteger)index {
+    self.index = index;
+    [self.collectV scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.index inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+}
 
 - (void)reLoadData {
     self.num = [self.delegate numberOfBrowser];
@@ -97,15 +100,12 @@ BQPhotoViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     BQPhotoBrowserCollectionCell * cel = (BQPhotoBrowserCollectionCell *)cell;
     [cel.photoView resetNormal];
+    [self.delegate browserConfigImgV:cel.photoView index:indexPath.row];
 }
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.index = (NSInteger)((scrollView.contentOffset.x + scrollView.bounds.size.width * 0.5) / scrollView.bounds.size.width);
-    
-    if (!self.numLab.hidden) {
-        self.numLab.text = [NSString stringWithFormat:@"%zd / %zd",self.index + 1, self.num];
-    }
 }
 
 - (void)photoTapAction {
@@ -158,6 +158,19 @@ BQPhotoViewDelegate
 
 
 #pragma mark - *** Set
+
+- (void)setIndex:(NSInteger)index {
+    
+    if (index < 0) {
+        _index = 0;
+    } else {
+        _index = index;
+    }
+    
+    if (!self.numLab.hidden) {
+        self.numLab.text = [NSString stringWithFormat:@"%zd / %zd",_index + 1, self.num];
+    }
+}
 
 #pragma mark - *** Get
     

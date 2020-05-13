@@ -1,8 +1,8 @@
 // *******************************************
-//  File Name:      BQPhotoBrowserView.h       
+//  File Name:      BQPhotoBrowserView.h
 //  Author:         MrBai
 //  Created Date:   2020/3/4 2:27 PM
-//    
+//
 //  Copyright © 2020 baiqiang
 //  All rights reserved
 // *******************************************
@@ -28,11 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)configViewWithFrame:(CGRect)frame delegate:(id<BQPhotoBrowserViewDelegate>)delegate;
 
+- (void)reLoadData;
+
+- (void)scrollToIndex:(NSInteger)index;
+
 @property (nonatomic, weak) id<BQPhotoBrowserViewDelegate>  delegate;
 
+@property (nonatomic, assign) NSInteger  index;     ///< 默认为0
 @property (nonatomic, assign) BOOL tapBack;         ///< 单击返回，默认YES
 
-- (void)reLoadData;
 
 @end
 
