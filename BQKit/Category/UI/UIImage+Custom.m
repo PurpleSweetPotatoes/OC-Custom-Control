@@ -929,7 +929,7 @@
     CGContextMoveToPoint(ct, startPoint.x, startPoint.y);
     CGContextAddLineToPoint(ct, centerPoint.x, centerPoint.y);
     CGContextAddLineToPoint(ct, endPoint.x, endPoint.y);
-    CGContextSetLineWidth(ct, 3);
+    CGContextSetLineWidth(ct, line);
     CGContextSetStrokeColorWithColor(ct, color.CGColor);
     CGContextStrokePath(ct);
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
