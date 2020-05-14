@@ -49,6 +49,7 @@
 + (void)closeResponse {
     BQKeyBoardManager * manager =  [self share];
     manager.responseV = nil;
+    [manager removeNotifiCation];
 }
 
 #pragma mark - Event
@@ -68,12 +69,10 @@
 #pragma mark - Instacell
 
 - (void)checkCanResponseCtlr:(UIView *)view {
-    for (UIView * subV in view.subviews) {
-        if (([subV isKindOfClass:[UITextField class]] || [subV isKindOfClass:[UITextView class]]) && subV.userInteractionEnabled) {
-            [self.editVList addObject:subV];
-        } else if (subV.subviews) {
-            [self checkCanResponseCtlr:subV];
-        }
+    if (([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) && view.userInteractionEnabled) {
+        [self.editVList addObject:view];
+    } else if (view.subviews) {
+        [self checkCanResponseCtlr:view];
     }
 }
 
@@ -84,11 +83,13 @@
     [self checkCanResponseCtlr:self.responseV];
     
     for (UITextField * tf in self.editVList) {
-        BQKeyBoardToolBar * toolBar = [BQKeyBoardToolBar toolBar];
-        [toolBar.preBtn addTarget:self action:@selector(preBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [toolBar.nextBtn addTarget:self action:@selector(nextBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [toolBar.dissBtn addTarget:self action:@selector(dissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        tf.inputAccessoryView = toolBar;
+        if (tf.inputAccessoryView == nil) {
+            BQKeyBoardToolBar * toolBar = [BQKeyBoardToolBar toolBar];
+            [toolBar.preBtn addTarget:self action:@selector(preBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [toolBar.nextBtn addTarget:self action:@selector(nextBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [toolBar.dissBtn addTarget:self action:@selector(dissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            tf.inputAccessoryView = toolBar;
+        }
     }
     
     if (!self.didAdd) {
