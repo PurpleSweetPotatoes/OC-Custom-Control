@@ -13,11 +13,8 @@
 @interface BQKeyBoardManager ()
 @property (nonatomic, strong) UIView * responseV;
 @property (nonatomic, strong) NSMutableArray<UIView *> * editVList;
-@property (nonatomic, strong) UIView * preEditV;
 @property (nonatomic, strong) UIView * currentEditV;
-@property (nonatomic, strong) UIView * nextEditV;
 @property (nonatomic, assign) BOOL  didAdd;
-@property (nonatomic, assign) BOOL  didShow;
 @end
 
 
@@ -49,17 +46,20 @@
 + (void)closeResponse {
     BQKeyBoardManager * manager =  [self share];
     manager.responseV = nil;
-    [manager removeNotifiCation];
 }
 
 #pragma mark - Event
 
 - (void)preBtnAction:(UIButton *)btn {
-    [self.preEditV becomeFirstResponder];
+    NSInteger index = [self.editVList indexOfObject:self.currentEditV];
+    UIView * preV = self.editVList[index - 1];
+    [preV becomeFirstResponder];
 }
 
 - (void)nextBtnAction:(UIButton *)btn {
-    [self.nextEditV becomeFirstResponder];
+    NSInteger index = [self.editVList indexOfObject:self.currentEditV];
+    UIView * nextV = self.editVList[index + 1];
+    [nextV becomeFirstResponder];
 }
 
 - (void)dissBtnAction:(UIButton *)btn {
@@ -71,8 +71,10 @@
 - (void)checkCanResponseCtlr:(UIView *)view {
     if (([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) && view.userInteractionEnabled) {
         [self.editVList addObject:view];
-    } else if (view.subviews) {
-        [self checkCanResponseCtlr:view];
+    } else {
+        for (UIView * subV in view.subviews) {
+            [self checkCanResponseCtlr:subV];
+        }
     }
 }
 
@@ -81,13 +83,22 @@
 - (void)addNotifiCation {
     [self.editVList removeAllObjects];
     [self checkCanResponseCtlr:self.responseV];
-    
-    for (UITextField * tf in self.editVList) {
+    for (NSInteger i = 0; i < self.editVList.count; i++) {
+        UITextField * tf = (UITextField *)self.editVList[i];
         if (tf.inputAccessoryView == nil) {
             BQKeyBoardToolBar * toolBar = [BQKeyBoardToolBar toolBar];
             [toolBar.preBtn addTarget:self action:@selector(preBtnAction:) forControlEvents:UIControlEventTouchUpInside];
             [toolBar.nextBtn addTarget:self action:@selector(nextBtnAction:) forControlEvents:UIControlEventTouchUpInside];
             [toolBar.dissBtn addTarget:self action:@selector(dissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            if (i == 0) {
+                toolBar.preBtn.selected = YES;
+                toolBar.preBtn.userInteractionEnabled = NO;
+            }
+            if (i == self.editVList.count - 1) {
+                toolBar.nextBtn.selected = YES;
+                toolBar.nextBtn.userInteractionEnabled = NO;
+            }
+            
             tf.inputAccessoryView = toolBar;
         }
     }
@@ -97,7 +108,7 @@
         //增加监听，当键盘弹出时收出消息
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         //增加监听，当键盘修改时收出消息
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
         //增加监听，当键盘退出时收出消息
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
     }
@@ -110,18 +121,15 @@
     }
 }
 
-
 - (void)keyboardWillShow:(NSNotification *)notifi {
-    self.didShow = NO;
     for (UIView * editV in self.editVList) {
         if (editV.isFirstResponder) {
-            if ([((UITextField *)editV).inputAccessoryView isKindOfClass:[BQKeyBoardToolBar class]]) {
-                BQKeyBoardToolBar * bar = (BQKeyBoardToolBar *)((UITextField *)editV).inputAccessoryView;
-                bar.preBtn.userInteractionEnabled = NO;
-                bar.nextBtn.userInteractionEnabled = NO;
-                bar.dissBtn.userInteractionEnabled = NO;
+            self.currentEditV = editV;
+            if ([editV.inputAccessoryView isKindOfClass:[BQKeyBoardToolBar class]] && [editV isKindOfClass:[UITextField class]]) {
+                UITextField * tf = (UITextField *)editV;
+                BQKeyBoardToolBar * bar = (BQKeyBoardToolBar *)tf.inputAccessoryView;
+                bar.tipLab.text = tf.placeholder;
             }
-            
             //回归原视图，这样不影响获取正确的视图最低点
             self.responseV.transform = CGAffineTransformIdentity;
             //获取键盘的y值
@@ -136,33 +144,6 @@
             //键盘挡住了响应式图
             if (keyBoardY < vMaxY) {
                 self.responseV.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0,keyBoardY - vMaxY);
-            }
-            return;
-        }
-    }
-}
-
-- (void)keyboardDidShow:(NSNotification *)notifi {
-    self.didShow = YES;
-    for (NSInteger i = 0; i < self.editVList.count; i++) {
-        if (self.editVList[i].isFirstResponder) {
-            self.currentEditV = self.editVList[i];
-            if (i - 1 >= 0) {
-                self.preEditV = self.editVList[i-1];
-            }
-            if (i < self.editVList.count - 1) {
-                self.nextEditV = self.editVList[i+1];
-            }
-            
-            UITextField * tf = (UITextField *)self.editVList[i];
-            if ([tf.inputAccessoryView isKindOfClass:[BQKeyBoardToolBar class]]) {
-                BQKeyBoardToolBar * bar = (BQKeyBoardToolBar *)tf.inputAccessoryView;
-                if ([tf isKindOfClass:[UITextField class]]) {
-                    bar.tipLab.text = tf.placeholder;
-                }
-                bar.preBtn.userInteractionEnabled = self.preEditV ? YES:NO;
-                bar.nextBtn.userInteractionEnabled = self.nextEditV ? YES:NO;;
-                bar.dissBtn.userInteractionEnabled = YES;
             }
             return;
         }
@@ -207,12 +188,14 @@
     UIButton * preBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     preBtn.frame = CGRectMake(0, 0, 44, 44);
     [preBtn setImage:[UIImage arrowImgWithFrame:CGRectMake(10, 0, 22, 12) color:[UIColor colorWithWhite:0.3 alpha:1] lineWidth:2 direction:BQArrowDirection_Top] forState:UIControlStateNormal];
+    [preBtn setImage:[UIImage arrowImgWithFrame:CGRectMake(10, 0, 22, 12) color:[UIColor lightGrayColor] lineWidth:2 direction:BQArrowDirection_Top] forState:UIControlStateSelected];
     [self addSubview:preBtn];
     self.preBtn = preBtn;
     
     UIButton * nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     nextBtn.frame = CGRectMake(CGRectGetMaxX(preBtn.frame), 0, 44, 44);
     [nextBtn setImage:[UIImage arrowImgWithFrame:CGRectMake(0, 0, 22, 12) color:[UIColor colorWithWhite:0.3 alpha:1] lineWidth:2 direction:BQArrowDirection_bottom] forState:UIControlStateNormal];
+    [nextBtn setImage:[UIImage arrowImgWithFrame:CGRectMake(0, 0, 22, 12) color:[UIColor lightGrayColor] lineWidth:2 direction:BQArrowDirection_bottom] forState:UIControlStateSelected];
     [self addSubview:nextBtn];
     self.nextBtn = nextBtn;
     

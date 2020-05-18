@@ -109,7 +109,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSString * appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString * sysVersion = [UIDevice currentDevice].systemVersion;
     
-    NSString * deviceInfo = [NSString stringWithFormat:@"**********    %@    **********\ndisName:%@\t version:%@\t system:%@", currentTimeStr(),disPlayName, appVersion, sysVersion];
+    NSString * deviceInfo = [NSString stringWithFormat:@"**********       **********\ndisName:%@\t version:%@\t system:%@",disPlayName, appVersion, sysVersion];
     
     /*  获取异常崩溃信息 */
     NSString * name = [exception name];

@@ -36,7 +36,7 @@ typedef void(^VoidBlock)(void);
 
 /** ---------------- 输出调试 ---------------  */
 #ifdef DEBUG
-#define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#define NSLog(format, ...) fprintf(stderr,"%s(%d) %s\n",[[NSString stringWithUTF8String:__FUNCTION__] UTF8String], __LINE__, [[NSString stringWithFormat:format, ##__VA_ARGS__] UTF8String])
 #else
 #define NSLog(...)
 #endif
