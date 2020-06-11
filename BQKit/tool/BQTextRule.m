@@ -9,7 +9,6 @@
     
 
 #import "BQTextRule.h"
-
 #import <objc/runtime.h>
 
 @interface BQTextRule ()
@@ -29,7 +28,10 @@
 }
 
 - (void)textFieldTextDidChange:(UITextField *)tf {
-    if (!tf.rule || tf.text.length == 0 || tf.markedTextRange != nil) return;
+    if (!tf.rule ||
+        tf.text.length == 0 ||
+        tf.markedTextRange != nil)
+        return;
     
     switch (self.type) {
         case BQTextRuleType_Num:
@@ -108,6 +110,7 @@
 }
 
 @end
+
 
 @implementation UITextField(BQTextRule)
 

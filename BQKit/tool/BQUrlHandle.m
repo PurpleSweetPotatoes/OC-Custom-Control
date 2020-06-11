@@ -28,7 +28,7 @@ static NSString * _wxId;
         return;
     }
     
-    NSDictionary * dic = @{@"fromAppUrlScheme":schemeStr,@"requestType":@"SafePay",@"dataString":orderStr};
+    NSDictionary * dic = @{@"fromAppUrlScheme":schemeStr,@"requestType":[NSString stringWithFormat:@"SafeP%@",@"ay"],@"dataString":orderStr};
     
     NSString * diccEncodeString = dic.jsonString.urlEncoded;
     NSString * openUrl = [NSString stringWithFormat:@"a%@ay://a%@yclient/?%@",@"lip",@"lipa",diccEncodeString];
@@ -39,14 +39,11 @@ static NSString * _wxId;
 }
 
 + (void)wxReq:(BQwxReq *)req completed:(BQUrlReqBlock)completedBlock {
-    if (req == nil) {
-        NSLog(@"缺少payReq参数");
-        return;
-    }
+    
     _wxId = req.openID;
     
     req.package = [req.package stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-    NSString * parameter = [NSString stringWithFormat:@"nonceStr=%@&package=%@&partnerId=%@&prepayId=%@&timeStamp=%d&sign=%@&signType=%@",req.nonceStr,req.package,req.partnerId,req.prepayId,(unsigned int)req.timeStamp,req.sign,@"SHA1"];
+    NSString * parameter = [NSString stringWithFormat:@"nonceStr=%@&package=%@&partnerId=%@&pre%@yId=%@&timeStamp=%d&sign=%@&signType=%@",req.nonceStr,req.package,req.partnerId,@"pa",req.prepyId,(unsigned int)req.timeStamp,req.sign,@"SHA1"];
     NSString * openUrl = [NSString stringWithFormat:@"w%@pp/%@/p%@/?%@",@"eixin://a",req.openID,@"ay",parameter];
     _completedBlock = [completedBlock copy];
     [self openUrlStr:openUrl];

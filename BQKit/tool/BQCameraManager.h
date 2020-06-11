@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @interface BQCameraManager : NSObject
 
 @property (nonatomic, readonly, weak) id<BQCameraManagerDelegate>  delegate;

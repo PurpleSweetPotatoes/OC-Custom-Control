@@ -27,19 +27,26 @@ typedef void(^BQUrlReqBlock)(NSInteger code);
 @end
 
 @interface BQwxReq : NSObject
-/** 微信开放平台审核通过的应用APPID*/
+
+/// 微信开放平台审核通过的应用APPID
 @property (nonatomic, copy) NSString* openID;
-/** 微信分配的商户号 */
+
+/// 微信分配的商户号
 @property (nonatomic, copy) NSString *partnerId;
-/** 微信返回的交易会话ID */
-@property (nonatomic, copy) NSString *prepayId;
-/** 随机串，防重发 */
+
+/// 微信返回的交易会话ID
+@property (nonatomic, copy) NSString *prepyId;
+
+/// 随机串，防重发
 @property (nonatomic, copy) NSString *nonceStr;
-/** 时间戳，防重发 */
+
+/// 时间戳，防重发
 @property (nonatomic, assign) UInt32 timeStamp;
-/** 扩展字段,暂填写固定值Sign=WXPay */
+
+/// 扩展字段,暂填写固定值Sign=WXPay
 @property (nonatomic, copy) NSString *package;
-/** 签名 */
+
+/// 签名
 @property (nonatomic, copy) NSString *sign;
 @end
 

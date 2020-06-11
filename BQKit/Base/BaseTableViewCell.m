@@ -33,7 +33,7 @@
     if (_lineLayer == nil) {
         CALayer * lineLayer = [CALayer layer];
         lineLayer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
-        lineLayer.backgroundColor = [UIColor colorWithRed:201 / 255.0 green:201 / 255.0 blue:201 / 255.0 alpha:1].CGColor;
+        lineLayer.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
         _lineLayer = lineLayer;
     }
     return _lineLayer;

@@ -21,7 +21,6 @@
 /// @param AddressBooksBlock 回调方法
 + (void)loadAddressBooksInfo:(void(^)(NSArray *phoneArr))AddressBooksBlock;
 
-
 /**
  验证权限，第一次会请求授权
  */

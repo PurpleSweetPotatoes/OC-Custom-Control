@@ -64,9 +64,9 @@
         self.handle(image);
         [self removeFromSuperview];
     } else {
-        self.tipLab.text = @"文字区域太小，请重新在框内用正楷手写您的名字";
+        self.tipLab.text = @"请正确签写您的名字";
         self.tipLab.textColor = [UIColor colorWithRed:1.0 green:98/255.0 blue:82/255.0 alpha:1];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.tipLab.text = @"请在框内用正楷手写您的名字";
             self.tipLab.textColor = [UIColor colorWithWhite:0 alpha:0.2];
         });
@@ -223,17 +223,16 @@
         }
     }
     
-    if (length < 600 || (self.maxY - self.minY) < self.sizeW * 0.5 || (self.maxX - self.minX) < self.sizeW * 0.5) {
+    if (length < 600 || (self.maxY - self.minY) <= self.sizeW * 0.4 || (self.maxX - self.minX) <= self.sizeW * 0.4) {
         [self resetView];
         return nil;
     }
     
     CGSize size = CGSizeMake(self.sizeH, self.sizeH);
     UIGraphicsBeginImageContextWithOptions(size, NO, 1);
-    [[UIColor whiteColor] setFill];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextRotateCTM(context, -M_PI_2);
-    CGContextTranslateCTM(context, -self.sizeW - (self.sizeH - self.sizeW) * 0.5,0);
+    CGContextTranslateCTM(context,-(self.sizeH + self.minX + self.maxX) * 0.5,(self.sizeH - self.maxY - self.minY) * 0.5);
     [self.layer renderInContext:context];
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -247,6 +246,22 @@
 }
 
 - (void)drawWithPoint:(CGPoint)point {
+    
+    if (point.x < self.minX) {
+        self.minX = point.x;
+    }
+    if (point.x > self.maxX) {
+        self.maxX = point.x;
+    }
+    
+    if (point.y < self.minY) {
+        self.minY = point.y;
+    }
+    if (point.y > self.maxY) {
+        self.maxY = point.y;
+    }
+
+    
     [_tempArr addObject:[NSValue valueWithCGPoint:point]];
     [self setNeedsDisplay];
 }

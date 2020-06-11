@@ -21,23 +21,37 @@ typedef NS_ENUM(NSUInteger, BQTextRuleType) {
     BQTextRuleType_Price        ///< 价格(数字+小数点)
 };
 
+@class BQTextRule;
+
+@interface UITextField (BQTextRule)
+@property (nonatomic, strong) BQTextRule * rule;
+@end
+
+/// 文字规则类
 @interface BQTextRule : NSObject
 
-@property (nonatomic, assign) BQTextRuleType type;          ///< 规则配置
-@property (nonatomic, assign) NSInteger  precision;         ///< 小数点位数(数字加小数点文本)type:为InputTextType_Price时有效(默认2位)
+/// 规则类型
+@property (nonatomic, assign) BQTextRuleType type;
+
+/// 小数点位数(数字加小数点文本)type:为InputTextType_Price时有效(默认2位)
+@property (nonatomic, assign) NSInteger  precision;
 
 + (instancetype)textRuleType:(BQTextRuleType)type;
 
 #pragma mark - 其他规则配置
-@property (nonatomic, assign) BOOL  upText;                 ///< 全大写,默认false
-@property (nonatomic, assign) BOOL  lowText;                ///< 全小写,默认false
-@property (nonatomic, assign) BOOL  clearSpace;         ///< 消除空格
-@property (nonatomic, assign) NSInteger  maxLength;         ///< 文本最大长度,默认无限制
 
-@end
+/// 全大写,默认false
+@property (nonatomic, assign) BOOL  upText;
 
-@interface UITextField (BQTextRule)
-@property (nonatomic, strong) BQTextRule * rule;
+/// 全小写,默认false
+@property (nonatomic, assign) BOOL  lowText;
+
+/// 消除空格
+@property (nonatomic, assign) BOOL  clearSpace;
+
+/// 文本最大长度,默认无限制
+@property (nonatomic, assign) NSInteger  maxLength;
+
 @end
 
 NS_ASSUME_NONNULL_END
