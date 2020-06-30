@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, BQDatePickerViewMode) {
 @property(nonatomic, copy)NSString * centerTitle;
 
 /// 当前时间
-@property(nonatomic, strong)NSDate *currentDate;
+@property(nonatomic, strong)NSDate * currentDate;
 
 + (instancetype)configDateView:(BQDatePickerViewMode)dateMode;
 

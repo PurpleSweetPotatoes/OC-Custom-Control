@@ -299,6 +299,9 @@ UIPickerViewDelegate
             default:
                 break;
         }
+        if (_selectedDay > _dayRange) {
+            _selectedDay = _dayRange;
+        }
     } else if (self.pickerViewMode <= 7) {
         switch (component) {
             case 0:
@@ -369,8 +372,8 @@ UIPickerViewDelegate
     self.columnArray = @[@(1),@(2),@(3),@(4),@(5),@(6),@(2),@(3),@(2)];
     
     _dayRange = 0;
-    _startYear = 1970;
-    _yearRange = 0;
+    _startYear = 1980;
+    _yearRange = 100;
     _selectedYear = 0;
     _selectedMonth = 0;
     _selectedDay = 0;
@@ -487,7 +490,6 @@ UIPickerViewDelegate
     _selectedMinute = [comps minute];
     _selectedSecond  = [comps second];
     _currentDate = currentDate;
-    _yearRange = _selectedYear - _startYear + 1;
     _dayRange = [self allDaysAtMouth];
 
     [self.pickerView reloadAllComponents];
