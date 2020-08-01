@@ -59,7 +59,7 @@ BQSliderViewDelegate
 - (void)resetStatus {
     self.sliederView.maxValue = 0.6;
     self.sliederView.bufferValue = 0;
-    self.sliederView.sliderValue = 0;
+    self.sliederView.value = 0;
     self.centerBtn.selected = NO;
 }
 
@@ -131,7 +131,7 @@ BQSliderViewDelegate
     
     BQSliderView * sliderView = [[BQSliderView alloc] initWithFrame:CGRectMake(10, self.sizeH - 20, self.sizeW - 50, 12)];
     sliderView.delegate = self;
-    sliderView.sliderValue = 0;
+    sliderView.value = 0;
     [self.bottomToolView addSubview:sliderView];
     self.sliederView = sliderView;
     

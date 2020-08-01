@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BQSliderImgV.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, SliderImgType) {
+    SliderImgTypeNone,
     SliderImgTypeBrightness,            ///< 灯光
     SliderImgTypeVolume,                ///< 音量
     SliderImgTypeSpeed,               ///< 快进/快退

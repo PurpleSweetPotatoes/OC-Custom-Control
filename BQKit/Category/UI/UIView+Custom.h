@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
 /** 自定义渐变颜色值 */
 - (void)addGradientShadow:(GradientShadowDirection)direction withLength:(CGFloat)length startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
 
-- (void)addGradientShadow:(GradientShadowDirection)direction inRect:(CGRect)rect startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
+- (CALayer *)addGradientShadow:(GradientShadowDirection)direction inRect:(CGRect)rect startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
 
 #pragma mark - 截图
 

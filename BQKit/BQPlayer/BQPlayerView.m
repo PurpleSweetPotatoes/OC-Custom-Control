@@ -151,7 +151,7 @@ BQPlayerCtrlViewDelegate
             }
             [self.imgSliderView setCurrentValue:_startValue];
         } else if (!isUpDown) {
-            _startValue = self.ctrlView.sliederView.sliderValue;
+            _startValue = self.ctrlView.sliederView.value;
             self.imgSliderView.type = SliderImgTypeSpeed;
             showImgSlide = self.canSlide && self.ctrlView.sliederView.maxValue > 1;
         }
@@ -222,7 +222,7 @@ BQPlayerCtrlViewDelegate
 
 - (void)ctrlViewSliderEndChange:(BQSliderView *)slider {
     [self pause];
-    [self.player seekToTime:CMTimeMake(slider.sliderValue, 1) completionHandler:^(BOOL finished) {
+    [self.player seekToTime:CMTimeMake(slider.value, 1) completionHandler:^(BOOL finished) {
         [self play];
     }];
 }
@@ -278,7 +278,7 @@ BQPlayerCtrlViewDelegate
 - (void)timeLinkUpdate:(CADisplayLink *)link {
     if (self.player.currentItem.duration.timescale > 0) {
         self.ctrlView.sliederView.maxValue = CMTimeGetSeconds(self.player.currentItem.duration);
-        self.ctrlView.sliederView.sliderValue = CMTimeGetSeconds(self.player.currentTime);
+        self.ctrlView.sliederView.value = CMTimeGetSeconds(self.player.currentTime);
     }
 }
 

@@ -240,7 +240,7 @@
     [self addGradientShadow:direction inRect:rect startColor:startColor endColor:endColor];
 }
 
-- (void)addGradientShadow:(GradientShadowDirection)direction inRect:(CGRect)rect startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
+- (CALayer *)addGradientShadow:(GradientShadowDirection)direction inRect:(CGRect)rect startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = rect;
@@ -275,6 +275,7 @@
     gradientLayer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
     
     [self.layer addSublayer:gradientLayer];
+    return gradientLayer;
 }
 
 #pragma mark - 截图

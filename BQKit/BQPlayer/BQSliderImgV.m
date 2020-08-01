@@ -61,7 +61,6 @@
         self.lab.hidden = YES;
         self.progressView.hidden = NO;
     }
-    self.center = CGPointMake(self.superview.sizeW * 0.5, self.superview.sizeH * 0.5);
     
     self.imgV.frame = CGRectMake((self.sizeW - 30) * 0.5, 10, 30, 30);
     self.progressView.frame = CGRectMake(5, 46, 100, 8);
@@ -91,7 +90,7 @@
     self.frame = CGRectMake(0, 0, 110, 60);
     self.alpha = 0;
     
-    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     self.layer.cornerRadius = 4;
     
     UIImageView * imgV = [[UIImageView alloc] init];
