@@ -10,6 +10,8 @@
 
 #import "BQUrlHandle.h"
 #import "NSString+Custom.h"
+#import "NSObject+Custom.h"
+#import "NSDictionary+Custom.h"
 
 static BQUrlReqBlock _completedBlock;
 static NSString * _wxId;

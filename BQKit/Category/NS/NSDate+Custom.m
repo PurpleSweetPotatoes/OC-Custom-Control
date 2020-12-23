@@ -31,6 +31,9 @@ static NSDateFormatter * _dateFormatter;
     return [_dateFormatter dateFromString:string];
 }
 
++ (NSString *)millisecond {
+    return [NSString stringWithFormat:@"%.0f",[[NSDate date] timeIntervalSince1970] * 1000];
+}
 
 
 - (NSString *)getFormatteTimestamp {

@@ -11,6 +11,29 @@
 
 @implementation NSString (Custom)
 
+- (NSDictionary *)StringOfJsonConversionDictionary {
+    
+    if (!self || self.length == 0) {
+        
+        return nil;
+        
+    }
+    
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *parseError;
+    
+    NSDictionary *Dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&parseError];
+    
+    if(parseError) {
+        
+        return nil;
+    }
+    
+    return Dictionary;
+    
+}
+
 #pragma mark - 散列函数
 
 - (NSString *)md5String {
@@ -1120,6 +1143,25 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     NSString *jsonString = self;
     NSData *JSONData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     return [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
+}
+
+- (NSString *)reverse {
+    NSUInteger length = [self length];
+    if (length < 2) {
+        return self;
+    }
+    unichar * data = malloc(sizeof(unichar) * length);
+    int i;
+    for (i = 0; i < length / 2; i++) {
+        unichar startChar = [self characterAtIndex:i];
+        unichar endChar = [self  characterAtIndex:(length - 1) - i];
+        data[i] = endChar;
+        data[(length - 1) - i] = startChar;
+    }
+
+    NSString * reversed = [NSString stringWithCharacters:data length:length];
+    free(data);
+    return reversed;
 }
 @end
 

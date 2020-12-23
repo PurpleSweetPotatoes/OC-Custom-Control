@@ -23,4 +23,7 @@
 - (NSInteger)intValueForKey:(NSString *)key;
 
 - (BOOL)boolValueForKey:(NSString *)key;
+
+- (NSString *)sortKeysToJson;
+
 @end

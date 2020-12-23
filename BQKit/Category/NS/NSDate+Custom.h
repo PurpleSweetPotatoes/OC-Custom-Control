@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, NSDateTimeStyle) {
 @property (nonatomic, assign, readonly) NSInteger second;
 @property (nonatomic, strong, readonly) NSString * weekDay;
 
++ (NSString *)millisecond;
+
 + (instancetype)locaDate;
 
 /// 字符串转时间

@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-static inline void timeFuntion( NSString * name, void(^block)(void)) {
-    NSTimeInterval start = CACurrentMediaTime();
-    block();
-    printf("%s耗时:%fs\n", [name UTF8String],(CACurrentMediaTime() - start));
-}
+//static inline void timeFuntion( NSString * name, void(^block)(void)) {
+//    NSTimeInterval start = CACurrentMediaTime();
+//    block();
+//    printf("%s耗时:%fs\n", [name UTF8String],(CACurrentMediaTime() - start));
+//}
 
 @interface NSObject (Custom)
 

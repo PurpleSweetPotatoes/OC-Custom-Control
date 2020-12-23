@@ -9,6 +9,9 @@
     
 
 #import "BQPhotoBrowserView.h"
+#import "UIView+Custom.h"
+#import "UIImage+Custom.h"
+#import "BQMsgView.h"
 
 @interface BQPhotoBrowserView ()
 <

@@ -12,6 +12,7 @@
 #import <Contacts/Contacts.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
+#import "UIAlertController+Custom.h"
 
 //首先导入头文件信息
 #include <ifaddrs.h>

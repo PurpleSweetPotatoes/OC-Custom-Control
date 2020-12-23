@@ -9,6 +9,7 @@
     
 
 #import "BQSignatureView.h"
+#import "UIView+Custom.h"
 
 @interface BQDrawView : UIView
 @property (nonatomic, strong) NSMutableArray * pointArr;

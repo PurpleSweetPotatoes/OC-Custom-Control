@@ -10,6 +10,7 @@
 
 #import "BQRecorder.h"
 #import "lame.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface BQRecorder ()
 <

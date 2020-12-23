@@ -10,6 +10,8 @@
 
 @interface NSString (Custom)
 
+- (NSDictionary *)StringOfJsonConversionDictionary;
+
 #pragma mark - Base64Code
 /**  base64编码 */
 - (NSString *)base64String;
@@ -172,5 +174,8 @@
 
 /** 字符串转字典*/
 - (NSDictionary *)jsonDic;
+
+/** 字符串反转*/
+- (NSString *)reverse;
 @end
 

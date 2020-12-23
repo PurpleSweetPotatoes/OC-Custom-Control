@@ -69,4 +69,25 @@
     return result;
 }
 
+- (NSString *)sortKeysToJson {
+
+    NSArray * arr = [[self allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString * obj1, NSString * obj2) {
+        return NSOrderedDescending == [obj1 compare:obj2];
+    }];
+    
+    if (arr.count == 0) {
+        return @"";
+    }
+    
+    NSMutableString * outStr = [NSMutableString stringWithFormat:@"%@=%@",arr.firstObject,self[arr.firstObject]];
+    for (NSInteger i = 1; i < arr.count; i++) {
+        id value = self[arr[i]];
+        if ([value isKindOfClass:[NSNull class]] || ([value isKindOfClass: [NSString class]] && [value length] == 0)) {
+            continue;
+        }
+        [outStr appendFormat:@"&%@=%@",arr[i], self[arr[i]]];
+    }
+    return [outStr copy];
+}
+
 @end

@@ -8,6 +8,9 @@
 
 #import "UIViewController+Custom.h"
 #import "UIView+Custom.h"
+#import "CALayer+Custom.h"
+#import "UIColor+Custom.h"
+#import "BQDefineHead.h"
 #import <objc/runtime.h>
 
 @interface UIViewController()

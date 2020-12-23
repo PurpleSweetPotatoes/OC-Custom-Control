@@ -9,6 +9,10 @@
     
 
 #import "BQKeyBoardManager.h"
+#import "BQDefineHead.h"
+#import "UIImage+Custom.h"
+#import "UILabel+Custom.h"
+#import "UIColor+Custom.h"
 
 @interface BQKeyBoardManager ()
 @property (nonatomic, strong) UIView * responseV;

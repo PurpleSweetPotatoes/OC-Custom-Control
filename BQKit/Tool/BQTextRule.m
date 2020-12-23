@@ -9,6 +9,7 @@
     
 
 #import "BQTextRule.h"
+#import "NSString+Custom.h"
 #import <objc/runtime.h>
 
 @interface BQTextRule ()
