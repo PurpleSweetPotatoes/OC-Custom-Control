@@ -10,7 +10,7 @@
 
 @interface NSString (Custom)
 
-- (NSDictionary *)StringOfJsonConversionDictionary;
+- (id)jsonToObjc;
 
 #pragma mark - Base64Code
 /**  base64编码 */

@@ -166,3 +166,11 @@ static const NSUInteger EmptyTag = 'VIEW';
 }
 
 @end
+
+@implementation UITableViewCell (Custom)
+
++ (instancetype)loadFromTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+    return [tableView loadCell:[self class] indexPath:indexPath];
+}
+
+@end

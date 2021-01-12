@@ -38,8 +38,22 @@
                                radius:(CGFloat)radius
                              corner:(UIRectCorner)corner;
 
-
 /// 转化为图片
 - (UIImage *)convertToImage;
+
+/// 创建全屏引导视图
+/// @param rect 留白区域
++ (instancetype)guideLayerWithFrame:(CGRect)rect;
+
+/// 创建引导视图
+/// @param rect 留白区域
+/// @param inSize 引导图大小
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size;
+
+/// 创建引导视图
+/// @param rect 留白区域
+/// @param inSize 引导图大小
+/// @param bgColor 引导图背景色
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color;
 
 @end

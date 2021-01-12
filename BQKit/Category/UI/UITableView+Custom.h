@@ -21,6 +21,16 @@
 
 @end
 
+
+@interface UITableViewCell (Custom)
+/**
+ auto load tableViewCell, use this need with "registerCell:isNib:" method
+ */
++ (instancetype)loadFromTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
 @interface UITableView (Custom)
 
 @property (nonatomic, weak) id<UITableViewNoDataProtocol>  noDataDelegate;

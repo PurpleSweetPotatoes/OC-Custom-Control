@@ -122,4 +122,25 @@
     shapLayer.path = path.CGPath;
     return shapLayer;
 }
+
++ (instancetype)guideLayerWithFrame:(CGRect)rect {
+    return [self guideLayerWithFrame:rect inSize:[UIScreen mainScreen].bounds.size];
+}
+
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size {
+    return [self guideLayerWithFrame:rect inSize:size bgColor:[UIColor colorWithWhite:0 alpha:0.8]];
+}
+
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color {
+    CALayer * outLayer = [CALayer layerWithFrame:CGRectMake(0, 0, size.width, size.height) color:[UIColor clearColor]];
+    if (CGRectEqualToRect(rect, CGRectZero)) {
+        return outLayer;
+    }
+    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(0, 0, size.width, rect.origin.y) color:color]];
+    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(0, rect.origin.y, rect.origin.x, rect.size.height) color:color]];
+    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(0, CGRectGetMaxY(rect), size.width, size.height - CGRectGetMaxY(rect)) color:color]];
+    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(CGRectGetMaxX(rect), rect.origin.y, size.width - CGRectGetMaxX(rect), CGRectGetMaxY(rect) - rect.origin.y) color:color]];
+    return outLayer;
+}
+
 @end

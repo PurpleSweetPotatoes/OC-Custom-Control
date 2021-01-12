@@ -23,14 +23,14 @@
     
     NSError *parseError;
     
-    NSDictionary *Dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&parseError];
+    id objc = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&parseError];
     
     if(parseError) {
         
         return nil;
     }
     
-    return Dictionary;
+    return objc;
     
 }
 
