@@ -45,6 +45,8 @@ static NSString * const kFMDBTypeBool = @"BLOB";
 ///快捷操作fmdb
 @interface BQFMDBHelper : NSObject
 
+#if __has_include(<FMDB/FMDB.h>)
+
 @property (nonatomic, readonly, strong) FMDatabase * db;
 
 + (instancetype)database;
@@ -80,6 +82,7 @@ static NSString * const kFMDBTypeBool = @"BLOB";
 /// @param action 返回操作结果
 - (void)transactionAction:(BOOL(^)(void))action;
 
+#endif
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,13 +11,9 @@
 
 @implementation NSString (Custom)
 
-- (NSDictionary *)StringOfJsonConversionDictionary {
+- (id)jsonToObjc {
     
-    if (!self || self.length == 0) {
-        
-        return nil;
-        
-    }
+    if (self.length == 0) { return @""; }
     
     NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -25,13 +21,9 @@
     
     id objc = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&parseError];
     
-    if(parseError) {
-        
-        return nil;
-    }
+    if(parseError) { return @""; }
     
     return objc;
-    
 }
 
 #pragma mark - 散列函数

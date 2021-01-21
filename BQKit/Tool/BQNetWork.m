@@ -262,7 +262,7 @@ static NSDictionary * _hearders;
 + (BOOL)isExistenceNetwork {
     BOOL isExistenceNetwork;
     Reachability *reachability = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-    
+
     switch([reachability currentReachabilityStatus]){
             case NotReachable: isExistenceNetwork = FALSE;
             break;

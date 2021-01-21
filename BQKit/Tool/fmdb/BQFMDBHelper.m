@@ -9,6 +9,9 @@
     
 
 #import "BQFMDBHelper.h"
+
+#if __has_include(<FMDB/FMDB.h>)
+
 #import <FMDB/FMDB.h>
 
 @interface BQFMDBHelper ()
@@ -33,13 +36,13 @@ static NSMutableDictionary * dbInfo;
 }
 
 + (instancetype)databaseWithPath:(NSString *)path {
-    
+
     if (dbInfo == nil) {
         dbInfo = [NSMutableDictionary dictionary];
     } else if (dbInfo[path]){
         return dbInfo[path];
     }
-    
+
     BQFMDBHelper * helper = [[BQFMDBHelper alloc] init];
     helper.db = [FMDatabase databaseWithPath:path];
     return helper;
@@ -94,7 +97,7 @@ static NSMutableDictionary * dbInfo;
     FMResultSet * result = [self.db executeQuery:query];
     NSDictionary * dic = [cls propertyTypes];
     NSMutableArray * arr = [NSMutableArray array];
-    
+
     while ([result next]) {
         SqlModel * model = [[cls alloc] init];
         model.keyId = [result intForColumn:@"id"];
@@ -103,7 +106,7 @@ static NSMutableDictionary * dbInfo;
         }
         [arr addObject:model];
     }
-    
+
     return arr;
 }
 
@@ -127,7 +130,7 @@ static NSMutableDictionary * dbInfo;
 
 - (BOOL)updateInfo:(SqlModel *)objc {
     if (objc.keyId <= 0) return NO;
-    
+
     Class cls = [objc class];
     NSDictionary * dic = [cls propertyTypes];
     NSMutableString * sql = [NSMutableString stringWithFormat:@"UPDATE t_%@ SET", NSStringFromClass(cls)];
@@ -160,9 +163,10 @@ static NSMutableDictionary * dbInfo;
         [self.db rollback];
     }
 }
-
+#else
+@implementation BQFMDBHelper
+#endif
 @end
-
 
 @implementation SqlModel
 

@@ -38,7 +38,7 @@
     for (NSInteger i = 0; i < 2; i++) {
         UILabel * lab = [[UILabel alloc] initWithFrame:self.bounds];
         lab.font = [UIFont systemFontOfSize:13];
-        lab.textColor = [UIColor colorFromHexString:@"333333"];
+        lab.textColor = [UIColor hex:0x333333];
         lab.textAlignment = NSTextAlignmentRight;
         if (i < self.infos.count) {
             lab.text = self.infos[i];
@@ -53,7 +53,7 @@
     self.index = 0;
     
     if (self.direction == ScrollDirection_up) {
-        self.nextLab.top = self.height;
+        self.nextLab.top = self.sizeH;
     } else {
         self.nextLab.left = self.right;
     }
@@ -69,16 +69,16 @@
         self.index = (self.index + 1) % self.infos.count;
         [UIView animateWithDuration:1 animations:^{
             if (self.direction == ScrollDirection_up) {
-                self.showLab.top = -self.height;
+                self.showLab.top = -self.sizeH;
                 self.nextLab.top = 0;
             } else {
-                self.showLab.left = -self.width;
+                self.showLab.left = -self.sizeW;
                 self.nextLab.left = 0;
             }
         } completion:^(BOOL finished) {
             
             if (self.direction == ScrollDirection_up) {
-                self.showLab.top = self.height;
+                self.showLab.top = self.sizeH;
             } else {
                 self.showLab.left = self.right;
             }

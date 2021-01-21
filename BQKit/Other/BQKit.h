@@ -9,9 +9,6 @@
 #ifndef BQKit_h
 #define BQKit_h
 
-#pragma mark - Base
-#import "BaseTableViewCell.h"
-
 #pragma mark - Tool
 #import "BQWeakProxy.h"
 #import "BQVideoTool.h"
@@ -57,7 +54,6 @@
 #import "UITabBarController+Custom.h"
 #import "NSAttributedString+Custom.h"
 #import "UIViewController+Custom.h"
-
 
 #endif /* BQKit_h */
 
