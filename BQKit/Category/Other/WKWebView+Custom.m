@@ -11,11 +11,19 @@
 
 @implementation WKWebView (Custom)
 
-- (void)dealloc {
-    NSLog(@"webView 移除");
+- (void)removeFromSuperview {
+    [super removeFromSuperview];
+    
+    if (self.isLoading) {
+        [self stopLoading];
+    }
+
+    WKUserContentController * userCtrl = self.configuration.userContentController;
+    // 清除UserScript
+    [userCtrl removeAllUserScripts];
+    
     // 释放对应JS交互处理器
     for (WebProcessUnti * unti in self.untiList) {
-        WKUserContentController * userCtrl = self.configuration.userContentController;
         for (NSString * name in [unti jsHandleNames]) {
             [userCtrl removeScriptMessageHandlerForName:name];
         }
@@ -63,7 +71,16 @@
     return arr;
 }
 
-- (WKWebViewConfiguration *)configWkWebOptions {
+- (void)configCookie:(NSDictionary *)dic {
+    NSMutableString * cookie = [NSMutableString string];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [cookie appendFormat:@"document.cookie='%@=%@';",key, obj];
+    }];
+    WKUserScript *cookieScript = [[WKUserScript alloc] initWithSource:cookie injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
+    [self.configuration.userContentController addUserScript:cookieScript];
+}
+
++ (WKWebViewConfiguration *)configWkWebOptions {
     WKWebViewConfiguration * config = [[WKWebViewConfiguration alloc] init];
     config.allowsInlineMediaPlayback = YES;
     config.processPool = [WKWebView sharedProcessPool];
@@ -87,14 +104,6 @@
     return config;
 }
 
-- (void)configCookie:(NSDictionary *)dic {
-    NSMutableString * cookie = [NSMutableString string];
-    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [cookie appendFormat:@"document.cookie='%@=%@';",key, obj];
-    }];
-    WKUserScript *cookieScript = [[WKUserScript alloc] initWithSource:cookie injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
-    [self.configuration.userContentController addUserScript:cookieScript];
-}
 
 + (WKProcessPool*)sharedProcessPool {
     static WKProcessPool *processPool = nil;
@@ -106,4 +115,5 @@
     });
     return processPool;
 }
+
 @end

@@ -34,13 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)addJs:(NSString *)js injectionTime:(WKUserScriptInjectionTime)time;
 
-/// 快捷配置configuration
-- (WKWebViewConfiguration *)configWkWebOptions;
-
 /// 新增cookie
 /// @param dic cookie字典
 - (void)configCookie:(NSDictionary *)dic;
 
+/// 快捷配置configuration
++ (WKWebViewConfiguration *)configWkWebOptions;
 
 + (WKProcessPool*)sharedProcessPool;
 
