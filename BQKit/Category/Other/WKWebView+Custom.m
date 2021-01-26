@@ -13,7 +13,7 @@
 
 - (void)removeFromSuperview {
     [super removeFromSuperview];
-    
+    NSLog(@"准备移除webView，开始清理JS交互拦截");
     if (self.isLoading) {
         [self stopLoading];
     }
@@ -24,9 +24,7 @@
     
     // 释放对应JS交互处理器
     for (WebProcessUnti * unti in self.untiList) {
-        for (NSString * name in [unti jsHandleNames]) {
-            [userCtrl removeScriptMessageHandlerForName:name];
-        }
+        [unti clearnJSHandle];
     }
     [self.untiList removeAllObjects];
 }
