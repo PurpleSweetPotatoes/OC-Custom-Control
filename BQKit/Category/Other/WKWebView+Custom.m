@@ -11,8 +11,8 @@
 
 @implementation WKWebView (Custom)
 
-- (void)removeFromSuperview {
-    [super removeFromSuperview];
+- (void)clearnJSHandle {
+    
     NSLog(@"准备移除webView，开始清理JS交互拦截");
     if (self.isLoading) {
         [self stopLoading];

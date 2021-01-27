@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, strong) NSMutableArray<WebProcessUnti *> * untiList;
 
+/// 适用于添加了WebProcessUnti处理器
+- (void)clearnJSHandle;
+
 /** 文本大小自适应 */
 - (void)textAutoFit;
 
