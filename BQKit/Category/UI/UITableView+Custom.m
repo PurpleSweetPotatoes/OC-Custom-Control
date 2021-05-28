@@ -157,7 +157,7 @@ static const NSUInteger EmptyTag = 'VIEW';
     
     id<UITableViewNoDataProtocol> delegate = self.noDataDelegate;
     
-    if ([delegate showEmtpyView:self]) {
+    if ([delegate showEmptyView:self]) {
         UIView * backView = [delegate configEmptyView:self];
         NSAssert([backView isKindOfClass:[UIView class]], @"configEmptyView should return a view which kind of UIView");
         backView.tag = EmptyTag;
