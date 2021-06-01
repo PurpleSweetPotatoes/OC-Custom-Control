@@ -107,7 +107,7 @@ UIScrollViewDelegate
 
 #pragma mark - Timer
 
-- (void)timeValueChange:(BQTimer *)timer {
+- (void)timeValueChange:(NSInteger )count {
     NSInteger index = self.currentIndex + 1;
     self.currentIndex = index;
     [self.contentView setContentOffset:CGPointMake(self.contentView.bounds.size.width * 2, 0) animated:YES];
@@ -150,8 +150,11 @@ UIScrollViewDelegate
         [self.timer clear];
     }
     
-    self.timer = [BQTimer configWithScheduleTime:times target:self selector:@selector(timeValueChange:)];
-
+    __weak typeof(self) weakSelf = self;
+    self.timer = [BQTimer start:times interval:times block:^(NSInteger count) {
+        [weakSelf timeValueChange:count];
+    }];
+                
     if (self.count > 1) {
         [self.timer start];
     }
