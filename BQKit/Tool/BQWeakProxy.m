@@ -25,11 +25,12 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    [invocation invokeWithTarget:_target];
+    void *null = NULL;
+    [invocation setReturnValue:&null];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
-    return [_target methodSignatureForSelector:selector];
+    return [NSObject instanceMethodSignatureForSelector:@selector(init)];
 }
 
 - (NSUInteger)hash {

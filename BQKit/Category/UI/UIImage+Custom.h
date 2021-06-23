@@ -235,4 +235,12 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 #pragma mark - 视屏流转换
 
 - (CVPixelBufferRef)converToPixelBuffer;
+
+/**
+ 获取视频第一帧图片
+
+ @param urlPath 本地视频路径
+ @return 第一帧图片
+ */
++ (UIImage *)getFirstVideoImage:(NSString *)urlPath;
 @end

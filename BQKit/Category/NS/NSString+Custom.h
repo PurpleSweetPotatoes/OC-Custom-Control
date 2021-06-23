@@ -127,6 +127,9 @@
 //
 - (NSString *)gtm_stringByUnescapingFromHTML;
 
+/// 过滤html标签
+- (NSString *)filterHtml;
+
 #pragma mark - 正则验证
 
 /**  是否为QQ账号 */

@@ -11,8 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-typedef void(^TimerBlock)(NSInteger count);
-
 /// 自定义定时器
 @interface BQTimer : NSObject
 
@@ -22,9 +20,7 @@ typedef void(^TimerBlock)(NSInteger count);
 /// 是否正在执行
 @property (nonatomic, readonly, assign) BOOL isRun;
 
-
-+ (instancetype)start:(NSTimeInterval)startTime interval:(NSTimeInterval)interval block:(TimerBlock)block;
-+ (instancetype)start:(NSTimeInterval)startTime interval:(NSTimeInterval)interval async:(BOOL)async block:(TimerBlock)block;
++ (instancetype)configWithScheduleTime:(NSTimeInterval)time target:(id)target selector:(SEL)selector;
 
 - (void)start;
 - (void)pause;

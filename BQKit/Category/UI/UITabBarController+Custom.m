@@ -10,7 +10,6 @@
 
 @implementation UITabBarController (Custom)
 
-
 + (instancetype)createVcWithInfo:(NSArray *)infos {
     return [self createVcWithInfo:infos needNaVc:YES];
 }
@@ -61,7 +60,6 @@
         }
     }
     self.viewControllers = vcs;
-    
 }
 
 

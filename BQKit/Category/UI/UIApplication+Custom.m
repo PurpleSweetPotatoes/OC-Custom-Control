@@ -7,17 +7,8 @@
 //
 
 #import "UIApplication+Custom.h"
-#import "NSObject+Custom.h"
 
 @implementation UIApplication (Custom)
-
-+ (void)load {
-    [self exchangeMethod:@selector(sendEvent:) with:@selector(bq_sendEvent:)];
-}
-
-- (void)bq_sendEvent:(UIEvent *)event {
-    [self bq_sendEvent:event];
-}
 
 + (NSString *)appName {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];

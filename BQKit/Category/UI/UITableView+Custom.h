@@ -13,7 +13,7 @@
 @required
 /// 是否展示空视图
 /// @param tableView 对应tableView
-- (BOOL)showEmptyView:(UITableView *)tableView;
+- (BOOL)showEmtpyView:(UITableView *)tableView;
 
 /// 配置空视图
 /// @param tableView 对应tableview

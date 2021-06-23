@@ -11,7 +11,6 @@
 
 #pragma mark - Tool
 #import "BQWeakProxy.h"
-#import "BQVideoTool.h"
 #import "BQAddressBook.h"
 #import "BQLocationManager.h"
 #import "BQDatePickerView.h"
@@ -54,6 +53,7 @@
 #import "UITabBarController+Custom.h"
 #import "NSAttributedString+Custom.h"
 #import "UIViewController+Custom.h"
+#import "WKWebView+Custom.h"
 
 #endif /* BQKit_h */
 

@@ -1086,6 +1086,18 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return data;
 }
 
+
+- (NSString *)filterHtml {
+    if (self.length == 0) {
+        return @"";
+    }
+    NSRegularExpression *regularExpretion=[NSRegularExpression regularExpressionWithPattern:@"<[^>]*>|&[^;]+;"
+                                            options:0
+                                             error:nil];
+    NSString * outStr = [regularExpretion stringByReplacingMatchesInString:self options:NSMatchingReportProgress range:NSMakeRange(0, self.length) withTemplate:@""];
+    return outStr;
+}
+
 #pragma mark - url编码解码
 
 - (NSString *)urlEncoded {

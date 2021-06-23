@@ -11,9 +11,9 @@
 
 @implementation WKWebView (Custom)
 
-- (void)clearnJSHandle {
+- (void)removeFromSuperview {
+    [super removeFromSuperview];
     
-    NSLog(@"准备移除webView，开始清理JS交互拦截");
     if (self.isLoading) {
         [self stopLoading];
     }
@@ -24,7 +24,9 @@
     
     // 释放对应JS交互处理器
     for (WebProcessUnti * unti in self.untiList) {
-        [unti clearnJSHandle];
+        for (NSString * name in [unti jsHandleNames]) {
+            [userCtrl removeScriptMessageHandlerForName:name];
+        }
     }
     [self.untiList removeAllObjects];
 }

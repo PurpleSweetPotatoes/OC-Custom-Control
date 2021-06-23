@@ -18,20 +18,20 @@ static NSString * const kNormalImg  = @"kNormalImg";
 @interface UITabBarController (Custom)
 
 /// 创建tabbarVc,默认每个子vc为navvc
-/// @param infos @{@[kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg],...}
+/// @param infos @[@{kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg},...]
 + (instancetype)createVcWithInfo:(NSArray *)infos;
 
 /// 创建tabbarVc,默认每个子vc为navvc
-/// @param infos @{@[kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg],...}
+/// @param infos @[@{kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg},...]
 /// @param needNaVc 是否需要导航栏
 + (instancetype)createVcWithInfo:(NSArray *)infos needNaVc:(BOOL)needNaVc;
 
 /// 配置子控制器
-/// @param infos @{@[kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg],...}
+/// @param infos @[@{kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg},...]
 - (void)configVcWithInfo:(NSArray *)infos;
 
 /// 配置子控制器
-/// @param infos @{@[kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg],...}
+/// @param infos @[@{kVcName:VcName, kVcTitle:vcTitle, kSelectImg:selectImg, kNormalImg:normalImg},...]
 /// @param needNaVc 是否需要导航栏
 - (void)configVcWithInfo:(NSArray *)infos needNaVc:(BOOL)needNaVc;
 @end
