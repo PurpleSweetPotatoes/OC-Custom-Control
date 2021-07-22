@@ -78,11 +78,11 @@
         if (self.numberOfLines != 0) {
             rect.size.height = MIN(rect.size.height, self.font.lineHeight * self.numberOfLines);
         }
-        self.sizeH = ceil(rect.size.height + space);
-        return self.sizeH;
+        self.height = ceil(rect.size.height + space);
+        return self.height;
     } else {
-        self.sizeW = ceil(rect.size.width + space);
-        return self.sizeW;
+        self.width = ceil(rect.size.width + space);
+        return self.width;
     }
 }
 

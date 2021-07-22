@@ -18,7 +18,7 @@
 }
 
 - (CGPoint)sizeCenter {
-    return CGPointMake(self.sizeW * 0.5,self.sizeH * 0.5);
+    return CGPointMake(self.width * 0.5,self.height * 0.5);
 }
 
 - (CGPoint)origin {
@@ -76,19 +76,19 @@
 }
 
 - (void)setBottom:(CGFloat)bottom {
-    self.top = bottom - self.sizeH;
+    self.top = bottom - self.height;
 }
 
 - (void)setRight:(CGFloat)right {
-    self.left = right - self.sizeW;
+    self.left = right - self.width;
 }
 
 - (CGFloat)right {
-    return self.left + self.sizeW;
+    return self.left + self.width;
 }
 
 - (CGFloat)bottom {
-    return self.top + self.sizeH;
+    return self.top + self.height;
 }
 
 - (UIImage *)convertToImage {

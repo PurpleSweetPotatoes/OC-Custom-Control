@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, FileExportType) {
-    FileExportType_MP4,
+    FileExportType_MP4 = 0,
     FileExportType_MOV,
     FileExportType_M4A,
     FileExportType_CAF

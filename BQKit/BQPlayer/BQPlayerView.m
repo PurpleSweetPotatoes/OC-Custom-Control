@@ -136,7 +136,7 @@ BQPlayerCtrlViewDelegate
         CGPoint translation = [sender translationInView:sender.view];
         BOOL isUpDown = fabs(translation.x) < fabs(translation.y);
         _startPoint = [sender locationInView:sender.view];
-        BOOL isLeft = _startPoint.x <= sender.view.sizeW * 0.5;
+        BOOL isLeft = _startPoint.x <= sender.view.width * 0.5;
         BOOL showImgSlide = YES;
         if (isUpDown && isLeft) {
             self.imgSliderView.type = SliderImgTypeBrightness;
@@ -181,7 +181,7 @@ BQPlayerCtrlViewDelegate
             self.imgSliderView.timeValue = value;
             
         } else {
-            float value = (_startPoint.y - currentPoint.y) / self.sizeH + _startValue;
+            float value = (_startPoint.y - currentPoint.y) / self.height + _startValue;
             if (value >= 0 && value <= 1) {
                 if (self.imgSliderView.type == SliderImgTypeVolume) {
                     self.volumeViewSlider.value = value;

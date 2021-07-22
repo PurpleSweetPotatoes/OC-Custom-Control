@@ -80,46 +80,46 @@
         bottomHeight = self.customView.bottom;
     } else {
         
-        UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, self.disPlayerView.sizeW - 20, 20)];
+        UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, self.disPlayerView.width - 20, 20)];
         titleLab.text = self.alertTitle;
         titleLab.font = [UIFont systemFontOfSize:17 weight:UIFontWeightMedium];
         titleLab.numberOfLines = 0;
         titleLab.textAlignment = NSTextAlignmentCenter;
         titleLab.textColor = [UIColor hexstr:@"282520"];
         [titleLab heightToFit];
-        titleLab.center = CGPointMake(self.disPlayerView.sizeW * 0.5, 25 + titleLab.sizeH * 0.5);
+        titleLab.center = CGPointMake(self.disPlayerView.width * 0.5, 25 + titleLab.height * 0.5);
         [self.disPlayerView addSubview:titleLab];
         
-        UILabel * contentLab = [[UILabel alloc] initWithFrame:CGRectMake(30, 25, self.disPlayerView.sizeW - 60, 20)];
+        UILabel * contentLab = [[UILabel alloc] initWithFrame:CGRectMake(30, 25, self.disPlayerView.width - 60, 20)];
         contentLab.text = self.content;
         contentLab.numberOfLines = 0;
         contentLab.font = [UIFont systemFontOfSize:13];
         contentLab.textAlignment = NSTextAlignmentCenter;
         contentLab.textColor = [UIColor hexstr:@"282520"];
         [contentLab heightToFit];
-        contentLab.center = CGPointMake(self.disPlayerView.sizeW * 0.5, titleLab.bottom + 15 + contentLab.sizeH * 0.5);
+        contentLab.center = CGPointMake(self.disPlayerView.width * 0.5, titleLab.bottom + 15 + contentLab.height * 0.5);
         [self.disPlayerView addSubview:contentLab];
         bottomHeight = contentLab.bottom + 20;
     }
     
-    CGFloat btnWidth = self.disPlayerView.sizeW;
+    CGFloat btnWidth = self.disPlayerView.width;
     if (self.btnArr.count == 0) {
         [self addBtnWithTitle:@"OK" type:AlertBtnTypeNormal handle:nil];
     } else if (self.btnArr.count == 2) {
-        CALayer * lineLayer = [CALayer cellLineLayerWithFrame:CGRectMake(self.disPlayerView.sizeW * 0.5 - 0.5, bottomHeight, 1, 45)];
+        CALayer * lineLayer = [CALayer cellLineLayerWithFrame:CGRectMake(self.disPlayerView.width * 0.5 - 0.5, bottomHeight, 1, 45)];
         [self.disPlayerView.layer addSublayer:lineLayer];
-        btnWidth = self.disPlayerView.sizeW * 0.5;
+        btnWidth = self.disPlayerView.width * 0.5;
     }
     
-    CALayer * lineLayer = [CALayer cellLineLayerWithFrame:CGRectMake(0, bottomHeight, self.disPlayerView.sizeW, 1)];
+    CALayer * lineLayer = [CALayer cellLineLayerWithFrame:CGRectMake(0, bottomHeight, self.disPlayerView.width, 1)];
     [self.disPlayerView.layer addSublayer:lineLayer];
     
     for (NSInteger i = 0; i < self.btnArr.count; i++) {
         self.btnArr[i].frame = CGRectMake(i * btnWidth, bottomHeight, btnWidth, 45);
         [self.disPlayerView addSubview:self.btnArr[i]];
     }
-    self.disPlayerView.sizeH = self.btnArr[0].bottom;
-    self.disPlayerView.center = CGPointMake(self.view.sizeW * 0.5, self.view.sizeH * 0.5);
+    self.disPlayerView.height = self.btnArr[0].bottom;
+    self.disPlayerView.center = CGPointMake(self.view.width * 0.5, self.view.height * 0.5);
     
 }
 

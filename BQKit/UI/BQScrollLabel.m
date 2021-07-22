@@ -53,7 +53,7 @@
     self.index = 0;
     
     if (self.direction == ScrollDirection_up) {
-        self.nextLab.top = self.sizeH;
+        self.nextLab.top = self.height;
     } else {
         self.nextLab.left = self.right;
     }
@@ -69,16 +69,16 @@
         self.index = (self.index + 1) % self.infos.count;
         [UIView animateWithDuration:1 animations:^{
             if (self.direction == ScrollDirection_up) {
-                self.showLab.top = -self.sizeH;
+                self.showLab.top = -self.height;
                 self.nextLab.top = 0;
             } else {
-                self.showLab.left = -self.sizeW;
+                self.showLab.left = -self.width;
                 self.nextLab.left = 0;
             }
         } completion:^(BOOL finished) {
             
             if (self.direction == ScrollDirection_up) {
-                self.showLab.top = self.sizeH;
+                self.showLab.top = self.height;
             } else {
                 self.showLab.left = self.right;
             }

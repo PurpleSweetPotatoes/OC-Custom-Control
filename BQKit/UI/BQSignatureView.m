@@ -83,7 +83,7 @@
 - (void)configUI {
     
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.frame = CGRectMake(70, (self.sizeH - 500) * 0.5, self.sizeW - 90, 500);
+    shapeLayer.frame = CGRectMake(70, (self.height - 500) * 0.5, self.width - 90, 500);
     [shapeLayer setFillColor:[UIColor clearColor].CGColor];
     shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
     shapeLayer.lineWidth = 2.0;
@@ -115,13 +115,13 @@
     
 - (UILabel *)centLab {
     if (_centLab == nil) {
-        UILabel * centerLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, self.sizeW - 90)];
+        UILabel * centerLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, self.width - 90)];
         centerLab.text = @"签 名 处";
         centerLab.font = [UIFont systemFontOfSize:100];
         centerLab.textColor = [UIColor colorWithWhite:0.4 alpha:0.2];
         centerLab.textAlignment = NSTextAlignmentCenter;
         centerLab.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
-        centerLab.origin = CGPointMake(100, (self.sizeH - 500) * 0.5);
+        centerLab.origin = CGPointMake(100, (self.height - 500) * 0.5);
         _centLab = centerLab;
     }
     return _centLab;
@@ -135,7 +135,7 @@
         lab.textColor = [UIColor colorWithWhite:0 alpha:0.2];
         lab.textAlignment = NSTextAlignmentCenter;
         lab.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
-        lab.origin = CGPointMake(110, (self.sizeH - 500) * 0.5);
+        lab.origin = CGPointMake(110, (self.height - 500) * 0.5);
         _tipLab = lab;
     }
     return _tipLab;
@@ -151,7 +151,7 @@
         [btn setTitle:@"重 写" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(resetBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         btn.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
-        btn.origin = CGPointMake(15, self.sizeH * 0.5 -  140);
+        btn.origin = CGPointMake(15, self.height * 0.5 -  140);
         _resetBtn = btn;
     }
     return _resetBtn;
@@ -167,7 +167,7 @@
         [btn setTitle:@"确 定" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(sureBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         btn.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
-        btn.origin = CGPointMake(15, self.sizeH * 0.5 + 60);
+        btn.origin = CGPointMake(15, self.height * 0.5 + 60);
         _sureBtn = btn;
     }
     return _sureBtn;
@@ -224,16 +224,16 @@
         }
     }
     
-    if (length < 600 || (self.maxY - self.minY) <= self.sizeW * 0.4 || (self.maxX - self.minX) <= self.sizeW * 0.4) {
+    if (length < 600 || (self.maxY - self.minY) <= self.width * 0.4 || (self.maxX - self.minX) <= self.width * 0.4) {
         [self resetView];
         return nil;
     }
     
-    CGSize size = CGSizeMake(self.sizeH, self.sizeH);
+    CGSize size = CGSizeMake(self.height, self.height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 1);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextRotateCTM(context, -M_PI_2);
-    CGContextTranslateCTM(context,-(self.sizeH + self.minX + self.maxX) * 0.5,(self.sizeH - self.maxY - self.minY) * 0.5);
+    CGContextTranslateCTM(context,-(self.height + self.minX + self.maxX) * 0.5,(self.height - self.maxY - self.minY) * 0.5);
     [self.layer renderInContext:context];
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

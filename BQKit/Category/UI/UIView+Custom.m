@@ -27,7 +27,7 @@
 }
 
 - (CGPoint)thisCenter {
-    return CGPointMake(self.sizeW * 0.5,self.sizeH * 0.5);
+    return CGPointMake(self.width * 0.5,self.height * 0.5);
 }
 
 - (CGPoint)origin {
@@ -64,40 +64,40 @@
     return self.bounds.size;
 }
 
-- (void)setSizeW:(CGFloat)width{
+- (void)setWidth:(CGFloat)width{
     CGRect rect = self.frame;
     rect.size.width  = width;
     self.frame = rect;
 }
 
-- (CGFloat)sizeW {
+- (CGFloat)width {
     return self.size.width;
 }
 
-- (void)setSizeH:(CGFloat)height {
+- (void)setHeight:(CGFloat)height {
     CGRect rect = self.frame;
     rect.size.height = height;
     self.frame = rect;
 }
 
-- (CGFloat)sizeH {
+- (CGFloat)height {
     return self.size.height;
 }
 
 - (void)setBottom:(CGFloat)bottom {
-    self.top = bottom - self.sizeH;
+    self.top = bottom - self.height;
 }
 
 - (void)setRight:(CGFloat)right {
-    self.left = right - self.sizeW;
+    self.left = right - self.width;
 }
 
 - (CGFloat)right {
-    return self.left + self.sizeW;
+    return self.left + self.width;
 }
 
 - (CGFloat)bottom {
-    return self.top + self.sizeH;
+    return self.top + self.height;
 }
 
 #pragma mark - 圆角
@@ -291,7 +291,7 @@
 
 - (UIView *)tailorWithFrame:(CGRect)frame {
     
-    if (CGRectGetMaxX(frame) > self.sizeW || CGRectGetMaxY(frame) > self.sizeH) {
+    if (CGRectGetMaxX(frame) > self.width || CGRectGetMaxY(frame) > self.height) {
         return nil;
     }
     

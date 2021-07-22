@@ -40,10 +40,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _bgLayer.sizeW = self.sizeW;
-    _leftLab.sizeW = self.sizeW;
-    _rightLab.sizeW = self.sizeW;
-    _gestureView.sizeW = self.sizeW;
+    _bgLayer.width = self.width;
+    _leftLab.width = self.width;
+    _rightLab.width = self.width;
+    _gestureView.width = self.width;
     [self adjustFrame];
 }
 
@@ -62,8 +62,8 @@
 }
 
 - (void)resetStatus {
-    _bufferLayer.sizeW = 0;
-    _sliderLayer.sizeW = 0;
+    _bufferLayer.width = 0;
+    _sliderLayer.width = 0;
     _leftLab.text = @"00:00";
     _rightLab.text = @"00:00";
     _imgV.center = CGPointMake(0, _imgV.center.y);
@@ -76,8 +76,8 @@
     if (!self.canSlide) return;
     
     CGPoint point = [sender locationInView:sender.view];
-    if (point.x >= 0 && point.x <= _gestureView.sizeW) {
-        _value = point.x / _gestureView.sizeW * _maxValue;
+    if (point.x >= 0 && point.x <= _gestureView.width) {
+        _value = point.x / _gestureView.width * _maxValue;
         [self adjustFrame];
     }
     
@@ -139,9 +139,9 @@
     
     _bgLayer = [self configLayerWithColor:[UIColor colorWithWhite:1 alpha:0.5]];
     _bufferLayer = [self configLayerWithColor:[UIColor colorWithWhite:1 alpha:0.7]];
-    _bufferLayer.sizeW = 0;
+    _bufferLayer.width = 0;
     _sliderLayer = [self configLayerWithColor:[UIColor clearColor]];
-    _sliderLayer.sizeW = 0;
+    _sliderLayer.width = 0;
     
     _gestureView = [[UIView alloc] initWithFrame:self.bounds];
     [self addSubview:_gestureView];
@@ -186,8 +186,8 @@
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     [self configLabInfo];
-    _sliderLayer.sizeW = _value / (CGFloat)_maxValue * _bgLayer.bounds.size.width;
-    _bufferLayer.sizeW = _bufferValue / (CGFloat)_maxValue * _bgLayer.bounds.size.width;
+    _sliderLayer.width = _value / (CGFloat)_maxValue * _bgLayer.bounds.size.width;
+    _bufferLayer.width = _bufferValue / (CGFloat)_maxValue * _bgLayer.bounds.size.width;
     [CATransaction commit];
     _imgV.center = CGPointMake(_sliderLayer.right, _imgV.center.y);
 }

@@ -62,9 +62,9 @@
         self.progressView.hidden = NO;
     }
     
-    self.imgV.frame = CGRectMake((self.sizeW - 30) * 0.5, 10, 30, 30);
+    self.imgV.frame = CGRectMake((self.width - 30) * 0.5, 10, 30, 30);
     self.progressView.frame = CGRectMake(5, 46, 100, 8);
-    self.lab.frame = CGRectMake(0, 40, self.sizeW, 20);
+    self.lab.frame = CGRectMake(0, 40, self.width, 20);
 }
 
 - (void)setCurrentValue:(float)value {

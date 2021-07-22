@@ -117,22 +117,22 @@
         UILabel * lab = [UILabel labWithFrame:CGRectMake(space, i * rowHeight, 100, rowHeight) title:self.titles[i] font:[UIFont systemFontOfSize:15] textColor:[UIColor whiteColor]];
         [lab widthToFit];
         [tapV addSubview:lab];
-        if (tapV.sizeW < lab.right + 15) {
-            tapV.sizeW = lab.right + 15;
+        if (tapV.width < lab.right + 15) {
+            tapV.width = lab.right + 15;
         }
     }
     
-    tapV.left = self.showPoint.x - tapV.sizeW * 0.5 + 7;
+    tapV.left = self.showPoint.x - tapV.width * 0.5 + 7;
     
     for (NSInteger i = 0; i < self.titles.count - 1; i++) {
-        CALayer * lineLayer = [CALayer layerWithFrame:CGRectMake(space, rowHeight - 0.5 + i * rowHeight, tapV.sizeW - space, 0.5) color:[UIColor whiteColor]];
+        CALayer * lineLayer = [CALayer layerWithFrame:CGRectMake(space, rowHeight - 0.5 + i * rowHeight, tapV.width - space, 0.5) color:[UIColor whiteColor]];
         [tapV.layer addSublayer:lineLayer];
     }
     
     if (tapV.left < 10) {
         tapV.left = 10;
-    } else if (tapV.right > self.sizeW) {
-        tapV.right = self.sizeW - 10;
+    } else if (tapV.right > self.width) {
+        tapV.right = self.width - 10;
     }
 }
 

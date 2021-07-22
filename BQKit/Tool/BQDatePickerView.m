@@ -67,7 +67,7 @@ UIPickerViewDelegate
 - (void)showDateTimePickerView {
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [UIView animateWithDuration:0.25f animations:^{
-        self.bottomView.top = self.sizeH - self.bottomView.sizeH;
+        self.bottomView.top = self.height - self.bottomView.height;
         self.bgView.alpha = 1;
     }];
     
@@ -78,7 +78,7 @@ UIPickerViewDelegate
 
 - (void)hideDateTimePickerView {    
     [UIView animateWithDuration:0.2f animations:^{
-        self.bottomView.top = self.sizeH;
+        self.bottomView.top = self.height;
         self.bgView.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
@@ -166,7 +166,7 @@ UIPickerViewDelegate
         label.textAlignment = NSTextAlignmentCenter;
     }
     
-    label.frame = CGRectMake(self.sizeW * component / 6.0, 0 ,self.sizeW / 6.0, 30);
+    label.frame = CGRectMake(self.width * component / 6.0, 0 ,self.width / 6.0, 30);
     
     if (self.pickerViewMode <= 5) {
         switch (component) {
@@ -250,7 +250,7 @@ UIPickerViewDelegate
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return (self.sizeW - 40) / [self.columnArray[self.pickerViewMode] integerValue];
+    return (self.width - 40) / [self.columnArray[self.pickerViewMode] integerValue];
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
@@ -425,7 +425,7 @@ UIPickerViewDelegate
 
 - (UIView *)bottomView {
     if (_bottomView == nil) {
-        UIView * bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.sizeH, self.sizeW, 224)];
+        UIView * bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.height, self.width, 224)];
         bottomView.backgroundColor = [UIColor whiteColor];
         _bottomView = bottomView;
     }
@@ -439,7 +439,7 @@ UIPickerViewDelegate
         pickView.dataSource = self;
         pickView.delegate = self;
         pickView.showsSelectionIndicator = YES;
-        [pickView.layer addSublayer:[CALayer cellLineLayerWithFrame:CGRectMake(0, 0, self.sizeW, 1)]];
+        [pickView.layer addSublayer:[CALayer cellLineLayerWithFrame:CGRectMake(0, 0, self.width, 1)]];
         _pickerView = pickView;
     }
     return _pickerView;
@@ -458,7 +458,7 @@ UIPickerViewDelegate
 - (UIButton *)chooseButton {
     if (_chooseButton == nil) {
         UIButton * btn = [self configBtnWithWithTitle:@"确定"];
-        btn.frame = CGRectMake(self.sizeW - 54, 0, 44, 44);
+        btn.frame = CGRectMake(self.width - 54, 0, 44, 44);
         [btn addTarget:self action:@selector(chooseBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         _chooseButton = btn;
     }
@@ -467,7 +467,7 @@ UIPickerViewDelegate
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(self.cancelButton.right, 0, self.sizeW - 108, 44)];
+        UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(self.cancelButton.right, 0, self.width - 108, 44)];
         titleLab.textColor = [UIColor blackColor];
         titleLab.font = [UIFont systemFontOfSize:15];
         titleLab.textAlignment = NSTextAlignmentCenter;

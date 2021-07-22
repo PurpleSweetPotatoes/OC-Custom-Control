@@ -10,6 +10,9 @@
 
 #import "AVAssetExportSession+Custom.h"
 
+static NSString * const typeKey = @"typeKey";
+static NSString * const typeName = @"typeName";
+
 @implementation AVAssetExportSession (Custom)
 
 + (AVMutableComposition *)compositionWithTrackList:(NSArray<BQAssetTrack *> *)trackList {
@@ -63,7 +66,7 @@
     AVAssetExportSession * session = [[AVAssetExportSession alloc] initWithAsset:asset presetName:presetName];
     session.shouldOptimizeForNetworkUse = YES;
     NSArray *supportedTypeArray = session.supportedFileTypes;
-    AVFileType fileType = [self loadAVTypeWithExportType:type];
+    AVFileType fileType = [self exportInfo:type][typeKey];
     if ([supportedTypeArray containsObject:fileType]) {
         session.outputFileType = fileType;
     } else {
@@ -73,7 +76,7 @@
         return nil;
     }
     
-    NSString * outputPath = [NSString stringWithFormat:@"%@%@.%@",NSTemporaryDirectory() ,[NSUUID UUID].UUIDString, [self fileSuffixWithExportType:type]];
+    NSString * outputPath = [NSString stringWithFormat:@"%@%@.%@",NSTemporaryDirectory() ,[NSUUID UUID].UUIDString, [self exportInfo:type][typeName]];
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:outputPath]) {
         [[NSFileManager defaultManager] removeItemAtPath:outputPath error:nil];
@@ -118,44 +121,26 @@
 }
 
 
-+ (AVFileType)loadAVTypeWithExportType:(FileExportType)type {
-    switch (type) {
-        case FileExportType_MP4:
-            return AVFileTypeMPEG4;
-            break;
-        case FileExportType_MOV:
-            return AVFileTypeQuickTimeMovie;
-            break;
-        case FileExportType_M4A:
-            return AVFileTypeAppleM4A;
-            break;
-        case FileExportType_CAF:
-            return AVFileTypeCoreAudioFormat;
-            break;
-        default:
-            break;
-    }
++ (NSDictionary *)exportInfo:(FileExportType)type {
+    return @[
+        @{
+            typeKey: AVFileTypeMPEG4,
+            typeName: @"mp4"
+        },
+        @{
+            typeKey: AVFileTypeQuickTimeMovie,
+            typeName: @"mov"
+        },
+        @{
+            typeKey: AVFileTypeAppleM4A,
+            typeName: @"m4a"
+        },
+        @{
+            typeKey: AVFileTypeCoreAudioFormat,
+            typeName: @"caf"
+        }
+    ][type];
 }
-
-+ (NSString *)fileSuffixWithExportType:(FileExportType)type {
-    switch (type) {
-        case FileExportType_MP4:
-            return @"mp4";
-            break;
-        case FileExportType_MOV:
-            return @"mov";
-            break;
-        case FileExportType_M4A:
-            return @"m4a";
-            break;
-        case FileExportType_CAF:
-            return @"caf";
-            break;
-        default:
-            return @"";
-    }
-}
-
 @end
 
 

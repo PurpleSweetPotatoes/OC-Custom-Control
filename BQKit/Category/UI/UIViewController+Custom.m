@@ -73,7 +73,7 @@
 
 - (CGFloat)navbarBottom {
     if (self.navigationController) {
-        return self.navigationController.navigationBar.sizeH + [UIApplication sharedApplication].statusBarFrame.size.height;
+        return self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height;
     }
     return 0;
 }
@@ -100,7 +100,7 @@
 
 - (void)bq_configsetShadowLine:(BOOL)hide {
     if (self.showadLine == nil) {
-        self.showadLine = [CALayer layerWithFrame:CGRectMake(0, self.barBgView.sizeH - 1, self.barBgView.sizeW, 1) color:[UIColor hexstr:@"d2d2d2"]];
+        self.showadLine = [CALayer layerWithFrame:CGRectMake(0, self.barBgView.height - 1, self.barBgView.width, 1) color:[UIColor hexstr:@"d2d2d2"]];
         [self.view.layer addSublayer:self.showadLine];
     }
 

@@ -33,20 +33,20 @@
 }
 
 - (void)setUpUI {
-    self.disPalyHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.sizeW, 0)];
+    self.disPalyHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 0)];
     
     if (self.headerView) {
         [self.disPalyHeaderView addSubview:self.headerView];
-        self.disPalyHeaderView.sizeH = self.headerView.bottom;
+        self.disPalyHeaderView.height = self.headerView.bottom;
     }
     
     if (self.barView) {
         self.barView.top = self.headerView.bottom;
         [self.view addSubview:self.barView];
-        self.disPalyHeaderView.sizeH = self.barView.bottom;
+        self.disPalyHeaderView.height = self.barView.bottom;
     }
     
-    self.tempHeaderView = [self.headerView tailorWithFrame:CGRectMake(0, 0, self.view.sizeW, self.headerView.sizeH)];
+    self.tempHeaderView = [self.headerView tailorWithFrame:CGRectMake(0, 0, self.view.width, self.headerView.height)];
     self.tempHeaderView.hidden = YES;
     self.tempHeaderView.userInteractionEnabled = NO;
     [self.view addSubview:self.tempHeaderView];
@@ -57,7 +57,7 @@
 - (void)configTabArrs {
 
     for (UIViewController<BQSwipTableViewDelegate> * tVc in self.tabArrs) {
-        tVc.headerHeight = self.disPalyHeaderView.sizeH;
+        tVc.headerHeight = self.disPalyHeaderView.height;
         WeakSelf;
         [tVc scrollViewDidScrollBlock:^(CGFloat offsetY) {
             StrongSelf;
@@ -66,7 +66,7 @@
         
         [self addChildViewController:tVc];
         [self.view addSubview:tVc.view];
-        tVc.view.left = self.view.sizeW;
+        tVc.view.left = self.view.width;
         
         if (self.navBottom == 0) {
             tVc.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -105,19 +105,19 @@
 
 - (void)updateDisplayViewFrame:(CGFloat)offsetY {
 
-    if (offsetY >= self.headerView.sizeH - self.navBottom) {
+    if (offsetY >= self.headerView.height - self.navBottom) {
         
-        if (self.barView.top != self.headerView.sizeH + self.navBottom - self.headerView.sizeH) {
-            [self resetTableOffset:self.headerView.sizeH - self.navBottom];
-            self.barView.top = self.headerView.sizeH + self.navBottom - self.headerView.sizeH;
-            self.tempHeaderView.top = self.barView.top - self.tempHeaderView.sizeH;
+        if (self.barView.top != self.headerView.height + self.navBottom - self.headerView.height) {
+            [self resetTableOffset:self.headerView.height - self.navBottom];
+            self.barView.top = self.headerView.height + self.navBottom - self.headerView.height;
+            self.tempHeaderView.top = self.barView.top - self.tempHeaderView.height;
         }
         
     } else {
         [self resetTableOffset:offsetY];
         self.isFirst = NO;
-        self.barView.top = self.headerView.sizeH - offsetY;
-        self.tempHeaderView.top = self.barView.top - self.tempHeaderView.sizeH;
+        self.barView.top = self.headerView.height - offsetY;
+        self.tempHeaderView.top = self.barView.top - self.tempHeaderView.height;
     }
 }
 
@@ -143,7 +143,7 @@
         UIViewController<BQSwipTableViewDelegate> * currentTabVc = self.tabArrs[self.currentTabIndex];
         currentTabVc.needScrollBlock = NO;
         currentTabVc.view.right = 0;
-        currentTabVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.sizeH)];
+        currentTabVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.height)];
         
         UIViewController<BQSwipTableViewDelegate> * tabVc = self.tabArrs[index];
         tabVc.view.left = 0;
@@ -180,14 +180,14 @@
     
     self.tempHeaderView.hidden = NO;
     fromVc.needScrollBlock = NO;
-    fromVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.sizeH)];
+    fromVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.height)];
     
     toVc.needScrollBlock = YES;
 //    toVc.tableView.tableHeaderView = self.disPalyHeaderView;
-    toVc.view.left = swipRight ? -self.view.sizeW: self.view.sizeW;
+    toVc.view.left = swipRight ? -self.view.width: self.view.width;
     
     [UIView animateWithDuration:0.25 animations:^{
-        fromVc.view.left = swipRight ? self.view.sizeW : -self.view.sizeW;
+        fromVc.view.left = swipRight ? self.view.width : -self.view.width;
         toVc.view.left = 0;
     } completion:^(BOOL finished) {
         toVc.tableView.tableHeaderView = self.disPalyHeaderView;

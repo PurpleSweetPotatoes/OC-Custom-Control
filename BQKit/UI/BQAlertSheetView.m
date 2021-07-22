@@ -53,7 +53,7 @@
     
     for (NSInteger i = 0; i < self.titles.count; i++) {
         
-        UIButton * btn  = [self createTitleBtnWithFrame:CGRectMake(0, i * (rowHeight + 1), self.bottomView.sizeW, rowHeight) title:self.titles[i] tag:i];
+        UIButton * btn  = [self createTitleBtnWithFrame:CGRectMake(0, i * (rowHeight + 1), self.bottomView.width, rowHeight) title:self.titles[i] tag:i];
         
         CAShapeLayer * lineLayer = [CAShapeLayer layer];
         lineLayer.frame = CGRectMake(0, CGRectGetMaxY(btn.frame), self.bounds.size.width, 1 + (i == (self.titles.count - 1)?4:0));
@@ -63,7 +63,7 @@
         [self.bottomView addSubview:btn];
     }
     
-    UIButton * btn = [self createTitleBtnWithFrame:CGRectMake(0, height - rowHeight, self.bottomView.sizeW, rowHeight) title:@"取消" tag:100];
+    UIButton * btn = [self createTitleBtnWithFrame:CGRectMake(0, height - rowHeight, self.bottomView.width, rowHeight) title:@"取消" tag:100];
     [self.bottomView addSubview:btn];
 }
 

@@ -37,12 +37,12 @@ BQSliderViewDelegate
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _topToolView.frame = CGRectMake(0, 0, self.sizeW, 40);
-    _bottomToolView.frame = CGRectMake(0, self.sizeH - 40, self.sizeW, 40);
-    _sliederView.frame = CGRectMake(10, 10, self.sizeW - 60, 20);
+    _topToolView.frame = CGRectMake(0, 0, self.width, 40);
+    _bottomToolView.frame = CGRectMake(0, self.height - 40, self.width, 40);
+    _sliederView.frame = CGRectMake(10, 10, self.width - 60, 20);
     _fullBtn.frame = CGRectMake(_sliederView.right + 5, 0, 40, 40);
     _titleLab.frame = _topToolView.bounds;
-    _centerBtn.center = CGPointMake(self.sizeW * 0.5, self.sizeH * 0.5);
+    _centerBtn.center = CGPointMake(self.width * 0.5, self.height * 0.5);
 }
 
 #pragma mark - Public method
@@ -129,7 +129,7 @@ BQSliderViewDelegate
     
     [self addSubview:self.centerBtn];
     
-    BQSliderView * sliderView = [[BQSliderView alloc] initWithFrame:CGRectMake(10, self.sizeH - 20, self.sizeW - 50, 12)];
+    BQSliderView * sliderView = [[BQSliderView alloc] initWithFrame:CGRectMake(10, self.height - 20, self.width - 50, 12)];
     sliderView.delegate = self;
     sliderView.value = 0;
     [self.bottomToolView addSubview:sliderView];

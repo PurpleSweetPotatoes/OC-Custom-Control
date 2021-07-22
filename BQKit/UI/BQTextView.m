@@ -59,21 +59,21 @@
             [self lastHeightCompareWithHeight:self.minHeight];
         }
         
-        if (self.sizeH < self.minHeight) {
-            self.sizeH = self.minHeight;
+        if (self.height < self.minHeight) {
+            self.height = self.minHeight;
         }
     }
     
     if (placeHolderLabel.alpha != 0) {
         CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
         CGFloat offsetRight = self.textContainerInset.right + self.textContainer.lineFragmentPadding;
-        placeHolderLabel.frame = CGRectMake(offsetLeft, 0, self.sizeW - offsetLeft - offsetRight, self.minHeight < self.sizeH ? self.minHeight : self.sizeH);
+        placeHolderLabel.frame = CGRectMake(offsetLeft, 0, self.width - offsetLeft - offsetRight, self.minHeight < self.height ? self.minHeight : self.height);
     }
 }
 
 
 - (void)lastHeightCompareWithHeight:(CGFloat)height {
-    self.sizeH = height;
+    self.height = height;
     if (_lastHeight != height) {
         _lastHeight = height;
         if ([self.ourDelegate respondsToSelector:@selector(textViewDidAdjustFrame:)]    ) {
