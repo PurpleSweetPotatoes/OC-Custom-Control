@@ -55,23 +55,23 @@
     return self.bounds.size;
 }
 
-- (void)setSizeW:(CGFloat)width{
+- (void)setWidth:(CGFloat)width{
     CGRect rect = self.frame;
     rect.size.width  = width;
     self.frame = rect;
 }
 
-- (CGFloat)sizeW {
+- (CGFloat)width {
     return self.size.width;
 }
 
-- (void)setSizeH:(CGFloat)height {
+- (void)setHeight:(CGFloat)height {
     CGRect rect = self.frame;
     rect.size.height = height;
     self.frame = rect;
 }
 
-- (CGFloat)sizeH {
+- (CGFloat)height {
     return self.size.height;
 }
 

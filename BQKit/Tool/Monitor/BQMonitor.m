@@ -11,8 +11,6 @@
 #import "BQMonitor.h"
 #import <CrashReporter/CrashReporter.h>
 
-void UncaughtExceptionHandler(NSException *exception);
-
 @implementation BQMonitor
 {
     dispatch_semaphore_t semaphore;
@@ -84,37 +82,5 @@ static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActi
     printf("**** 出现卡顿 ****\n%s",[logStr UTF8String]);
 }
 
-#pragma mark - 异常
-
-+ (NSString *)errorLogPath {
-    NSString * doucoment = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    return [doucoment stringByAppendingPathComponent:@"bqCrash.log"];
-}
-
-+ (void)loadCrashReport:(CrashBlock)handle {
-    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-    NSString * info = [NSString stringWithContentsOfFile:[self errorLogPath]  encoding:NSUTF8StringEncoding error:nil];
-    if ([info isKindOfClass:[NSString class]] && info.length > 0) {
-        handle(info);
-    }
-    
-    [@"" writeToFile:[self errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-}
-
 @end
 
-void UncaughtExceptionHandler(NSException *exception) {
-    
-    NSString * disPlayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    NSString * appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSString * sysVersion = [UIDevice currentDevice].systemVersion;
-    
-    NSString * deviceInfo = [NSString stringWithFormat:@"**********       **********\ndisName:%@\t version:%@\t system:%@",disPlayName, appVersion, sysVersion];
-    
-    /*  获取异常崩溃信息 */
-    NSString * name = [exception name];
-    NSString * reason = [exception reason];
-    NSArray * callStack = [exception callStackSymbols];
-    NSString * content = [NSString stringWithFormat:@"\n%@\n%@ %@\ncallStackSymbols:\n%@",deviceInfo, name, reason, [callStack componentsJoinedByString:@"\n"]];
-    [content writeToFile:[BQMonitor errorLogPath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-}

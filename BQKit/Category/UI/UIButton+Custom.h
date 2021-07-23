@@ -12,7 +12,7 @@
 typedef NS_ENUM(NSInteger, BtnImgPosition) {
     BtnImgPosition_Left = 0,             //图片在左，文字在右，默认
     BtnImgPosition_Right,                //图片在右，文字在左
-    BtnImgPosition_Top,                   //图片在上，文字在下
+    BtnImgPosition_Top,                  //图片在上，文字在下
     BtnImgPosition_Bottom,               //图片在下，文字在上
 };
 

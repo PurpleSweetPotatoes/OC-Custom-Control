@@ -12,16 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^CrashBlock)(NSString * reason);
-
 /// 监控工具
 @interface BQMonitor : NSObject
 
 /// 卡顿监控工具类
 + (void)registerRunLoopObserver;
 
-/// 开启crash记录，并读取上次crash原因
-+ (void)loadCrashReport:(CrashBlock)handle;
+
 
 @end
 
