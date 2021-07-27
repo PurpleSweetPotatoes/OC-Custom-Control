@@ -29,7 +29,14 @@
 - (void)addTapBlockWithText:(NSString *)text {
     
     NSRange textRange = [[self.attributedText string] rangeOfString:text];
-    NSLog(@"%@",NSStringFromRange(textRange));
+    
+    if (textRange.length > 0) {
+        [self addTapBlockWithRange:textRange];
+    }
+    
+}
+
+- (void)addTapBlockWithRange:(NSRange)range {
     
     if (!self.hasTapGesture) {
         self.userInteractionEnabled = YES;
@@ -38,14 +45,6 @@
         self.hasTapGesture = YES;
     }
     
-    if (textRange.length > 0) {
-        NSString * key = [NSString stringWithFormat:@"%ld-%ld",textRange.location, textRange.length];
-        self.blockInfos[key] = text;
-    }
-    
-}
-
-- (void)addTapBlockWithRange:(NSRange)range {
     if (range.length > 0 && (range.location + range.length - 1 < self.attributedText.length)) {
         NSString * key = [NSString stringWithFormat:@"%ld-%ld",range.location, range.length];
         self.blockInfos[key] = [[self.attributedText string] substringWithRange:range];
