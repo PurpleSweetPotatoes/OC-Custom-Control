@@ -5,8 +5,6 @@
 //  Created by baiqiang on 16/9/29.
 //  Copyright © 2016年 白强. All rights reserved.
 //
-
-
 typedef void(^VoidBlock)(void);
 
 /*  弱引用和强引用 */

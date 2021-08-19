@@ -47,7 +47,7 @@
     var img = imgs[i];   \
     img.style.maxWidth = %f;   \
     } \
-    }";
+    } imgAutoFit();";
     js = [NSString stringWithFormat:js, self.bounds.size.width - space * 2];
     [self addJs:js injectionTime:WKUserScriptInjectionTimeAtDocumentEnd];
 }

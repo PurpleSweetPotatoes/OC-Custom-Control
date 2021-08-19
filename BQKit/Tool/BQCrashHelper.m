@@ -22,6 +22,8 @@ static NSUncaughtExceptionHandler *_bqPreviousHandler;
 
 @implementation BQCrashHelper
 
+#ifdef DEBUG
+
 + (void)load {
     __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         _bqPreviousHandler = NSGetUncaughtExceptionHandler();
@@ -51,6 +53,7 @@ static NSUncaughtExceptionHandler *_bqPreviousHandler;
         [CrashTipView showWithTip:reason];
     }];
 }
+#endif
 @end
 
 void BQ_UncaughtExceptionHandler(NSException *exception) {
