@@ -518,6 +518,17 @@
     return newImage;
 }
 
++ (UIImage *)appIcon {
+    NSDictionary * infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSDictionary * iconDic = [infoDic dicValueForKey:@"CFBundleIcons"];
+    NSDictionary * priDic = [iconDic dicValueForKey:@"CFBundlePrimaryIcon"];
+    NSArray * iconFies = [priDic arrayValueForKey:@"CFBundleIconFiles"];
+    if (iconFies.count > 0) {
+        return [UIImage imageNamed:iconFies.lastObject];
+    }
+    return nil;
+}
+
 - (UIImage *)applyLightEffect{
     
     UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];

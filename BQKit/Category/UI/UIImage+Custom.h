@@ -146,6 +146,9 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 /// @param color 颜色
 - (UIImage *)imageWithColor:(UIColor *)color;
 
+
+/// app图标
++ (UIImage *)appIcon;
 #pragma mark - Blur Image
 
 /**
