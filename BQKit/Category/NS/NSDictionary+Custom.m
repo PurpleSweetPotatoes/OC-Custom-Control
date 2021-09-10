@@ -18,6 +18,23 @@
     return  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
 }
 
++ (instancetype)ecodeUrlPath:(NSString *)urlStr {
+    NSArray * urlArr = [urlStr componentsSeparatedByString:@"?"];
+    if (urlArr.count > 1) {
+        NSString * path = urlArr.lastObject;
+        NSArray * params = [path componentsSeparatedByString:@"&"];
+        NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+        for (NSString * info in params) {
+            NSArray * keyVArr = [info componentsSeparatedByString:@"="];
+            if (keyVArr.count == 2) {
+                dic[keyVArr.firstObject] = keyVArr.lastObject;
+            }
+        }
+        return [dic copy];
+    }
+    return @{};
+}
+
 - (NSInteger)intValueForKey:(NSString *)key {
     id result = [self safeObjectForKey:key];
     if ([result isKindOfClass:[NSNumber class]] || [result isKindOfClass:[NSString class]]) {
