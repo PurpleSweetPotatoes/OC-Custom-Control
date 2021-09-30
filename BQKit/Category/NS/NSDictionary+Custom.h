@@ -14,7 +14,7 @@
 
 + (instancetype)encodeFromData:(NSData *)data;
 
-+ (instancetype)ecodeUrlPath:(NSString *)urlStr;
++ (instancetype)parseUrlPath:(NSString *)urlStr;
 
 - (NSString *)stringValueForKey:(NSString *)key;
 

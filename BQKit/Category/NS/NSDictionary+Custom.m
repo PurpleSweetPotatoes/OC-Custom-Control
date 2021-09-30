@@ -18,7 +18,7 @@
     return  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
 }
 
-+ (instancetype)ecodeUrlPath:(NSString *)urlStr {
++ (instancetype)parseUrlPath:(NSString *)urlStr {
     NSArray * urlArr = [urlStr componentsSeparatedByString:@"?"];
     if (urlArr.count > 1) {
         NSString * path = urlArr.lastObject;
