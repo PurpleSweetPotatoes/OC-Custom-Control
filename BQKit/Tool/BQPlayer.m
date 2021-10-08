@@ -10,125 +10,137 @@
 
 #import "BQPlayer.h"
 
-static NSString * const kControlStatus = @"timeControlStatus";
+static NSString * const kControlRate = @"rate";
 static NSString * const kItemPlayStatus = @"status";
 static NSString * const kItemBufferLoad = @"loadedTimeRanges";
 static NSString * const kItemNoBuffer = @"playbackBufferEmpty";
-static NSString * const kItemBufferReady = @"isPlaybackLikelyToKeepUp";
+static NSString * const kItemBufferReady = @"playbackLikelyToKeepUp";
 
 
 @interface BQPlayer ()
 @property (nonatomic, strong) NSMutableArray * kvoList;
 @property (nonatomic, strong) id timeObserve;
+@property (nonatomic, strong) AVPlayer * player;
 @end
 
 @implementation BQPlayer
 
+#pragma mark - *** life
 - (void)dealloc {
-    NSLog(@"播放器释放%@", self);
     [self cleanBaseObserver];
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _bqStatus = BQPlayerStatusNone;
-        [self addObserver:self forKeyPath:kControlStatus options:0 context:nil];
-        self.hookTime = CMTimeMake(1, 1);
-    }
-    return self;
++ (instancetype)playerWithURL:(NSURL *)URL {
+    return [[self alloc] initWithURL:URL];
 }
 
 - (instancetype)initWithURL:(NSURL *)URL {
-    self = [super initWithURL:URL];
+    self = [super init];
     if (self) {
+        _status = BQPlayerStatusNone;
+        self.player = [AVPlayer playerWithURL:URL];
+        [self.player addObserver:self forKeyPath:kControlRate options:0 context:nil];
+        self.hookTime = CMTimeMake(1, 1);
         [self addObserverInfo];
     }
     return self;
 }
 
-- (void)replaceCurrentItemWithPlayerItem:(AVPlayerItem *)item {
+- (void)reSetURL:(NSURL *)URL {
     [self cleanItemObserver];
-    [super replaceCurrentItemWithPlayerItem:item];
+    AVPlayerItem * item = [AVPlayerItem playerItemWithURL:URL];
+    [self.player replaceCurrentItemWithPlayerItem:item];
     [self addObserverInfo];
+}
+
+- (void)play {
+    [self.player play];
+}
+
+- (void)pause {
+    [self.player pause];
+}
+
+- (void)stop {
+    [self.player pause];
+    [self.player seekToTime:CMTimeMake(0, 1)];
+    self.status = BQPlayerStatusStop;
+}
+
+- (void)replay {
+    if (self.player.currentItem && self.status < BQPlayerStatusFail) {
+        [self.player seekToTime:CMTimeMake(0, 1)];
+        [self play];
+    }
+}
+
+- (void)seekToTime:(NSTimeInterval)time {
+    [self.player seekToTime:CMTimeMake(time, 1)];
 }
 
 #pragma mark - *** private method
 
 - (void)addObserverInfo {
-    if (self.currentItem) {
-        [self.currentItem addObserver:self forKeyPath:kItemPlayStatus options:0 context:nil];
-        [self.currentItem addObserver:self forKeyPath:kItemBufferLoad options:0 context:nil];
-        [self.currentItem addObserver:self forKeyPath:kItemNoBuffer options:0 context:nil];
-        [self.currentItem addObserver:self forKeyPath:kItemBufferReady options:0 context:nil];
+    if (self.player.currentItem) {
+        [self.player.currentItem addObserver:self forKeyPath:kItemPlayStatus options:0 context:nil];
+        [self.player.currentItem addObserver:self forKeyPath:kItemBufferLoad options:0 context:nil];
+        [self.player.currentItem addObserver:self forKeyPath:kItemNoBuffer options:0 context:nil];
+        [self.player.currentItem addObserver:self forKeyPath:kItemBufferReady options:0 context:nil];
     }
 }
 
 - (void)cleanItemObserver {
-    [self.currentItem removeObserver:self forKeyPath:kItemPlayStatus];
-    [self.currentItem removeObserver:self forKeyPath:kItemBufferLoad];
-    [self.currentItem removeObserver:self forKeyPath:kItemNoBuffer];
-    [self.currentItem removeObserver:self forKeyPath:kItemBufferReady];
+    [self.player.currentItem removeObserver:self forKeyPath:kItemPlayStatus];
+    [self.player.currentItem removeObserver:self forKeyPath:kItemBufferLoad];
+    [self.player.currentItem removeObserver:self forKeyPath:kItemNoBuffer];
+    [self.player.currentItem removeObserver:self forKeyPath:kItemBufferReady];
 }
 
 - (void)cleanBaseObserver {
     if (_timeObserve) {
-        [self removeTimeObserver:_timeObserve];
+        [self.player removeTimeObserver:_timeObserve];
     }
-    [self removeObserver:self forKeyPath:kControlStatus];
+    [self.player removeObserver:self forKeyPath:kControlRate];
 }
 
 #pragma mark - *** observer handler
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if ([kControlStatus isEqualToString:keyPath]) {
-        [self bqPlayStatusChange];
+    if ([kControlRate isEqualToString:keyPath]) {
+        if (self.player.rate > 0) {
+            self.status = BQPlayerStatusPlaying;
+        } else if (self.status != BQPlayerStatusStop) {
+            self.status = BQPlayerStatusPaused;
+        }
     } else if ([kItemPlayStatus isEqualToString:keyPath]) {
         [self itemStatusChange];
     } else if ([kItemBufferLoad isEqualToString:keyPath]) {
         [self bufferChange];
     } else if ([kItemNoBuffer isEqualToString:keyPath]) {
-        if ([self.delegate respondsToSelector:@selector(bqPlayerBufferEmpty)]) {
-            [self.delegate bqPlayerBufferEmpty];
-        }
+        self.status = BQPlayerStatusWait;
     } else if ([kItemBufferReady isEqualToString:keyPath]) {
-        if ([self.delegate respondsToSelector:@selector(bqPlayerBufferReady)]) {
-            [self.delegate bqPlayerBufferReady];
-        }
-    }
-}
-
-- (void)bqPlayStatusChange {
-    if (@available(iOS 10.0, *)) {
-        AVPlayerTimeControlStatus status = self.timeControlStatus;
-        if (AVPlayerTimeControlStatusPlaying == status) {
-            self.bqStatus = BQPlayerStatusPlaying;
-        } else if (AVPlayerTimeControlStatusPaused == status) {
-            if (CMTimeGetSeconds([self currentTime]) == CMTimeGetSeconds(self.currentItem.duration)) {
-                self.bqStatus = BQPlayerStatusStop;
-            } else {
-                self.bqStatus = BQPlayerStatusPuased;
-            }
-        } else {
-            self.bqStatus = BQPlayerStatusWait;
-        }
+        self.status = self.player.rate > 0 ? BQPlayerStatusPlaying : BQPlayerStatusPaused;
     }
 }
 
 - (void)itemStatusChange {
-    if (self.currentItem) {
-        AVPlayerItemStatus status = self.currentItem.status;
+    if (self.player.currentItem) {
+        AVPlayerItemStatus status = self.player.currentItem.status;
         if (status == AVPlayerItemStatusReadyToPlay) {
-            self.bqStatus = BQPlayerStatusReady;
+            self.status = BQPlayerStatusReady;
+            if (self.player.rate > 0) {
+                self.status = BQPlayerStatusPlaying;
+            }
         } else if (status == AVPlayerItemStatusFailed) {
-            self.bqStatus = BQPlayerStatusFail;
+            self.status = BQPlayerStatusFail;
+        } else if (status == AVPlayerItemStatusUnknown) {
+            self.status = BQPlayerStatusUnkown;
         }
     }
 }
 
 - (void)bufferChange {
-    
-    NSArray<NSValue *> * ranges = self.currentItem.loadedTimeRanges;
+    NSArray<NSValue *> * ranges = self.player.currentItem.loadedTimeRanges;
     if (ranges.count > 0) {
         CMTimeRange time = [ranges.firstObject CMTimeRangeValue];
         CGFloat total = CMTimeGetSeconds(time.start) + CMTimeGetSeconds(time.duration);
@@ -142,22 +154,32 @@ static NSString * const kItemBufferReady = @"isPlaybackLikelyToKeepUp";
 
 - (void)setHookTime:(CMTime)hookTime {
     if (_timeObserve) {
-        [self removeTimeObserver:_timeObserve];
+        [self.player removeTimeObserver:_timeObserve];
     }
     _hookTime = hookTime;
-    WeakSelf;
-    _timeObserve = [self addPeriodicTimeObserverForInterval:hookTime queue:nil usingBlock:^(CMTime time) {
+    WS(weakSelf);
+    _timeObserve = [self.player addPeriodicTimeObserverForInterval:hookTime queue:nil usingBlock:^(CMTime time) {
+        CGFloat currentTime = CMTimeGetSeconds(time);
         if ([weakSelf.delegate respondsToSelector:@selector(bqPlayerTimeChange:)]) {
-            [weakSelf.delegate bqPlayerTimeChange:CMTimeGetSeconds(time)];
+            [weakSelf.delegate bqPlayerTimeChange:currentTime];
+        }
+        CGFloat duration = CMTimeGetSeconds(weakSelf.player.currentItem.duration);
+        if (!isnan(duration) && currentTime == duration) {
+            weakSelf.status =  BQPlayerStatusStop;
         }
     }];
 }
 
-- (void)setBqStatus:(BQPlayerStatus)bqStatus {
-    _bqStatus = bqStatus;
-    if ([self.delegate respondsToSelector:@selector(bqPlayerStatusChange:duration:)]) {
-        CGFloat duration = CMTimeGetSeconds(self.currentItem.duration);
-        [self.delegate bqPlayerStatusChange:self.bqStatus duration:duration];
+- (void)setStatus:(BQPlayerStatus)status {
+    if (status != _status) {
+        _status = status;
+        CGFloat duration = CMTimeGetSeconds(self.player.currentItem.duration);
+        if (isnan(duration)) {
+            duration = 0;
+        }
+        if ([self.delegate respondsToSelector:@selector(bqPlayerStatusChange:duration:)]) {
+            [self.delegate bqPlayerStatusChange:status duration:duration];
+        }
     }
 }
 @end
