@@ -58,4 +58,7 @@
     return [[NSMutableAttributedString alloc] initWithAttributedString:[NSAttributedString imgStrWithImg:img fontSize:fontSize spac:spac]];
 }
 
+- (void)clearStr {
+    [self replaceCharactersInRange:NSMakeRange(0, self.length) withString:@""];
+}
 @end

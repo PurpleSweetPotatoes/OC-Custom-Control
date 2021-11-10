@@ -42,6 +42,10 @@ typedef NS_ENUM(NSUInteger, NSDateTimeStyle) {
 
 - (NSString *)getTimeStringFormat:(NSString*)formatStr;
 
+/// 标准通用时间字符串
+/// @param time 时间戳(秒)
++ (NSString *)standardFormatTimeStringWithTime:(NSTimeInterval)time;
+
 /**
  标准通用时间字符串
  1分钟内：刚刚

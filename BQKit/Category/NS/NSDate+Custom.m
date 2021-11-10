@@ -95,9 +95,14 @@ static NSDateFormatter * _dateFormatter;
     return components;
 }
 
++ (NSString *)standardFormatTimeStringWithTime:(NSTimeInterval)time {
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970:time];
+    return [date standardFormatTimeString];
+}
+
 - (NSString *)standardFormatTimeString {
     
-    NSDate *date = [NSDate locaDate];
+    NSDate *date = [NSDate date];
     NSTimeInterval nowTimeStamp = [date timeIntervalSince1970];
     
     NSTimeInterval targetTimeStamp = [self timeIntervalSince1970];

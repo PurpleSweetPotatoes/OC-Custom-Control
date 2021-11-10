@@ -63,21 +63,22 @@
 
 - (CGFloat)layout:(BOOL)isAttr space:(CGFloat)space isHeight:(BOOL)isHeight {
     CGRect rect = CGRectZero;
-    CGSize size = CGSizeMake(isHeight ? self.bounds.size.width : CGFLOAT_MAX, isHeight ? CGFLOAT_MAX : self.bounds.size.height);
-    if (isAttr) {
-        
-        rect = [self.attributedText boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    if (self.numberOfLines != 0) {
+        [self sizeToFit];
+        rect = self.bounds;
     } else {
-        if (self.text == nil) {
-            self.text = @"";
+        CGSize size = CGSizeMake(isHeight ? self.bounds.size.width : CGFLOAT_MAX, isHeight ? CGFLOAT_MAX : self.bounds.size.height);
+        if (isAttr) {
+            rect = [self.attributedText boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+        } else {
+            if (self.text == nil) {
+                self.text = @"";
+            }
+            rect = [self.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
         }
-        rect = [self.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font} context:nil];
     }
     
     if (isHeight) {
-        if (self.numberOfLines != 0) {
-            rect.size.height = MIN(rect.size.height, self.font.lineHeight * self.numberOfLines);
-        }
         self.height = ceil(rect.size.height + space);
         return self.height;
     } else {
