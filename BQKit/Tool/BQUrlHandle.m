@@ -9,13 +9,13 @@
     
 
 #import "BQUrlHandle.h"
-#import "NSString+Custom.h"
-#import "NSObject+Custom.h"
+
 #import "NSDictionary+Custom.h"
+#import "NSObject+Custom.h"
+#import "NSString+Custom.h"
 
 static BQUrlReqBlock _completedBlock;
 static NSString * _wxId;
-
 @implementation BQUrlHandle
 
 + (void)aliReqStr:(NSString *)orderStr fromScheme:(NSString *)schemeStr completed:(BQUrlReqBlock)completedBlock {

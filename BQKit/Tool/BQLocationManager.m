@@ -6,20 +6,19 @@
 //  Copyright © 2016年 MAC. All rights reserved.
 //
 
-#import "BQLocationManager.h"
 #import "BQDefineHead.h"
-
-#import <CoreLocation/CLLocationManager.h>
+#import "BQLocationManager.h"
 #import <CoreLocation/CLGeocoder.h>
+#import <CoreLocation/CLLocationManager.h>
 
 @interface BQLocationManager()
 <
 CLLocationManagerDelegate
 >
-@property (nonatomic, strong) CLLocationManager * clManager;
-@property (nonatomic, strong) CLGeocoder * clGeocoder;
-@property (nonatomic, assign) BOOL loadSuccess;
-@property (nonatomic, copy) void (^callBlock)(LocationInfo * info, NSError * error);
+@property (nonatomic, strong                ) CLLocationManager * clManager;
+@property (nonatomic, strong                ) CLGeocoder        * clGeocoder;
+@property (nonatomic, assign                ) BOOL              loadSuccess;
+@property (nonatomic, copy) void (^callBlock) (LocationInfo * info, NSError * error            );
 @end
 
 @implementation BQLocationManager

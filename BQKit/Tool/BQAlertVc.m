@@ -7,28 +7,22 @@
 //
 
 #import "BQAlertVc.h"
-#import "UIImage+Custom.h"
+
 #import "BQDefineHead.h"
-#import "UIView+Custom.h"
-#import "UIColor+Custom.h"
-#import "UILabel+Custom.h"
 #import "CALayer+Custom.h"
+#import "UIColor+Custom.h"
+#import "UIImage+Custom.h"
+#import "UILabel+Custom.h"
+#import "UIView+Custom.h"
 
 @interface BQAlertVc ()
-
-@property (nonatomic, strong) UIView * disPlayerView;
-@property (nonatomic, strong) UIImageView * blurImgV;
-
-@property (nonatomic, strong) NSString * alertTitle;
-@property (nonatomic, strong) NSString * content;
-
-@property (nonatomic, strong) UIView * customView;
-
-@property (nonatomic, strong) NSMutableDictionary * blockDic;
+@property (nonatomic, strong) UIView                     * disPlayerView;
+@property (nonatomic, strong) UIImageView                * blurImgV;
+@property (nonatomic, strong) NSString                   * alertTitle;
+@property (nonatomic, strong) NSString                   * content;
+@property (nonatomic, strong) UIView                     * customView;
+@property (nonatomic, strong) NSMutableDictionary        * blockDic;
 @property (nonatomic, strong) NSMutableArray<UIButton *> * btnArr;
-
-
-
 @end
 
 @implementation BQAlertVc

@@ -18,9 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface BQImgPickerCell : UICollectionViewCell
-@property (nonatomic, weak) id<BQImgPickCellDelegate>  delegate;
-@property (nonatomic, weak) PHAsset * assetModel;
-
+@property (nonatomic, weak) id<BQImgPickCellDelegate>   delegate;
+@property (nonatomic, weak) PHAsset                     * assetModel;
 @end
 
 NS_ASSUME_NONNULL_END

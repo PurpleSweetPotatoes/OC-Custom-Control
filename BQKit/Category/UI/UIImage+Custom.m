@@ -7,16 +7,16 @@
 //
 
 #import "UIImage+Custom.h"
-#import <AssetsLibrary/ALAssetsLibrary.h>
+
 #import <AssetsLibrary/ALAssetRepresentation.h>
+#import <AssetsLibrary/ALAssetsLibrary.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <Photos/Photos.h>
-#import <objc/runtime.h>
 #import <Photos/Photos.h>
-
 #import <float.h>
-@import Accelerate;
+#import <objc/runtime.h>
 
+@import Accelerate;
 @implementation UIImage (Custom)
 
 + (UIImage *)createCodeImageWithContent:(NSString *)content {

@@ -6,10 +6,9 @@
 //  Copyright © 2017年 MrBai. All rights reserved.
 //
 
-#import "UIView+Custom.h"
 #import "NSObject+Custom.h"
+#import "UIView+Custom.h"
 #import "objc/runtime.h"
-
 
 @interface UIView()
 

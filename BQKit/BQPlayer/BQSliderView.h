@@ -22,21 +22,16 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface BQSliderView : UIView
-
-@property (nonatomic, weak) id<BQSliderViewDelegate>  delegate;
-
+@property (nonatomic, weak            ) id<BQSliderViewDelegate> delegate;
 /**  最大数值 */
-@property (nonatomic, assign) NSInteger  maxValue;
+@property (nonatomic, assign          ) NSInteger            maxValue;
 /**  当前数值 */
-@property (nonatomic, assign) NSInteger value;
-
-@property (nonatomic, strong) UIImage * centerImg;
-
+@property (nonatomic, assign          ) NSInteger            value;
+@property (nonatomic, strong          ) UIImage              * centerImg;
 /** 缓冲条数值 */
-@property (nonatomic, assign) NSInteger  bufferValue;
-
-@property (nonatomic, assign) BOOL  canSlide;
-@property (nonatomic, readonly, assign) BOOL isDrag;
+@property (nonatomic, assign          ) NSInteger            bufferValue;
+@property (nonatomic, assign          ) BOOL                 canSlide;
+@property (nonatomic, readonly, assign) BOOL                 isDrag;
 
 /**  设置滑条颜色 */
 - (void)setSliderColor:(UIColor *)color;

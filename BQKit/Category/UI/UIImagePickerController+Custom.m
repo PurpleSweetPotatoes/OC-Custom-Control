@@ -8,8 +8,8 @@
 // *******************************************
     
 
-#import "UIImagePickerController+Custom.h"
 #import "UIDevice+Custom.h"
+#import "UIImagePickerController+Custom.h"
 
 @interface UIImagePickerController()
 <

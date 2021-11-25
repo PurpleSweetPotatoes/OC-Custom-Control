@@ -10,7 +10,7 @@
 
 #import "AVAssetExportSession+Custom.h"
 
-static NSString * const typeKey = @"typeKey";
+static NSString * const typeKey  = @"typeKey";
 static NSString * const typeName = @"typeName";
 
 @implementation AVAssetExportSession (Custom)

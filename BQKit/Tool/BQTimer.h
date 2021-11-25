@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BQTimer : NSObject
 
 /// 运行次数
-@property (nonatomic, assign) NSInteger runTimes;
+@property (nonatomic, assign          ) NSInteger runTimes;
 
 /// 是否正在执行
-@property (nonatomic, readonly, assign) BOOL isRun;
+@property (nonatomic, readonly, assign) BOOL      isRun;
 
 + (instancetype)configWithScheduleTime:(NSTimeInterval)time target:(id)target selector:(SEL)selector;
 

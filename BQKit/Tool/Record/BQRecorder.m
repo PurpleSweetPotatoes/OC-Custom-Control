@@ -9,6 +9,7 @@
     
 
 #import "BQRecorder.h"
+
 #import "lame.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -16,9 +17,9 @@
 <
 AVAudioRecorderDelegate
 >
-@property (nonatomic, weak) id<BQRecorderDelegate>  delegate;
-@property (nonatomic, strong) AVAudioRecorder * recorder;
-@property (nonatomic, strong) NSDictionary * recordParams;
+@property (nonatomic, weak  ) id<BQRecorderDelegate>    delegate;
+@property (nonatomic, strong) AVAudioRecorder           * recorder;
+@property (nonatomic, strong) NSDictionary              * recordParams;
 @end
 
 @implementation BQRecorder

@@ -7,14 +7,14 @@
 //
 
 #import "BQSliderImgV.h"
+
 #import "NSBundle+BQPlayer.h"
 #import "UIView+Custom.h"
 
 @interface BQSliderImgV ()
-@property (nonatomic, strong) UIImageView * imgV;
+@property (nonatomic, strong) UIImageView    * imgV;
 @property (nonatomic, strong) UIProgressView * progressView;
-@property (nonatomic, strong) UILabel * lab;
-
+@property (nonatomic, strong) UILabel        * lab;
 @end
 
 @implementation BQSliderImgV

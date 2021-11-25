@@ -12,9 +12,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PHAsset (Picker)
-@property (nonatomic, assign) BOOL selected;            ///<  是否选中
-@property (nonatomic, strong) UIImage * image;          ///<  对应图片
-@property (nonatomic, strong) NSData * data;            ///<  对应数据
+@property (nonatomic, assign) BOOL    selected;///<  是否选中
+@property (nonatomic, strong) UIImage * image;///<  对应图片
+@property (nonatomic, strong) NSData  * data;///<  对应数据
 @end
 
 NS_ASSUME_NONNULL_END

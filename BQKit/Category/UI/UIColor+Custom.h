@@ -10,9 +10,9 @@
 
 @interface UIColor (Custom)
 
-@property (nonatomic, readonly, assign) CGFloat red;
-@property (nonatomic, readonly, assign) CGFloat green;
-@property (nonatomic, readonly, assign) CGFloat blue;
+@property (nonatomic, readonly, assign) CGFloat  red;
+@property (nonatomic, readonly, assign) CGFloat  green;
+@property (nonatomic, readonly, assign) CGFloat  blue;
 @property (nonatomic, readonly, strong) NSString * hexString;
 
 + (UIColor *)randomColor;

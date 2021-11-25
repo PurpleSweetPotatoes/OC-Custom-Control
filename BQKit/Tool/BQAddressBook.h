@@ -6,11 +6,10 @@
 //  Copyright © 2018年 baiqiang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
-
 #import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
+#import <Foundation/Foundation.h>
 
 /*
  需要在info.plist文件中添加 Privacy - Contacts Usage Description字段

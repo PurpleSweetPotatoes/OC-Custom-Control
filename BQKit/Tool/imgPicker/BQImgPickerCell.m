@@ -7,16 +7,14 @@
 //
 
 #import "BQImgPickerCell.h"
-
+#import "PHAsset+Picker.h"
 #import <Photos/PHImageManager.h>
 
-#import "PHAsset+Picker.h"
-
 @interface BQImgPickerCell()
-@property (nonatomic, strong) UIImageView * imageView;
-@property (nonatomic, assign) CGFloat targetWidth;         ///<  获取的宽度
+@property (nonatomic, strong) UIImageView           * imageView;
+@property (nonatomic, assign) CGFloat               targetWidth;///<  获取的宽度
 @property (nonatomic, strong) PHImageRequestOptions * options;
-@property (nonatomic, strong) UIButton * selectBtn;
+@property (nonatomic, strong) UIButton              * selectBtn;
 @end
 
 @implementation BQImgPickerCell

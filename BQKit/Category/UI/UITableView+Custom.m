@@ -7,11 +7,11 @@
 //
 
 #import "UITableView+Custom.h"
+
 #import "NSObject+Custom.h"
 #import <objc/runtime.h>
 
 static const NSUInteger EmptyTag = 'VIEW';
-
 @implementation UITableView (Custom)
 
 - (void)registerCell:(Class)cellClass isNib:(BOOL)isNib {
@@ -152,16 +152,18 @@ static const NSUInteger EmptyTag = 'VIEW';
 - (void)bq_layoutSubviews {
     [self bq_layoutSubviews];
 
-    UIView * emptyView = [self viewWithTag:EmptyTag];
-    [emptyView removeFromSuperview];
-    
     id<UITableViewNoDataProtocol> delegate = self.noDataDelegate;
     
-    if ([delegate showEmtpyView:self]) {
+    if (delegate) {
         UIView * backView = [delegate configEmptyView:self];
-        NSAssert([backView isKindOfClass:[UIView class]], @"configEmptyView should return a view which kind of UIView");
-        backView.tag = EmptyTag;
-        [self addSubview:backView];
+        UIView * emptyV = [self viewWithTag:EmptyTag];
+        if (emptyV != backView) {
+            [emptyV removeFromSuperview];
+            backView.top += self.tableHeaderView.height;
+            backView.tag = EmptyTag;
+            [self addSubview:backView];
+        }
+        backView.hidden = ![delegate showEmptyView:self];
     }
 }
 

@@ -9,6 +9,7 @@
 #import "UICollectionView+Custom.h"
 
 @implementation UICollectionView (Custom)
+
 - (void)registerCell:(Class)cellClass isNib:(BOOL)isNib {
     
     NSString * identifier = NSStringFromClass(cellClass);
@@ -19,13 +20,6 @@
         [self registerClass:cellClass forCellWithReuseIdentifier:identifier];
     }
     
-}
-
-- (UICollectionViewCell *)loadCell:(Class)cellClass indexPath:(NSIndexPath *)indexPath {
-    
-    NSString * identifier = NSStringFromClass(cellClass);
-    
-    return [self dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
 }
 
 - (void)registerHeaderFooterView:(Class)aClass  isNib:(BOOL)isNib {
@@ -39,10 +33,25 @@
     
 }
 
-- (UICollectionReusableView *)loadHeaderFooterView:(Class)aClass indexPath:(NSIndexPath *)indexPath {
-    NSString * identifier = NSStringFromClass(aClass);
-    UICollectionReusableView * reusableView = [self dequeueReusableSupplementaryViewOfKind:identifier withReuseIdentifier:identifier forIndexPath:indexPath];
+@end
+
+@implementation UICollectionViewCell (Custom)
+
++ (instancetype)loadFromCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath {
+    NSString * identifier = NSStringFromClass(self);
+    return [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+}
+
+@end
+
+@implementation UICollectionReusableView (Custom)
+
++ (instancetype)loadHeaderFooterView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath {
+    NSString * identifier = NSStringFromClass(self);
+    UICollectionReusableView * reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:identifier withReuseIdentifier:identifier forIndexPath:indexPath];
     return reusableView;
 }
 
 @end
+
+

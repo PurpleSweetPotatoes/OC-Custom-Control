@@ -9,12 +9,13 @@
     
 
 #import "BQNavMapView.h"
+
 #import <MapKit/MapKit.h>
 
 @interface BQNavMapView ()
-@property (nonatomic, assign) NavMapType  type;
-@property (nonatomic, assign) NSString * latitude;
-@property (nonatomic, assign) NSString * longitude;
+@property (nonatomic, assign) NavMapType     type;
+@property (nonatomic, assign) NSString       * latitude;
+@property (nonatomic, assign) NSString       * longitude;
 @property (nonatomic, strong) NSMutableArray * openUrls;
 @end
 

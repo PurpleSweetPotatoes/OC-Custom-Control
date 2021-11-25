@@ -9,15 +9,16 @@
     
 
 #import "BQSpeechManager.h"
+
 #import <AVFoundation/AVFoundation.h>
 
 @interface BQSpeechManager ()
 <
 AVSpeechSynthesizerDelegate
 >
-@property (nonatomic, weak) id<BQSpeechManagerDelegate>  delegate;
-@property (nonatomic, copy) AVSpeechUtterance * utter;
-@property (nonatomic, strong) AVSpeechSynthesizer * speech;
+@property (nonatomic, weak  ) id<BQSpeechManagerDelegate> delegate;
+@property (nonatomic, copy  ) AVSpeechUtterance       * utter;
+@property (nonatomic, strong) AVSpeechSynthesizer     * speech;
 @end
 
 static BQSpeechManager * manager = nil;

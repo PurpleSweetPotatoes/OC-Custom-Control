@@ -7,6 +7,7 @@
 //
 
 #import "BQPlayerCtrlView.h"
+
 #import "NSBundle+BQPlayer.h"
 #import "UIView+Custom.h"
 
@@ -14,10 +15,10 @@
 <
 BQSliderViewDelegate
 >
-@property (nonatomic, strong) UIView * topToolView;
-@property (nonatomic, strong) UIView * bottomToolView;
+@property (nonatomic, strong) UIView  * topToolView;
+@property (nonatomic, strong) UIView  * bottomToolView;
 @property (nonatomic, strong) UILabel * titleLab;
-@property (nonatomic, assign) BOOL  isDisplay;
+@property (nonatomic, assign) BOOL    isDisplay;
 
 
 @end

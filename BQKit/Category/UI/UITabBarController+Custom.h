@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const kVcName     = @"kVcName";
-static NSString * const kVcTitle    = @"kVcTitle";
-static NSString * const kSelectImg  = @"kSelectImg";
-static NSString * const kNormalImg  = @"kNormalImg";
+static NSString * const kVcName    = @"kVcName";
+static NSString * const kVcTitle   = @"kVcTitle";
+static NSString * const kSelectImg = @"kSelectImg";
+static NSString * const kNormalImg = @"kNormalImg";
 
 @interface UITabBarController (Custom)
 

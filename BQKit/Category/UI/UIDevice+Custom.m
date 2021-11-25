@@ -7,18 +7,18 @@
 //
 
 #import "UIDevice+Custom.h"
+
+#import "UIAlertController+Custom.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AddressBook/AddressBook.h>
-#import <Contacts/Contacts.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <Contacts/Contacts.h>
 #import <Photos/Photos.h>
-#import "UIAlertController+Custom.h"
 
 //首先导入头文件信息
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #include <net/if.h>
-
 #define IOS_3G          @"pdp_ip0"
 #define IOS_WIFI        @"en0"  //局域网
 //#define IOS_VPN       @"utun0"

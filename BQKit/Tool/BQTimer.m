@@ -7,14 +7,15 @@
 //
 
 #import "BQTimer.h"
+
 #import "BQWeakProxy.h"
 
 @interface BQTimer ()
 @property (nonatomic, strong) NSTimer * timer;
-@property (nonatomic, assign) BOOL  isRun;
-@property (nonatomic, weak) id  target;
-@property (nonatomic, assign) SEL selector;
-@property (nonatomic, assign) BOOL  isStart;
+@property (nonatomic, assign) BOOL    isRun;
+@property (nonatomic, weak  ) id      target;
+@property (nonatomic, assign) SEL     selector;
+@property (nonatomic, assign) BOOL    isStart;
 @end
 
 @implementation BQTimer

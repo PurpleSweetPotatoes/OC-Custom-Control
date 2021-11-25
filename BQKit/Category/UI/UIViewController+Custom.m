@@ -6,11 +6,11 @@
 //  Copyright © 2019年 baiqiang. All rights reserved.
 //
 
-#import "UIViewController+Custom.h"
-#import "UIView+Custom.h"
+#import "BQDefineHead.h"
 #import "CALayer+Custom.h"
 #import "UIColor+Custom.h"
-#import "BQDefineHead.h"
+#import "UIView+Custom.h"
+#import "UIViewController+Custom.h"
 #import <objc/runtime.h>
 
 @interface UIViewController()

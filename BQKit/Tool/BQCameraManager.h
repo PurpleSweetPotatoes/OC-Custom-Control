@@ -28,18 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BQCameraManager : NSObject
 
-@property (nonatomic, readonly, weak) id<BQCameraManagerDelegate>  delegate;
-@property (nonatomic, strong) AVCaptureDevice * device;
-@property (nonatomic, strong) AVCaptureSession * session;
-@property (nonatomic, strong) AVCaptureInput * videoInput;
+@property (nonatomic, readonly, weak) id<BQCameraManagerDelegate> delegate;
+@property (nonatomic, strong        ) AVCaptureDevice             * device;
+@property (nonatomic, strong        ) AVCaptureSession            * session;
+@property (nonatomic, strong        ) AVCaptureInput              * videoInput;
 /// 默认 AVCaptureDevicePositionBack
-@property (nonatomic, assign) AVCaptureDevicePosition  postion;
-
+@property (nonatomic, assign        ) AVCaptureDevicePosition     postion;
 /// 默认使用32RGB类型的videoDataOutput
-@property (nonatomic, strong) AVCaptureOutput * output;
-
+@property (nonatomic, strong        ) AVCaptureOutput             * output;
 /// 是否开启麦克风
-@property (nonatomic, assign) BOOL startMic;
+@property (nonatomic, assign        ) BOOL                        startMic;
 
 
 + (instancetype)configManager;

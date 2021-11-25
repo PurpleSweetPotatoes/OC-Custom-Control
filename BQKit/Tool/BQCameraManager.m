@@ -16,9 +16,9 @@
 AVCaptureVideoDataOutputSampleBufferDelegate,
 AVCaptureAudioDataOutputSampleBufferDelegate
 >
-@property (nonatomic, weak) id<BQCameraManagerDelegate>  delegate;
-@property (nonatomic, strong) AVCaptureConnection * videoConnec;
-@property (nonatomic, assign) CGColorSpaceRef   colorSpace;
+@property (nonatomic, weak  ) id<BQCameraManagerDelegate> delegate;
+@property (nonatomic, strong) AVCaptureConnection         * videoConnec;
+@property (nonatomic, assign) CGColorSpaceRef             colorSpace;
 @end
 
 @implementation BQCameraManager

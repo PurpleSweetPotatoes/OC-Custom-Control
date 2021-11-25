@@ -12,9 +12,9 @@
 /**  图片视图 */
 @property (nonatomic, strong) UIImageView *imageView;
 /**  背景视图 */
-@property (nonatomic, strong) UIView *backView;
+@property (nonatomic, strong) UIView      *backView;
 /**  原图片位置 */
-@property (nonatomic, assign) CGRect orgiFrame;
+@property (nonatomic, assign) CGRect      orgiFrame;
 
 + (void)showImage:(UIImage *)image frame:(CGRect)frame;
 

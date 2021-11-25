@@ -18,11 +18,10 @@ typedef void(^PickerCompletedBlock)(NSArray * arr);
  NSPhotoLibraryUsageDescription字段
 */
 
-
 /// 自定义多图片选择器
 @interface BQImagePickerVc : UIViewController
-@property (nonatomic, assign) NSInteger  maxSelecd;                     ///< 最大选择数,默认为1
-@property (nonatomic, assign) PHAssetCollectionSubtype  sourceType;           ///< 资源类型，默认为PHAssetCollectionSubtypeSmartAlbumUserLibrary
+@property (nonatomic, assign) NSInteger                maxSelecd;   ///< 最大选择数,默认为1
+@property (nonatomic, assign) PHAssetCollectionSubtype sourceType;  ///< 资源类型，默认为PHAssetCollectionSubtypeSmartAlbumUserLibrary
 
 /**
  选取成功返回对应 image 或 video 数组

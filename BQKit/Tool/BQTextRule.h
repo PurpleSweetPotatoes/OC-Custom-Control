@@ -41,17 +41,13 @@ typedef NS_ENUM(NSUInteger, BQTextRuleType) {
 #pragma mark - 其他规则配置
 
 /// 全大写,默认false
-@property (nonatomic, assign) BOOL  upText;
-
+@property (nonatomic, assign) BOOL      upText;
 /// 全小写,默认false
-@property (nonatomic, assign) BOOL  lowText;
-
+@property (nonatomic, assign) BOOL      lowText;
 /// 消除空格
-@property (nonatomic, assign) BOOL  clearSpace;
-
+@property (nonatomic, assign) BOOL      clearSpace;
 /// 文本最大长度,默认无限制
-@property (nonatomic, assign) NSInteger  maxLength;
-
+@property (nonatomic, assign) NSInteger maxLength;
 @end
 
 NS_ASSUME_NONNULL_END

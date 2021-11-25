@@ -19,20 +19,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerCell:(Class)cellClass isNib:(BOOL)isNib;
 
 /**
- load cell use className as identifier
- */
-- (UICollectionViewCell *)loadCell:(Class)cellClass indexPath:(NSIndexPath *)indexPath;
-
-/**
  registerHeaderFooterView use className as identifier
  when load can use loadHeaderFooterView:
  */
 - (void)registerHeaderFooterView:(Class)aClass  isNib:(BOOL)isNib;
 
+@end
+
+@interface UICollectionViewCell (Custom)
+/**
+ auto load tableViewCell, use this need with "registerCell:isNib:" method
+ */
++ (instancetype)loadFromCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath;
+
+@end
+
+@interface UICollectionReusableView (Custom)
+
 /**
  load headerFooterView use className as identifier
  */
-- (UICollectionReusableView *)loadHeaderFooterView:(Class)aClass indexPath:(NSIndexPath *)indexPath;
++ (instancetype)loadHeaderFooterView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath;
 
 @end
 

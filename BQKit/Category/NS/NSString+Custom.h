@@ -156,8 +156,8 @@
 /**  是否含有unicode编码 */
 - (BOOL)hasUnicode;
 
-/** 转化为16进制字符串 */
-- (NSString *)convertToHex;
+/** string字面转化为Data */
+- (NSMutableData*)convertBytesToData;
 
 
 /// 删除对应字符串

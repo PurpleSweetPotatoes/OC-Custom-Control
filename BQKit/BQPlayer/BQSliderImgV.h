@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, SliderImgType) {
 
 @interface BQSliderImgV : UIView
 @property (nonatomic, assign) SliderImgType type;
-@property (nonatomic, assign) CGFloat timeValue;    ///< 快进快退秒数
+@property (nonatomic, assign) CGFloat       timeValue;///< 快进快退秒数
 
 - (void)show;
 - (void)hide;

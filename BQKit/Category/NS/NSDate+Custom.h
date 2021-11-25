@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, NSDateTimeStyle) {
-    NSDateTimeStyle_YMD1,//yyyy-MM-dd
-    NSDateTimeStyle_YMD2,//yyyy年MM月dd日
-    NSDateTimeStyle_HM,//HH:mm
-    NSDateTimeStyle_HMS1,//HH:mm:ss
-    NSDateTimeStyle_HMS2,//HH时mm分ss秒
-    NSDateTimeStyle_YMDHMS,//yyyy-MM-dd HH:mm:ss,
+    NSDateTimeStyle_YMD1,   //yyyy-MM-dd
+    NSDateTimeStyle_YMD2,   //yyyy年MM月dd日
+    NSDateTimeStyle_HM,     //HH:mm
+    NSDateTimeStyle_HMS1,   //HH:mm:ss
+    NSDateTimeStyle_HMS2,   //HH时mm分ss秒
+    NSDateTimeStyle_YMDHMS, //yyyy-MM-dd HH:mm:ss,
 };
 
 @interface NSDate (Custom)
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, NSDateTimeStyle) {
 @property (nonatomic, assign, readonly) NSInteger hour;
 @property (nonatomic, assign, readonly) NSInteger min;
 @property (nonatomic, assign, readonly) NSInteger second;
-@property (nonatomic, strong, readonly) NSString * weekDay;
+@property (nonatomic, strong, readonly) NSString  * weekDay;
 
 + (NSString *)millisecond;
 

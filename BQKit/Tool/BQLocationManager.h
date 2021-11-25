@@ -21,10 +21,10 @@ NSLocationAlwaysUsageDescription始终访问位置
 
 @interface LocationInfo: NSObject
 
-@property (nonatomic, copy) NSString * address;       ///<地址
-@property (nonatomic, copy) NSString * city;          ///<城市
-@property (nonatomic, copy) CLLocation * location;    ///<经纬度坐标
-@property (nonatomic, copy) CLPlacemark * place;         ///<详细地址
+@property (nonatomic, copy) NSString    * address;///<地址
+@property (nonatomic, copy) NSString    * city;///<城市
+@property (nonatomic, copy) CLLocation  * location;///<经纬度坐标
+@property (nonatomic, copy) CLPlacemark * place;///<详细地址
 
 @end
 

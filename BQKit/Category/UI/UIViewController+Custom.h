@@ -17,9 +17,9 @@ typedef NS_ENUM(NSUInteger, StatusColorType) {
 
 @interface UIViewController (Custom)
 
-@property (nonatomic, assign) StatusColorType  statuType;                       ///< 状态栏颜色
-@property (nonatomic, readonly, assign) CGFloat  navbarBottom;                  ///< 导航栏底部高度
-@property (nonatomic, readonly, assign) CGFloat  tabbarHeight;                  ///< tabbar栏高度
+@property (nonatomic, assign          ) StatusColorType statuType;///< 状态栏颜色
+@property (nonatomic, readonly, assign) CGFloat         navbarBottom;///< 导航栏底部高度
+@property (nonatomic, readonly, assign) CGFloat         tabbarHeight;///< tabbar栏高度
 
 /// 当前最上层控制器
 + (UIViewController *)currentDisPalyVc;

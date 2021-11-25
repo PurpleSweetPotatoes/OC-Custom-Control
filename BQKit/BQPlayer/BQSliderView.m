@@ -7,20 +7,21 @@
 //
 
 #import "BQSliderView.h"
-#import "NSBundle+BQPlayer.h"
-#import "UIView+Custom.h"
-#import "UILabel+Custom.h"
+
 #import "CALayer+Custom.h"
+#import "NSBundle+BQPlayer.h"
+#import "UILabel+Custom.h"
+#import "UIView+Custom.h"
 
 @interface BQSliderView ()
-@property (nonatomic, assign) BOOL isDrag;
-@property (nonatomic, strong) CALayer * bgLayer;
-@property (nonatomic, strong) CALayer * bufferLayer;
-@property (nonatomic, strong) CALayer * sliderLayer;
-@property (nonatomic, strong) UIView * gestureView;
+@property (nonatomic, assign) BOOL        isDrag;
+@property (nonatomic, strong) CALayer     * bgLayer;
+@property (nonatomic, strong) CALayer     * bufferLayer;
+@property (nonatomic, strong) CALayer     * sliderLayer;
+@property (nonatomic, strong) UIView      * gestureView;
 @property (nonatomic, strong) UIImageView * imgV;
-@property (nonatomic, strong) UILabel * leftLab;
-@property (nonatomic, strong) UILabel * rightLab;
+@property (nonatomic, strong) UILabel     * leftLab;
+@property (nonatomic, strong) UILabel     * rightLab;
 @end
 
 @implementation BQSliderView

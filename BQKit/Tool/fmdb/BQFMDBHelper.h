@@ -17,11 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - sqlite valueType
 
-static NSString * const kFMDBTypeText = @"TEXT";
-static NSString * const kFMDBTypeInt = @"INTEGER";
+static NSString * const kFMDBTypeText  = @"TEXT";
+static NSString * const kFMDBTypeInt   = @"INTEGER";
 static NSString * const kFMDBTypeFloat = @"REAL";
-static NSString * const kFMDBTypeBool = @"BLOB";
-
+static NSString * const kFMDBTypeBool  = @"BLOB";
 
 #pragma mark - sqlite model
 

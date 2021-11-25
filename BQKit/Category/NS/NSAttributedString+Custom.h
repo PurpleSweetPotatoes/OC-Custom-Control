@@ -43,8 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
                      fontSize:(CGFloat)fontSize
                          spac:(CGFloat)spac;
 
-/// 清空字符串
-- (void)clearStr;
 @end
 
 

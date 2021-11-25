@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BQPlayerView : UIView
 
-@property (nonatomic, copy) NSString * assetUrl;
-@property (nonatomic, strong) AVAsset * asset;
-@property (nonatomic, assign) BOOL  canSlide;               ///< 是否可拖动,默认YES
-@property (nonatomic, strong) UIImage * disPlayImg;         ///< 占位图
+@property (nonatomic, copy  ) NSString * assetUrl;
+@property (nonatomic, strong) AVAsset  * asset;
+@property (nonatomic, assign) BOOL     canSlide;        ///< 是否可拖动,默认YES
+@property (nonatomic, strong) UIImage  * disPlayImg;    ///< 占位图
 
 - (void)setTopTitle:(NSString *)title;
 

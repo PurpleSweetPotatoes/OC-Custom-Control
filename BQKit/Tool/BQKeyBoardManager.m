@@ -9,24 +9,24 @@
     
 
 #import "BQKeyBoardManager.h"
+
 #import "BQDefineHead.h"
+#import "UIColor+Custom.h"
 #import "UIImage+Custom.h"
 #import "UILabel+Custom.h"
-#import "UIColor+Custom.h"
 
 @interface BQKeyBoardManager ()
-@property (nonatomic, strong) UIView * responseV;
-@property (nonatomic, strong) NSMutableArray<UIView *> * editVList;
-@property (nonatomic, strong) UIView * currentEditV;
-@property (nonatomic, assign) BOOL  didAdd;
+@property (nonatomic, strong) UIView                    * responseV;
+@property (nonatomic, strong) NSMutableArray<UIView *>  * editVList;
+@property (nonatomic, strong) UIView                    * currentEditV;
+@property (nonatomic, assign) BOOL                      didAdd;
 @end
 
-
 @interface BQKeyBoardToolBar : UIView
-@property (nonatomic, strong) UIButton * preBtn;
-@property (nonatomic, strong) UIButton * nextBtn;
-@property (nonatomic, strong) UILabel * tipLab;
-@property (nonatomic, strong) UIButton * dissBtn;
+@property (nonatomic, strong) UIButton     * preBtn;
+@property (nonatomic, strong) UIButton     * nextBtn;
+@property (nonatomic, strong) UILabel      * tipLab;
+@property (nonatomic, strong) UIButton     * dissBtn;
 + (instancetype)toolBar;
 @end
 
@@ -142,6 +142,7 @@
             CGRect keyboardRect = [aValue CGRectValue];
             NSInteger height = keyboardRect.size.height;
             CGFloat keyBoardY = [UIScreen mainScreen].bounds.size.height - height;
+            
             //响应视图的最低点
             CGRect rect = [editV.superview convertRect:editV.frame toView:[UIApplication sharedApplication].keyWindow];
             CGFloat vMaxY = CGRectGetMaxY(rect);

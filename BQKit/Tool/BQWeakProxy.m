@@ -7,6 +7,7 @@
 //
 
 #import "BQWeakProxy.h"
+
 #import <objc/runtime.h>
 
 @implementation BQWeakProxy

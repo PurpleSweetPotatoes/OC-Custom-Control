@@ -19,15 +19,15 @@ UICollectionViewDelegate,
 UICollectionViewDataSource,
 BQImgPickCellDelegate
 >
-@property (nonatomic, strong) UICollectionView * collectionView;            ///<  列表视图
-@property (nonatomic, strong) NSMutableArray<PHAsset *> * datasArr;         ///<  数据源
-@property (nonatomic, strong) NSMutableArray * backArr;                     ///<  选取的数据
-@property (nonatomic, assign) NSInteger  currentNum;                        ///<  已选择数量
-@property (nonatomic, copy) PickerCompletedBlock selectedHandle;
-@property (nonatomic, copy) PickerCompletedBlock failHandle;
-@property (nonatomic, strong) PHImageRequestOptions * options;
-@property (nonatomic, assign) CGSize itemSize;
-@property (nonatomic, assign) CGSize targetSize;
+@property (nonatomic, strong) UICollectionView          * collectionView;///<  列表视图
+@property (nonatomic, strong) NSMutableArray<PHAsset *> * datasArr;///<  数据源
+@property (nonatomic, strong) NSMutableArray            * backArr;///<  选取的数据
+@property (nonatomic, assign) NSInteger                 currentNum;///<  已选择数量
+@property (nonatomic, copy  ) PickerCompletedBlock      selectedHandle;
+@property (nonatomic, copy  ) PickerCompletedBlock      failHandle;
+@property (nonatomic, strong) PHImageRequestOptions     * options;
+@property (nonatomic, assign) CGSize                    itemSize;
+@property (nonatomic, assign) CGSize                    targetSize;
 @end
 
 static NSString * const kImagePickerCell = @"BQImgPickerCell";

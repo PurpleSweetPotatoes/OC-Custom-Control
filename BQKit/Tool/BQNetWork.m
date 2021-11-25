@@ -8,6 +8,7 @@
 
 
 #import "BQNetWork.h"
+
 #import "Reachability.h"
 #import "UIAlertController+Custom.h"
 
@@ -16,7 +17,6 @@ typedef NS_ENUM(NSUInteger, NetWorkType) {
     GET,
     PUT
 };
-
 @implementation BQNetWork
 
 static CGFloat const timeOutInterval = 15.0f;

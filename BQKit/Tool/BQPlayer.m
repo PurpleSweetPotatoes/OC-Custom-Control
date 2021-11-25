@@ -10,12 +10,11 @@
 
 #import "BQPlayer.h"
 
-static NSString * const kControlRate = @"rate";
-static NSString * const kItemPlayStatus = @"status";
-static NSString * const kItemBufferLoad = @"loadedTimeRanges";
-static NSString * const kItemNoBuffer = @"playbackBufferEmpty";
+static NSString * const kControlRate     = @"rate";
+static NSString * const kItemPlayStatus  = @"status";
+static NSString * const kItemBufferLoad  = @"loadedTimeRanges";
+static NSString * const kItemNoBuffer    = @"playbackBufferEmpty";
 static NSString * const kItemBufferReady = @"playbackLikelyToKeepUp";
-
 
 @interface BQPlayer ()
 @property (nonatomic, strong) NSMutableArray * kvoList;
@@ -157,7 +156,7 @@ static NSString * const kItemBufferReady = @"playbackLikelyToKeepUp";
         [self.player removeTimeObserver:_timeObserve];
     }
     _hookTime = hookTime;
-    WS(weakSelf);
+    __weak typeof(self) weakSelf = self;
     _timeObserve = [self.player addPeriodicTimeObserverForInterval:hookTime queue:nil usingBlock:^(CMTime time) {
         CGFloat currentTime = CMTimeGetSeconds(time);
         if ([weakSelf.delegate respondsToSelector:@selector(bqPlayerTimeChange:)]) {

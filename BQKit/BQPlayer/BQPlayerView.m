@@ -7,34 +7,34 @@
 //
 
 #import "BQPlayerView.h"
+
 #import "BQPlayerCtrlView.h"
 #import "BQSliderImgV.h"
-#import <MediaPlayer/MediaPlayer.h>
-#import <AVFoundation/AVFoundation.h>
 #import "UIView+Custom.h"
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 static NSString * const kNotifiPlayStatus = @"status";
 static NSString * const kNotifiBufferLoad = @"loadedTimeRanges";
-static NSString * const kNotifiNoBuffer = @"playbackBufferEmpty";
-static NSString * const kNotifiKeepUp = @"playbackLikelyToKeepUp";
+static NSString * const kNotifiNoBuffer   = @"playbackBufferEmpty";
+static NSString * const kNotifiKeepUp     = @"playbackLikelyToKeepUp";
 
 @interface BQPlayerView ()
 <
 BQPlayerCtrlViewDelegate
 >
-@property (nonatomic, strong) UIImageView * placeHoderImgV;
-@property (nonatomic, strong) AVPlayerLayer * disPlayer;
-@property (nonatomic, strong) AVPlayer * player;
+@property (nonatomic, strong) UIImageView      * placeHoderImgV;
+@property (nonatomic, strong) AVPlayerLayer    * disPlayer;
+@property (nonatomic, strong) AVPlayer         * player;
 @property (nonatomic, strong) BQPlayerCtrlView * ctrlView;
-@property (nonatomic, strong) BQSliderImgV * imgSliderView;
-@property (nonatomic, strong) UIView * activiView;
-@property (nonatomic, strong) CADisplayLink * timeLink;
-@property (nonatomic, strong) UISlider * volumeViewSlider;
-@property (nonatomic, strong) MPVolumeView * volumeView;
-@property (nonatomic, strong) UILabel * tipLab;
-@property (nonatomic, weak) UIView * supView;
-@property (nonatomic, assign) CGRect  orginFrame;
-
+@property (nonatomic, strong) BQSliderImgV     * imgSliderView;
+@property (nonatomic, strong) UIView           * activiView;
+@property (nonatomic, strong) CADisplayLink    * timeLink;
+@property (nonatomic, strong) UISlider         * volumeViewSlider;
+@property (nonatomic, strong) MPVolumeView     * volumeView;
+@property (nonatomic, strong) UILabel          * tipLab;
+@property (nonatomic, weak  ) UIView           * supView;
+@property (nonatomic, assign) CGRect           orginFrame;
 @end
 
 @implementation BQPlayerView
