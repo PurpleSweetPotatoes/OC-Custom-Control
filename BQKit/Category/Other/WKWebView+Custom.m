@@ -5,15 +5,14 @@
 //  Created by baiqiang on 2019/7/15.
 //  Copyright © 2019 baiqiang. All rights reserved.
 //
-
 #import "WKWebView+Custom.h"
 
+#import "WebImgClickUnti.h"
 #import <objc/runtime.h>
 
 @implementation WKWebView (Custom)
 
-- (void)removeFromSuperview {
-    [super removeFromSuperview];
+- (void)clearnJSHandle {
     
     if (self.isLoading) {
         [self stopLoading];
@@ -25,9 +24,7 @@
     
     // 释放对应JS交互处理器
     for (WebProcessUnti * unti in self.untiList) {
-        for (NSString * name in [unti jsHandleNames]) {
-            [userCtrl removeScriptMessageHandlerForName:name];
-        }
+        [unti clearnJSHandle];
     }
     [self.untiList removeAllObjects];
 }
@@ -42,15 +39,42 @@
 }
 
 - (void)imgAutoFitWithSpace:(CGFloat)space {
-    NSString *js = @"function imgAutoFit() { \
-    var imgs = document.getElementsByTagName('img'); \
-    for (var i = 0; i < imgs.length; ++i) {\
-    var img = imgs[i];   \
-    img.style.maxWidth = %f;   \
-    } \
-    } imgAutoFit();";
+    NSString *js = @"function imgAutoFit() {\
+                        var imgs = document.getElementsByTagName('img');\
+                        for (var i = 0; i < imgs.length; ++i) {\
+                        var img = imgs[i];\
+                        img.style.maxWidth = %f;\
+                        } \
+                    } imgAutoFit();";
     js = [NSString stringWithFormat:js, self.bounds.size.width - space * 2];
     [self addJs:js injectionTime:WKUserScriptInjectionTimeAtDocumentEnd];
+}
+
+- (void)imgsAddClickInCtrl:(UIViewController *)ctrl {
+    
+    WebImgClickUnti * until = [WebImgClickUnti untiWithWebView:self ctrlVc:ctrl];
+    
+    NSString * js = @"function getImages () {\
+                        var imgs = document.getElementsByTagName('img');\
+                        var imgUrls = [];\
+                        for (var i = 0; i < imgs.length; i++) {\
+                            let img = imgs[i];\
+                            let src = img.src;\
+                            if (src.startsWith('http')) {\
+                                imgUrls.push(src);\
+                                img.customTag = i;\
+                                img.onclick = function () {window.webkit.messageHandlers.webImgClick.postMessage(this.customTag)};\
+                            }\
+                        }\
+                        return imgUrls;\
+                    } getImages();";
+    [self evaluateJavaScript:js completionHandler:^(id _Nullable list, NSError * _Nullable error) {
+        if (list) {
+            until.imgUrls = list;
+        } else {
+            NSLog(@"图片点击事件加载失败报错:%@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)addJs:(NSString *)js injectionTime:(WKUserScriptInjectionTime)time {
@@ -104,7 +128,6 @@
     
     return config;
 }
-
 
 + (WKProcessPool*)sharedProcessPool {
     static WKProcessPool *processPool = nil;

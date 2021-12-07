@@ -6,25 +6,29 @@
 //  Copyright © 2019 baiqiang. All rights reserved.
 //
 
-#import "WebProcessUnti.h"
 #import <WebKit/WebKit.h>
+#import "WebProcessUnti.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface WKWebView (Custom)
 
 @property (nonatomic, readonly, strong) NSMutableArray<WebProcessUnti *> * untiList;
+
 
 /** 文本大小自适应 */
 - (void)textAutoFit;
 
 /** 图片宽度自适应 */
 - (void)imgAutoFit;
-
-/**
- 图片宽度自适应
- @param space 间距(左右各一个)
- */
 - (void)imgAutoFitWithSpace:(CGFloat)space;
+
+/// 适用于添加了WebProcessUnti处理器
+- (void)clearnJSHandle;
+
+/// 增加web图片点击浏览，需在释放时调用clearnJSHandle方法
+/// @param ctrl 当前控制器
+- (void)imgsAddClickInCtrl:(UIViewController *)ctrl;
 
 /**
  注入js代码
