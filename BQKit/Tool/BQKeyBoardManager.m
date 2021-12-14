@@ -14,13 +14,14 @@
 #import "UIColor+Custom.h"
 #import "UIImage+Custom.h"
 #import "UILabel+Custom.h"
-
 @interface BQKeyBoardManager ()
-@property (nonatomic, strong) UIView                    * responseV;
-@property (nonatomic, strong) NSMutableArray<UIView *>  * editVList;
-@property (nonatomic, strong) UIView                    * currentEditV;
-@property (nonatomic, assign) BOOL                      didAdd;
+@property (nonatomic, strong) UIView  * responseV;
+@property (nonatomic, strong) NSMutableArray<UIView  *> * editVList;
+@property (nonatomic, strong) UIView  * currentEditV;
+@property (nonatomic, assign) BOOL    didAdd;
+@property (nonatomic, assign) CGFloat space;
 @end
+
 
 @interface BQKeyBoardToolBar : UIView
 @property (nonatomic, strong) UIButton     * preBtn;
@@ -43,8 +44,13 @@
 }
 
 + (void)startResponseView:(UIView *)reView {
+    [self startResponseView:reView space:0];
+}
+
++ (void)startResponseView:(UIView *)reView space:(CGFloat)space {
     BQKeyBoardManager * manager =  [self share];
     manager.responseV = reView;
+    manager.space = space;
 }
 
 + (void)closeResponse {
@@ -142,13 +148,12 @@
             CGRect keyboardRect = [aValue CGRectValue];
             NSInteger height = keyboardRect.size.height;
             CGFloat keyBoardY = [UIScreen mainScreen].bounds.size.height - height;
-            
             //响应视图的最低点
             CGRect rect = [editV.superview convertRect:editV.frame toView:[UIApplication sharedApplication].keyWindow];
             CGFloat vMaxY = CGRectGetMaxY(rect);
             //键盘挡住了响应式图
             if (keyBoardY < vMaxY) {
-                self.responseV.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0,keyBoardY - vMaxY);
+                self.responseV.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0,keyBoardY - vMaxY - self.space);
             }
             return;
         }
@@ -176,7 +181,7 @@
 @implementation BQKeyBoardToolBar
 
 + (instancetype)toolBar {
-    return [[BQKeyBoardToolBar alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 44)];
+    return [[BQKeyBoardToolBar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -213,7 +218,7 @@
     dissBtn.frame = CGRectMake(self.bounds.size.width - 60, 0, 60, 44);
     dissBtn.titleLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
     [dissBtn setTitle:@"完成" forState:UIControlStateNormal];
-    [dissBtn setTitleColor:[UIColor hexstr:@"0099ff"] forState:UIControlStateNormal];
+    [dissBtn setTitleColor:[UIColor colorFromHexString:@"0099ff"] forState:UIControlStateNormal];
     [self addSubview:dissBtn];
     self.dissBtn = dissBtn;
 }

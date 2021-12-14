@@ -15,9 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 键盘管理者
 @interface BQKeyBoardManager : NSObject
 
+/// 添加键盘管理视图，偏移增量为0
++ (void)startResponseView:(UIView *)reView;
+
 /// 添加键盘管理视图,只能针对一个视图管理,添加一个自动移除上一个管理视图
 /// @param reView 被管理的视图
-+ (void)startResponseView:(UIView *)reView;
+/// @param space 视图偏移增量 +向上 -向下
++ (void)startResponseView:(UIView *)reView space:(CGFloat)space;
 
 /// 移除键盘管理
 + (void)closeResponse;
