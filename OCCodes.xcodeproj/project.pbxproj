@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		880EB2A5CD62B11D76F0FFFE /* Pods_OCCodes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D793857ECFE23983AC3A04 /* Pods_OCCodes.framework */; };
+		E20A01992770524600701ADC /* CameraVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E20A01982770524600701ADC /* CameraVc.m */; };
 		E21A076B276ADB0500D01F83 /* BQLaunchAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E21A0769276ADB0500D01F83 /* BQLaunchAd.m */; };
 		E21A076E276AE3F500D01F83 /* BQLaunchConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E21A076D276AE3F500D01F83 /* BQLaunchConfig.m */; };
 		E21A07A7276B0C4000D01F83 /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E21A07A6276B0C4000D01F83 /* CellModel.m */; };
@@ -111,6 +112,8 @@
 		79377964ACD4AD0078E14D68 /* Pods-OCCodes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCCodes.debug.xcconfig"; path = "Target Support Files/Pods-OCCodes/Pods-OCCodes.debug.xcconfig"; sourceTree = "<group>"; };
 		B2D793857ECFE23983AC3A04 /* Pods_OCCodes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCCodes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB741CEA104B51BA11EB12FA /* Pods-OCCodes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCCodes.release.xcconfig"; path = "Target Support Files/Pods-OCCodes/Pods-OCCodes.release.xcconfig"; sourceTree = "<group>"; };
+		E20A01972770524600701ADC /* CameraVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraVc.h; sourceTree = "<group>"; };
+		E20A01982770524600701ADC /* CameraVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraVc.m; sourceTree = "<group>"; };
 		E21A0769276ADB0500D01F83 /* BQLaunchAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BQLaunchAd.m; sourceTree = "<group>"; };
 		E21A076A276ADB0500D01F83 /* BQLaunchAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BQLaunchAd.h; sourceTree = "<group>"; };
 		E21A076C276AE3F500D01F83 /* BQLaunchConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQLaunchConfig.h; sourceTree = "<group>"; };
@@ -740,6 +743,8 @@
 				E21A07AD276B125400D01F83 /* DatePickView.m */,
 				E250CFCB276C3E7C00AC1F40 /* VideoPlayerVc.h */,
 				E250CFCC276C3E7C00AC1F40 /* VideoPlayerVc.m */,
+				E20A01972770524600701ADC /* CameraVc.h */,
+				E20A01982770524600701ADC /* CameraVc.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -911,6 +916,7 @@
 				E25F233727688FD200C3E984 /* BaseVc.m in Sources */,
 				E25F229E276871C100C3E984 /* BQAlertVc.m in Sources */,
 				E25F209D2768706700C3E984 /* AppDelegate.m in Sources */,
+				E20A01992770524600701ADC /* CameraVc.m in Sources */,
 				E25F22A5276871C100C3E984 /* BQTextRule.m in Sources */,
 				E25F22B8276871C100C3E984 /* BQFMDBHelper.m in Sources */,
 				E25F2294276871C100C3E984 /* WebProcessUnti.m in Sources */,

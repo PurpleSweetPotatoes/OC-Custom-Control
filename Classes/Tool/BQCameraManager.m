@@ -13,12 +13,14 @@
 
 @interface BQCameraManager()
 <
-AVCaptureVideoDataOutputSampleBufferDelegate,
-AVCaptureAudioDataOutputSampleBufferDelegate
+AVCaptureVideoDataOutputSampleBufferDelegate
+,AVCaptureAudioDataOutputSampleBufferDelegate
+,AVCaptureMetadataOutputObjectsDelegate
 >
 @property (nonatomic, weak  ) id<BQCameraManagerDelegate> delegate;
 @property (nonatomic, strong) AVCaptureConnection         * videoConnec;
 @property (nonatomic, assign) CGColorSpaceRef             colorSpace;
+@property (nonatomic, strong) AVCaptureMetadataOutput     * metaOutput;
 @end
 
 @implementation BQCameraManager
@@ -49,12 +51,14 @@ AVCaptureAudioDataOutputSampleBufferDelegate
 
 - (void)startRunning {
     if (self.videoInput && ![self.session isRunning]) {
-        AVCaptureConnection* connection = [self.output connectionWithMediaType:AVMediaTypeVideo];
+        AVCaptureConnection* connection = [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
         connection.videoOrientation = AVCaptureVideoOrientationPortrait;
         // 调节摄像头翻转
         connection.videoMirrored = (self.postion == AVCaptureDevicePositionFront);
-        [self.session startRunning];
-        [self resetFocusAndExposureModes];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.session startRunning];
+            [self resetFocusAndExposureModes];
+        });
     }
 }
 
@@ -95,9 +99,11 @@ AVCaptureAudioDataOutputSampleBufferDelegate
 
 /// 闪光灯操作
 - (void)setFlashMode:(AVCaptureFlashMode)flashMode {
-    if (self.device.flashMode != flashMode && [self.device isFlashModeSupported:flashMode]) {
+    AVCapturePhotoSettings * settings = [AVCapturePhotoSettings photoSettings];
+    AVCapturePhotoOutput * photoOutput = [AVCapturePhotoOutput new];
+    if (settings.flashMode != flashMode && [photoOutput.supportedFlashModes containsObject:@(flashMode)]) {
         [self changeDeviceStatus:^{
-            self.device.flashMode = flashMode;
+            settings.flashMode = flashMode;
         }];
     }
 }
@@ -153,7 +159,9 @@ AVCaptureAudioDataOutputSampleBufferDelegate
 - (CGPoint)transtionPoint:(CGPoint)point size:(CGSize)size {
     if (point.x > size.width || point.y > size.height) {
         if ([self.delegate respondsToSelector:@selector(cameraChangeStatusFail:)]) {
-            [self.delegate cameraChangeStatusFail:@"调整点位不正确"];
+            MainQueueSafe(^{
+                [self.delegate cameraChangeStatusFail:@"调整点位不正确"];
+            })
             return CGPointZero;
         }
     }
@@ -170,7 +178,9 @@ AVCaptureAudioDataOutputSampleBufferDelegate
     if ([self.device lockForConfiguration:&err]) {
         block();
     } else if([self.delegate respondsToSelector:@selector(cameraChangeStatusFail:)]){
-        [self.delegate cameraChangeStatusFail:err.localizedDescription];
+        MainQueueSafe(^{
+            [self.delegate cameraChangeStatusFail:err.localizedDescription];
+        });
     } else {
         NSLog(@"状态修改错误:%@",err.localizedDescription);
     }
@@ -182,7 +192,10 @@ AVCaptureAudioDataOutputSampleBufferDelegate
     if (connection == self.videoConnec) {
         //视频处理
         if ([self.delegate respondsToSelector:@selector(cameraFrameImage:)]) {
-            [self.delegate cameraFrameImage:[self imageFromSampleBuffer:sampleBuffer]];
+            UIImage * image = [self imageFromSampleBuffer:sampleBuffer];
+            MainQueueSafe(^{
+                [self.delegate cameraFrameImage:image];
+            });
         }
 
     }
@@ -218,11 +231,25 @@ AVCaptureAudioDataOutputSampleBufferDelegate
     return outImg;
 }
 
+- (void)captureOutput:(AVCaptureOutput *)output didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    
+    AVMetadataMachineReadableCodeObject *code = metadataObjects.firstObject;
+    if (code.stringValue) {
+        NSLog(@"扫描到%@: %@", code.type == AVMetadataObjectTypeQRCode?@"二维码":@"条形码", code.stringValue);
+        NSLog(@"位置:%@", NSStringFromCGRect(code.bounds));
+        if ([self.delegate respondsToSelector:@selector(cameraScanInfo:bounds:)]) {
+            MainQueueSafe(^{
+                [self.delegate cameraScanInfo:code.stringValue bounds:code.bounds];
+            });
+        }
+    }
+}
+
 #pragma mark - 配置相机
 
 - (void)configDevice {
-    NSArray * deviceList = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-    
+    AVCaptureDeviceDiscoverySession * session = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera] mediaType:AVMediaTypeVideo position:self.postion];
+    NSArray * deviceList = session.devices;
     if (deviceList.count > 0) {
         self.device = deviceList[0];
         for (AVCaptureDevice * device in deviceList) {
@@ -230,12 +257,6 @@ AVCaptureAudioDataOutputSampleBufferDelegate
                 self.device = device;
             }
         }
-        
-//        [self changeDeviceStatus:^{
-//            [self.device setActiveVideoMinFrameDuration:CMTimeMake(1, 20)];
-//            [self.device setActiveVideoMaxFrameDuration:CMTimeMake(1, self.setting.fps)];
-//        }];
-        
         __weak typeof(self) weakSelf = self;
         [UIDevice prepareCamera:^{
                 [weakSelf configStreams];
@@ -252,14 +273,6 @@ AVCaptureAudioDataOutputSampleBufferDelegate
     self.videoInput = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:&err];
     
     if (!err) {
-
-        if (self.output == nil) {
-            AVCaptureVideoDataOutput * videoOutput = [[AVCaptureVideoDataOutput alloc] init];
-            videoOutput.videoSettings = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt:kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
-            [videoOutput setSampleBufferDelegate:self queue:dispatch_queue_create("BQCameraSetting.process.queue", DISPATCH_QUEUE_SERIAL)];
-            self.output = videoOutput;
-        }
-    
         [self.session beginConfiguration];
         
         if (videoInput) {
@@ -270,31 +283,47 @@ AVCaptureAudioDataOutputSampleBufferDelegate
             [self.session addInput:self.videoInput];
         }
         
-        if ([self.session canAddOutput:self.output]) {
-            [self.session addOutput:self.output];
-            self.videoConnec = [self.output connectionWithMediaType:AVMediaTypeVideo];
+        if ([self.session canAddOutput:self.videoOutput]) {
+            [self.session addOutput:self.videoOutput];
+            self.videoConnec = [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
+        }
+        
+        if ([self.session canAddOutput:self.metaOutput]) {
+            [self.session addOutput:self.metaOutput];
+            // 需要在添加后设置
+            self.metaOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code];
         }
         
         if (self.startMic) {
-            NSArray * deviceList = [AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio];
-            AVCaptureDeviceInput * audioInput = [AVCaptureDeviceInput deviceInputWithDevice:deviceList[0] error:nil];
-            if ([self.session canAddInput:audioInput]) {
-                [self.session addInput:audioInput];
-            }
+            AVCaptureDeviceDiscoverySession * session = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInMicrophone] mediaType:AVMediaTypeVideo position:self.postion];
+            NSArray * deviceList = session.devices;
+            if (deviceList.count > 0) {
+                AVCaptureDeviceInput * audioInput = [AVCaptureDeviceInput deviceInputWithDevice:deviceList[0] error:nil];
+                if ([self.session canAddInput:audioInput]) {
+                    [self.session addInput:audioInput];
+                }
 
-            AVCaptureAudioDataOutput * audioOutput = [[AVCaptureAudioDataOutput alloc] init];
-            [audioOutput setSampleBufferDelegate:self queue:dispatch_get_global_queue(0, 0)];
-            if ([self.session canAddOutput:audioOutput]) {
-                [self.session addOutput:audioOutput];
+                AVCaptureAudioDataOutput * audioOutput = [[AVCaptureAudioDataOutput alloc] init];
+                [audioOutput setSampleBufferDelegate:self queue:dispatch_get_global_queue(0, 0)];
+                if ([self.session canAddOutput:audioOutput]) {
+                    [self.session addOutput:audioOutput];
+                }
             }
         }
-        
         [self.session commitConfiguration];
     } else {
         if ([self.delegate respondsToSelector:@selector(cameraLoadFail:)]) {
-            [self.delegate cameraLoadFail:err.localizedDescription];
+            MainQueueSafe(^{
+                [self.delegate cameraLoadFail:err.localizedDescription];
+            })
+            
         }
     }
+}
+
+- (void)configScanRect:(CGRect)rect superSize:(CGSize)size {
+    
+    self.metaOutput.rectOfInterest = CGRectMake(rect.origin.y/size.height, rect.origin.x/size.width, rect.size.height / size.height, rect.size.width / size.width);
 }
 
 - (BOOL)setSeesionPreset:(AVCaptureSessionPreset)preset {
@@ -304,5 +333,27 @@ AVCaptureAudioDataOutputSampleBufferDelegate
     }
     return NO;
 }
+
+#pragma mark - *** get
+
+- (AVCaptureOutput *)videoOutput {
+    if (_videoOutput == nil) {
+        AVCaptureVideoDataOutput * videoOutput = [[AVCaptureVideoDataOutput alloc] init];
+        videoOutput.videoSettings = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt:kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
+        [videoOutput setSampleBufferDelegate:self queue:dispatch_queue_create("BQCameraSetting.process.queue", DISPATCH_QUEUE_SERIAL)];
+        _videoOutput = videoOutput;
+    }
+    return _videoOutput;
+}
+
+- (AVCaptureMetadataOutput *)metaOutput {
+    if (_metaOutput == nil) {
+        AVCaptureMetadataOutput * metaOutput = [[AVCaptureMetadataOutput alloc] init];
+        [metaOutput setMetadataObjectsDelegate:self queue:dispatch_queue_create("BQCameraSetting.process.queue", DISPATCH_QUEUE_SERIAL)];
+        _metaOutput = metaOutput;
+    }
+    return _metaOutput;
+}
+
 @end
 

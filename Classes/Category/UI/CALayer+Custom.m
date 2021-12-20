@@ -125,22 +125,31 @@
 }
 
 + (instancetype)guideLayerWithFrame:(CGRect)rect {
-    return [self guideLayerWithFrame:rect inSize:[UIScreen mainScreen].bounds.size];
+    return [self guideLayerWithFrame:rect inSize:[UIScreen mainScreen].bounds.size radius:0];
 }
 
-+ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size {
-    return [self guideLayerWithFrame:rect inSize:size bgColor:[UIColor colorWithWhite:0 alpha:0.8]];
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size radius:(CGFloat)radius {
+    return [self guideLayerWithFrame:rect inSize:size bgColor:[UIColor colorWithWhite:0 alpha:0.6] radius:0];
 }
 
-+ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color {
-    CALayer * outLayer = [CALayer layerWithFrame:CGRectMake(0, 0, size.width, size.height) color:[UIColor clearColor]];
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color radius:(CGFloat)radius {
     if (CGRectEqualToRect(rect, CGRectZero)) {
-        return outLayer;
+        return [CALayer layerWithFrame:CGRectMake(0, 0, size.width, size.height) color:color];
     }
-    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(0, 0, size.width, rect.origin.y) color:color]];
-    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(0, rect.origin.y, rect.origin.x, rect.size.height) color:color]];
-    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(0, CGRectGetMaxY(rect), size.width, size.height - CGRectGetMaxY(rect)) color:color]];
-    [outLayer addSublayer:[CALayer layerWithFrame:CGRectMake(CGRectGetMaxX(rect), rect.origin.y, size.width - CGRectGetMaxX(rect), CGRectGetMaxY(rect) - rect.origin.y) color:color]];
+    
+    CAShapeLayer * outLayer = [CAShapeLayer layer];
+    outLayer.frame = CGRectMake(0, 0, size.width, size.height);
+    outLayer.fillColor = color.CGColor;
+    outLayer.fillRule = kCAFillRuleEvenOdd;
+    
+    UIBezierPath * rectPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius];
+    [rectPath closePath];
+    UIBezierPath * overlayPath = [UIBezierPath bezierPathWithRect:outLayer.bounds];
+    [overlayPath closePath];
+    [overlayPath appendPath:rectPath];
+    
+    outLayer.path = overlayPath.CGPath;
+    
     return outLayer;
 }
 

@@ -22,7 +22,14 @@ typedef void(^ImgBlock)(UIImage * img);
 
 #pragma mark - *** DefineInfo
 
-/*  弱引用和强引用 */
+/** ---------------- 安全线程回调  ---------------- */
+#define MainQueueSafe(block)\
+    if (dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == dispatch_queue_get_label(dispatch_get_main_queue())) {\
+        block();\
+    } else {\
+        dispatch_async(dispatch_get_main_queue(), block);\
+    }
+/** ---------------- 弱引用和强引用  ---------------- */
 #define WeakSelf __weak typeof(self) weakSelf = self
 #define StrongSelf __weak typeof(weakSelf) strongSelf = weakSelf
 

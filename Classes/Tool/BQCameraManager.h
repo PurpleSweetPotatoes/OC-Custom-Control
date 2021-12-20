@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cameraChangeStatusFail:(NSString *)fail;
 
+- (void)cameraScanInfo:(NSString *)info bounds:(CGRect)bounds;
 /// 使用默认output有效
 - (void)cameraFrameImage:(UIImage *)image;
 
@@ -35,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 默认 AVCaptureDevicePositionBack
 @property (nonatomic, assign        ) AVCaptureDevicePosition     postion;
 /// 默认使用32RGB类型的videoDataOutput
-@property (nonatomic, strong        ) AVCaptureOutput             * output;
+@property (nonatomic, strong        ) AVCaptureOutput             * videoOutput;
 /// 是否开启麦克风
 @property (nonatomic, assign        ) BOOL                        startMic;
 
@@ -43,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)configManager;
 
 + (instancetype)configManagerWithDelegate:(_Nullable id<BQCameraManagerDelegate>)delegate;
+
+- (void)configScanRect:(CGRect)rect superSize:(CGSize)size;
 
 /// 设置分辨率
 - (BOOL)setSeesionPreset:(AVCaptureSessionPreset)preset;

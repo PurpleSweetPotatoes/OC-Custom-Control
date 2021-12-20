@@ -47,13 +47,14 @@
 
 /// 创建引导视图
 /// @param rect 留白区域
-/// @param inSize 引导图大小
-+ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size;
+/// @param radius 留白区域圆角
++ (instancetype)guideLayerWithFrame:(CGRect)rect radius:(CGFloat)radius;
 
 /// 创建引导视图
 /// @param rect 留白区域
-/// @param inSize 引导图大小
-/// @param bgColor 引导图背景色
-+ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color;
+/// @param size 引导图大小
+/// @param color 引导图背景色
+/// @param radius 留白区域圆角
++ (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color radius:(CGFloat)radius;
 
 @end

@@ -148,8 +148,6 @@
 }
 
 
-
-
 - (CALayer *)showadLine {
     return objc_getAssociatedObject(self, _cmd);
 }
@@ -158,4 +156,10 @@
     objc_setAssociatedObject(self, @selector(showadLine), showadLine, OBJC_ASSOCIATION_RETAIN);
 }
 
+- (BOOL)isPhoneX {
+    if (@available(iOS 11.0, *)) {
+        return [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;
+    }
+    return NO;
+}
 @end
