@@ -41,7 +41,7 @@ BQSliderViewDelegate
     _topToolView.frame = CGRectMake(0, 0, self.width, 40);
     _bottomToolView.frame = CGRectMake(0, self.height - 40, self.width, 40);
     if (_fullBtn.selected) {
-        _sliederView.frame = CGRectMake(50, 0, self.width - 90, 40);
+        _sliederView.frame = CGRectMake(50, 0, self.width - 120, 40);
     } else {
         _sliederView.frame = CGRectMake(10, 0, self.width - 60, 40);
     }

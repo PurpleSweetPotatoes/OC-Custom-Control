@@ -14,23 +14,28 @@
 #import "BQTimer.h"
 #import "BQTipView.h"
 #import "CALayer+Custom.h"
+#import "ScanView.h"
 #import "UIColor+Custom.h"
+#import "UILabel+Custom.h"
 #import "UIViewController+Custom.h"
-
+#import "CameraGestureView.h"
 @interface CameraVc ()
 <
 BQCameraManagerDelegate
+,CAAnimationDelegate
 >
-@property (nonatomic, strong) UIImageView * showImgV;
-@property (nonatomic, strong) BQCameraManager * cameraManager;
+@property (nonatomic, strong) BQCameraManager   * cameraManager;
+@property (nonatomic, strong) UIImageView       * showImgV;
+@property (nonatomic, strong) CameraGestureView * gestureV;
+@property (nonatomic, assign) CALayer           * btnLayer;
+@property (nonatomic, assign) UIButton          * preBtn;
+@property (nonatomic, strong) UIView            * topView;
 
-@property (nonatomic, strong) CALayer * guideLayer;
-@property (nonatomic, strong) CAShapeLayer * borderLayer;
-@property (nonatomic, strong) CALayer * animationLayer;
+@property (nonatomic, strong) ScanView          * scanV;
+
 @end
 
 @implementation CameraVc
-
 
 #pragma mark - *** Public method
 
@@ -39,41 +44,45 @@ BQCameraManagerDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor blackColor];
     [self configUI];
+    
+    [self topBtnClick:[self.topView viewWithTag:100]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     [self.cameraManager startRunning];
-//    [self.timer start];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
     [self.cameraManager stopRunning];
-//    [self.timer pause];
 }
 
 #pragma mark - *** NetWork method
 
 #pragma mark - *** Event Action
 
+- (void)backBtnClick {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
-//- (void)timeChange {
-//    if (self.showImgV.image) {
-//        NSLog(@"图片检测");
-//        CIDetector * detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
-//        CIImage * image = [CIImage imageWithCGImage:self.showImgV.image.CGImage];
-//        NSArray * features = [detector featuresInImage:image];
-//        if (features.count >= 1) {
-//            CIQRCodeFeature * feature = features.firstObject;
-//            NSLog(@"扫描位置: %@, 结果: %@",NSStringFromCGRect(feature.bounds), feature.messageString);
-//        }
-//        NSLog(@"检查完毕");
-//    }
-//}
+- (void)topBtnClick:(UIButton *)sender {
+
+    if (sender == self.preBtn) return;
+    
+    self.preBtn.selected = !self.preBtn.isSelected;
+    
+    sender.selected = !sender.isSelected;
+    self.preBtn = sender;
+    self.btnLayer.left = self.preBtn.left;
+    
+    self.scanV.hidden = ![sender.currentTitle isEqualToString:@"扫描"];
+}
+
 #pragma mark - *** Delegate
 - (void)cameraLoadFail:(NSString *)fail {
     [BQTipView showInfo:fail];
@@ -85,8 +94,9 @@ BQCameraManagerDelegate
 
 - (void)cameraScanInfo:(NSString *)info bounds:(CGRect)bounds {
     
+    if (self.scanV.isHidden) return;
+        
     [BQTipView showInfo:info];
-    
     [self.cameraManager stopRunning];
 }
 
@@ -94,20 +104,20 @@ BQCameraManagerDelegate
 - (void)cameraFrameImage:(UIImage *)image {
     self.showImgV.image = image;
 }
+
 #pragma mark - *** Instance method
 
 #pragma mark - *** UI method
 
 - (void)configUI {
-    [self.view addSubview:self.showImgV];
+    [self.view addSubview:self.topView];
     
-    [self.guideLayer addSublayer:self.borderLayer];
-    [self.guideLayer addSublayer:self.animationLayer];
-    [self.showImgV.layer addSublayer:self.guideLayer];
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return YES;
+    [self.view addSubview:self.showImgV];
+    [self.view addSubview:self.gestureV];
+    
+    [self.view addSubview:self.scanV];
+    
+    [self.cameraManager configScanRect:self.scanV.scanFrame superSize:self.showImgV.size];
 }
 
 #pragma mark - *** Set
@@ -117,8 +127,8 @@ BQCameraManagerDelegate
 
 - (UIImageView *)showImgV {
     if (_showImgV == nil) {
-        UIImageView * showImgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        showImgV.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView * showImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topView.bottom, self.view.width, self.view.height - self.topView.bottom)];
+//        showImgV.contentMode = UIViewContentModeScaleAspectFit;
         _showImgV = showImgV;
     }
     return _showImgV;
@@ -132,74 +142,57 @@ BQCameraManagerDelegate
     return _cameraManager;
 }
 
-//- (BQTimer *)timer {
-//    if (_timer == nil) {
-//        BQTimer * timer = [BQTimer configWithScheduleTime:0.3 target:self selector:@selector(timeChange)];
-//        [timer pause];
-//        _timer = timer;
-//    }
-//    return _timer;
-//}
-
-- (CALayer *)guideLayer {
-    if (_guideLayer == nil) {
-        CALayer * guideLayer = [CALayer guideLayerWithFrame:self.borderLayer.frame];
-
-        [self.cameraManager configScanRect:self.borderLayer.frame superSize:guideLayer.size];
+- (UIView *)topView {
+    if (_topView == nil) {
+        UIView * topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.isPhoneX ? 88 : 64)];
+        topView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
         
-        _guideLayer = guideLayer;
+        UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        backBtn.frame = CGRectMake(15, self.isPhoneX ? 44 : 20, 44, 44);
+        [backBtn setImage:[UIImage imageNamed:@"item_bakc"] forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchDown];
+        [topView addSubview:backBtn];
+        
+        NSArray * arr = @[@"拍照", @"录像", @"扫描"];
+        CGFloat btnW = 50;
+        CGFloat left = topView.width * 0.5 - (arr.count / 2.0) * btnW;
+        for (NSInteger i = 0; i < arr.count; i++) {
+            NSString * title = arr[i];
+            UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake(left + btnW * i, backBtn.top, btnW, backBtn.height);
+            btn.tag = 100 + i;
+            [btn setTitle:title forState:UIControlStateNormal];
+            [btn setTitle:title forState:UIControlStateSelected];
+            [btn setTitleColor:[UIColor colorWithWhite:1 alpha:0.6] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+            [btn addTarget:self action:@selector(topBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [topView addSubview:btn];
+            if (i == 0) {
+                _btnLayer = [CALayer layerWithFrame:CGRectMake(btn.left, btn.bottom - 4, btn.width, 1) color:[UIColor whiteColor]];
+            }
+        }
+        
+        [topView.layer addSublayer:_btnLayer];
+        
+        _topView = topView;
     }
-    return _guideLayer;
+    return _topView;
+}
+- (ScanView *)scanV {
+    if (_scanV == nil) {
+        ScanView * scanV = [[ScanView alloc] initWithFrame:self.showImgV.frame scanFrame:CGRectMake((self.showImgV.width - 200) * 0.5, (self.showImgV.height - 200) * 0.5 - 50, 200, 200)];
+        _scanV = scanV;
+    }
+    return _scanV;
 }
 
-- (CAShapeLayer *)borderLayer {
-    if (_borderLayer == nil) {
-        CAShapeLayer * borderLayer = [CAShapeLayer layer];
-        borderLayer.frame = CGRectMake((self.showImgV.width - 200) * 0.5, (self.showImgV.height - 200) * 0.5 - 50, 200, 200);
-        
-        CGFloat lineW = 20;
-        UIBezierPath * path = [UIBezierPath bezierPath];
-        [path moveToPoint:CGPointMake(0, lineW)];
-        [path addLineToPoint:CGPointZero];
-        [path addLineToPoint:CGPointMake(lineW, 0)];
-        
-        [path moveToPoint:CGPointMake(borderLayer.width - lineW, 0)];
-        [path addLineToPoint:CGPointMake(borderLayer.width , 0)];
-        [path addLineToPoint:CGPointMake(borderLayer.width, lineW)];
-        
-        [path moveToPoint:CGPointMake(borderLayer.width, borderLayer.height - lineW)];
-        [path addLineToPoint:CGPointMake(borderLayer.width, borderLayer.height)];
-        [path addLineToPoint:CGPointMake(borderLayer.width - lineW, borderLayer.height)];
-        
-        [path moveToPoint:CGPointMake(lineW, borderLayer.height)];
-        [path addLineToPoint:CGPointMake(0, borderLayer.height)];
-        [path addLineToPoint:CGPointMake(0, borderLayer.height - lineW)];
-        
-        borderLayer.lineWidth = 4;
-        borderLayer.fillColor = [UIColor clearColor].CGColor;
-        borderLayer.strokeColor = [UIColor greenColor].CGColor;
-        borderLayer.path = path.CGPath;
-        
-        _borderLayer = borderLayer;
+- (CameraGestureView *)gestureV {
+    if (_gestureV == nil) {
+        CameraGestureView * gestureV = [[CameraGestureView alloc] initWithFrame:self.showImgV.frame];
+        gestureV.manager = self.cameraManager;
+        _gestureV = gestureV;
     }
-    return _borderLayer;
-}
-
-- (CALayer *)animationLayer {
-    if (_animationLayer == nil) {
-        CAShapeLayer * animationLayer = [CAShapeLayer layer];
-        animationLayer.frame = CGRectMake(self.borderLayer.left + 5, 0, self.borderLayer.width - 10, 4);
-        animationLayer.backgroundColor = self.borderLayer.strokeColor;
-        CABasicAnimation * animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
-        animation.fromValue = @(self.borderLayer.top + 2);
-        animation.toValue = @(self.borderLayer.bottom - 2);
-        animation.duration = 2.5;
-        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-        animation.repeatCount = 1000;
-        [animationLayer addAnimation:animation forKey:@"animationLayer"];
-        _animationLayer = animationLayer;
-    }
-    return _animationLayer;
+    return _gestureV;
 }
 
 @end

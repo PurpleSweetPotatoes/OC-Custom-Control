@@ -45,6 +45,7 @@ static NSString * const kItemBufferReady = @"playbackLikelyToKeepUp";
     self = [super initWithFrame:frame];
     if (self) {
         _status = BQPlayerStatusNone;
+        self.backgroundColor = [UIColor blackColor];
         self.player = [[AVPlayer alloc] init];
         self.showLayer = [[AVPlayerLayer alloc] init];
         self.showLayer.frame = self.bounds;

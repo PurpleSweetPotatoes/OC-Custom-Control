@@ -129,7 +129,7 @@
 }
 
 + (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size radius:(CGFloat)radius {
-    return [self guideLayerWithFrame:rect inSize:size bgColor:[UIColor colorWithWhite:0 alpha:0.6] radius:0];
+    return [self guideLayerWithFrame:rect inSize:size bgColor:[UIColor colorWithWhite:0 alpha:0.5] radius:0];
 }
 
 + (instancetype)guideLayerWithFrame:(CGRect)rect inSize:(CGSize)size bgColor:(UIColor *)color radius:(CGFloat)radius {

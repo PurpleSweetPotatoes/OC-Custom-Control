@@ -143,7 +143,7 @@
         UIViewController<BQSwipTableViewDelegate> * currentTabVc = self.tabArrs[self.currentTabIndex];
         currentTabVc.needScrollBlock = NO;
         currentTabVc.view.right = 0;
-        currentTabVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.height)];
+//        currentTabVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.height)];
         
         UIViewController<BQSwipTableViewDelegate> * tabVc = self.tabArrs[index];
         tabVc.view.left = 0;
@@ -180,7 +180,6 @@
     
     self.tempHeaderView.hidden = NO;
     fromVc.needScrollBlock = NO;
-    fromVc.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, self.disPalyHeaderView.height)];
     
     toVc.needScrollBlock = YES;
 //    toVc.tableView.tableHeaderView = self.disPalyHeaderView;

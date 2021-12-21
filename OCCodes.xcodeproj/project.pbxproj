@@ -106,6 +106,11 @@
 		E25F233727688FD200C3E984 /* BaseVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F233627688FD200C3E984 /* BaseVc.m */; };
 		E25F233A2768900B00C3E984 /* TestListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F23392768900B00C3E984 /* TestListVc.m */; };
 		E25F233D2768906300C3E984 /* CenterInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F233C2768906300C3E984 /* CenterInfoVc.m */; };
+		E2BF586527717AB20010C2E5 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2BF586227717AB20010C2E5 /* 1.jpg */; };
+		E2BF586627717AB20010C2E5 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2BF586327717AB20010C2E5 /* 3.jpg */; };
+		E2BF586727717AB20010C2E5 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2BF586427717AB20010C2E5 /* 2.jpg */; };
+		E2BF58A02771C8110010C2E5 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF589F2771C8110010C2E5 /* ScanView.m */; };
+		E2BF58A32771D8270010C2E5 /* CameraGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF58A22771D8270010C2E5 /* CameraGestureView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -309,6 +314,13 @@
 		E25F23392768900B00C3E984 /* TestListVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestListVc.m; sourceTree = "<group>"; };
 		E25F233B2768906300C3E984 /* CenterInfoVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CenterInfoVc.h; sourceTree = "<group>"; };
 		E25F233C2768906300C3E984 /* CenterInfoVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CenterInfoVc.m; sourceTree = "<group>"; };
+		E2BF586227717AB20010C2E5 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		E2BF586327717AB20010C2E5 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		E2BF586427717AB20010C2E5 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		E2BF589E2771C8110010C2E5 /* ScanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
+		E2BF589F2771C8110010C2E5 /* ScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
+		E2BF58A12771D8270010C2E5 /* CameraGestureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraGestureView.h; sourceTree = "<group>"; };
+		E2BF58A22771D8270010C2E5 /* CameraGestureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraGestureView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +379,10 @@
 			children = (
 				E250CFCF276C3ED500AC1F40 /* VcInfoCell.h */,
 				E250CFD0276C3ED500AC1F40 /* VcInfoCell.m */,
+				E2BF589E2771C8110010C2E5 /* ScanView.h */,
+				E2BF589F2771C8110010C2E5 /* ScanView.m */,
+				E2BF58A12771D8270010C2E5 /* CameraGestureView.h */,
+				E2BF58A22771D8270010C2E5 /* CameraGestureView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +429,7 @@
 		E25F20B6276870B000C3E984 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E2BF586127717AA00010C2E5 /* imgs */,
 				E250D00B276C6EF100AC1F40 /* test.mp4 */,
 				E25F20AD2768706800C3E984 /* main.m */,
 				E25F20A92768706800C3E984 /* LaunchScreen.storyboard */,
@@ -771,6 +788,16 @@
 			path = BaseCls;
 			sourceTree = "<group>";
 		};
+		E2BF586127717AA00010C2E5 /* imgs */ = {
+			isa = PBXGroup;
+			children = (
+				E2BF586227717AB20010C2E5 /* 1.jpg */,
+				E2BF586427717AB20010C2E5 /* 2.jpg */,
+				E2BF586327717AB20010C2E5 /* 3.jpg */,
+			);
+			path = imgs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -831,8 +858,11 @@
 			files = (
 				E25F20AB2768706800C3E984 /* LaunchScreen.storyboard in Resources */,
 				E25F229B276871C100C3E984 /* BQPlayer.bundle in Resources */,
+				E2BF586727717AB20010C2E5 /* 2.jpg in Resources */,
 				E25F20A82768706800C3E984 /* Assets.xcassets in Resources */,
+				E2BF586627717AB20010C2E5 /* 3.jpg in Resources */,
 				E250D00C276C6EF100AC1F40 /* test.mp4 in Resources */,
+				E2BF586527717AB20010C2E5 /* 1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +934,7 @@
 				E25F2282276871C100C3E984 /* UITableView+Custom.m in Sources */,
 				E25F2284276871C100C3E984 /* UIColor+Custom.m in Sources */,
 				E25F228B276871C100C3E984 /* NSString+Custom.m in Sources */,
+				E2BF58A32771D8270010C2E5 /* CameraGestureView.m in Sources */,
 				E25F2291276871C100C3E984 /* NSObject+Custom.m in Sources */,
 				E250CFD1276C3ED500AC1F40 /* VcInfoCell.m in Sources */,
 				E25F226C276871C100C3E984 /* BQSwipeSubTableVc.m in Sources */,
@@ -925,6 +956,7 @@
 				E25F22B5276871C100C3E984 /* NSObject+analys.m in Sources */,
 				E25F2296276871C100C3E984 /* BQPlayerCtrlView.m in Sources */,
 				E25F2280276871C100C3E984 /* UILabel+Custom.m in Sources */,
+				E2BF58A02771C8110010C2E5 /* ScanView.m in Sources */,
 				E25F2295276871C100C3E984 /* AVAssetExportSession+Custom.m in Sources */,
 				E25F22B0276871C100C3E984 /* BQPhotoView.m in Sources */,
 				E25F2292276871C100C3E984 /* AppDelegate+Notification.m in Sources */,

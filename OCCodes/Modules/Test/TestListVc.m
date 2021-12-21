@@ -38,6 +38,7 @@ UITableViewDelegate
         [VcModel modelWithDic:@{@"clsName":@"DatePickView",@"titleName":@"时间选择控件",@"descStr":@"时间选择"}]
         ,[VcModel modelWithDic:@{@"clsName":@"VideoPlayerVc",@"titleName":@"播放器控件",@"descStr":@"视频播放"}]
         ,[VcModel modelWithDic:@{@"clsName":@"CameraVc",@"titleName":@"摄像头控件",@"descStr":@"摄像头调用"}]
+        ,[VcModel modelWithDic:@{@"clsName":@"ThroughScrollViewsVc",@"titleName":@"左右列表控件",@"descStr":@"多列表一个头视图"}]
     ];
     
     [self configUI];
