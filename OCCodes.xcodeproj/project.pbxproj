@@ -110,7 +110,7 @@
 		E2BF586627717AB20010C2E5 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2BF586327717AB20010C2E5 /* 3.jpg */; };
 		E2BF586727717AB20010C2E5 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2BF586427717AB20010C2E5 /* 2.jpg */; };
 		E2BF58A02771C8110010C2E5 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF589F2771C8110010C2E5 /* ScanView.m */; };
-		E2BF58A32771D8270010C2E5 /* CameraGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF58A22771D8270010C2E5 /* CameraGestureView.m */; };
+		E2BF58A32771D8270010C2E5 /* BQGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF58A22771D8270010C2E5 /* BQGestureView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -319,8 +319,8 @@
 		E2BF586427717AB20010C2E5 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		E2BF589E2771C8110010C2E5 /* ScanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
 		E2BF589F2771C8110010C2E5 /* ScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
-		E2BF58A12771D8270010C2E5 /* CameraGestureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraGestureView.h; sourceTree = "<group>"; };
-		E2BF58A22771D8270010C2E5 /* CameraGestureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraGestureView.m; sourceTree = "<group>"; };
+		E2BF58A12771D8270010C2E5 /* BQGestureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQGestureView.h; sourceTree = "<group>"; };
+		E2BF58A22771D8270010C2E5 /* BQGestureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BQGestureView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,8 +381,8 @@
 				E250CFD0276C3ED500AC1F40 /* VcInfoCell.m */,
 				E2BF589E2771C8110010C2E5 /* ScanView.h */,
 				E2BF589F2771C8110010C2E5 /* ScanView.m */,
-				E2BF58A12771D8270010C2E5 /* CameraGestureView.h */,
-				E2BF58A22771D8270010C2E5 /* CameraGestureView.m */,
+				E2BF58A12771D8270010C2E5 /* BQGestureView.h */,
+				E2BF58A22771D8270010C2E5 /* BQGestureView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -934,7 +934,7 @@
 				E25F2282276871C100C3E984 /* UITableView+Custom.m in Sources */,
 				E25F2284276871C100C3E984 /* UIColor+Custom.m in Sources */,
 				E25F228B276871C100C3E984 /* NSString+Custom.m in Sources */,
-				E2BF58A32771D8270010C2E5 /* CameraGestureView.m in Sources */,
+				E2BF58A32771D8270010C2E5 /* BQGestureView.m in Sources */,
 				E25F2291276871C100C3E984 /* NSObject+Custom.m in Sources */,
 				E250CFD1276C3ED500AC1F40 /* VcInfoCell.m in Sources */,
 				E25F226C276871C100C3E984 /* BQSwipeSubTableVc.m in Sources */,

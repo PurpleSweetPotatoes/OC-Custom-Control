@@ -8,10 +8,17 @@
 // *******************************************
     
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_OPTIONS(NSUInteger, BQCameraType) {
+    BQCameraType_Photo = 1 << 0,        ///< 相机
+    BQCameraType_Video = 1 << 1,        ///< 视频
+    BQCameraType_Audio = 1 << 2,        ///< 音频
+    BQCameraType_Scan  = 1 << 3,        ///< 扫描
+};
 
 @protocol BQCameraManagerDelegate <NSObject>
 @optional
@@ -21,32 +28,44 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)cameraChangeStatusFail:(NSString *)fail;
 
 - (void)cameraScanInfo:(NSString *)info bounds:(CGRect)bounds;
-/// 使用默认output有效
-- (void)cameraFrameImage:(UIImage *)image;
+
+/// when use takePhoto finish will call this method
+- (void)cameraPhotoImage:(UIImage *)image error:(NSError *)error;
 
 @end
 
 
+
 @interface BQCameraManager : NSObject
 
-@property (nonatomic, readonly, weak) id<BQCameraManagerDelegate> delegate;
-@property (nonatomic, strong        ) AVCaptureDevice             * device;
-@property (nonatomic, strong        ) AVCaptureSession            * session;
-@property (nonatomic, strong        ) AVCaptureInput              * videoInput;
-/// 默认 AVCaptureDevicePositionBack
-@property (nonatomic, assign        ) AVCaptureDevicePosition     postion;
-/// 默认使用32RGB类型的videoDataOutput
-@property (nonatomic, strong        ) AVCaptureOutput             * videoOutput;
-/// 是否开启麦克风
-@property (nonatomic, assign        ) BOOL                        startMic;
+@property (nonatomic, weak  ) id<BQCameraManagerDelegate> delegate;
+@property (nonatomic, strong) AVCaptureDevice         * device;
+@property (nonatomic, strong) AVCaptureSession        * session;
+@property (nonatomic, assign) BQCameraType            type;         ///< 呈现形式 默认BQCameraType_Photo
+@property (nonatomic, assign) AVCaptureDevicePosition postion;      ///< 默认 AVCaptureDevicePositionBack
+@property (nonatomic, assign) AVCaptureFlashMode      flashModel;   ///< 闪光灯状态
+@property (nonatomic, assign) AVCaptureTorchMode      torchMode;    ///< 手电状态
 
++ (instancetype)manager;
++ (instancetype)managerWithDelegate:(_Nullable id<BQCameraManagerDelegate>)delegate;
 
-+ (instancetype)configManager;
+/// set  show image  in supView
+/// @param supView superView
+- (void)configShowView:(UIView *)supView;
+- (void)configShowView:(UIView *)supView model:(AVLayerVideoGravity)model;
 
-+ (instancetype)configManagerWithDelegate:(_Nullable id<BQCameraManagerDelegate>)delegate;
+#pragma mark - *** BQCameraType_Photo
 
+/// 拍照, 拍照完成回调cameraPhotoImage:error:方法
+- (void)takePhoto;
+
+#pragma mark - *** BQCameraType_Video
+
+#pragma mark - *** BQCameraType_Scan
 - (void)configScanRect:(CGRect)rect superSize:(CGSize)size;
 
+
+#pragma mark - *** config method
 /// 设置分辨率
 - (BOOL)setSeesionPreset:(AVCaptureSessionPreset)preset;
 
@@ -59,16 +78,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置焦距
 - (void)setVideoZoomFactor:(CGFloat)zoom;
 
-/// 转换摄像头
+/// 转换摄像头, BQCameraType_Scan 不支持
 - (void)switchCamera;
 
-/// 闪光灯操作
-- (void)setFlashMode:(AVCaptureFlashMode)flashMode;
-
-/// 手电筒操作
-- (void)setTorchMode:(AVCaptureTorchMode)flashMode;
-
-/// 聚焦点(同时修改曝光点)
+/// 聚焦点
 /// @param point 视图所呈现点位
 /// @param size 视图大小
 - (void)focusAtPoint:(CGPoint)point vSize:(CGSize)size;

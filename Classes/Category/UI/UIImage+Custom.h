@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 typedef void (^PHAssetForURLImageResultBlock)(UIImage * image);
 
@@ -243,4 +244,8 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
  @return 第一帧图片
  */
 + (UIImage *)getFirstVideoImage:(NSString *)urlPath;
+
+
++ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+
 @end

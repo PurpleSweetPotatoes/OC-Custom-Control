@@ -37,6 +37,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.scanFrame = scanFrame;
+        self.userInteractionEnabled = NO;
         [self configUI];
     }
     return self;
@@ -58,6 +59,8 @@
     [self.guideLayer addSublayer:self.borderLayer];
     
     [self.borderLayer addSublayer:self.animationLayer];
+    
+    [self addSubview:self.tipLab];
 }
 
 - (void)showAnimation {

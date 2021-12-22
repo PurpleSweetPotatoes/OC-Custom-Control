@@ -8,18 +8,6 @@
 
 #import "UIImageView+Custom.h"
 
-@interface BQShowImageView : UIView
-/**  图片视图 */
-@property (nonatomic, strong) UIImageView *imageView;
-/**  背景视图 */
-@property (nonatomic, strong) UIView      *backView;
-/**  原图片位置 */
-@property (nonatomic, assign) CGRect      orgiFrame;
-
-+ (void)showImage:(UIImage *)image frame:(CGRect)frame;
-
-@end;
-
 @implementation UIImageView (Custom)
 
 - (void)canShowImage {
@@ -144,6 +132,7 @@
             frame:(CGRect)frame {
     BQShowImageView * showImageView = [[BQShowImageView alloc] initWithOrignframe:frame];
     showImageView.imageView.image = image;
+    showImageView.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:showImageView];
     [showImageView beginAnimation];
 }
