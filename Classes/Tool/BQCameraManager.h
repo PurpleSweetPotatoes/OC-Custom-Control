@@ -14,10 +14,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, BQCameraType) {
-    BQCameraType_Photo = 1 << 0,        ///< 相机
-    BQCameraType_Video = 1 << 1,        ///< 视频
-    BQCameraType_Audio = 1 << 2,        ///< 音频
-    BQCameraType_Scan  = 1 << 3,        ///< 扫描
+    BQCameraType_Photo  = 1 << 0,   ///< 相机
+    BQCameraType_Video  = 1 << 1,   ///< 视频
+    BQCameraType_Audio  = 1 << 2,   ///< 音频
+    BQCameraType_Scan   = 1 << 3,   ///< 扫描
 };
 
 @protocol BQCameraManagerDelegate <NSObject>
@@ -32,6 +32,9 @@ typedef NS_OPTIONS(NSUInteger, BQCameraType) {
 /// when use takePhoto finish will call this method
 - (void)cameraPhotoImage:(UIImage *)image error:(NSError *)error;
 
+- (void)cameraStartRecordVideo;
+- (void)cameraRecordVideoFail:(NSString *)fail;
+- (void)cameraRecordVideoCompleted:(NSString *)url;
 @end
 
 
@@ -45,6 +48,9 @@ typedef NS_OPTIONS(NSUInteger, BQCameraType) {
 @property (nonatomic, assign) AVCaptureDevicePosition postion;      ///< 默认 AVCaptureDevicePositionBack
 @property (nonatomic, assign) AVCaptureFlashMode      flashModel;   ///< 闪光灯状态
 @property (nonatomic, assign) AVCaptureTorchMode      torchMode;    ///< 手电状态
+@property (nonatomic, assign) NSTimeInterval          maxDuration;  ///< 最长录制时间
+@property (nonatomic, readonly) BOOL                  isRun;        ///< 是否运行中
+
 
 + (instancetype)manager;
 + (instancetype)managerWithDelegate:(_Nullable id<BQCameraManagerDelegate>)delegate;
@@ -59,7 +65,12 @@ typedef NS_OPTIONS(NSUInteger, BQCameraType) {
 /// 拍照, 拍照完成回调cameraPhotoImage:error:方法
 - (void)takePhoto;
 
-#pragma mark - *** BQCameraType_Video
+#pragma mark - *** BQCameraType_Record
+
+- (void)startRecord;
+- (void)pauseRecord;
+- (void)resumeRecord;
+- (void)stopRecord;
 
 #pragma mark - *** BQCameraType_Scan
 - (void)configScanRect:(CGRect)rect superSize:(CGSize)size;

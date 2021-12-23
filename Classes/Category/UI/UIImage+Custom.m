@@ -8,10 +8,7 @@
 
 #import "UIImage+Custom.h"
 
-#import <AssetsLibrary/ALAssetRepresentation.h>
-#import <AssetsLibrary/ALAssetsLibrary.h>
 #import <MobileCoreServices/UTCoreTypes.h>
-#import <Photos/Photos.h>
 #import <Photos/Photos.h>
 #import <float.h>
 #import <objc/runtime.h>

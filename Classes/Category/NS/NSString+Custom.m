@@ -1168,5 +1168,21 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     free(data);
     return reversed;
 }
+
+#pragma mark - *** 路径拼接
+
+- (NSString *)appendDocumentPath {
+    NSString *dir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+    return [dir stringByAppendingPathComponent:self.lastPathComponent];
+}
+
+- (NSString *)appendCachePath {
+    NSString *dir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+    return [dir stringByAppendingPathComponent:self.lastPathComponent];
+}
+
+- (NSString *)appendTempPath {
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:self.lastPathComponent];
+}
 @end
 

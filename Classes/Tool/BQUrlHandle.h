@@ -22,6 +22,8 @@ typedef void(^BQUrlReqBlock)(NSInteger code);
 
 + (void)wxReq:(BQwxReq *)req completed:(BQUrlReqBlock)completedBlock;
 
++ (void)openUrlStr:(NSString *)openUrl;
+
 + (BOOL)handleOpenURL:(NSURL *)url options:(nullable NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options;
 
 @end

@@ -10,17 +10,21 @@
 
 #import "CameraVc.h"
 
+#import "AVAssetExportSession+Custom.h"
+#import "BQAlertSheetView.h"
 #import "BQCameraManager.h"
+#import "BQGestureView.h"
+#import "BQPlayerView.h"
 #import "BQTimer.h"
 #import "BQTipView.h"
+#import "BQUrlHandle.h"
 #import "CALayer+Custom.h"
-#import "BQGestureView.h"
 #import "ScanView.h"
+#import "UIAlertController+Custom.h"
 #import "UIColor+Custom.h"
 #import "UIImageView+Custom.h"
 #import "UILabel+Custom.h"
 #import "UIViewController+Custom.h"
-#import "BQAlertSheetView.h"
 
 @interface CameraVc ()
 <
@@ -28,19 +32,21 @@ BQCameraManagerDelegate
 ,CAAnimationDelegate
 ,BQGestureViewDelegate
 >
-@property (nonatomic, strong) UIView            * bottomView;
-@property (nonatomic, assign) CALayer           * btnLayer;
-@property (nonatomic, strong) BQCameraManager   * cameraManager;
-@property (nonatomic, strong) BQGestureView * gestureV;
-@property (nonatomic, assign) UIButton          * preBtn;
-@property (nonatomic, strong) ScanView          * scanV;
-@property (nonatomic, strong) UIView            * showV;
-@property (nonatomic, strong) UIView            * topView;
-@property (nonatomic, strong) UIButton          * photoBtn;
-@property (nonatomic, strong) UIButton          * videoBtn;
-@property (nonatomic, strong) UIButton          * flashBtn;
-@property (nonatomic, strong) UIButton          * torchBtn;
-@property (nonatomic, strong) CALayer * foucsLayer;     ///<  聚焦框
+@property (nonatomic, strong) UIView          * bottomView;
+@property (nonatomic, assign) CALayer         * btnLayer;
+@property (nonatomic, strong) BQCameraManager * cameraManager;
+@property (nonatomic, strong) BQGestureView   * gestureV;
+@property (nonatomic, assign) UIButton        * preBtn;
+@property (nonatomic, strong) ScanView        * scanV;
+@property (nonatomic, strong) UIView          * showV;
+@property (nonatomic, strong) UIView          * topView;
+@property (nonatomic, strong) UIButton        * photoBtn;
+@property (nonatomic, strong) UIButton        * videoBtn;
+@property (nonatomic, strong) UIButton        * flashBtn;
+@property (nonatomic, strong) UIButton        * torchBtn;
+@property (nonatomic, strong) UIButton        * switchBtn;
+@property (nonatomic, strong) CALayer         * foucsLayer;///<  聚焦框
+@property (nonatomic, copy  ) NSString        * scanInfo;
 @end
 
 @implementation CameraVc
@@ -92,20 +98,26 @@ BQCameraManagerDelegate
     self.scanV.hidden = ![sender.currentTitle isEqualToString:@"扫描"];
     self.videoBtn.hidden = YES;
     self.photoBtn.hidden = YES;
+    self.switchBtn.hidden = !self.scanV.hidden;
     NSString * title = sender.currentTitle;
     if ([title isEqualToString:@"扫描"]) {
         self.showV.frame = self.scanV.frame;
         self.cameraManager.type = BQCameraType_Scan;
+        [self.cameraManager configScanRect:self.scanV.scanFrame superSize:self.showV.size];
     } else if ([title isEqualToString:@"拍照"]) {
         self.showV.frame = self.gestureV.frame;
         self.cameraManager.type = BQCameraType_Photo;
         self.photoBtn.hidden = NO;
     } else if ([title isEqualToString:@"录像"]) {
         self.showV.frame = self.view.bounds;
-        self.cameraManager.type = BQCameraType_Video;
+        self.cameraManager.type = BQCameraType_Video | BQCameraType_Audio;
         self.videoBtn.hidden = NO;
     }
     [self.cameraManager configShowView:self.showV];
+}
+
+- (void)switchBtnClick {
+    [self.cameraManager switchCamera];
 }
 
 - (void)flashBtnClick {
@@ -134,7 +146,11 @@ BQCameraManagerDelegate
 }
 
 - (void)videoBtnClick:(UIButton *)sender {
-    
+    if (!sender.isSelected) {
+        [self.cameraManager startRecord];
+    } else {
+        [self.cameraManager stopRecord];
+    }
 }
 
 - (void)torchBtnClick {
@@ -156,9 +172,23 @@ BQCameraManagerDelegate
 - (void)cameraScanInfo:(NSString *)info bounds:(CGRect)bounds {
     
     if (self.scanV.isHidden) return;
-        
-    [BQTipView showInfo:info];
     [self.cameraManager stopRunning];
+    
+    if ([info hasPrefix:@"http"]) {
+        [UIAlertController showWithTitle:@"扫描结果" content:[NSString stringWithFormat:@"是否打开网页地址:%@", info] buttonTitles:@[@"打开",@"取消"] clickedHandle:^(NSInteger index) {
+            self.scanInfo = nil;
+            if (index == 0) {
+                [BQUrlHandle openUrlStr:info];
+            } else {
+                [self.cameraManager startRunning];
+            }
+        }];
+    } else {
+        [UIAlertController showWithTitle:@"扫描结果" content:info handle:^(NSInteger index) {
+            self.scanInfo = nil;
+            [self.cameraManager startRunning];
+        }];
+    }
 }
 
 /// 使用默认output有效
@@ -171,6 +201,22 @@ BQCameraManagerDelegate
     self.torchBtn.selected = AVCaptureTorchModeOn == self.cameraManager.torchMode;
 }
 
+- (void)cameraStartRecordVideo {
+    self.videoBtn.selected = YES;
+}
+
+- (void)cameraRecordVideoFail:(NSString *)fail {
+    NSLog(@"录制视频失败:%@",fail);
+    [BQTipView showInfo:fail];
+}
+
+- (void)cameraRecordVideoCompleted:(NSString *)url {
+    self.videoBtn.selected = NO;
+    
+    NSLog(@"录制地址:%@",url);
+    UISaveVideoAtPathToSavedPhotosAlbum(url, nil, nil, nil);
+
+}
 #pragma mark - *** BQGestureView Delegate
 
 - (void)gestureView:(BQGestureView *)view tapPoint:(CGPoint)point {
@@ -247,7 +293,7 @@ BQCameraManagerDelegate
 - (UIView *)topView {
     if (_topView == nil) {
         UIView * topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.isPhoneX ? 88 : 64)];
-        topView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        topView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         
         UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         backBtn.frame = CGRectMake(15, self.isPhoneX ? 44 : 20, 44, 44);
@@ -273,8 +319,15 @@ BQCameraManagerDelegate
                 _btnLayer = [CALayer layerWithFrame:CGRectMake(btn.left, btn.bottom - 4, btn.width, 1) color:[UIColor whiteColor]];
             }
         }
-        
+
         [topView.layer addSublayer:_btnLayer];
+        
+        btnW = 44;
+        self.switchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.switchBtn.frame = CGRectMake(topView.width - btnW - 15, backBtn.top, btnW, btnW);
+        [self.switchBtn addTarget:self action:@selector(switchBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [self.switchBtn setImage:[UIImage imageNamed:@"camera_rotate"] forState:UIControlStateNormal];
+        [topView addSubview:self.switchBtn];
         
         _topView = topView;
     }

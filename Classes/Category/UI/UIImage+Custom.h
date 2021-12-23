@@ -246,6 +246,4 @@ typedef NS_ENUM(NSUInteger, BQArrowDirection) {
 + (UIImage *)getFirstVideoImage:(NSString *)urlPath;
 
 
-+ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
-
 @end
