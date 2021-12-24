@@ -40,13 +40,17 @@ BQCameraManagerDelegate
 @property (nonatomic, strong) ScanView        * scanV;
 @property (nonatomic, strong) UIView          * showV;
 @property (nonatomic, strong) UIView          * topView;
+@property (nonatomic, strong) UIView          * photoToolView;
 @property (nonatomic, strong) UIButton        * photoBtn;
+@property (nonatomic, strong) UIView          * videoToolView;
+@property (nonatomic, strong) UIButton        * videoDurationBtn;
 @property (nonatomic, strong) UIButton        * videoBtn;
 @property (nonatomic, strong) UIButton        * flashBtn;
 @property (nonatomic, strong) UIButton        * torchBtn;
 @property (nonatomic, strong) UIButton        * switchBtn;
 @property (nonatomic, strong) CALayer         * foucsLayer;///<  聚焦框
 @property (nonatomic, copy  ) NSString        * scanInfo;
+@property (nonatomic, assign) CGFloat         recordTime;
 @end
 
 @implementation CameraVc
@@ -59,6 +63,7 @@ BQCameraManagerDelegate
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
+    self.recordTime = 0;
     [self configUI];
     
     [self topBtnClick:[self.topView viewWithTag:100]];
@@ -87,6 +92,11 @@ BQCameraManagerDelegate
 
 - (void)topBtnClick:(UIButton *)sender {
 
+    if (self.cameraManager.recordStatus == RecordStatus_Record) {
+        [BQTipView showInfo:@"视频录制中，不可更换模式"];
+        return;
+    }
+    
     if (sender == self.preBtn) return;
     
     self.preBtn.selected = !self.preBtn.isSelected;
@@ -96,9 +106,10 @@ BQCameraManagerDelegate
     self.btnLayer.left = self.preBtn.left;
     
     self.scanV.hidden = ![sender.currentTitle isEqualToString:@"扫描"];
-    self.videoBtn.hidden = YES;
-    self.photoBtn.hidden = YES;
     self.switchBtn.hidden = !self.scanV.hidden;
+    self.photoToolView.hidden = YES;
+    self.videoToolView.hidden = YES;
+     
     NSString * title = sender.currentTitle;
     if ([title isEqualToString:@"扫描"]) {
         self.showV.frame = self.scanV.frame;
@@ -107,11 +118,11 @@ BQCameraManagerDelegate
     } else if ([title isEqualToString:@"拍照"]) {
         self.showV.frame = self.gestureV.frame;
         self.cameraManager.type = BQCameraType_Photo;
-        self.photoBtn.hidden = NO;
+        self.photoToolView.hidden = NO;
     } else if ([title isEqualToString:@"录像"]) {
         self.showV.frame = self.view.bounds;
         self.cameraManager.type = BQCameraType_Video | BQCameraType_Audio;
-        self.videoBtn.hidden = NO;
+        self.videoToolView.hidden = NO;
     }
     [self.cameraManager configShowView:self.showV];
 }
@@ -146,11 +157,20 @@ BQCameraManagerDelegate
 }
 
 - (void)videoBtnClick:(UIButton *)sender {
-    if (!sender.isSelected) {
+    if (!sender.selected) {
         [self.cameraManager startRecord];
     } else {
         [self.cameraManager stopRecord];
     }
+}
+
+- (void)durationBtnClick {
+    if (self.cameraManager.recordStatus == RecordStatus_Record) {
+        [self.cameraManager pauseRecord];
+    } else if (self.cameraManager.recordStatus == RecordStatus_Pause) {
+        [self.cameraManager resumeRecord];
+    }
+    [self cameraRecordTimeChange:self.recordTime];
 }
 
 - (void)torchBtnClick {
@@ -210,12 +230,35 @@ BQCameraManagerDelegate
     [BQTipView showInfo:fail];
 }
 
+- (void)cameraRecordTimeChange:(NSTimeInterval)time {
+    self.recordTime = time;
+    NSString * content = @"";
+    if (time == 0) {
+        content = [NSString stringWithFormat:@"最大时长: %0.1lfs\n自动保存", self.cameraManager.maxDuration];
+    } else {
+        if (self.cameraManager.recordStatus == RecordStatus_Record) {
+            content = @"点击暂停录制\n";
+        } else if (self.cameraManager.recordStatus == RecordStatus_Pause) {
+            content = @"点击继续录制\n";
+        }
+        content = [NSString stringWithFormat:@"%@录制时长:%0.1lfs", content, time];
+    }
+    
+    [self.videoDurationBtn setTitle:content forState:UIControlStateNormal];
+}
+
 - (void)cameraRecordVideoCompleted:(NSString *)url {
     self.videoBtn.selected = NO;
-    
+    [self cameraRecordTimeChange:0];
     NSLog(@"录制地址:%@",url);
-    UISaveVideoAtPathToSavedPhotosAlbum(url, nil, nil, nil);
-
+    UISaveVideoAtPathToSavedPhotosAlbum(url, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+}
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (!error) {
+        [BQTipView showInfo:error.localizedDescription];
+    } else {
+        [BQTipView showInfo:@"保存成功"];
+    }
 }
 #pragma mark - *** BQGestureView Delegate
 
@@ -252,6 +295,10 @@ BQCameraManagerDelegate
     
     [self.view addSubview:self.topView];
     [self.view addSubview:self.bottomView];
+    
+    [self.bottomView addSubview:self.photoToolView];
+    [self.bottomView addSubview:self.videoToolView];
+    [self.bottomView addSubview:self.torchBtn];
 }
 
 - (void)focusLayerAnimation:(CGPoint)point {
@@ -285,6 +332,7 @@ BQCameraManagerDelegate
 - (BQCameraManager *)cameraManager {
     if (_cameraManager == nil) {
         BQCameraManager * cameraManager = [BQCameraManager managerWithDelegate:self];
+        cameraManager.maxDuration = 15;
         _cameraManager = cameraManager;
     }
     return _cameraManager;
@@ -362,35 +410,8 @@ BQCameraManagerDelegate
 - (UIView *)bottomView {
     if (_bottomView == nil) {
         CGFloat height = self.isPhoneX ? 100 : 80;
-        CGFloat top = self.isPhoneX ? -10: 0 ;
         UIView * bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - height, self.view.width, height)];
         bottomView.backgroundColor = self.topView.backgroundColor;
-        self.photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGFloat btnW = 50;
-        self.photoBtn.frame = CGRectMake((bottomView.width - btnW) * 0.5, (bottomView.height - btnW) * 0.5  + top, btnW, btnW);
-        [self.photoBtn setImage:[UIImage imageNamed:@"camera_take_photo"] forState:UIControlStateNormal];
-        [self.photoBtn addTarget:self action:@selector(photoBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [bottomView addSubview:self.photoBtn];
-        
-        self.flashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.flashBtn.frame = CGRectMake((self.photoBtn.left - 30)  * 0.5, (bottomView.height - 30) * 0.5 + top, 30, 30);
-        [self.flashBtn addTarget:self action:@selector(flashBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [bottomView addSubview:self.flashBtn];
-        
-        self.videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.videoBtn.frame = self.photoBtn.frame;
-        [self.videoBtn addTarget:self action:@selector(videoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.videoBtn setImage:[UIImage imageNamed:@"camera_start_video"] forState:UIControlStateNormal];
-        [self.videoBtn setImage:[UIImage imageNamed:@"camera_stop_video"] forState:UIControlStateSelected];
-        [bottomView addSubview:self.videoBtn];
-        
-        self.torchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.torchBtn.frame = CGRectMake(self.photoBtn.right + (self.view.width - self.photoBtn.right - 60)  * 0.5, (bottomView.height - 50) * 0.5 + top, 60, 50);
-        [self.torchBtn setImage:[UIImage imageNamed:@"camera_torch_off"] forState:UIControlStateNormal];
-        [self.torchBtn setImage:[UIImage imageNamed:@"camera_torch_open"] forState:UIControlStateSelected];
-        [self.torchBtn addTarget:self action:@selector(torchBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [bottomView addSubview:self.torchBtn];
-        
         _bottomView = bottomView;
     }
     return _bottomView;
@@ -406,6 +427,68 @@ BQCameraManagerDelegate
         _foucsLayer = foucslayer;
     }
     return _foucsLayer;
+}
+
+- (UIView *)photoToolView {
+    if (_photoToolView == nil) {
+        UIView * photoToolView = [[UIView alloc] initWithFrame:self.bottomView.bounds];
+        CGFloat top = self.isPhoneX ? -10: 0 ;
+        
+        self.photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGFloat btnW = 50;
+        self.photoBtn.frame = CGRectMake((photoToolView.width - btnW) * 0.5, (photoToolView.height - btnW) * 0.5  + top, btnW, btnW);
+        [self.photoBtn setImage:[UIImage imageNamed:@"camera_take_photo"] forState:UIControlStateNormal];
+        [self.photoBtn addTarget:self action:@selector(photoBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [photoToolView addSubview:self.photoBtn];
+        
+        self.flashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.flashBtn.frame = CGRectMake((self.photoBtn.left - 30)  * 0.5, (photoToolView.height - 30) * 0.5 + top, 30, 30);
+        [self.flashBtn addTarget:self action:@selector(flashBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [photoToolView addSubview:self.flashBtn];
+        
+        _photoToolView = photoToolView;
+    }
+    return _photoToolView;
+}
+
+- (UIView *)videoToolView {
+    if (_videoToolView == nil) {
+        UIView * videoToolView = [[UIView alloc] initWithFrame:self.bottomView.bounds];
+        CGFloat top = self.isPhoneX ? -10: 0 ;
+        self.videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGFloat btnW = 50;
+        self.videoBtn.frame = CGRectMake((videoToolView.width - btnW) * 0.5, (videoToolView.height - btnW) * 0.5  + top, btnW, btnW);
+        [self.videoBtn setImage:[UIImage imageNamed:@"camera_start_video"] forState:UIControlStateNormal];
+        [self.videoBtn setImage:[UIImage imageNamed:@"camera_stop_video"] forState:UIControlStateSelected];
+        [self.videoBtn addTarget:self action:@selector(videoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [videoToolView addSubview:self.videoBtn];
+        
+        UIButton * durationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        durationBtn.frame = CGRectMake(20, self.videoBtn.top, self.videoBtn.left - 40, self.videoBtn.height);
+        durationBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:13];
+        durationBtn.titleLabel.numberOfLines = 2;
+        durationBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [durationBtn addTarget:self action:@selector(durationBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [durationBtn setRadius:4];
+        [durationBtn setBorderWidth:1 color:[UIColor whiteColor]];
+        [videoToolView addSubview:durationBtn];
+        self.videoDurationBtn = durationBtn;
+        [self cameraRecordTimeChange:self.recordTime];
+        _videoToolView = videoToolView;
+    }
+    return _videoToolView;
+}
+
+- (UIButton *)torchBtn {
+    if (_torchBtn == nil) {
+        UIButton * torchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        torchBtn.frame = CGRectMake(self.photoBtn.right + (self.view.width - self.photoBtn.right - 60)  * 0.5, (self.bottomView.height - 50) * 0.5 + (self.isPhoneX ? -10:0), 60, 50);
+        [torchBtn setImage:[UIImage imageNamed:@"camera_torch_off"] forState:UIControlStateNormal];
+        [torchBtn setImage:[UIImage imageNamed:@"camera_torch_open"] forState:UIControlStateSelected];
+        [torchBtn addTarget:self action:@selector(torchBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        _torchBtn = torchBtn;
+    }
+    return _torchBtn;
 }
 
 @end

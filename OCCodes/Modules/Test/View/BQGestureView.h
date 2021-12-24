@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class BQGestureView;
 
 @protocol BQGestureViewDelegate <NSObject>
+@optional
 
 - (void)gestureView:(BQGestureView *)view tapPoint:(CGPoint)point;
-
 
 /// when begin use pinValue as orgin value to get change value
 - (void)gestureViewPinBegin:(BQGestureView *)view;
