@@ -43,6 +43,7 @@
         launchW.windowLevel = UIWindowLevelStatusBar + 1;
         launchW.alpha = 1;
         launchW.hidden = NO;
+        launchW.backgroundColor = [UIColor whiteColor];
         if (ad.config.showView == nil) {
             launchW.rootViewController = ad.config.showVc;
         } else {

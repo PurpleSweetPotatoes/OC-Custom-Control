@@ -128,6 +128,18 @@
     
     [self addTarget:rule action:@selector(textFieldTextDidChange:) forControlEvents:UIControlEventEditingChanged];
     objc_setAssociatedObject(self, @selector(rule), rule, OBJC_ASSOCIATION_RETAIN);
+    
+    switch (rule.type) {
+        case BQTextRuleType_Num:
+            self.keyboardType = UIKeyboardTypeDecimalPad;
+            break;
+        case BQTextRuleType_Char:
+            self.keyboardType = UIKeyboardTypeASCIICapable;
+            break;
+        default:
+            self.keyboardType = UIKeyboardTypeDefault;
+            break;
+    }
 }
 
 @end

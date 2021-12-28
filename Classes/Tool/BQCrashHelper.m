@@ -9,6 +9,7 @@
     
 
 #import "BQCrashHelper.h"
+#import "BQTipView.h"
 
 void BQ_UncaughtExceptionHandler(NSException *exception);
 
@@ -37,9 +38,7 @@ static NSUncaughtExceptionHandler *_bqPreviousHandler;
 
 + (void)loadCrashReport:(StringBlock)handle {
     NSString * info = [NSString stringWithContentsOfFile:[self errorLogPath]  encoding:NSUTF8StringEncoding error:nil];
-    if ([info isKindOfClass:[NSString class]] && info.length > 0) {
-        handle(info);
-    }
+    handle(info);
 }
 
 + (void)clearCrashInfo {
@@ -48,7 +47,11 @@ static NSUncaughtExceptionHandler *_bqPreviousHandler;
 
 + (void)showCrashInfo {
     [self loadCrashReport:^(NSString * _Nonnull reason) {
-        [CrashTipView showWithTip:reason];
+        if (reason.length > 0) {
+            [CrashTipView showWithTip:reason];
+        } else {
+            [BQTipView showInfo:@"暂无 Crash Info"];
+        }
     }];
 }
 

@@ -38,13 +38,16 @@
     completeBlock:(VoidBlock)callblock {
     
     BQTipView * popView = [[BQTipView alloc] initWithFrame:[UIScreen mainScreen].bounds title:title info:info] ;
+    // 动画时间
+    NSTimeInterval time = 1.5;
+    time += info.length / 15;
     [[UIApplication sharedApplication].keyWindow addSubview:popView];
     popView.anmationView.transform = CGAffineTransformScale(popView.anmationView.transform, 1.1, 1.1);
     [UIView animateWithDuration:0.15f animations:^{
         popView.anmationView.transform = CGAffineTransformIdentity;
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.3f animations:^{
             popView.alpha = 0;
         } completion:^(BOOL finished) {

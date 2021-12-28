@@ -11,3 +11,17 @@ target 'OCCodes' do
   pod 'YYModel'
   
 end
+
+install! ‘cocoapods’,
+         :disable_input_output_paths => true,
+         :generate_multiple_pod_projects => true,
+         :incremental_installation => true
+
+#post_install do |installer|
+#  ## Must use `installer.generated_projects` instead of `installer.pods_project.targets`
+#  installer.generated_projects.each do |target|
+#    target.build_configurations.each do |config|
+#      config.build_settings['ENABLE_BITCODE'] = 'NO'
+#    end
+#  end
+#end

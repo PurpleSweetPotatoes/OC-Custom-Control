@@ -13,6 +13,7 @@
 #import "UITableView+Custom.h"
 #import "VcInfoCell.h"
 #import "VcModel.h"
+#import "BQCrashHelper.h"
 
 @interface TestListVc ()
 <
@@ -38,15 +39,21 @@ UITableViewDelegate
         [VcModel modelWithDic:@{@"clsName":@"DatePickView",@"titleName":@"时间选择控件",@"descStr":@"时间选择"}]
         ,[VcModel modelWithDic:@{@"clsName":@"VideoPlayerVc",@"titleName":@"播放器控件",@"descStr":@"视频播放"}]
         ,[VcModel modelWithDic:@{@"clsName":@"CameraVc",@"titleName":@"摄像头控件",@"descStr":@"摄像头调用"}]
-        ,[VcModel modelWithDic:@{@"clsName":@"ThroughScrollViewsVc",@"titleName":@"左右列表控件",@"descStr":@"多列表一个头视图"}]
+        ,[VcModel modelWithDic:@{@"clsName":@"KeyBoardManagerVc",@"titleName":@"键盘管理控件",@"descStr":@"键盘管理器+文本输入限制"}]
     ];
     
     [self configUI];
+    
+    [BQCrashHelper startCrashRecord];
 }
 
 #pragma mark - *** NetWork method
 
 #pragma mark - *** Event Action
+
+- (void)showCrashInfo {
+    [BQCrashHelper showCrashInfo];
+}
 
 #pragma mark - *** Delegate
 
@@ -76,6 +83,9 @@ UITableViewDelegate
 
 - (void)configUI {
     [self.view addSubview:self.tableView];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Crash Info" style:UIBarButtonItemStylePlain target:self action:@selector(showCrashInfo)];
+    
 }
 
 #pragma mark - *** Set

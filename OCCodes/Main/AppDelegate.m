@@ -33,7 +33,10 @@
     
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = self.window.bounds;
-    btn.backgroundColor = [UIColor cyanColor];
+    btn.titleLabel.numberOfLines = 0;
+    btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [btn setTitle:@"我是开屏广告界面\n点击关闭" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     BQLaunchConfig * config = [[BQLaunchConfig alloc] init];
     config.showView = btn;
@@ -42,6 +45,7 @@
 }
 
 - (void)btnAction:(UIButton *)sender {
+    NSLog(@"关闭广告");
     [BQLaunchAd close];
 }
 
