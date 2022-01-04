@@ -33,7 +33,7 @@
 #import "NSData+Custom.h"
 #import "NSDate+Custom.h"
 #import "NSDictionary+Custom.h"
-#import "NSMutableArray+Custom.h"
+#import "NSArray+Custom.h"
 #import "NSObject+Custom.h"
 #import "NSString+Custom.h"
 #import "AppDelegate+Notification.h"

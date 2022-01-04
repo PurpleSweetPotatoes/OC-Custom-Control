@@ -18,7 +18,9 @@
 @end
 
 @implementation BQTipView
+
 #pragma mark - Class Method
+
 + (void)showInfo:(NSString *)info {
     [self showTitle:nil info:info];
 }

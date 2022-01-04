@@ -1,20 +1,19 @@
 // *******************************************
-//  File Name:      NSMutableArray+Custom.h       
+//  File Name:      LaunchAdVc.h       
 //  Author:         MrBai
-//  Created Date:   2020/1/2 3:48 PM
+//  Created Date:   2022/1/4 2:47 PM
 //    
-//  Copyright © 2020 MrBai
+//  Copyright © 2022 ___ORGANIZATIONNAME___
 //  All rights reserved
 // *******************************************
     
 
-#import <UIKit/UIKit.h>
+#import "BaseVc.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-@interface NSMutableArray (Custom)
-- (void)randomElement;
+@interface LaunchAdVc : BaseVc
++ (void)show;
 @end
 
 NS_ASSUME_NONNULL_END

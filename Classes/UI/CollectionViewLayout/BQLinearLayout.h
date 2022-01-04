@@ -1,9 +1,9 @@
 // *******************************************
-//  File Name:      NSMutableArray+Custom.h       
+//  File Name:      BQLinearLayout.h       
 //  Author:         MrBai
-//  Created Date:   2020/1/2 3:48 PM
+//  Created Date:   2022/1/4 2:42 PM
 //    
-//  Copyright © 2020 MrBai
+//  Copyright © 2022 ___ORGANIZATIONNAME___
 //  All rights reserved
 // *******************************************
     
@@ -12,9 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface BQLinearLayout : UICollectionViewFlowLayout
 
-@interface NSMutableArray (Custom)
-- (void)randomElement;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -40,7 +40,6 @@ AVCaptureVideoDataOutputSampleBufferDelegate
 @property (nonatomic, assign) CMTime                     lastVideoTime;
 @property (nonatomic, assign) CMTime                     videoOffset;
 @property (nonatomic, assign) BOOL                       reSetOffsetV;
-
 @property (nonatomic, assign) CMTime                     lastAudioTime;
 @property (nonatomic, assign) CMTime                     audioOffset;
 @property (nonatomic, assign) BOOL                       reSetOffsetA;
@@ -489,7 +488,8 @@ AVCaptureVideoDataOutputSampleBufferDelegate
         }
         __weak typeof(self) weakSelf = self;
         [UIDevice prepareCamera:^{
-                [weakSelf configStreams];
+            [weakSelf configStreams];
+            [weakSelf startRunning];
         }];
     }
 }
@@ -713,8 +713,10 @@ AVCaptureVideoDataOutputSampleBufferDelegate
 
 - (AVCaptureDeviceInput *)audioInput {
     if (_audioInput == nil) {
-        AVCaptureDevice * audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        _audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+        if (_type & BQCameraType_Audio) { // 有使用才授权
+            AVCaptureDevice * audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+            _audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+        }
     }
     return _audioInput;
 }

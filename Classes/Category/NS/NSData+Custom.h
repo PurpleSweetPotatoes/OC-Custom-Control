@@ -31,4 +31,5 @@
 + (instancetype)dataWithFloat:(float)f;
 + (instancetype)dataWithLong:(long)l;
 
+- (NSString *)bytesString;
 @end

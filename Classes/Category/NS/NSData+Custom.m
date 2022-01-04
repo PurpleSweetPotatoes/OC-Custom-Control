@@ -103,4 +103,15 @@ return value;
     NSData *data = [NSData dataWithBytes:&z length:sizeof(l)];
     return data;
 }
+
+- (NSString *)bytesString {
+    if (self.length == 0) return @"";
+    
+    NSMutableString * outStr = [[NSMutableString alloc] initWithCapacity:self.length];
+    Byte * bytes = (Byte *)self.bytes;
+    for (int i = 0; i < self.length; i++) {
+        [outStr appendFormat:@"%02x",bytes[i] & 0xFF];
+    }
+    return [outStr copy];
+}
 @end

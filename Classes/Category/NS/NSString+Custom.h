@@ -156,9 +156,11 @@
 /**  是否含有unicode编码 */
 - (BOOL)hasUnicode;
 
-/** string字面转化为Data */
-- (NSMutableData*)convertBytesToData;
+/// 转化为16进制字符串
+- (NSString *)hexString;
 
+/** string字面转化为Data */
+- (NSData *)stringData;
 
 /// 删除对应字符串
 /// @param regular 正则规则

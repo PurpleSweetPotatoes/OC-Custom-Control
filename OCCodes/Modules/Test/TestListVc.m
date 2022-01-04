@@ -10,10 +10,13 @@
 
 #import "TestListVc.h"
 
+#import "BQCrashHelper.h"
+#import "NSData+Custom.h"
+#import "NSString+Custom.h"
 #import "UITableView+Custom.h"
 #import "VcInfoCell.h"
 #import "VcModel.h"
-#import "BQCrashHelper.h"
+#import "NSArray+Custom.h"
 
 @interface TestListVc ()
 <
@@ -40,10 +43,12 @@ UITableViewDelegate
         ,[VcModel modelWithDic:@{@"clsName":@"VideoPlayerVc",@"titleName":@"播放器控件",@"descStr":@"视频播放"}]
         ,[VcModel modelWithDic:@{@"clsName":@"CameraVc",@"titleName":@"摄像头控件",@"descStr":@"摄像头调用"}]
         ,[VcModel modelWithDic:@{@"clsName":@"KeyBoardManagerVc",@"titleName":@"键盘管理控件",@"descStr":@"键盘管理器+文本输入限制"}]
+        ,[VcModel modelWithDic:@{@"clsName":@"CollectionViewVc",@"titleName":@"CollectionView布局",@"descStr":@"列表布局设计"}]
+        
     ];
     
     [self configUI];
-    
+    [self testMethod];
     [BQCrashHelper startCrashRecord];
 }
 
@@ -105,4 +110,13 @@ UITableViewDelegate
     return _tableView;
 }
 
+
+- (void)testMethod {
+    NSData * data = [@"fA0103" stringData];
+    NSLog(@"data = %@", data);
+    NSString * str = [data bytesString];
+    NSLog(@"str = %@", str);
+    NSArray * array = @[@(35),@(786),@"111",@"73",@"80",@"58",@"34",@"3"];
+    NSLog(@"sum = %f, avg = %f, max = %f, min = %f",[array sumNum],[array avgNum],[array maxNum],[array minNum]);
+}
 @end

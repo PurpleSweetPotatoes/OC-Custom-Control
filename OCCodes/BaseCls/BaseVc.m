@@ -19,6 +19,9 @@
 
 #pragma mark - *** Public method
 
+- (void)dealloc {
+    NSLog(@"%@控制器释放", self);
+}
 #pragma mark - *** Life cycle
 
 - (void)viewDidLoad {
