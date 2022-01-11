@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>UIImage(Custom) Category Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/adjustImageOrientation:">+ adjustImageOrientation:</option>
+		
+		<option value="//api/name/arrowImgWithFrame:color:lineWidth:direction:">+ arrowImgWithFrame:color:lineWidth:direction:</option>
+		
+		<option value="//api/name/compressImageWithImage:aimLength:accurancyOfLength:maxCircleNum:">+ compressImageWithImage:aimLength:accurancyOfLength:maxCircleNum:</option>
+		
+		<option value="//api/name/compressImageWithImage:aimWidth:aimLength:accuracyOfLength:">+ compressImageWithImage:aimWidth:aimLength:accuracyOfLength:</option>
+		
+		<option value="//api/name/createCodeCIImageWithContent:">+ createCodeCIImageWithContent:</option>
+		
+		<option value="//api/name/createCodeImageWithContent:">+ createCodeImageWithContent:</option>
+		
+		<option value="//api/name/createCodeImageWithContent:size:">+ createCodeImageWithContent:size:</option>
+		
+		<option value="//api/name/createCodeImageWithContent:size:logo:">+ createCodeImageWithContent:size:logo:</option>
+		
+		<option value="//api/name/createCodeImageWithContent:size:logo:red:green:blue:">+ createCodeImageWithContent:size:logo:red:green:blue:</option>
+		
+		<option value="//api/name/createCodeImageWithContent:size:red:green:blue:">+ createCodeImageWithContent:size:red:green:blue:</option>
+		
+		<option value="//api/name/editedImageFromImagePickerMediaInfo:">+ editedImageFromImagePickerMediaInfo:</option>
+		
+		<option value="//api/name/editedImageFromImagePickerMediaInfo:resultBlock:">+ editedImageFromImagePickerMediaInfo:resultBlock:</option>
+		
+		<option value="//api/name/getFirstVideoImage:">+ getFirstVideoImage:</option>
+		
+		<option value="//api/name/imageFromImagePickerMediaInfo:imageType:resultBlock:">+ imageFromImagePickerMediaInfo:imageType:resultBlock:</option>
+		
+		<option value="//api/name/imageWithImage:aimWidth:">+ imageWithImage:aimWidth:</option>
+		
+		<option value="//api/name/imageWithImage:scaledToSize:">+ imageWithImage:scaledToSize:</option>
+		
+		<option value="//api/name/originalImageFromImagePickerMediaInfo:">+ originalImageFromImagePickerMediaInfo:</option>
+		
+		<option value="//api/name/originalImageFromImagePickerMediaInfo:resultBlock:">+ originalImageFromImagePickerMediaInfo:resultBlock:</option>
+		
+		<option value="//api/name/rectImageWithImage:">+ rectImageWithImage:</option>
+		
+		<option value="//api/name/roundImageWithImage:">+ roundImageWithImage:</option>
+		
+		<option value="//api/name/snapshootFromSncreen">+ snapshootFromSncreen</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/addImageToImage:atRect:">- addImageToImage:atRect:</option>
+		
+		<option value="//api/name/addlogo:">- addlogo:</option>
+		
+		<option value="//api/name/applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:">- applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:</option>
+		
+		<option value="//api/name/applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:atFrame:">- applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:atFrame:</option>
+		
+		<option value="//api/name/applyDarkEffect">- applyDarkEffect</option>
+		
+		<option value="//api/name/applyExtraLightEffect">- applyExtraLightEffect</option>
+		
+		<option value="//api/name/applyLightEffect">- applyLightEffect</option>
+		
+		<option value="//api/name/applyTintEffectWithColor:">- applyTintEffectWithColor:</option>
+		
+		<option value="//api/name/averageColor">- averageColor</option>
+		
+		<option value="//api/name/blurImage">- blurImage</option>
+		
+		<option value="//api/name/blurImageAtFrame:">- blurImageAtFrame:</option>
+		
+		<option value="//api/name/blurImageWithMask:">- blurImageWithMask:</option>
+		
+		<option value="//api/name/blurImageWithRadius:">- blurImageWithRadius:</option>
+		
+		<option value="//api/name/converToPixelBuffer">- converToPixelBuffer</option>
+		
+		<option value="//api/name/croppedImageAtFrame:">- croppedImageAtFrame:</option>
+		
+		<option value="//api/name/grayScale">- grayScale</option>
+		
+		<option value="//api/name/image:didFinishSavingWithError:contextInfo:">- image:didFinishSavingWithError:contextInfo:</option>
+		
+		<option value="//api/name/imageWithColor:">- imageWithColor:</option>
+		
+		<option value="//api/name/saveToPhotosWithReslut:">- saveToPhotosWithReslut:</option>
+		
+		<option value="//api/name/scaleWithFixedHeight:">- scaleWithFixedHeight:</option>
+		
+		<option value="//api/name/scaleWithFixedWidth:">- scaleWithFixedWidth:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">UIImage(Custom) Category Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Declared in</th>
+	<td>UIImage+Custom.h<br />UIImage+Custom.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/createCodeImageWithContent:" title="createCodeImageWithContent:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCodeImageWithContent:">+&nbsp;createCodeImageWithContent:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>二维码生成</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)createCodeImageWithContent:(NSString *)<em>content</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>二维码文本内容</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>二维码生成</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCodeImageWithContent:size:" title="createCodeImageWithContent:size:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCodeImageWithContent:size:">+&nbsp;createCodeImageWithContent:size:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>高清二维码生成</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)createCodeImageWithContent:(NSString *)<em>content</em> size:(CGFloat)<em>size</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>二维码文本内容</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>生成后的二维码图片大小</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>高清二维码生成</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCodeImageWithContent:size:logo:" title="createCodeImageWithContent:size:logo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCodeImageWithContent:size:logo:">+&nbsp;createCodeImageWithContent:size:logo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>生成带标示的二维码</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)createCodeImageWithContent:(NSString *)<em>content</em> size:(CGFloat)<em>size</em> logo:(UIImage *)<em>logo</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>二维码文本内容</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>生成后的二维码图片大小</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logo</code></th>
+						<td><p>标示图片</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>生成带标示的二维码</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCodeImageWithContent:size:red:green:blue:" title="createCodeImageWithContent:size:red:green:blue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCodeImageWithContent:size:red:green:blue:">+&nbsp;createCodeImageWithContent:size:red:green:blue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>带颜色的高清二维码</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)createCodeImageWithContent:(NSString *)<em>content</em> size:(CGFloat)<em>size</em> red:(NSInteger)<em>red</em> green:(NSInteger)<em>green</em> blue:(NSInteger)<em>blue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>二维码文本内容</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>生成后的二维码图片大小</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>red</code></th>
+						<td><p>红色值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>green</code></th>
+						<td><p>绿色值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>blue</code></th>
+						<td><p>蓝色值</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>带颜色的高清二维码</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCodeImageWithContent:size:logo:red:green:blue:" title="createCodeImageWithContent:size:logo:red:green:blue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCodeImageWithContent:size:logo:red:green:blue:">+&nbsp;createCodeImageWithContent:size:logo:red:green:blue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>带颜色标示符的高清二维码</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)createCodeImageWithContent:(NSString *)<em>content</em> size:(CGFloat)<em>size</em> logo:(UIImage *)<em>logo</em> red:(NSInteger)<em>red</em> green:(NSInteger)<em>green</em> blue:(NSInteger)<em>blue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>content</code></th>
+						<td><p>二维码文本内容</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>生成后的二维码图片大小</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logo</code></th>
+						<td><p>标示图片</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>red</code></th>
+						<td><p>红色值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>green</code></th>
+						<td><p>绿色值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>blue</code></th>
+						<td><p>蓝色值</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>带颜色标示符的高清二维码</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/createCodeCIImageWithContent:" title="createCodeCIImageWithContent:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createCodeCIImageWithContent:">+&nbsp;createCodeCIImageWithContent:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (CIImage *)createCodeCIImageWithContent:(NSString *)<em>content</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addlogo:" title="addlogo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addlogo:">&ndash;&nbsp;addlogo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)addlogo:(UIImage *)<em>logo</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageWithImage:aimWidth:" title="imageWithImage:aimWidth:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageWithImage:aimWidth:">+&nbsp;imageWithImage:aimWidth:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>裁剪成正方形
+width > 0，根据width进行压缩
+width &lt;= 0,根据原图尺寸最小值进行压缩</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)imageWithImage:(UIImage *)<em>image</em> aimWidth:(NSInteger)<em>width</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>裁剪成正方形
+width > 0，根据width进行压缩
+width &lt;= 0,根据原图尺寸最小值进行压缩</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageWithImage:scaledToSize:" title="imageWithImage:scaledToSize:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageWithImage:scaledToSize:">+&nbsp;imageWithImage:scaledToSize:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>指定尺寸压缩</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)imageWithImage:(UIImage *)<em>image</em> scaledToSize:(CGSize)<em>newSize</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>指定尺寸压缩</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/rectImageWithImage:" title="rectImageWithImage:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rectImageWithImage:">+&nbsp;rectImageWithImage:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>裁剪成正方形
+根据原图尺寸最小值进行剪切</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)rectImageWithImage:(UIImage *)<em>image</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>裁剪成正方形
+根据原图尺寸最小值进行剪切</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/roundImageWithImage:" title="roundImageWithImage:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/roundImageWithImage:">+&nbsp;roundImageWithImage:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>裁剪为圆形(请保证图片宽高相同)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)roundImageWithImage:(UIImage *)<em>image</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>裁剪为圆形(请保证图片宽高相同)</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/compressImageWithImage:aimLength:accurancyOfLength:maxCircleNum:" title="compressImageWithImage:aimLength:accurancyOfLength:maxCircleNum:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/compressImageWithImage:aimLength:accurancyOfLength:maxCircleNum:">+&nbsp;compressImageWithImage:aimLength:accurancyOfLength:maxCircleNum:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>质量不变，压缩到指定大小
+aimLength：目标大小
+accurancyOfLength：压缩控制误差范围(+ / -)
+maxCircleNum:最大循环次数</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSData *)compressImageWithImage:(UIImage *)<em>image</em> aimLength:(NSInteger)<em>length</em> accurancyOfLength:(NSInteger)<em>accuracy</em> maxCircleNum:(int)<em>maxCircleNum</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>质量不变，压缩到指定大小
+aimLength：目标大小
+accurancyOfLength：压缩控制误差范围(+ / -)
+maxCircleNum:最大循环次数</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/compressImageWithImage:aimWidth:aimLength:accuracyOfLength:" title="compressImageWithImage:aimWidth:aimLength:accuracyOfLength:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/compressImageWithImage:aimWidth:aimLength:accuracyOfLength:">+&nbsp;compressImageWithImage:aimWidth:aimLength:accuracyOfLength:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>压缩图片质量
+aimWidth:  （宽高最大值）
+aimLength: 目标大小，单位：字节（b）
+accuracyOfLength: 压缩控制误差范围(+ / -)
+推荐使用个方法对图片进行压缩</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSData *)compressImageWithImage:(UIImage *)<em>image</em> aimWidth:(CGFloat)<em>width</em> aimLength:(NSInteger)<em>length</em> accuracyOfLength:(NSInteger)<em>accuracy</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>压缩图片质量
+aimWidth:  （宽高最大值）
+aimLength: 目标大小，单位：字节（b）
+accuracyOfLength: 压缩控制误差范围(+ / -)
+推荐使用个方法对图片进行压缩</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/originalImageFromImagePickerMediaInfo:" title="originalImageFromImagePickerMediaInfo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/originalImageFromImagePickerMediaInfo:">+&nbsp;originalImageFromImagePickerMediaInfo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据系统返回的图片字典信息获取源图片</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)<em>info</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>info</code></th>
+						<td><p>系统图片信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>根据系统返回的图片字典信息获取源图片</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/originalImageFromImagePickerMediaInfo:resultBlock:" title="originalImageFromImagePickerMediaInfo:resultBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/originalImageFromImagePickerMediaInfo:resultBlock:">+&nbsp;originalImageFromImagePickerMediaInfo:resultBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据系统返回的图片字典信息获取源图片</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)originalImageFromImagePickerMediaInfo:(NSDictionary *)<em>info</em> resultBlock:(PHAssetForURLImageResultBlock)<em>resultBlock</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>info</code></th>
+						<td><p>系统图片信息</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultBlock</code></th>
+						<td><p>未获取到图片回调处理</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>根据系统返回的图片字典信息获取源图片</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/editedImageFromImagePickerMediaInfo:" title="editedImageFromImagePickerMediaInfo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/editedImageFromImagePickerMediaInfo:">+&nbsp;editedImageFromImagePickerMediaInfo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据系统返回的图片字典信息获取编辑后的图片</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)<em>info</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>info</code></th>
+						<td><p>系统图片信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>根据系统返回的图片字典信息获取编辑后的图片</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/editedImageFromImagePickerMediaInfo:resultBlock:" title="editedImageFromImagePickerMediaInfo:resultBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/editedImageFromImagePickerMediaInfo:resultBlock:">+&nbsp;editedImageFromImagePickerMediaInfo:resultBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据系统返回的图片字典信息获取编辑后的图片</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)editedImageFromImagePickerMediaInfo:(NSDictionary *)<em>info</em> resultBlock:(PHAssetForURLImageResultBlock)<em>resultBlock</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>info</code></th>
+						<td><p>系统图片信息</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultBlock</code></th>
+						<td><p>未获取到图片回调处理</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>根据系统返回的图片字典信息获取编辑后的图片</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageFromImagePickerMediaInfo:imageType:resultBlock:" title="imageFromImagePickerMediaInfo:imageType:resultBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageFromImagePickerMediaInfo:imageType:resultBlock:">+&nbsp;imageFromImagePickerMediaInfo:imageType:resultBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)imageFromImagePickerMediaInfo:(NSDictionary *)<em>info</em> imageType:(NSString *)<em>imageType</em> resultBlock:(PHAssetForURLImageResultBlock)<em>resultBlock</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/adjustImageOrientation:" title="adjustImageOrientation:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/adjustImageOrientation:">+&nbsp;adjustImageOrientation:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>图片方向调整，调整为正向</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)adjustImageOrientation:(UIImage *)<em>aImage</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aImage</code></th>
+						<td><p>源图片</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>图片方向调整，调整为正向</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/snapshootFromSncreen" title="snapshootFromSncreen"></a>
+	<h3 class="method-title"><code><a href="#//api/name/snapshootFromSncreen">+&nbsp;snapshootFromSncreen</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>截取当前屏幕,不含状态栏(时间、信号等),
+如需要状态栏信息，可直接使用[view snapshotViewAfterScreenUpdates:NO]</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)snapshootFromSncreen</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>截取当前屏幕,不含状态栏(时间、信号等),
+如需要状态栏信息，可直接使用[view snapshotViewAfterScreenUpdates:NO]</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/saveToPhotosWithReslut:" title="saveToPhotosWithReslut:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/saveToPhotosWithReslut:">&ndash;&nbsp;saveToPhotosWithReslut:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>保存图片至相册，需开通相册权限</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)saveToPhotosWithReslut:(void ( ^ ) ( NSError *error ))<em>reslutBlock</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>reslutBlock</code></th>
+						<td><p>图片保存结果</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>保存图片至相册，需开通相册权限</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/image:didFinishSavingWithError:contextInfo:" title="image:didFinishSavingWithError:contextInfo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/image:didFinishSavingWithError:contextInfo:">&ndash;&nbsp;image:didFinishSavingWithError:contextInfo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)image:(UIImage *)<em>image</em> didFinishSavingWithError:(NSError *)<em>error</em> contextInfo:(void *)<em>contextInfo</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageWithColor:" title="imageWithColor:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageWithColor:">&ndash;&nbsp;imageWithColor:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>改变icon颜色</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)imageWithColor:(UIColor *)<em>color</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>color</code></th>
+						<td><p>颜色</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>改变icon颜色</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyLightEffect" title="applyLightEffect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyLightEffect">&ndash;&nbsp;applyLightEffect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)applyLightEffect</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyExtraLightEffect" title="applyExtraLightEffect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyExtraLightEffect">&ndash;&nbsp;applyExtraLightEffect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)applyExtraLightEffect</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyDarkEffect" title="applyDarkEffect"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyDarkEffect">&ndash;&nbsp;applyDarkEffect</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)applyDarkEffect</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyTintEffectWithColor:" title="applyTintEffectWithColor:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyTintEffectWithColor:">&ndash;&nbsp;applyTintEffectWithColor:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)applyTintEffectWithColor:(UIColor *)<em>tintColor</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/blurImage" title="blurImage"></a>
+	<h3 class="method-title"><code><a href="#//api/name/blurImage">&ndash;&nbsp;blurImage</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get blured image.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)blurImage</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Blured image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get blured image.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/blurImageWithRadius:" title="blurImageWithRadius:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/blurImageWithRadius:">&ndash;&nbsp;blurImageWithRadius:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get blured image and you can set the blur radius.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)blurImageWithRadius:(CGFloat)<em>radius</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>radius</code></th>
+						<td><p>Blur radius.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Blured image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get blured image and you can set the blur radius.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/blurImageWithMask:" title="blurImageWithMask:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/blurImageWithMask:">&ndash;&nbsp;blurImageWithMask:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get the blured image masked by another image.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)blurImageWithMask:(UIImage *)<em>maskImage</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maskImage</code></th>
+						<td><p>Image used for mask.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>the Blured image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get the blured image masked by another image.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/blurImageAtFrame:" title="blurImageAtFrame:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/blurImageAtFrame:">&ndash;&nbsp;blurImageAtFrame:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get blured image at specified frame.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)blurImageAtFrame:(CGRect)<em>frame</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>frame</code></th>
+						<td><p>The specified frame that you use to blur.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Blured image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get blured image at specified frame.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:" title="applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:">&ndash;&nbsp;applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)applyBlurWithRadius:(CGFloat)<em>blurRadius</em> tintColor:(UIColor *)<em>tintColor</em> saturationDeltaFactor:(CGFloat)<em>saturationDeltaFactor</em> maskImage:(UIImage *)<em>maskImage</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/grayScale" title="grayScale"></a>
+	<h3 class="method-title"><code><a href="#//api/name/grayScale">&ndash;&nbsp;grayScale</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get grayScale image.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)grayScale</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>GrayScaled image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get grayScale image.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/scaleWithFixedWidth:" title="scaleWithFixedWidth:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/scaleWithFixedWidth:">&ndash;&nbsp;scaleWithFixedWidth:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Scale image with fixed width.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)scaleWithFixedWidth:(CGFloat)<em>width</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>width</code></th>
+						<td><p>The fixed width you give.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Scaled image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Scale image with fixed width.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/scaleWithFixedHeight:" title="scaleWithFixedHeight:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/scaleWithFixedHeight:">&ndash;&nbsp;scaleWithFixedHeight:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Scale image with fixed height.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)scaleWithFixedHeight:(CGFloat)<em>height</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>height</code></th>
+						<td><p>The fixed height you give.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Scaled image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Scale image with fixed height.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/averageColor" title="averageColor"></a>
+	<h3 class="method-title"><code><a href="#//api/name/averageColor">&ndash;&nbsp;averageColor</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get the image average color.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIColor *)averageColor</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Average color from the image.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get the image average color.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/croppedImageAtFrame:" title="croppedImageAtFrame:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/croppedImageAtFrame:">&ndash;&nbsp;croppedImageAtFrame:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Get cropped image at specified frame.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)croppedImageAtFrame:(CGRect)<em>frame</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>frame</code></th>
+						<td><p>The specified frame that you use to crop.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Cropped image</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Get cropped image at specified frame.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addImageToImage:atRect:" title="addImageToImage:atRect:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addImageToImage:atRect:">&ndash;&nbsp;addImageToImage:atRect:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)addImageToImage:(UIImage *)<em>img</em> atRect:(CGRect)<em>cropRect</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:atFrame:" title="applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:atFrame:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:atFrame:">&ndash;&nbsp;applyBlurWithRadius:tintColor:saturationDeltaFactor:maskImage:atFrame:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)applyBlurWithRadius:(CGFloat)<em>blurRadius</em> tintColor:(UIColor *)<em>tintColor</em> saturationDeltaFactor:(CGFloat)<em>saturationDeltaFactor</em> maskImage:(UIImage *)<em>maskImage</em> atFrame:(CGRect)<em>frame</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/arrowImgWithFrame:color:lineWidth:direction:" title="arrowImgWithFrame:color:lineWidth:direction:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/arrowImgWithFrame:color:lineWidth:direction:">+&nbsp;arrowImgWithFrame:color:lineWidth:direction:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>生成箭头图片,建议宽高比为14:22</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)arrowImgWithFrame:(CGRect)<em>frame</em> color:(UIColor *)<em>color</em> lineWidth:(CGFloat)<em>line</em> direction:(BQArrowDirection)<em>direction</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>生成箭头图片,建议宽高比为14:22</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/converToPixelBuffer" title="converToPixelBuffer"></a>
+	<h3 class="method-title"><code><a href="#//api/name/converToPixelBuffer">&ndash;&nbsp;converToPixelBuffer</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (CVPixelBufferRef)converToPixelBuffer</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getFirstVideoImage:" title="getFirstVideoImage:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getFirstVideoImage:">+&nbsp;getFirstVideoImage:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取视频第一帧图片</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (UIImage *)getFirstVideoImage:(NSString *)<em>urlPath</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>urlPath</code></th>
+						<td><p>本地视频路径</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>第一帧图片</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取视频第一帧图片</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">UIImage+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

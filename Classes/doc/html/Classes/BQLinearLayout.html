@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>BQLinearLayout Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/scorllReset">scorllReset</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/layoutAttributesForElementsInRect:">- layoutAttributesForElementsInRect:</option>
+		
+		<option value="//api/name/shouldInvalidateLayoutForBoundsChange:">- shouldInvalidateLayoutForBoundsChange:</option>
+		
+		<option value="//api/name/targetContentOffsetForProposedContentOffset:withScrollingVelocity:">- targetContentOffsetForProposedContentOffset:withScrollingVelocity:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">BQLinearLayout Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>UICollectionViewFlowLayout</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>BQLinearLayout.h<br />BQLinearLayout.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/layoutAttributesForElementsInRect:" title="layoutAttributesForElementsInRect:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/layoutAttributesForElementsInRect:">&ndash;&nbsp;layoutAttributesForElementsInRect:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>UICollectionViewLayoutAttributes *attrs;
+1.一个cell对应一个UICollectionViewLayoutAttributes对象
+2.UICollectionViewLayoutAttributes对象决定了cell的frame</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray *)layoutAttributesForElementsInRect:(CGRect)<em>rect</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>UICollectionViewLayoutAttributes *attrs;
+1.一个cell对应一个UICollectionViewLayoutAttributes对象
+2.UICollectionViewLayoutAttributes对象决定了cell的frame</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLinearLayout.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldInvalidateLayoutForBoundsChange:" title="shouldInvalidateLayoutForBoundsChange:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldInvalidateLayoutForBoundsChange:">&ndash;&nbsp;shouldInvalidateLayoutForBoundsChange:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<ul>
+<li>当collectionView的显示范围发生改变的时候，是否需要重新刷新布局</li>
+<li>一旦重新刷新布局，就会重新调用下面的方法：
+1.prepareLayout
+2.layoutAttributesForElementsInRect:方法</li>
+</ul>
+
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)<em>newBounds</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<ul>
+<li>当collectionView的显示范围发生改变的时候，是否需要重新刷新布局</li>
+<li>一旦重新刷新布局，就会重新调用下面的方法：
+1.prepareLayout
+2.layoutAttributesForElementsInRect:方法</li>
+</ul>
+
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLinearLayout.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/targetContentOffsetForProposedContentOffset:withScrollingVelocity:" title="targetContentOffsetForProposedContentOffset:withScrollingVelocity:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/targetContentOffsetForProposedContentOffset:withScrollingVelocity:">&ndash;&nbsp;targetContentOffsetForProposedContentOffset:withScrollingVelocity:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>这个方法的返回值，就决定了collectionView停止滚动时的偏移量
+proposedContentOffset：原本情况下，collectionView停止滚动时最终的偏移量
+velocity：滚动速率，通过这个参数可以了解滚动的方向</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)<em>proposedContentOffset</em> withScrollingVelocity:(CGPoint)<em>velocity</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>这个方法的返回值，就决定了collectionView停止滚动时的偏移量
+proposedContentOffset：原本情况下，collectionView停止滚动时最终的偏移量
+velocity：滚动速率，通过这个参数可以了解滚动的方向</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLinearLayout.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;BQLinearLayoutDelegate&gt; delegate</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/scorllReset" title="scorllReset"></a>
+	<h3 class="method-title"><code><a href="#//api/name/scorllReset">&nbsp;&nbsp;scorllReset</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>默认为 YES</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL scorllReset</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>默认为 YES</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLinearLayout.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

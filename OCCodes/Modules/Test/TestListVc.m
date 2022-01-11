@@ -10,11 +10,19 @@
 
 #import "TestListVc.h"
 
+#import "BQCrashHelper.h"
+#import "NSData+Custom.h"
+#import "NSString+Custom.h"
 #import "UITableView+Custom.h"
 #import "VcInfoCell.h"
 #import "VcModel.h"
+<<<<<<< HEAD
 #import "BQCrashHelper.h"
 #import "NSString+Custom.h"
+=======
+#import "NSArray+Custom.h"
+
+>>>>>>> 64fb1d420b89756195b8f44fd6ad5cf8cc6faa1e
 @interface TestListVc ()
 <
 UITableViewDelegate
@@ -40,10 +48,12 @@ UITableViewDelegate
         ,[VcModel modelWithDic:@{@"clsName":@"VideoPlayerVc",@"titleName":@"播放器控件",@"descStr":@"视频播放"}]
         ,[VcModel modelWithDic:@{@"clsName":@"CameraVc",@"titleName":@"摄像头控件",@"descStr":@"摄像头调用"}]
         ,[VcModel modelWithDic:@{@"clsName":@"KeyBoardManagerVc",@"titleName":@"键盘管理控件",@"descStr":@"键盘管理器+文本输入限制"}]
+        ,[VcModel modelWithDic:@{@"clsName":@"CollectionViewVc",@"titleName":@"CollectionView布局",@"descStr":@"列表布局设计"}]
+        ,[VcModel modelWithDic:@{@"clsName":@"SpeedVc",@"titleName":@"速度检测",@"descStr":@"gps检测"}]
     ];
     
     [self configUI];
-    
+    [self testMethod];
     [BQCrashHelper startCrashRecord];
     
     [self testMethod];
@@ -114,4 +124,12 @@ UITableViewDelegate
     return _tableView;
 }
 
+
+- (void)testMethod {
+    NSLog(@"测试方法");
+    NSInteger num = 0;
+    for (NSInteger i = 0; i< num; i++) {
+        NSLog(@"%zd",i);
+    }
+}
 @end

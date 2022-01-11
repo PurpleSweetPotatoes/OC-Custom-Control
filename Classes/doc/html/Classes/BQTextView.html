@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>BQTextView Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/autoAdjustHeight">autoAdjustHeight</option>
+		
+		<option value="//api/name/maxCharNum">maxCharNum</option>
+		
+		<option value="//api/name/maxHeight">maxHeight</option>
+		
+		<option value="//api/name/minHeight">minHeight</option>
+		
+		<option value="//api/name/ourDelegate">ourDelegate</option>
+		
+		<option value="//api/name/placeholder">placeholder</option>
+		
+		<option value="//api/name/placeholderColor">placeholderColor</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/awakeFromNib">- awakeFromNib</option>
+		
+		<option value="//api/name/configTextView">- configTextView</option>
+		
+		<option value="//api/name/delegate">- delegate</option>
+		
+		<option value="//api/name/initWithFrame:">- initWithFrame:</option>
+		
+		<option value="//api/name/lastHeightCompareWithHeight:">- lastHeightCompareWithHeight:</option>
+		
+		<option value="//api/name/layoutSubviews">- layoutSubviews</option>
+		
+		<option value="//api/name/refreshPlaceholder">- refreshPlaceholder</option>
+		
+		<option value="//api/name/setFont:">- setFont:</option>
+		
+		<option value="//api/name/setText:">- setText:</option>
+		
+		<option value="//api/name/setTextAlignment:">- setTextAlignment:</option>
+		
+		<option value="//api/name/textView:shouldChangeTextInRange:replacementText:">- textView:shouldChangeTextInRange:replacementText:</option>
+		
+		<option value="//api/name/textViewDidBeginEditing:">- textViewDidBeginEditing:</option>
+		
+		<option value="//api/name/textViewDidChange:">- textViewDidChange:</option>
+		
+		<option value="//api/name/textViewDidEndEditing:">- textViewDidEndEditing:</option>
+		
+		<option value="//api/name/textViewShouldBeginEditing:">- textViewShouldBeginEditing:</option>
+		
+		<option value="//api/name/textViewShouldEndEditing:">- textViewShouldEndEditing:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">BQTextView Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>UITextView</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>BQTextView.h<br />BQTextView.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>自定义多行文字编辑视图,支持自动调整高度和提示文案</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/ourDelegate" title="ourDelegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/ourDelegate">&nbsp;&nbsp;ourDelegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>文本编辑代理</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;BQTextViewDelegate&gt; ourDelegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>文本编辑代理</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQTextView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/placeholder" title="placeholder"></a>
+	<h3 class="method-title"><code><a href="#//api/name/placeholder">&nbsp;&nbsp;placeholder</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>占位字符</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *placeholder</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>占位字符</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQTextView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/placeholderColor" title="placeholderColor"></a>
+	<h3 class="method-title"><code><a href="#//api/name/placeholderColor">&nbsp;&nbsp;placeholderColor</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>占位符颜色</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIColor *placeholderColor</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>占位符颜色</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQTextView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maxCharNum" title="maxCharNum"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maxCharNum">&nbsp;&nbsp;maxCharNum</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>最大字符数,默认1000</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSInteger maxCharNum</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>最大字符数,默认1000</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQTextView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/autoAdjustHeight" title="autoAdjustHeight"></a>
+	<h3 class="method-title"><code><a href="#//api/name/autoAdjustHeight">&nbsp;&nbsp;autoAdjustHeight</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自动适应高度,默认为NO</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL autoAdjustHeight</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>自动适应高度,默认为NO</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQTextView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maxHeight" title="maxHeight"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maxHeight">&nbsp;&nbsp;maxHeight</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>最大高度默认为初始化高度,开启自适应高度时有效</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat maxHeight</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>最大高度默认为初始化高度,开启自适应高度时有效</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQTextView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithFrame:" title="initWithFrame:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithFrame:">&ndash;&nbsp;initWithFrame:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithFrame:(CGRect)<em>frame</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/awakeFromNib" title="awakeFromNib"></a>
+	<h3 class="method-title"><code><a href="#//api/name/awakeFromNib">&ndash;&nbsp;awakeFromNib</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)awakeFromNib</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configTextView" title="configTextView"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configTextView">&ndash;&nbsp;configTextView</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configTextView</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/layoutSubviews" title="layoutSubviews"></a>
+	<h3 class="method-title"><code><a href="#//api/name/layoutSubviews">&ndash;&nbsp;layoutSubviews</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)layoutSubviews</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/lastHeightCompareWithHeight:" title="lastHeightCompareWithHeight:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/lastHeightCompareWithHeight:">&ndash;&nbsp;lastHeightCompareWithHeight:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)lastHeightCompareWithHeight:(CGFloat)<em>height</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setText:" title="setText:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setText:">&ndash;&nbsp;setText:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)setText:(NSString *)<em>text</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setFont:" title="setFont:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setFont:">&ndash;&nbsp;setFont:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)setFont:(UIFont *)<em>font</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setTextAlignment:" title="setTextAlignment:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setTextAlignment:">&ndash;&nbsp;setTextAlignment:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)setTextAlignment:(NSTextAlignment)<em>textAlignment</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&ndash;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (id&lt;UITextViewDelegate&gt;)delegate</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/refreshPlaceholder" title="refreshPlaceholder"></a>
+	<h3 class="method-title"><code><a href="#//api/name/refreshPlaceholder">&ndash;&nbsp;refreshPlaceholder</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)refreshPlaceholder</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textView:shouldChangeTextInRange:replacementText:" title="textView:shouldChangeTextInRange:replacementText:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textView:shouldChangeTextInRange:replacementText:">&ndash;&nbsp;textView:shouldChangeTextInRange:replacementText:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)textView:(UITextView *)<em>textView</em> shouldChangeTextInRange:(NSRange)<em>range</em> replacementText:(NSString *)<em>text</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textViewDidChange:" title="textViewDidChange:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textViewDidChange:">&ndash;&nbsp;textViewDidChange:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)textViewDidChange:(UITextView *)<em>textView</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textViewShouldBeginEditing:" title="textViewShouldBeginEditing:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textViewShouldBeginEditing:">&ndash;&nbsp;textViewShouldBeginEditing:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)textViewShouldBeginEditing:(UITextView *)<em>textView</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textViewShouldEndEditing:" title="textViewShouldEndEditing:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textViewShouldEndEditing:">&ndash;&nbsp;textViewShouldEndEditing:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)textViewShouldEndEditing:(BQTextView *)<em>textView</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textViewDidBeginEditing:" title="textViewDidBeginEditing:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textViewDidBeginEditing:">&ndash;&nbsp;textViewDidBeginEditing:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)textViewDidBeginEditing:(BQTextView *)<em>textView</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textViewDidEndEditing:" title="textViewDidEndEditing:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textViewDidEndEditing:">&ndash;&nbsp;textViewDidEndEditing:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)textViewDidEndEditing:(BQTextView *)<em>textView</em></code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/minHeight" title="minHeight"></a>
+	<h3 class="method-title"><code><a href="#//api/name/minHeight">&nbsp;&nbsp;minHeight</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat minHeight</code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

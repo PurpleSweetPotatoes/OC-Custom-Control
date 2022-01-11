@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>BQLocationManager Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/callBlock">callBlock</option>
+		
+		<option value="//api/name/clGeocoder">clGeocoder</option>
+		
+		<option value="//api/name/clManager">clManager</option>
+		
+		<option value="//api/name/loadSuccess">loadSuccess</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/allocWithZone:">+ allocWithZone:</option>
+		
+		<option value="//api/name/loadLocationWithAddress:callBack:">+ loadLocationWithAddress:callBack:</option>
+		
+		<option value="//api/name/loadLocationWithlocation:callBack:">+ loadLocationWithlocation:callBack:</option>
+		
+		<option value="//api/name/shareManager">+ shareManager</option>
+		
+		<option value="//api/name/startLoadLocationCallBack:">+ startLoadLocationCallBack:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/clGeocoder">- clGeocoder</option>
+		
+		<option value="//api/name/clManager">- clManager</option>
+		
+		<option value="//api/name/geocodeAddressString:">- geocodeAddressString:</option>
+		
+		<option value="//api/name/locationManager:didFailWithError:">- locationManager:didFailWithError:</option>
+		
+		<option value="//api/name/locationManager:didUpdateLocations:">- locationManager:didUpdateLocations:</option>
+		
+		<option value="//api/name/prcoessPlacemMarks:">- prcoessPlacemMarks:</option>
+		
+		<option value="//api/name/reverseLocationWithLocation:">- reverseLocationWithLocation:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">BQLocationManager Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>BQLocationManager.h<br />BQLocationManager.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>位置管理</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/allocWithZone:" title="allocWithZone:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/allocWithZone:">+&nbsp;allocWithZone:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)allocWithZone:(struct _NSZone *)<em>zone</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shareManager" title="shareManager"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shareManager">+&nbsp;shareManager</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)shareManager</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startLoadLocationCallBack:" title="startLoadLocationCallBack:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startLoadLocationCallBack:">+&nbsp;startLoadLocationCallBack:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>启动定位,获取用户地理位置信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)startLoadLocationCallBack:(void ( ^ ) ( LocationInfo *, NSError *))<em>callBack</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>callBack</code></th>
+						<td><p>定位后回调方法</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>启动定位,获取用户地理位置信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLocationManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loadLocationWithlocation:callBack:" title="loadLocationWithlocation:callBack:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loadLocationWithlocation:callBack:">+&nbsp;loadLocationWithlocation:callBack:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据坐标获取地理位置信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)loadLocationWithlocation:(CLLocation *)<em>location</em> callBack:(void ( ^ ) ( LocationInfo *locationInfo , NSError *error ))<em>callBack</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>location</code></th>
+						<td><p>地理位置坐标</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>callBack</code></th>
+						<td><p>定位后回调方法</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>根据坐标获取地理位置信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLocationManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loadLocationWithAddress:callBack:" title="loadLocationWithAddress:callBack:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loadLocationWithAddress:callBack:">+&nbsp;loadLocationWithAddress:callBack:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据地名获取地理位置信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)loadLocationWithAddress:(NSString *)<em>address</em> callBack:(void ( ^ ) ( LocationInfo *locationInfo , NSError *error ))<em>callBack</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>address</code></th>
+						<td><p>地名</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>callBack</code></th>
+						<td><p>定位后回调方法</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>根据地名获取地理位置信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQLocationManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reverseLocationWithLocation:" title="reverseLocationWithLocation:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reverseLocationWithLocation:">&ndash;&nbsp;reverseLocationWithLocation:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)reverseLocationWithLocation:(CLLocation *)<em>location</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/geocodeAddressString:" title="geocodeAddressString:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/geocodeAddressString:">&ndash;&nbsp;geocodeAddressString:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)geocodeAddressString:(NSString *)<em>address</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/prcoessPlacemMarks:" title="prcoessPlacemMarks:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/prcoessPlacemMarks:">&ndash;&nbsp;prcoessPlacemMarks:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)prcoessPlacemMarks:(NSArray&lt;CLPlacemark*&gt; *)<em>placemarks</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/locationManager:didUpdateLocations:" title="locationManager:didUpdateLocations:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/locationManager:didUpdateLocations:">&ndash;&nbsp;locationManager:didUpdateLocations:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)locationManager:(CLLocationManager *)<em>manager</em> didUpdateLocations:(NSArray&lt;CLLocation*&gt; *)<em>locations</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/locationManager:didFailWithError:" title="locationManager:didFailWithError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/locationManager:didFailWithError:">&ndash;&nbsp;locationManager:didFailWithError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)locationManager:(CLLocationManager *)<em>manager</em> didFailWithError:(NSError *)<em>error</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/clManager" title="clManager"></a>
+	<h3 class="method-title"><code><a href="#//api/name/clManager">&ndash;&nbsp;clManager</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (CLLocationManager *)clManager</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/clGeocoder" title="clGeocoder"></a>
+	<h3 class="method-title"><code><a href="#//api/name/clGeocoder">&ndash;&nbsp;clGeocoder</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (CLGeocoder *)clGeocoder</code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/clManager" title="clManager"></a>
+	<h3 class="method-title"><code><a href="#//api/name/clManager">&nbsp;&nbsp;clManager</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CLLocationManager *clManager</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/clGeocoder" title="clGeocoder"></a>
+	<h3 class="method-title"><code><a href="#//api/name/clGeocoder">&nbsp;&nbsp;clGeocoder</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CLGeocoder *clGeocoder</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loadSuccess" title="loadSuccess"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loadSuccess">&nbsp;&nbsp;loadSuccess</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL loadSuccess</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/callBlock" title="callBlock"></a>
+	<h3 class="method-title"><code><a href="#//api/name/callBlock">&nbsp;&nbsp;callBlock</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) void ( ^ ) ( LocationInfo *info , NSError *error ) callBlock</code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
