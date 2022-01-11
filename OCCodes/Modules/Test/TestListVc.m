@@ -14,7 +14,7 @@
 #import "VcInfoCell.h"
 #import "VcModel.h"
 #import "BQCrashHelper.h"
-
+#import "NSString+Custom.h"
 @interface TestListVc ()
 <
 UITableViewDelegate
@@ -45,9 +45,18 @@ UITableViewDelegate
     [self configUI];
     
     [BQCrashHelper startCrashRecord];
+    
+    [self testMethod];
 }
 
 #pragma mark - *** NetWork method
+
+- (void)testMethod {
+    NSString * str = @"FA012345";
+    NSLog(@"%@",[str convertBytesToData]);
+    str = @"FA01a";
+    NSLog(@"%@",[str convertBytesToData]);
+}
 
 #pragma mark - *** Event Action
 

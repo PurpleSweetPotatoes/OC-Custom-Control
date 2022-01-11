@@ -157,8 +157,7 @@
 - (BOOL)hasUnicode;
 
 /** string字面转化为Data */
-- (NSMutableData*)convertBytesToData;
-
+- (NSData*)convertBytesToData;
 
 /// 删除对应字符串
 /// @param regular 正则规则
