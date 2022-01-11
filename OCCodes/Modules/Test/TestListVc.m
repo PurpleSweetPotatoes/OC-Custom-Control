@@ -16,13 +16,9 @@
 #import "UITableView+Custom.h"
 #import "VcInfoCell.h"
 #import "VcModel.h"
-<<<<<<< HEAD
 #import "BQCrashHelper.h"
 #import "NSString+Custom.h"
-=======
 #import "NSArray+Custom.h"
-
->>>>>>> 64fb1d420b89756195b8f44fd6ad5cf8cc6faa1e
 @interface TestListVc ()
 <
 UITableViewDelegate
@@ -124,12 +120,4 @@ UITableViewDelegate
     return _tableView;
 }
 
-
-- (void)testMethod {
-    NSLog(@"测试方法");
-    NSInteger num = 0;
-    for (NSInteger i = 0; i< num; i++) {
-        NSLog(@"%zd",i);
-    }
-}
 @end

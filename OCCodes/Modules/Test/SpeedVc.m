@@ -16,7 +16,7 @@
 #import "BQTimer.h"
 #import "CALayer+Custom.h"
 #import "UILabel+Custom.h"
-
+#import "BQTipView.h"
 
 @interface SpeedVc ()
 @property (nonatomic, strong) BQTimer * timer;
@@ -28,6 +28,7 @@
 @property (nonatomic, assign) CLLocationSpeed  maxSpeed;
 @property (nonatomic, assign) CLLocationSpeed  totalSpeed;
 @property (nonatomic, assign) NSInteger  count;
+@property (nonatomic, strong) UILabel * errorLab;
 @end
 
 @implementation SpeedVc
@@ -69,30 +70,24 @@
     [BQLocationManager startLoadLocationCallBack:^(LocationInfo *locationInfo, NSError *error) {
         
         if (locationInfo) {
-            CLLocationSpeed speed = 0;
-            
             NSString * errorMsg = @"";
             if ([locationInfo.location.timestamp compare:self.preLocation.timestamp] == NSOrderedAscending) { //
                 errorMsg = @"定位超时无效";
             } else if (locationInfo.location.horizontalAccuracy <= 0) {
-//                errorMsg = @"准确性无效";
+                errorMsg = @"准确性无效";
             } else if (locationInfo.location.speed == -1) {
-//                errorMsg = @"速度无效";
+                errorMsg = @"速度无效";
             }
             
             if (errorMsg.length > 0) {
-                NSLog(@"定位失败: %@", errorMsg);
+                weakSelf.errorLab.text = [NSString stringWithFormat:@"定位失败: %@", errorMsg];
+                weakSelf.errorLab.hidden = NO;
+//                NSLog(@"定位失败: %@", errorMsg);
                 return;
             }
+            weakSelf.errorLab.hidden = YES;
             
-            speed = locationInfo.location.speed;
-            if (weakSelf.preLocation && speed == -1) {
-                CLLocationDistance distance = ABS([locationInfo.location distanceFromLocation:weakSelf.preLocation]);
-                NSTimeInterval time = ABS([locationInfo.location.timestamp timeIntervalSinceDate:self.preLocation.timestamp]);
-                speed = distance / time;
-                NSLog(@"计算速度:%.2f, 时间:%@ 距离:%.2f",speed, locationInfo.location.timestamp, distance);
-                [weakSelf resetStatus:speed];
-            }
+            [weakSelf resetStatus:locationInfo.location.speed];
             weakSelf.preLocation = locationInfo.location;
         } else {
             NSLog(@"定位失败:%@",error.localizedDescription);
@@ -122,6 +117,7 @@
     [self.view addSubview:self.avgSpeedLab];
     [self.view addSubview:self.maxSpeedLab];
     [self.view addSubview:self.timeLab];
+    [self.view addSubview:self.errorLab];
 }
 
 #pragma mark - *** Set
@@ -143,7 +139,7 @@
         BQDashBoradView * dashView = [[BQDashBoradView alloc] initWithFrame:CGRectMake((self.view.width - 240) * 0.5, self.navbarBottom + 60, 240, 240) ringWidth:10 areaNum:12 areaDailNum:2 maxNum:120];
         NSMutableArray * arr = [NSMutableArray arrayWithCapacity:13];
         for (NSInteger i = 0; i <= 12; i++) {
-            arr[i] = [NSString stringWithFormat:@"%zd", i * 10];
+            arr[i] = [NSString stringWithFormat:@"%d", i * 10];
         }
         [dashView setDailTextList:[arr copy]];
         _dashView = dashView;
@@ -182,4 +178,13 @@
     return _timeLab;
 }
 
+- (UILabel *)errorLab {
+    if (_errorLab == nil) {
+        UILabel * lab = [UILabel labWithFrame:CGRectMake(0, self.timeLab.bottom + 20, self.view.width, 40) title:@"" fontSize:16 textColor:[UIColor whiteColor]];
+        lab.textAlignment = NSTextAlignmentCenter;
+        lab.hidden = YES;
+        _errorLab = lab;
+    }
+    return _errorLab;
+}
 @end

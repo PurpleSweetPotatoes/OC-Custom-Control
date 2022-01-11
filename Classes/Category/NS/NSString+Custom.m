@@ -1073,14 +1073,7 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return finalString;
 } // gtm_stringByUnescapingHTML
 
-<<<<<<< HEAD
-- (NSData*)convertBytesToData {
-    NSMutableData* data = [NSMutableData data];
-    int idx = 0;
-    while (idx < self.length) {
-        unsigned int intValue;
-        NSRange range = NSMakeRange(idx, (idx + 2 <= self.length) ? 2:1);
-=======
+
 - (NSString *)hexString {
     if (self.length == 0) {
         return @"";
@@ -1094,8 +1087,7 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
     return [str copy];
 }
 
-
-- (NSData *)stringData {
+- (NSData *)convertBytesToData {
     if (self.length % 2 != 0) {
         NSLog(@"字符串长度必须为双数");
         return nil;
@@ -1103,13 +1095,12 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
         
     NSMutableData* data = [NSMutableData data];
     for (int idx = 0; idx+2 <= self.length; idx+=2) {
+        unsigned int intValue;
         NSRange range = NSMakeRange(idx, 2);
->>>>>>> 64fb1d420b89756195b8f44fd6ad5cf8cc6faa1e
         NSString* hexStr = [self substringWithRange:range];
         NSScanner* scanner = [NSScanner scannerWithString:hexStr];
         [scanner scanHexInt:&intValue];
         [data appendBytes:&intValue length:1];
-        idx += range.length;
     }
     return [data copy];
 }
