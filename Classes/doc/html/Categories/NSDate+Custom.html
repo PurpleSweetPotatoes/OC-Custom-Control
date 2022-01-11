@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>NSDate(Custom) Category Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/dateFromString:style:">+ dateFromString:style:</option>
+		
+		<option value="//api/name/formaterStrWith:">+ formaterStrWith:</option>
+		
+		<option value="//api/name/locaDate">+ locaDate</option>
+		
+		<option value="//api/name/millisecond">+ millisecond</option>
+		
+		<option value="//api/name/setFormatterStyle:">+ setFormatterStyle:</option>
+		
+		<option value="//api/name/standardFormatTimeStringWithTime:">+ standardFormatTimeStringWithTime:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/day">- day</option>
+		
+		<option value="//api/name/getCurrentComponents">- getCurrentComponents</option>
+		
+		<option value="//api/name/getFormatteTimestamp">- getFormatteTimestamp</option>
+		
+		<option value="//api/name/getTimeString:">- getTimeString:</option>
+		
+		<option value="//api/name/getTimeStringFormat:">- getTimeStringFormat:</option>
+		
+		<option value="//api/name/hour">- hour</option>
+		
+		<option value="//api/name/min">- min</option>
+		
+		<option value="//api/name/month">- month</option>
+		
+		<option value="//api/name/second">- second</option>
+		
+		<option value="//api/name/standardFormatTimeString">- standardFormatTimeString</option>
+		
+		<option value="//api/name/weekDay">- weekDay</option>
+		
+		<option value="//api/name/year">- year</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">NSDate(Custom) Category Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Declared in</th>
+	<td>NSDate+Custom.h<br />NSDate+Custom.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/locaDate" title="locaDate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/locaDate">+&nbsp;locaDate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)locaDate</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setFormatterStyle:" title="setFormatterStyle:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setFormatterStyle:">+&nbsp;setFormatterStyle:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (void)setFormatterStyle:(NSString *)<em>style</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dateFromString:style:" title="dateFromString:style:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dateFromString:style:">+&nbsp;dateFromString:style:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>字符串转时间</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSDate *)dateFromString:(NSString *)<em>string</em> style:(NSString *)<em>style</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>string</code></th>
+						<td><p>时间字符串</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>style</code></th>
+						<td><p>转化类型yyyy MM dd HH mm ss 组合</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>字符串转时间</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NSDate+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/millisecond" title="millisecond"></a>
+	<h3 class="method-title"><code><a href="#//api/name/millisecond">+&nbsp;millisecond</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (NSString *)millisecond</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getFormatteTimestamp" title="getFormatteTimestamp"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getFormatteTimestamp">&ndash;&nbsp;getFormatteTimestamp</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)getFormatteTimestamp</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getTimeString:" title="getTimeString:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getTimeString:">&ndash;&nbsp;getTimeString:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)getTimeString:(NSDateTimeStyle)<em>style</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getTimeStringFormat:" title="getTimeStringFormat:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getTimeStringFormat:">&ndash;&nbsp;getTimeStringFormat:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)getTimeStringFormat:(NSString *)<em>formatStr</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/year" title="year"></a>
+	<h3 class="method-title"><code><a href="#//api/name/year">&ndash;&nbsp;year</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)year</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/month" title="month"></a>
+	<h3 class="method-title"><code><a href="#//api/name/month">&ndash;&nbsp;month</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)month</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/day" title="day"></a>
+	<h3 class="method-title"><code><a href="#//api/name/day">&ndash;&nbsp;day</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)day</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/hour" title="hour"></a>
+	<h3 class="method-title"><code><a href="#//api/name/hour">&ndash;&nbsp;hour</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)hour</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/min" title="min"></a>
+	<h3 class="method-title"><code><a href="#//api/name/min">&ndash;&nbsp;min</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)min</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/second" title="second"></a>
+	<h3 class="method-title"><code><a href="#//api/name/second">&ndash;&nbsp;second</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)second</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/weekDay" title="weekDay"></a>
+	<h3 class="method-title"><code><a href="#//api/name/weekDay">&ndash;&nbsp;weekDay</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)weekDay</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getCurrentComponents" title="getCurrentComponents"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getCurrentComponents">&ndash;&nbsp;getCurrentComponents</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSDateComponents *)getCurrentComponents</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/standardFormatTimeStringWithTime:" title="standardFormatTimeStringWithTime:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/standardFormatTimeStringWithTime:">+&nbsp;standardFormatTimeStringWithTime:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>标准通用时间字符串</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSString *)standardFormatTimeStringWithTime:(NSTimeInterval)<em>time</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>time</code></th>
+						<td><p>时间戳(秒)</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>标准通用时间字符串</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NSDate+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/standardFormatTimeString" title="standardFormatTimeString"></a>
+	<h3 class="method-title"><code><a href="#//api/name/standardFormatTimeString">&ndash;&nbsp;standardFormatTimeString</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>标准通用时间字符串
+1分钟内：刚刚
+1小时内：xx分钟前
+1小时-当天0点：x小时前
+昨天：昨天
+2-5天：星期x</p>
+
+<blockquote><p>5天：x月x日</p></blockquote>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)standardFormatTimeString</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>时间字符串</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>标准通用时间字符串
+1分钟内：刚刚
+1小时内：xx分钟前
+1小时-当天0点：x小时前
+昨天：昨天
+2-5天：星期x</p>
+
+<blockquote><p>5天：x月x日</p></blockquote>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NSDate+Custom.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/formaterStrWith:" title="formaterStrWith:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/formaterStrWith:">+&nbsp;formaterStrWith:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (NSString *)formaterStrWith:(NSDateTimeStyle)<em>style</em></code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -16,14 +16,6 @@
 
 @implementation BQLinearLayout
 
-- (void)prepareLayout{
-    [super prepareLayout];
-    NSLog(@"准备布局");
-    // 设置内边距
-    CGFloat inset = (self.collectionView.frame.size.width - self.itemSize.width) * 0.5;
-    self.sectionInset = UIEdgeInsetsMake(0, inset, 0, inset);
-}
-
 /**
  * 这个方法的返回值是一个数组（数组里面存放着rect范围内所有元素的布局属性）
  * 这个数组中存放的都是UICollectionViewLayoutAttributes对象
@@ -36,23 +28,9 @@
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect{
     // 获得super已经计算好的布局属性
     NSArray *array = [super layoutAttributesForElementsInRect:rect];
-    // 计算collectionView最中心点的x值
-    CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
-    // 在原有布局属性的基础上，进行微调
-    for (UICollectionViewLayoutAttributes *attrs in array) {
-        // cell的中心点x 和 collectionView最中心点的x值 的间距
-        CGFloat delta = ABS(attrs.center.x - centerX);
-        if (delta < self.collectionView.bounds.size.width * 0.5) {
-            // 根据间距值 计算 cell的缩放比例
-            CGFloat scale = 1 - delta / self.collectionView.frame.size.width;
-            // 设置缩放比例
-            attrs.transform = CGAffineTransformMakeScale(scale, scale);
-        } else {
-            attrs.transform = CGAffineTransformIdentity;
-        }
-        
+    if ([self.delegate respondsToSelector:@selector(didLoadLayoutAttributes:layout:)]) {
+        [self.delegate didLoadLayoutAttributes:array layout:self];
     }
-    
     return array;
 }
 
@@ -63,7 +41,7 @@
  2.layoutAttributesForElementsInRect:方法
  */
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds{
-    return YES;
+    return self.scorllReset;
 }
 
 /**

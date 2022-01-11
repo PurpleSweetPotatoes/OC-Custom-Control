@@ -11,12 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class BQAttributeLabel;
+
 @protocol BQAttributeLabelDelegate <NSObject>
 
 - (void)attributeLabel:(BQAttributeLabel *)label tapText:(NSString *)tapText;
 
 @end
-
 
 /**
  自定义属性文字Lab,可添加对应文字点击事件
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addTapBlockWithText:(NSString *)text;
 
 /// 对范围添加点击事件
-/// @param text 响应的范围
+/// @param range 响应的范围
 - (void)addTapBlockWithRange:(NSRange)range;
 
 /// 移除文字点击事件
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeTapBlockWithText:(NSString *)text;
 
 /// 移除范围点击事件
-/// @param text 响应的范围
+/// @param range 响应的范围
 - (void)removeTapBlockWithRange:(NSRange)range;
 
 /// 移除所有点击事件

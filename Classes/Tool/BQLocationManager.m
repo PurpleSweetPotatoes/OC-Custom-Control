@@ -44,12 +44,7 @@ CLLocationManagerDelegate
     
     BQLocationManager * manager = [[BQLocationManager alloc] init];
     manager.loadSuccess = NO;
-    
-    //判断系统IOS版本
-    if (@available(iOS 8.0, *)) {
-        [manager.clManager requestWhenInUseAuthorization];
-    }
-    
+    [manager.clManager requestWhenInUseAuthorization];
     [manager.clManager startUpdatingLocation];
     manager.callBlock = callBack;
 }
@@ -141,6 +136,7 @@ CLLocationManagerDelegate
 - (CLLocationManager *)clManager {
     if (_clManager == nil) {
         _clManager = [[CLLocationManager alloc] init];
+        _clManager.desiredAccuracy = kCLLocationAccuracyBest;
         _clManager.delegate = self;
     }
     return _clManager;

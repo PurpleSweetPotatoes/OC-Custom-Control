@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>PLCrashReporter Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/sharedReporter">+ sharedReporter</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/enableCrashReporter">- enableCrashReporter</option>
+		
+		<option value="//api/name/enableCrashReporterAndReturnError:">- enableCrashReporterAndReturnError:</option>
+		
+		<option value="//api/name/generateLiveReport">- generateLiveReport</option>
+		
+		<option value="//api/name/generateLiveReportAndReturnError:">- generateLiveReportAndReturnError:</option>
+		
+		<option value="//api/name/generateLiveReportWithThread:">- generateLiveReportWithThread:</option>
+		
+		<option value="//api/name/generateLiveReportWithThread:error:">- generateLiveReportWithThread:error:</option>
+		
+		<option value="//api/name/hasPendingCrashReport">- hasPendingCrashReport</option>
+		
+		<option value="//api/name/initWithConfiguration:">- initWithConfiguration:</option>
+		
+		<option value="//api/name/loadPendingCrashReportData">- loadPendingCrashReportData</option>
+		
+		<option value="//api/name/loadPendingCrashReportDataAndReturnError:">- loadPendingCrashReportDataAndReturnError:</option>
+		
+		<option value="//api/name/purgePendingCrashReport">- purgePendingCrashReport</option>
+		
+		<option value="//api/name/purgePendingCrashReportAndReturnError:">- purgePendingCrashReportAndReturnError:</option>
+		
+		<option value="//api/name/setCrashCallbacks:">- setCrashCallbacks:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">PLCrashReporter Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>PLCrashReporter.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The callback used to report caught signal information. In version 0 of this structure, all crashes will be
+reported via this function.</p><div class="warning"><p><strong>Warning:</strong> When using PLCrashReporterSignalHandlerTypeMach, the siginfo_t argument to this function will be derived
+from the Mach exception data, and may be incorrect, or may otherwise not match the expected data as provided via
+PLCrashReporterSignalHandlerTypeBSD. In addition, the provided ucontext_t value will be zero-initialized, and will
+not provide valid thread state.</p>
+
+<p>This callback will be deprecated in favor of a Mach-compatible replacement in a future release; support is maintained
+here to allow clients that rely on post-crash callbacks without thread state to make use of Mach exceptions.</p></div>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/sharedReporter" title="sharedReporter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sharedReporter">+&nbsp;sharedReporter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Path to the crash reporter internal data directory</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (PLCrashReporter *)sharedReporter</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Path to the crash reporter internal data directory</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">PLCrashReporter.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithConfiguration:" title="initWithConfiguration:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithConfiguration:">&ndash;&nbsp;initWithConfiguration:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithConfiguration:(PLCrashReporterConfig *)<em>config</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/hasPendingCrashReport" title="hasPendingCrashReport"></a>
+	<h3 class="method-title"><code><a href="#//api/name/hasPendingCrashReport">&ndash;&nbsp;hasPendingCrashReport</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)hasPendingCrashReport</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loadPendingCrashReportData" title="loadPendingCrashReportData"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loadPendingCrashReportData">&ndash;&nbsp;loadPendingCrashReportData</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)loadPendingCrashReportData</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/loadPendingCrashReportDataAndReturnError:" title="loadPendingCrashReportDataAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/loadPendingCrashReportDataAndReturnError:">&ndash;&nbsp;loadPendingCrashReportDataAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)loadPendingCrashReportDataAndReturnError:(NSError **)<em>outError</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/generateLiveReportWithThread:" title="generateLiveReportWithThread:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/generateLiveReportWithThread:">&ndash;&nbsp;generateLiveReportWithThread:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)generateLiveReportWithThread:(thread_t)<em>thread</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/generateLiveReportWithThread:error:" title="generateLiveReportWithThread:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/generateLiveReportWithThread:error:">&ndash;&nbsp;generateLiveReportWithThread:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)generateLiveReportWithThread:(thread_t)<em>thread</em> error:(NSError **)<em>outError</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/generateLiveReport" title="generateLiveReport"></a>
+	<h3 class="method-title"><code><a href="#//api/name/generateLiveReport">&ndash;&nbsp;generateLiveReport</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)generateLiveReport</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/generateLiveReportAndReturnError:" title="generateLiveReportAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/generateLiveReportAndReturnError:">&ndash;&nbsp;generateLiveReportAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)generateLiveReportAndReturnError:(NSError **)<em>outError</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/purgePendingCrashReport" title="purgePendingCrashReport"></a>
+	<h3 class="method-title"><code><a href="#//api/name/purgePendingCrashReport">&ndash;&nbsp;purgePendingCrashReport</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)purgePendingCrashReport</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/purgePendingCrashReportAndReturnError:" title="purgePendingCrashReportAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/purgePendingCrashReportAndReturnError:">&ndash;&nbsp;purgePendingCrashReportAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)purgePendingCrashReportAndReturnError:(NSError **)<em>outError</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enableCrashReporter" title="enableCrashReporter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enableCrashReporter">&ndash;&nbsp;enableCrashReporter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)enableCrashReporter</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enableCrashReporterAndReturnError:" title="enableCrashReporterAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enableCrashReporterAndReturnError:">&ndash;&nbsp;enableCrashReporterAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)enableCrashReporterAndReturnError:(NSError **)<em>outError</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setCrashCallbacks:" title="setCrashCallbacks:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setCrashCallbacks:">&ndash;&nbsp;setCrashCallbacks:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)setCrashCallbacks:(PLCrashReporterCallbacks *)<em>callbacks</em></code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

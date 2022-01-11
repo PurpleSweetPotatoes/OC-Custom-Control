@@ -81,7 +81,7 @@
         return self;
     }
     
-    return nil;
+    return [super hitTest:point withEvent:event];
 }
 
 - (BOOL)touchPoint:(CGPoint)p {

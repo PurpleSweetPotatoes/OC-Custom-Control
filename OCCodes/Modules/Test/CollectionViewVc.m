@@ -10,17 +10,21 @@
 
 #import "CollectionViewVc.h"
 
+#import "BQAlertSheetView.h"
+#import "BQLinearLayout.h"
+#import "BQPhotoBrowserView.h"
 #import "BQWaterFallLayout.h"
 #import "CollectionImgCell.h"
 #import "ImgModel.h"
 #import "UICollectionView+Custom.h"
 #import "UILabel+Custom.h"
-#import "BQAlertSheetView.h"
-#import "BQLinearLayout.h"
+
 @interface CollectionViewVc ()
 <
 UICollectionViewDataSource
 ,UICollectionViewDelegate
+,BQPhotoBrowserViewDelegate
+,BQLinearLayoutDelegate
 >
 @property (nonatomic, strong) UILabel * tipLab;
 @property (nonatomic, strong) UICollectionView * collectionV;
@@ -49,13 +53,16 @@ UICollectionViewDataSource
 #pragma mark - *** Event Action
 
 - (void)changeCollectionLayout {
-    NSArray * arr = @[@"常规布局",@"瀑布流"];
+    NSArray * arr = @[@"常规布局",@"瀑布流",@"线性布局"];
     [BQAlertSheetView showSheetViewWithTitles:arr callBlock:^(NSInteger index, NSString *title) {
         if (index == 0) {
             self.collectionV.collectionViewLayout = self.flowLayout;
         } else if (index == 1) {
             self.collectionV.collectionViewLayout = self.waterFallLayout;
+        } else if (index == 2) {
+            self.collectionV.collectionViewLayout = self.linearLayout;
         }
+        self.collectionV.height = index == 2 ? 150 : (self.view.height - self.tipLab.bottom);
         self.tipLab.text = [NSString stringWithFormat:@"当前布局:%@",arr[index]];
         [self.collectionV reloadData];
         [self.collectionV setContentOffset:CGPointZero animated:YES];
@@ -71,6 +78,41 @@ UICollectionViewDataSource
     CollectionImgCell * cell = [CollectionImgCell loadFromCollectionView:collectionView indexPath:indexPath];
     [cell configInfo:self.datas[indexPath.row]];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    BQPhotoBrowserView * view = [BQPhotoBrowserView showWithDelegate:self];
+    [view scrollToIndex:indexPath.row];
+}
+
+- (NSInteger)numberOfBrowser {
+    return self.datas.count;
+}
+
+- (void)browserConfigImgV:(BQPhotoView *)photoV index:(NSInteger)index {
+    photoV.imgV.image = [UIImage imageNamed:self.datas[index].imgName];
+}
+
+- (void)didLoadLayoutAttributes:(NSArray *)attributes layout:(UICollectionViewLayout *)layout {
+    if (layout == self.linearLayout) {
+        // 计算collectionView最中心点的x值
+        CGFloat centerX = layout.collectionView.contentOffset.x + layout.collectionView.frame.size.width * 0.5;
+        BQLinearLayout * linear = (BQLinearLayout *)layout;
+        // 在原有布局属性的基础上，进行微调
+        for (UICollectionViewLayoutAttributes *attrs in attributes) {
+            // cell的中心点x 和 collectionView最中心点的x值 的间距
+            CGFloat delta = ABS(attrs.center.x - centerX);
+            if (delta < (attrs.size.width + linear.minimumLineSpacing)) {
+                // 根据间距值 计算 cell的缩放比例
+                CGFloat scale = 1.5 - delta / (attrs.size.width + linear.minimumLineSpacing) * 0.5;
+                // 设置缩放比例
+                attrs.transform = CGAffineTransformMakeScale(scale, scale);
+            } else {
+                attrs.transform = CGAffineTransformIdentity;
+            }
+        }
+    }
 }
 #pragma mark - *** Instance method
 
@@ -103,7 +145,7 @@ UICollectionViewDataSource
 
 - (UICollectionView *)collectionV {
     if (_collectionV == nil) {
-        UICollectionView * collectionV = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.tipLab.bottom, self.view.width, 100) collectionViewLayout:self.linearLayout];
+        UICollectionView * collectionV = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.tipLab.bottom, self.view.width, self.view.height - self.tipLab.bottom) collectionViewLayout:self.flowLayout];
         collectionV.backgroundColor = [UIColor clearColor];
         collectionV.dataSource = self;
         collectionV.delegate = self;
@@ -152,10 +194,12 @@ UICollectionViewDataSource
 - (BQLinearLayout *)linearLayout {
     if (_linearLayout == nil) {
         BQLinearLayout * linearLayout = [[BQLinearLayout alloc] init];
-        linearLayout.minimumInteritemSpacing = 10;
-        CGFloat width = (self.view.width - linearLayout.minimumInteritemSpacing * 2) * 0.5;
-        linearLayout.itemSize = CGSizeMake(width, 100);
+        linearLayout.delegate = self;
+        linearLayout.scorllReset = YES;
+        linearLayout.minimumLineSpacing = 60;
+        linearLayout.itemSize = CGSizeMake(180, 100);
         linearLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        linearLayout.sectionInset = UIEdgeInsetsMake(0, (self.collectionV.width - linearLayout.itemSize.width) * 0.5, 0, (self.collectionV.width - linearLayout.itemSize.width) * 0.5);
         _linearLayout = linearLayout;
     }
     return _linearLayout;

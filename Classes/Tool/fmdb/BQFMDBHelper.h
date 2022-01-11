@@ -29,7 +29,7 @@ static NSString * const kFMDBTypeBool  = @"BLOB";
 
 @property (nonatomic, assign) NSInteger  keyId;
 
-/*
+/**
  TEXT : 文本类型
  INTEGER : 数字类型
  REAL: 浮点类型

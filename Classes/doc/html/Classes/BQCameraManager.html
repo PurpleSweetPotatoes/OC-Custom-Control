@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>BQCameraManager Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">BQOCKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">www.mrbai.demo.OCCodes</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/assetWriter">assetWriter</option>
+		
+		<option value="//api/name/audioInput">audioInput</option>
+		
+		<option value="//api/name/audioOffset">audioOffset</option>
+		
+		<option value="//api/name/audioOutput">audioOutput</option>
+		
+		<option value="//api/name/audioWrite">audioWrite</option>
+		
+		<option value="//api/name/cameraInput">cameraInput</option>
+		
+		<option value="//api/name/colorSpace">colorSpace</option>
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/device">device</option>
+		
+		<option value="//api/name/flashModel">flashModel</option>
+		
+		<option value="//api/name/lastAudioTime">lastAudioTime</option>
+		
+		<option value="//api/name/lastVideoTime">lastVideoTime</option>
+		
+		<option value="//api/name/maxDuration">maxDuration</option>
+		
+		<option value="//api/name/metaOutput">metaOutput</option>
+		
+		<option value="//api/name/photoOutput">photoOutput</option>
+		
+		<option value="//api/name/postion">postion</option>
+		
+		<option value="//api/name/queue">queue</option>
+		
+		<option value="//api/name/reSetOffsetA">reSetOffsetA</option>
+		
+		<option value="//api/name/reSetOffsetV">reSetOffsetV</option>
+		
+		<option value="//api/name/recordDuration">recordDuration</option>
+		
+		<option value="//api/name/recordStatus">recordStatus</option>
+		
+		<option value="//api/name/session">session</option>
+		
+		<option value="//api/name/showLayer">showLayer</option>
+		
+		<option value="//api/name/startTime">startTime</option>
+		
+		<option value="//api/name/type">type</option>
+		
+		<option value="//api/name/videoOffset">videoOffset</option>
+		
+		<option value="//api/name/videoOutput">videoOutput</option>
+		
+		<option value="//api/name/videoWrite">videoWrite</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/manager">+ manager</option>
+		
+		<option value="//api/name/managerWithDelegate:">+ managerWithDelegate:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/adjustTime:by:">- adjustTime:by:</option>
+		
+		<option value="//api/name/audioInput">- audioInput</option>
+		
+		<option value="//api/name/audioOutput">- audioOutput</option>
+		
+		<option value="//api/name/captureOutput:didFinishProcessingPhoto:error:">- captureOutput:didFinishProcessingPhoto:error:</option>
+		
+		<option value="//api/name/captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:">- captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:</option>
+		
+		<option value="//api/name/captureOutput:didOutputMetadataObjects:fromConnection:">- captureOutput:didOutputMetadataObjects:fromConnection:</option>
+		
+		<option value="//api/name/captureOutput:didOutputSampleBuffer:fromConnection:">- captureOutput:didOutputSampleBuffer:fromConnection:</option>
+		
+		<option value="//api/name/changeDeviceStatus:">- changeDeviceStatus:</option>
+		
+		<option value="//api/name/configAssertWriteInput:setting:assetWriter:">- configAssertWriteInput:setting:assetWriter:</option>
+		
+		<option value="//api/name/configAssetWriter">- configAssetWriter</option>
+		
+		<option value="//api/name/configAudioStream">- configAudioStream</option>
+		
+		<option value="//api/name/configDevice">- configDevice</option>
+		
+		<option value="//api/name/configMetaStream">- configMetaStream</option>
+		
+		<option value="//api/name/configPhotoStream">- configPhotoStream</option>
+		
+		<option value="//api/name/configScanRect:superSize:">- configScanRect:superSize:</option>
+		
+		<option value="//api/name/configShowView:">- configShowView:</option>
+		
+		<option value="//api/name/configShowView:model:">- configShowView:model:</option>
+		
+		<option value="//api/name/configStreams">- configStreams</option>
+		
+		<option value="//api/name/configStreamsByType">- configStreamsByType</option>
+		
+		<option value="//api/name/configVideoStream">- configVideoStream</option>
+		
+		<option value="//api/name/converImgData:error:">- converImgData:error:</option>
+		
+		<option value="//api/name/dealloc">- dealloc</option>
+		
+		<option value="//api/name/exposeAtPoint:">- exposeAtPoint:</option>
+		
+		<option value="//api/name/exposeAtPoint:vSize:">- exposeAtPoint:vSize:</option>
+		
+		<option value="//api/name/focusAtPoint:">- focusAtPoint:</option>
+		
+		<option value="//api/name/focusAtPoint:vSize:">- focusAtPoint:vSize:</option>
+		
+		<option value="//api/name/getOffsetTime:currtime:lastTime:">- getOffsetTime:currtime:lastTime:</option>
+		
+		<option value="//api/name/getVideoTransForm">- getVideoTransForm</option>
+		
+		<option value="//api/name/imageFromSampleBuffer:">- imageFromSampleBuffer:</option>
+		
+		<option value="//api/name/isRun">- isRun</option>
+		
+		<option value="//api/name/metaOutput">- metaOutput</option>
+		
+		<option value="//api/name/pauseRecord">- pauseRecord</option>
+		
+		<option value="//api/name/photoOutput">- photoOutput</option>
+		
+		<option value="//api/name/reSetInput:add:">- reSetInput:add:</option>
+		
+		<option value="//api/name/reSetOutput:add:">- reSetOutput:add:</option>
+		
+		<option value="//api/name/resetFocusAndExposureModes">- resetFocusAndExposureModes</option>
+		
+		<option value="//api/name/resumeRecord">- resumeRecord</option>
+		
+		<option value="//api/name/setSeesionPreset:">- setSeesionPreset:</option>
+		
+		<option value="//api/name/setTorchMode:">- setTorchMode:</option>
+		
+		<option value="//api/name/setType:">- setType:</option>
+		
+		<option value="//api/name/setVideoZoomFactor:">- setVideoZoomFactor:</option>
+		
+		<option value="//api/name/showLayer">- showLayer</option>
+		
+		<option value="//api/name/startRecord">- startRecord</option>
+		
+		<option value="//api/name/startRunning">- startRunning</option>
+		
+		<option value="//api/name/stopRecord">- stopRecord</option>
+		
+		<option value="//api/name/stopRunning">- stopRunning</option>
+		
+		<option value="//api/name/switchCamera">- switchCamera</option>
+		
+		<option value="//api/name/takePhoto">- takePhoto</option>
+		
+		<option value="//api/name/torchMode">- torchMode</option>
+		
+		<option value="//api/name/transtionPoint:size:">- transtionPoint:size:</option>
+		
+		<option value="//api/name/videoFilePath">- videoFilePath</option>
+		
+		<option value="//api/name/videoOutput">- videoOutput</option>
+		
+		<option value="//api/name/writeBuffer:inInput:offset:">- writeBuffer:inInput:offset:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">BQCameraManager Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>BQCameraManager.h<br />BQCameraManager.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/dealloc" title="dealloc"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dealloc">&ndash;&nbsp;dealloc</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)dealloc</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/manager" title="manager"></a>
+	<h3 class="method-title"><code><a href="#//api/name/manager">+&nbsp;manager</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)manager</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/managerWithDelegate:" title="managerWithDelegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/managerWithDelegate:">+&nbsp;managerWithDelegate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)managerWithDelegate:(_Nullable id&lt;BQCameraManagerDelegate&gt;)<em>delegate</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startRunning" title="startRunning"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startRunning">&ndash;&nbsp;startRunning</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>开始运行捕捉画面</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startRunning</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>开始运行捕捉画面</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopRunning" title="stopRunning"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopRunning">&ndash;&nbsp;stopRunning</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>停止捕捉画面</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stopRunning</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>停止捕捉画面</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setVideoZoomFactor:" title="setVideoZoomFactor:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setVideoZoomFactor:">&ndash;&nbsp;setVideoZoomFactor:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置焦距</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setVideoZoomFactor:(CGFloat)<em>zoom</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置焦距</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/switchCamera" title="switchCamera"></a>
+	<h3 class="method-title"><code><a href="#//api/name/switchCamera">&ndash;&nbsp;switchCamera</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>转换摄像头, BQCameraType_Scan 不支持</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)switchCamera</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>转换摄像头, BQCameraType_Scan 不支持</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/takePhoto" title="takePhoto"></a>
+	<h3 class="method-title"><code><a href="#//api/name/takePhoto">&ndash;&nbsp;takePhoto</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>拍照, 拍照完成回调cameraPhotoImage:error:方法</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)takePhoto</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>拍照, 拍照完成回调cameraPhotoImage:error:方法</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setTorchMode:" title="setTorchMode:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setTorchMode:">&ndash;&nbsp;setTorchMode:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>手电筒操作</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setTorchMode:(AVCaptureTorchMode)<em>torchMode</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>手电筒操作</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/torchMode" title="torchMode"></a>
+	<h3 class="method-title"><code><a href="#//api/name/torchMode">&ndash;&nbsp;torchMode</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>手电状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (AVCaptureTorchMode)torchMode</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>手电状态</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/focusAtPoint:vSize:" title="focusAtPoint:vSize:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/focusAtPoint:vSize:">&ndash;&nbsp;focusAtPoint:vSize:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>聚焦点</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)focusAtPoint:(CGPoint)<em>point</em> vSize:(CGSize)<em>size</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>point</code></th>
+						<td><p>视图所呈现点位</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>视图大小</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>聚焦点</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/focusAtPoint:" title="focusAtPoint:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/focusAtPoint:">&ndash;&nbsp;focusAtPoint:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)focusAtPoint:(CGPoint)<em>point</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/exposeAtPoint:vSize:" title="exposeAtPoint:vSize:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/exposeAtPoint:vSize:">&ndash;&nbsp;exposeAtPoint:vSize:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>曝光点</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)exposeAtPoint:(CGPoint)<em>point</em> vSize:(CGSize)<em>size</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>point</code></th>
+						<td><p>视图所呈现点位</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>size</code></th>
+						<td><p>视图大小</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>曝光点</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/exposeAtPoint:" title="exposeAtPoint:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/exposeAtPoint:">&ndash;&nbsp;exposeAtPoint:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)exposeAtPoint:(CGPoint)<em>point</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/transtionPoint:size:" title="transtionPoint:size:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/transtionPoint:size:">&ndash;&nbsp;transtionPoint:size:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (CGPoint)transtionPoint:(CGPoint)<em>point</em> size:(CGSize)<em>size</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resetFocusAndExposureModes" title="resetFocusAndExposureModes"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resetFocusAndExposureModes">&ndash;&nbsp;resetFocusAndExposureModes</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>重置曝光</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)resetFocusAndExposureModes</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>重置曝光</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/changeDeviceStatus:" title="changeDeviceStatus:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/changeDeviceStatus:">&ndash;&nbsp;changeDeviceStatus:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)changeDeviceStatus:(void ( ^ ) ( void ))<em>block</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startRecord" title="startRecord"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startRecord">&ndash;&nbsp;startRecord</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)startRecord</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/pauseRecord" title="pauseRecord"></a>
+	<h3 class="method-title"><code><a href="#//api/name/pauseRecord">&ndash;&nbsp;pauseRecord</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)pauseRecord</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resumeRecord" title="resumeRecord"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resumeRecord">&ndash;&nbsp;resumeRecord</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)resumeRecord</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopRecord" title="stopRecord"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopRecord">&ndash;&nbsp;stopRecord</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)stopRecord</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getVideoTransForm" title="getVideoTransForm"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getVideoTransForm">&ndash;&nbsp;getVideoTransForm</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (CGAffineTransform)getVideoTransForm</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/videoFilePath" title="videoFilePath"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoFilePath">&ndash;&nbsp;videoFilePath</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)videoFilePath</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:" title="captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:">&ndash;&nbsp;captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>iOS10~11 拍照完成</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)captureOutput:(AVCapturePhotoOutput *)<em>output</em> didFinishProcessingPhotoSampleBuffer:(nullable CMSampleBufferRef)<em>photoSampleBuffer</em> previewPhotoSampleBuffer:(nullable CMSampleBufferRef)<em>previewPhotoSampleBuffer</em> resolvedSettings:(AVCaptureResolvedPhotoSettings *)<em>resolvedSettings</em> bracketSettings:(nullable AVCaptureBracketedStillImageSettings *)<em>bracketSettings</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>iOS10~11 拍照完成</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/captureOutput:didFinishProcessingPhoto:error:" title="captureOutput:didFinishProcessingPhoto:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/captureOutput:didFinishProcessingPhoto:error:">&ndash;&nbsp;captureOutput:didFinishProcessingPhoto:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)captureOutput:(AVCapturePhotoOutput *)<em>output</em> didFinishProcessingPhoto:(AVCapturePhoto *)<em>photo</em> error:(NSError *)<em>error</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/converImgData:error:" title="converImgData:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/converImgData:error:">&ndash;&nbsp;converImgData:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)converImgData:(NSData *)<em>data</em> error:(NSError *)<em>error</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/captureOutput:didOutputSampleBuffer:fromConnection:" title="captureOutput:didOutputSampleBuffer:fromConnection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/captureOutput:didOutputSampleBuffer:fromConnection:">&ndash;&nbsp;captureOutput:didOutputSampleBuffer:fromConnection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)captureOutput:(AVCaptureOutput *)<em>output</em> didOutputSampleBuffer:(CMSampleBufferRef)<em>sampleBuffer</em> fromConnection:(AVCaptureConnection *)<em>connection</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getOffsetTime:currtime:lastTime:" title="getOffsetTime:currtime:lastTime:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getOffsetTime:currtime:lastTime:">&ndash;&nbsp;getOffsetTime:currtime:lastTime:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>偏移时间计算</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CMTime)getOffsetTime:(CMTime)<em>offset</em> currtime:(CMTime)<em>curTime</em> lastTime:(CMTime)<em>lastTime</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>offset</code></th>
+						<td><p>原偏移时间</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>curTime</code></th>
+						<td><p>当前时间</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>lastTime</code></th>
+						<td><p>暂停前时间</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>偏移时间计算</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/writeBuffer:inInput:offset:" title="writeBuffer:inInput:offset:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/writeBuffer:inInput:offset:">&ndash;&nbsp;writeBuffer:inInput:offset:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)writeBuffer:(CMSampleBufferRef)<em>sample</em> inInput:(AVAssetWriterInput *)<em>input</em> offset:(CMTime)<em>offset</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/adjustTime:by:" title="adjustTime:by:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/adjustTime:by:">&ndash;&nbsp;adjustTime:by:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (CMSampleBufferRef)adjustTime:(CMSampleBufferRef)<em>sample</em> by:(CMTime)<em>offset</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/imageFromSampleBuffer:" title="imageFromSampleBuffer:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/imageFromSampleBuffer:">&ndash;&nbsp;imageFromSampleBuffer:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)<em>sampleBuffer</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/captureOutput:didOutputMetadataObjects:fromConnection:" title="captureOutput:didOutputMetadataObjects:fromConnection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/captureOutput:didOutputMetadataObjects:fromConnection:">&ndash;&nbsp;captureOutput:didOutputMetadataObjects:fromConnection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)captureOutput:(AVCaptureOutput *)<em>output</em> didOutputMetadataObjects:(NSArray&lt;__kindofAVMetadataObject*&gt; *)<em>metadataObjects</em> fromConnection:(AVCaptureConnection *)<em>connection</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configDevice" title="configDevice"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configDevice">&ndash;&nbsp;configDevice</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configDevice</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configStreams" title="configStreams"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configStreams">&ndash;&nbsp;configStreams</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configStreams</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configPhotoStream" title="configPhotoStream"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configPhotoStream">&ndash;&nbsp;configPhotoStream</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configPhotoStream</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configVideoStream" title="configVideoStream"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configVideoStream">&ndash;&nbsp;configVideoStream</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configVideoStream</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configAudioStream" title="configAudioStream"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configAudioStream">&ndash;&nbsp;configAudioStream</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configAudioStream</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configMetaStream" title="configMetaStream"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configMetaStream">&ndash;&nbsp;configMetaStream</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configMetaStream</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reSetInput:add:" title="reSetInput:add:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reSetInput:add:">&ndash;&nbsp;reSetInput:add:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)reSetInput:(AVCaptureInput *)<em>input</em> add:(BOOL)<em>add</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reSetOutput:add:" title="reSetOutput:add:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reSetOutput:add:">&ndash;&nbsp;reSetOutput:add:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)reSetOutput:(AVCaptureOutput *)<em>output</em> add:(BOOL)<em>add</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configScanRect:superSize:" title="configScanRect:superSize:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configScanRect:superSize:">&ndash;&nbsp;configScanRect:superSize:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configScanRect:(CGRect)<em>rect</em> superSize:(CGSize)<em>size</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configShowView:" title="configShowView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configShowView:">&ndash;&nbsp;configShowView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>set  show image  in supView</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)configShowView:(UIView *)<em>supView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>supView</code></th>
+						<td><p>superView</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>set  show image  in supView</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configShowView:model:" title="configShowView:model:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configShowView:model:">&ndash;&nbsp;configShowView:model:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configShowView:(UIView *)<em>supView</em> model:(AVLayerVideoGravity)<em>model</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configAssetWriter" title="configAssetWriter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configAssetWriter">&ndash;&nbsp;configAssetWriter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVAssetWriter *)configAssetWriter</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configAssertWriteInput:setting:assetWriter:" title="configAssertWriteInput:setting:assetWriter:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configAssertWriteInput:setting:assetWriter:">&ndash;&nbsp;configAssertWriteInput:setting:assetWriter:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVAssetWriterInput *)configAssertWriteInput:(AVMediaType)<em>type</em> setting:(nullable NSDictionary&lt;NSString*,id&gt; *)<em>settting</em> assetWriter:(AVAssetWriter *)<em>assetWrite</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configStreamsByType" title="configStreamsByType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configStreamsByType">&ndash;&nbsp;configStreamsByType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)configStreamsByType</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setSeesionPreset:" title="setSeesionPreset:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setSeesionPreset:">&ndash;&nbsp;setSeesionPreset:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置分辨率</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)setSeesionPreset:(AVCaptureSessionPreset)<em>preset</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置分辨率</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setType:" title="setType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setType:">&ndash;&nbsp;setType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (void)setType:(BQCameraType)<em>type</em></code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isRun" title="isRun"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isRun">&ndash;&nbsp;isRun</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>是否运行中</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)isRun</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>是否运行中</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/showLayer" title="showLayer"></a>
+	<h3 class="method-title"><code><a href="#//api/name/showLayer">&ndash;&nbsp;showLayer</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVCaptureVideoPreviewLayer *)showLayer</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/videoOutput" title="videoOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoOutput">&ndash;&nbsp;videoOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVCaptureOutput *)videoOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/metaOutput" title="metaOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/metaOutput">&ndash;&nbsp;metaOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVCaptureMetadataOutput *)metaOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/photoOutput" title="photoOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/photoOutput">&ndash;&nbsp;photoOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVCapturePhotoOutput *)photoOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioInput" title="audioInput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioInput">&ndash;&nbsp;audioInput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVCaptureDeviceInput *)audioInput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioOutput" title="audioOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioOutput">&ndash;&nbsp;audioOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>- (AVCaptureAudioDataOutput *)audioOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;BQCameraManagerDelegate&gt; delegate</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/device" title="device"></a>
+	<h3 class="method-title"><code><a href="#//api/name/device">&nbsp;&nbsp;device</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureDevice *device</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/session" title="session"></a>
+	<h3 class="method-title"><code><a href="#//api/name/session">&nbsp;&nbsp;session</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureSession *session</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/type" title="type"></a>
+	<h3 class="method-title"><code><a href="#//api/name/type">&nbsp;&nbsp;type</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>呈现形式 默认BQCameraType_Photo</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BQCameraType type</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>呈现形式 默认BQCameraType_Photo</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/postion" title="postion"></a>
+	<h3 class="method-title"><code><a href="#//api/name/postion">&nbsp;&nbsp;postion</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>默认 AVCaptureDevicePositionBack</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) AVCaptureDevicePosition postion</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>默认 AVCaptureDevicePositionBack</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/flashModel" title="flashModel"></a>
+	<h3 class="method-title"><code><a href="#//api/name/flashModel">&nbsp;&nbsp;flashModel</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>闪光灯状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) AVCaptureFlashMode flashModel</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>闪光灯状态</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maxDuration" title="maxDuration"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maxDuration">&nbsp;&nbsp;maxDuration</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>最大录制视频时长，设置后达到最大时长自动停止,默认为0</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSTimeInterval maxDuration</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>最大录制视频时长，设置后达到最大时长自动停止,默认为0</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/recordStatus" title="recordStatus"></a>
+	<h3 class="method-title"><code><a href="#//api/name/recordStatus">&nbsp;&nbsp;recordStatus</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, assign) RecordStatus recordStatus</code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/queue" title="queue"></a>
+	<h3 class="method-title"><code><a href="#//api/name/queue">&nbsp;&nbsp;queue</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) dispatch_queue_t queue</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/colorSpace" title="colorSpace"></a>
+	<h3 class="method-title"><code><a href="#//api/name/colorSpace">&nbsp;&nbsp;colorSpace</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGColorSpaceRef colorSpace</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/showLayer" title="showLayer"></a>
+	<h3 class="method-title"><code><a href="#//api/name/showLayer">&nbsp;&nbsp;showLayer</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureVideoPreviewLayer *showLayer</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/cameraInput" title="cameraInput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/cameraInput">&nbsp;&nbsp;cameraInput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureDeviceInput *cameraInput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioInput" title="audioInput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioInput">&nbsp;&nbsp;audioInput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureDeviceInput *audioInput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/photoOutput" title="photoOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/photoOutput">&nbsp;&nbsp;photoOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCapturePhotoOutput *photoOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/videoOutput" title="videoOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoOutput">&nbsp;&nbsp;videoOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>  默认使用32RGB类型的videoDataOutput</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureOutput *videoOutput</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>  默认使用32RGB类型的videoDataOutput</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioOutput" title="audioOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioOutput">&nbsp;&nbsp;audioOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureAudioDataOutput *audioOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/metaOutput" title="metaOutput"></a>
+	<h3 class="method-title"><code><a href="#//api/name/metaOutput">&nbsp;&nbsp;metaOutput</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVCaptureMetadataOutput *metaOutput</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startTime" title="startTime"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startTime">&nbsp;&nbsp;startTime</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>开始录制点时间</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CMTime startTime</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>开始录制点时间</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/recordDuration" title="recordDuration"></a>
+	<h3 class="method-title"><code><a href="#//api/name/recordDuration">&nbsp;&nbsp;recordDuration</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>录制时长</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSTimeInterval recordDuration</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>录制时长</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BQCameraManager.m</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/assetWriter" title="assetWriter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/assetWriter">&nbsp;&nbsp;assetWriter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVAssetWriter *assetWriter</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/videoWrite" title="videoWrite"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoWrite">&nbsp;&nbsp;videoWrite</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVAssetWriterInput *videoWrite</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioWrite" title="audioWrite"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioWrite">&nbsp;&nbsp;audioWrite</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) AVAssetWriterInput *audioWrite</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/lastVideoTime" title="lastVideoTime"></a>
+	<h3 class="method-title"><code><a href="#//api/name/lastVideoTime">&nbsp;&nbsp;lastVideoTime</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CMTime lastVideoTime</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/videoOffset" title="videoOffset"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoOffset">&nbsp;&nbsp;videoOffset</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CMTime videoOffset</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reSetOffsetV" title="reSetOffsetV"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reSetOffsetV">&nbsp;&nbsp;reSetOffsetV</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL reSetOffsetV</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/lastAudioTime" title="lastAudioTime"></a>
+	<h3 class="method-title"><code><a href="#//api/name/lastAudioTime">&nbsp;&nbsp;lastAudioTime</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CMTime lastAudioTime</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioOffset" title="audioOffset"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioOffset">&nbsp;&nbsp;audioOffset</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CMTime audioOffset</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reSetOffsetA" title="reSetOffsetA"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reSetOffsetA">&nbsp;&nbsp;reSetOffsetA</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL reSetOffsetA</code></div>
+
+		    
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2022 www.mrbai.demo.OCCodes. All rights reserved. Updated: 2022-01-06</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -138,6 +138,8 @@
 		E2BF586727717AB20010C2E5 /* banner_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2BF586427717AB20010C2E5 /* banner_2.jpg */; };
 		E2BF58A02771C8110010C2E5 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF589F2771C8110010C2E5 /* ScanView.m */; };
 		E2BF58A32771D8270010C2E5 /* BQGestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BF58A22771D8270010C2E5 /* BQGestureView.m */; };
+		E2DF31692788414900B3DB67 /* SpeedVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DF31682788414900B3DB67 /* SpeedVc.m */; };
+		E2F6AED2278C156D00547039 /* BQDashBoradView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F6AED1278C156D00547039 /* BQDashBoradView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -382,6 +384,10 @@
 		E2BF589F2771C8110010C2E5 /* ScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
 		E2BF58A12771D8270010C2E5 /* BQGestureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQGestureView.h; sourceTree = "<group>"; };
 		E2BF58A22771D8270010C2E5 /* BQGestureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BQGestureView.m; sourceTree = "<group>"; };
+		E2DF31672788414900B3DB67 /* SpeedVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeedVc.h; sourceTree = "<group>"; };
+		E2DF31682788414900B3DB67 /* SpeedVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeedVc.m; sourceTree = "<group>"; };
+		E2F6AED0278C156D00547039 /* BQDashBoradView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQDashBoradView.h; sourceTree = "<group>"; };
+		E2F6AED1278C156D00547039 /* BQDashBoradView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BQDashBoradView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,7 +528,6 @@
 		E25F21BA276871C100C3E984 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				E2B5BA342783F454006F2EE7 /* CollectionViewLayout */,
 				E25F21C4276871C100C3E984 /* BQActivityView.h */,
 				E25F21D8276871C100C3E984 /* BQActivityView.m */,
 				E25F21BE276871C100C3E984 /* BQAlertSheetView.h */,
@@ -533,6 +538,8 @@
 				E25F21C9276871C100C3E984 /* BQBannerView.m */,
 				E25F21C7276871C100C3E984 /* BQCirLabel.h */,
 				E25F21D5276871C100C3E984 /* BQCirLabel.m */,
+				E2F6AED0278C156D00547039 /* BQDashBoradView.h */,
+				E2F6AED1278C156D00547039 /* BQDashBoradView.m */,
 				E25F21D2276871C100C3E984 /* BQFPSLabel.h */,
 				E25F21C1276871C100C3E984 /* BQFPSLabel.m */,
 				E25F21C3276871C100C3E984 /* BQMenuView.h */,
@@ -554,6 +561,7 @@
 				E25F21C0276871C100C3E984 /* BQTipView.h */,
 				E25F21CC276871C100C3E984 /* BQTipView.m */,
 				E25F22F6276884D200C3E984 /* BQUIHeader.h */,
+				E2B5BA342783F454006F2EE7 /* CollectionViewLayout */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -834,6 +842,8 @@
 				E22C48F62779590E00F13276 /* KeyBoardManagerVc.m */,
 				E2B5BA302783F212006F2EE7 /* CollectionViewVc.h */,
 				E2B5BA312783F212006F2EE7 /* CollectionViewVc.m */,
+				E2DF31672788414900B3DB67 /* SpeedVc.h */,
+				E2DF31682788414900B3DB67 /* SpeedVc.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -1080,6 +1090,7 @@
 				E25F2296276871C100C3E984 /* BQPlayerCtrlView.m in Sources */,
 				E25F2280276871C100C3E984 /* UILabel+Custom.m in Sources */,
 				E2BF58A02771C8110010C2E5 /* ScanView.m in Sources */,
+				E2DF31692788414900B3DB67 /* SpeedVc.m in Sources */,
 				E25F2295276871C100C3E984 /* AVAssetExportSession+Custom.m in Sources */,
 				E25F22B0276871C100C3E984 /* BQPhotoView.m in Sources */,
 				E25F2292276871C100C3E984 /* AppDelegate+Notification.m in Sources */,
@@ -1095,6 +1106,7 @@
 				E21A07AB276B0DE900D01F83 /* VcModel.m in Sources */,
 				E25F2279276871C100C3E984 /* BQActivityView.m in Sources */,
 				E25F2297276871C100C3E984 /* BQSliderView.m in Sources */,
+				E2F6AED2278C156D00547039 /* BQDashBoradView.m in Sources */,
 				E25F22B3276871C100C3E984 /* BQAnalysManager.m in Sources */,
 				E25F226F276871C100C3E984 /* BQAttributeLabel.m in Sources */,
 				E25F226B276871C100C3E984 /* BQSudokuView.m in Sources */,
