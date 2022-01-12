@@ -32,9 +32,16 @@ NSLocationAlwaysUsageDescription始终访问位置
 /// 位置管理
 @interface BQLocationManager : NSObject
 
-/// 启动定位,获取用户地理位置信息
+/// 启动定位,单次获取用户地理位置信息
 /// @param callBack 定位后回调方法
 + (void)startLoadLocationCallBack:(void(^)(LocationInfo * locationInfo, NSError * error))callBack;
+
+/// 导航持续定位
+/// @param navBlock 定位回调,只包含CLLocation
++ (void)startLoadNavLocation:(void(^)(LocationInfo * locationInfo, NSError * error))navBlock;
+
+/// 关闭持续定位
++ (void)stopNavLocation;
 
 /// 根据坐标获取地理位置信息
 /// @param location 地理位置坐标

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 是否正在执行
 @property (nonatomic, readonly, assign) BOOL      isRun;
 
-+ (instancetype)configWithScheduleTime:(NSTimeInterval)time target:(id)target selector:(SEL)selector;
++ (instancetype)configWithScheduleTime:(NSTimeInterval)time target:(id)target selector:(nullable SEL)selector;
 
 - (void)start;
 - (void)pause;

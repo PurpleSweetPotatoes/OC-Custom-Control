@@ -26,13 +26,13 @@
 @property (nonatomic, strong) UILabel * timeLab;
 @property (nonatomic, copy) CLLocation  * preLocation;///<经纬度坐标
 @property (nonatomic, assign) CLLocationSpeed  maxSpeed;
-@property (nonatomic, assign) CLLocationSpeed  totalSpeed;
-@property (nonatomic, assign) NSInteger  count;
+@property (nonatomic, assign) CGFloat  totalSpeed;
+@property (nonatomic, assign) NSInteger  speedCount;
 @property (nonatomic, strong) UILabel * errorLab;
+@property (nonatomic, strong) UIButton * navBtn;
 @end
 
 @implementation SpeedVc
-
 
 #pragma mark - *** Public method
 
@@ -43,71 +43,89 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
     self.maxSpeed = 0;
+    self.totalSpeed = 0;
     [self configUI];
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.timer start];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.timer pause];
+- (void)dealloc {
+    NSLog(@"清理数据");
+    [self.timer clear];
+    [BQLocationManager stopNavLocation];
 }
 
 #pragma mark - *** NetWork method
 
 #pragma mark - *** Event Action
 
-- (void)loadDeviceSpeed {
-    WeakSelf;
+- (void)navBtnClick:(UIButton *)sender {
+    if (!sender.selected) {
+        [self.timer start];
+        [self loadDeviceSpeed];
+    } else {
+        [self.timer pause];
+        [BQLocationManager stopNavLocation];
+        [self.dashView reSetSpeed:0];
+    }
+    sender.selected = !sender.selected;
+}
+
+- (void)timeChange {
     NSInteger hour = (NSInteger)self.timer.runTimes / 3600;
     NSInteger min = (NSInteger)((self.timer.runTimes % 3600) / 60);
     NSInteger second = (NSInteger)(self.timer.runTimes % 60);
     self.timeLab.text = [NSString stringWithFormat:@"总耗时: %02zd:%02zd:%02zd", hour, min, second];
-    [BQLocationManager startLoadLocationCallBack:^(LocationInfo *locationInfo, NSError *error) {
+    if (self.speedCount > 0) {
+        self.avgSpeedLab.text = [NSString stringWithFormat:@"%.2f\n平均时速\nkm/h", self.totalSpeed / self.speedCount * 3.6];
+    }
+}
+
+#pragma mark - *** Delegate
+
+#pragma mark - *** Instance method
+
+- (void)loadDeviceSpeed {
+    WeakSelf;
+    [BQLocationManager startLoadNavLocation:^(LocationInfo *locationInfo, NSError *error) {
         
         if (locationInfo) {
             NSString * errorMsg = @"";
-            if ([locationInfo.location.timestamp compare:self.preLocation.timestamp] == NSOrderedAscending) { //
+            CLLocation * location = locationInfo.location;
+            
+            if ([location.timestamp compare:weakSelf.preLocation.timestamp] == NSOrderedAscending) { //
                 errorMsg = @"定位超时无效";
-            } else if (locationInfo.location.horizontalAccuracy <= 0) {
+            } else if (location.horizontalAccuracy <= 0 && location.horizontalAccuracy > 70) {
                 errorMsg = @"准确性无效";
-            } else if (locationInfo.location.speed == -1) {
+            } else if (location.speed == -1) {
                 errorMsg = @"速度无效";
             }
+            NSLog(@"定位信息: 速度:%lf 范围:%lf, 时间:%@", location.speed, location.horizontalAccuracy, location.timestamp);
             
             if (errorMsg.length > 0) {
                 weakSelf.errorLab.text = [NSString stringWithFormat:@"定位失败: %@", errorMsg];
                 weakSelf.errorLab.hidden = NO;
-//                NSLog(@"定位失败: %@", errorMsg);
                 return;
             }
-            weakSelf.errorLab.hidden = YES;
             
-            [weakSelf resetStatus:locationInfo.location.speed];
-            weakSelf.preLocation = locationInfo.location;
+            [weakSelf resetStatus:locationInfo.location];
         } else {
             NSLog(@"定位失败:%@",error.localizedDescription);
         }
     }];
 }
-#pragma mark - *** Delegate
 
-#pragma mark - *** Instance method
-
-- (void)resetStatus:(CLLocationSpeed)speed {
-    self.count += 1;
-    CGFloat hourSpeed = speed * 3.6;
-    self.totalSpeed += hourSpeed;
-    if (speed > self.maxSpeed) {
-        self.maxSpeed = speed;
+- (void)resetStatus:(CLLocation *)location {
+    
+    self.speedCount += 1;
+    self.totalSpeed += location.speed;
+    self.preLocation = location;
+    self.errorLab.hidden = YES;
+    
+    CGFloat hourSpeed = location.speed * 3.6;
+    if (location.speed > self.maxSpeed) {
+        self.maxSpeed = location.speed;
         self.maxSpeedLab.text = [NSString stringWithFormat:@"%.2f\n最高时速\nkm/h", hourSpeed];
     }
-    self.avgSpeedLab.text = [NSString stringWithFormat:@"%.2f\n平均时速\nkm/h", self.totalSpeed / self.count];
-    
     [self.dashView reSetSpeed:hourSpeed];
 }
 #pragma mark - *** UI method
@@ -117,6 +135,7 @@
     [self.view addSubview:self.avgSpeedLab];
     [self.view addSubview:self.maxSpeedLab];
     [self.view addSubview:self.timeLab];
+    [self.view addSubview:self.navBtn];
     [self.view addSubview:self.errorLab];
 }
 
@@ -127,8 +146,7 @@
 
 - (BQTimer *)timer {
     if (_timer == nil) {
-        BQTimer * timer = [BQTimer configWithScheduleTime:1 target:self selector:@selector(loadDeviceSpeed)];
-        [timer pause];
+        BQTimer * timer = [BQTimer configWithScheduleTime:1 target:self selector:@selector(timeChange)];
         _timer = timer;
     }
     return _timer;
@@ -139,7 +157,7 @@
         BQDashBoradView * dashView = [[BQDashBoradView alloc] initWithFrame:CGRectMake((self.view.width - 240) * 0.5, self.navbarBottom + 60, 240, 240) ringWidth:10 areaNum:12 areaDailNum:2 maxNum:120];
         NSMutableArray * arr = [NSMutableArray arrayWithCapacity:13];
         for (NSInteger i = 0; i <= 12; i++) {
-            arr[i] = [NSString stringWithFormat:@"%d", i * 10];
+            arr[i] = [NSString stringWithFormat:@"%ld", i * 10];
         }
         [dashView setDailTextList:[arr copy]];
         _dashView = dashView;
@@ -149,7 +167,7 @@
 
 - (UILabel *)maxSpeedLab {
     if (_maxSpeedLab == nil) {
-        UILabel * maxSpeedLab = [UILabel labWithFrame:self.avgSpeedLab.frame title:@"0\n最高时速\nkm/h" font:[UIFont fontWithName:@"Helvetica Neue" size:28] textColor:[UIColor whiteColor]];
+        UILabel * maxSpeedLab = [UILabel labWithFrame:self.avgSpeedLab.frame title:@"0.00\n最高时速\nkm/h" font:[UIFont fontWithName:@"Helvetica Neue" size:28] textColor:[UIColor whiteColor]];
         maxSpeedLab.textAlignment = NSTextAlignmentCenter;
         maxSpeedLab.numberOfLines = 0;
         maxSpeedLab.left = self.avgSpeedLab.right;
@@ -161,7 +179,7 @@
 
 - (UILabel *)avgSpeedLab {
     if (_avgSpeedLab == nil) {
-        UILabel * avgSpeedLab = [UILabel labWithFrame:CGRectMake(0, self.dashView.bottom + 20, self.view.width * 0.5, 120) title:@"0\n平均时速\nkm/h" font:[UIFont fontWithName:@"Helvetica Neue" size:28] textColor:[UIColor whiteColor]];
+        UILabel * avgSpeedLab = [UILabel labWithFrame:CGRectMake(0, self.dashView.bottom + 20, self.view.width * 0.5, 120) title:@"0.00\n平均时速\nkm/h" font:[UIFont fontWithName:@"Helvetica Neue" size:28] textColor:[UIColor whiteColor]];
         avgSpeedLab.textAlignment = NSTextAlignmentCenter;
         avgSpeedLab.numberOfLines = 0;
         _avgSpeedLab = avgSpeedLab;
@@ -180,11 +198,25 @@
 
 - (UILabel *)errorLab {
     if (_errorLab == nil) {
-        UILabel * lab = [UILabel labWithFrame:CGRectMake(0, self.timeLab.bottom + 20, self.view.width, 40) title:@"" fontSize:16 textColor:[UIColor whiteColor]];
+        UILabel * lab = [UILabel labWithFrame:CGRectMake(0, self.navBtn.bottom + 20, self.view.width, 40) title:@"" fontSize:16 textColor:[UIColor whiteColor]];
         lab.textAlignment = NSTextAlignmentCenter;
         lab.hidden = YES;
         _errorLab = lab;
     }
     return _errorLab;
 }
+- (UIButton *)navBtn {
+    if (_navBtn == nil) {
+        UIButton * navBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        navBtn.frame = CGRectMake((self.view.width - 80) * 0.5, self.timeLab.bottom + 30, 80, 40);
+        [navBtn setRadius:8];
+        [navBtn setBorderWidth:1 color:[UIColor whiteColor]];
+        [navBtn addTarget:self action:@selector(navBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [navBtn setTitle:@"开始" forState:UIControlStateNormal];
+        [navBtn setTitle:@"完成" forState:UIControlStateSelected];
+        _navBtn = navBtn;
+    }
+    return _navBtn;
+}
+
 @end

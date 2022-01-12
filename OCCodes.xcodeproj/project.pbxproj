@@ -75,7 +75,6 @@
 		E25F229D276871C100C3E984 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F2227276871C100C3E984 /* Reachability.m */; };
 		E25F229E276871C100C3E984 /* BQAlertVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F2229276871C100C3E984 /* BQAlertVc.m */; };
 		E25F229F276871C100C3E984 /* BQLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F222A276871C100C3E984 /* BQLocationManager.m */; };
-		E25F22A0276871C100C3E984 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25F222C276871C100C3E984 /* CrashReporter.framework */; };
 		E25F22A1276871C100C3E984 /* BQMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F222D276871C100C3E984 /* BQMonitor.m */; };
 		E25F22A2276871C100C3E984 /* BQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F2230276871C100C3E984 /* BQDatePickerView.m */; };
 		E25F22A3276871C100C3E984 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E25F2233276871C100C3E984 /* libmp3lame.a */; };
@@ -395,7 +394,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E25F22A0276871C100C3E984 /* CrashReporter.framework in Frameworks */,
 				E25F22A3276871C100C3E984 /* libmp3lame.a in Frameworks */,
 				880EB2A5CD62B11D76F0FFFE /* Pods_OCCodes.framework in Frameworks */,
 			);

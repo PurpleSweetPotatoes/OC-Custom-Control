@@ -26,7 +26,7 @@
     }
 }
 
-+ (instancetype)configWithScheduleTime:(NSTimeInterval)time target:(id)target selector:(SEL)selector {
++ (instancetype)configWithScheduleTime:(NSTimeInterval)time target:(id)target selector:(nullable SEL)selector {
     BQTimer * objc = [[BQTimer alloc] init];
     objc.runTimes = 0;
     objc.target = target;
@@ -40,18 +40,17 @@
 
 
 - (void)timeScheduleAction:(NSTimer *)timer {
+    if (self.isStart) {
+        self.isStart = NO;
+        return;
+    }
+    self.runTimes += 1;
+    
     if ([self.target respondsToSelector:self.selector]) {
-        if (self.isStart) {
-            self.isStart = NO;
-            return;
-        }
-        self.runTimes += 1;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self.target performSelector:self.selector withObject:self];
 #pragma clang diagnostic pop
-    } else {
-        [self clear];
     }
 }
 

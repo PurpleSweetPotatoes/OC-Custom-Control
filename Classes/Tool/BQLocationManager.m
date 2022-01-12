@@ -10,6 +10,7 @@
 #import "BQDefineInfo.h"
 #import <CoreLocation/CLGeocoder.h>
 #import <CoreLocation/CLLocationManager.h>
+#import <CoreLocation/CLLocationManagerDelegate.h>
 
 @interface BQLocationManager()
 <
@@ -17,7 +18,7 @@ CLLocationManagerDelegate
 >
 @property (nonatomic, strong                ) CLLocationManager * clManager;
 @property (nonatomic, strong                ) CLGeocoder        * clGeocoder;
-@property (nonatomic, assign                ) BOOL              loadSuccess;
+@property (nonatomic, assign                ) BOOL              onceLoad;
 @property (nonatomic, copy) void (^callBlock) (LocationInfo * info, NSError * error            );
 @end
 
@@ -25,28 +26,41 @@ CLLocationManagerDelegate
 
 #pragma mark - Class Method
 
-
-
-+ (instancetype)allocWithZone:(struct _NSZone *)zone {
++ (instancetype)shareManager {
     static BQLocationManager * location;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        location = [super allocWithZone:zone];
+        location = [[BQLocationManager alloc] init];
     });
     return location;
 }
 
-+ (instancetype)shareManager {
-    return [[BQLocationManager alloc] init];
++ (void)startLoadLocationCallBack:(void (^)(LocationInfo *, NSError *))callBack {
+    BQLocationManager * manager = [BQLocationManager shareManager];
+    manager.onceLoad = YES;
+    [self startLoadLocation:manager block:callBack];
 }
 
-+ (void)startLoadLocationCallBack:(void (^)(LocationInfo *, NSError *))callBack {
-    
-    BQLocationManager * manager = [[BQLocationManager alloc] init];
-    manager.loadSuccess = NO;
-    [manager.clManager requestWhenInUseAuthorization];
++ (void)startLoadNavLocation:(void (^)(LocationInfo *, NSError *))navBlock {
+    BQLocationManager * manager = [BQLocationManager shareManager];
+    manager.onceLoad = NO;
+    [self startLoadLocation:manager block:navBlock];
+}
+
++ (void)stopNavLocation {
+    BQLocationManager * manager = [BQLocationManager shareManager];
+    [manager.clManager stopUpdatingLocation];
+}
+
++ (void)startLoadLocation:(BQLocationManager *)manager block:(void (^)(LocationInfo *, NSError *))block {
+    //如果定位状态为未打开
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        //requestWhenInUseAuthorization  前端定位
+        //requestAlwaysAuthorization 前端和后台定位
+        [manager.clManager requestWhenInUseAuthorization];
+    }
     [manager.clManager startUpdatingLocation];
-    manager.callBlock = callBack;
+    manager.callBlock = block;
 }
 
 + (void)loadLocationWithlocation:(CLLocation *)location
@@ -112,15 +126,20 @@ CLLocationManagerDelegate
 #pragma mark - Delegate Method
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    CLLocation *newLocation = [locations lastObject];
-    
-    if (self.loadSuccess == NO) {
-        self.loadSuccess = YES;
-        [self reverseLocationWithLocation:newLocation];
+    CLLocation * location = [locations lastObject];
+    if (!CLLocationCoordinate2DIsValid(location.coordinate)) {
+        NSLog(@"定位无效");
+        return;
     }
-    
-    [self.clManager stopUpdatingLocation];
+    if (self.onceLoad) {
+        self.onceLoad = YES;
+        [self reverseLocationWithLocation:location];
+        [self.clManager stopUpdatingLocation];
+    } else {
+        LocationInfo * info = [[LocationInfo alloc] init];
+        info.location = location;
+        self.callBlock(info, nil);
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
