@@ -74,7 +74,7 @@
 }
 
 - (void)stopAnimation {
-    [self.animationLayer removeAllAnimations];
+    [_animationLayer removeAllAnimations];
 }
 
 

@@ -68,7 +68,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.pointerView.transform = CGAffineTransformMakeRotation(angle);
     }];
-    self.tipLab.text = [NSString stringWithFormat:@"%.2f\n km/h", speed];
+    self.tipLab.text = [NSString stringWithFormat:@"%.0f\n km/h", speed];
 }
 #pragma mark - *** Life cycle
 

@@ -49,7 +49,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
 
 - (void)dealloc {
     NSLog(@"设备管理释放");
-    CGColorSpaceRelease(self.colorSpace);
+    CGColorSpaceRelease(_colorSpace);
 }
 
 #pragma mark - 公共方法

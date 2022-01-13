@@ -94,19 +94,19 @@ static NSString * const kItemBufferReady = @"playbackLikelyToKeepUp";
 }
 
 - (void)cleanItemObserver {
-    if (self.player.currentItem) {
-        [self.player.currentItem removeObserver:self forKeyPath:kItemPlayStatus];
-        [self.player.currentItem removeObserver:self forKeyPath:kItemBufferLoad];
-        [self.player.currentItem removeObserver:self forKeyPath:kItemNoBuffer];
-        [self.player.currentItem removeObserver:self forKeyPath:kItemBufferReady];
+    if (_player.currentItem) {
+        [_player.currentItem removeObserver:self forKeyPath:kItemPlayStatus];
+        [_player.currentItem removeObserver:self forKeyPath:kItemBufferLoad];
+        [_player.currentItem removeObserver:self forKeyPath:kItemNoBuffer];
+        [_player.currentItem removeObserver:self forKeyPath:kItemBufferReady];
     }
 }
 
 - (void)cleanBaseObserver {
-    if (_timeObserve) [self.player removeTimeObserver:_timeObserve];
+    if (_timeObserve) [_player removeTimeObserver:_timeObserve];
     
     [self cleanItemObserver];
-    [self.player removeObserver:self forKeyPath:kControlRate];
+    [_player removeObserver:self forKeyPath:kControlRate];
 }
 
 #pragma mark - *** observer handler

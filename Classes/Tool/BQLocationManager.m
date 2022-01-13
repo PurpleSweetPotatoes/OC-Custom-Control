@@ -126,6 +126,7 @@ CLLocationManagerDelegate
 #pragma mark - Delegate Method
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    NSLog(@"定位数量:%zd", locations.count);
     CLLocation * location = [locations lastObject];
     if (!CLLocationCoordinate2DIsValid(location.coordinate)) {
         NSLog(@"定位无效");
