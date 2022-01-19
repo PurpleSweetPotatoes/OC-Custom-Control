@@ -15,6 +15,7 @@
 		E21A07AB276B0DE900D01F83 /* VcModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E21A07AA276B0DE900D01F83 /* VcModel.m */; };
 		E21A07AE276B125400D01F83 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = E21A07AD276B125400D01F83 /* DatePickView.m */; };
 		E22C48F72779590E00F13276 /* KeyBoardManagerVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E22C48F62779590E00F13276 /* KeyBoardManagerVc.m */; };
+		E237EDB82797B80C004E264A /* NSUserDefaults+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = E237EDB72797B80C004E264A /* NSUserDefaults+Custom.m */; };
 		E250CFCD276C3E7C00AC1F40 /* VideoPlayerVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E250CFCC276C3E7C00AC1F40 /* VideoPlayerVc.m */; };
 		E250CFD1276C3ED500AC1F40 /* VcInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E250CFD0276C3ED500AC1F40 /* VcInfoCell.m */; };
 		E250CFD4276C407700AC1F40 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E250CFD3276C407700AC1F40 /* BaseCell.m */; };
@@ -159,6 +160,8 @@
 		E21A07AD276B125400D01F83 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
 		E22C48F52779590E00F13276 /* KeyBoardManagerVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyBoardManagerVc.h; sourceTree = "<group>"; };
 		E22C48F62779590E00F13276 /* KeyBoardManagerVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyBoardManagerVc.m; sourceTree = "<group>"; };
+		E237EDB62797B80C004E264A /* NSUserDefaults+Custom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Custom.h"; sourceTree = "<group>"; };
+		E237EDB72797B80C004E264A /* NSUserDefaults+Custom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Custom.m"; sourceTree = "<group>"; };
 		E250CFCB276C3E7C00AC1F40 /* VideoPlayerVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoPlayerVc.h; sourceTree = "<group>"; };
 		E250CFCC276C3E7C00AC1F40 /* VideoPlayerVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerVc.m; sourceTree = "<group>"; };
 		E250CFCF276C3ED500AC1F40 /* VcInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VcInfoCell.h; sourceTree = "<group>"; };
@@ -633,6 +636,8 @@
 				E25F220A276871C100C3E984 /* NSObject+Custom.m */,
 				E25F2206276871C100C3E984 /* NSString+Custom.h */,
 				E25F21FE276871C100C3E984 /* NSString+Custom.m */,
+				E237EDB62797B80C004E264A /* NSUserDefaults+Custom.h */,
+				E237EDB72797B80C004E264A /* NSUserDefaults+Custom.m */,
 			);
 			path = NS;
 			sourceTree = "<group>";
@@ -1084,6 +1089,7 @@
 				E25F22BB276871C100C3E984 /* BQAddressBook.m in Sources */,
 				E25F22AD276871C100C3E984 /* BQImagePickerVc.m in Sources */,
 				E2B5BA68278423DF006F2EE7 /* BQLinearLayout.m in Sources */,
+				E237EDB82797B80C004E264A /* NSUserDefaults+Custom.m in Sources */,
 				E25F22B5276871C100C3E984 /* NSObject+analys.m in Sources */,
 				E25F2296276871C100C3E984 /* BQPlayerCtrlView.m in Sources */,
 				E25F2280276871C100C3E984 /* UILabel+Custom.m in Sources */,
