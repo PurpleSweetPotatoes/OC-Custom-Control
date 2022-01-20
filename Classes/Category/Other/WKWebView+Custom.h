@@ -12,9 +12,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WKWebView (Custom)
+/// 共享进程池
+@property (class, nonatomic, readonly) WKProcessPool * sharedProcessPool;
+/// 快捷配置configuration
+@property (class, nonatomic, readonly) WKWebViewConfiguration * configWkWebOptions;
 
 @property (nonatomic, readonly, strong) NSMutableArray<WebProcessUnti *> * untiList;
-
 
 /** 文本大小自适应 */
 - (void)textAutoFit;
@@ -40,11 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 新增cookie
 /// @param dic cookie字典
 - (void)configCookie:(NSDictionary *)dic;
-
-/// 快捷配置configuration
-+ (WKWebViewConfiguration *)configWkWebOptions;
-
-+ (WKProcessPool*)sharedProcessPool;
 
 @end
 

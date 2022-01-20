@@ -111,7 +111,6 @@
     [CATransaction commit];
 }
 
-
 - (void)bq_setNavBarBackgroundColor:(UIColor *)color {
     if (self.navigationController) {
         if (self.barBgView == nil) {
@@ -138,7 +137,6 @@
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
-
 - (UIView *)barBgView {
     return objc_getAssociatedObject(self, _cmd);
 }
@@ -146,7 +144,6 @@
 - (void)setBarBgView:(UIView *)barBgView {
     objc_setAssociatedObject(self, @selector(barBgView), barBgView, OBJC_ASSOCIATION_RETAIN);
 }
-
 
 - (CALayer *)showadLine {
     return objc_getAssociatedObject(self, _cmd);

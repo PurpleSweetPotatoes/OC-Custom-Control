@@ -33,4 +33,7 @@
 /**  将对象转化为字符串 */
 - (NSString *)jsonString;
 
+/// 类名字符串
++ (NSString *)clsName;
+
 @end

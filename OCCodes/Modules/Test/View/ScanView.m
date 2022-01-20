@@ -105,6 +105,7 @@
         borderLayer.masksToBounds = YES;
         CGFloat lineW = 20;
         UIBezierPath * path = [UIBezierPath bezierPath];
+        
         [path moveToPoint:CGPointMake(0, lineW)];
         [path addLineToPoint:CGPointZero];
         [path addLineToPoint:CGPointMake(lineW, 0)];

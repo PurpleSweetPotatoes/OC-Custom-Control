@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, RecordStatus) {
 
 
 @interface BQCameraManager : NSObject
-
+@property (class, nonatomic, readonly ) BQCameraManager         * manager;
 @property (nonatomic, weak            ) id<BQCameraManagerDelegate> delegate;
 @property (nonatomic, strong          ) AVCaptureDevice         * device;
 @property (nonatomic, strong          ) AVCaptureSession        * session;
@@ -59,11 +59,9 @@ typedef NS_ENUM(NSUInteger, RecordStatus) {
 @property (nonatomic, assign          ) AVCaptureFlashMode      flashModel;///< 闪光灯状态
 @property (nonatomic, assign          ) AVCaptureTorchMode      torchMode;///< 手电状态
 @property (nonatomic, readonly, assign) BOOL                    isRun;///< 是否运行中
-@property (nonatomic, assign          ) NSTimeInterval          maxDuration; ///< 最大录制视频时长，设置后达到最大时长自动停止,默认为0
+@property (nonatomic, assign          ) NSTimeInterval          maxDuration;///< 最大录制视频时长，设置后达到最大时长自动停止,默认为0
 @property (nonatomic, readonly, assign) RecordStatus            recordStatus;
 
-
-+ (instancetype)manager;
 + (instancetype)managerWithDelegate:(_Nullable id<BQCameraManagerDelegate>)delegate;
 
 /// set  show image  in supView

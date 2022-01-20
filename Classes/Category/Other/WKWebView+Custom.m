@@ -108,7 +108,7 @@
 + (WKWebViewConfiguration *)configWkWebOptions {
     WKWebViewConfiguration * config = [[WKWebViewConfiguration alloc] init];
     config.allowsInlineMediaPlayback = YES;
-    config.processPool = [WKWebView sharedProcessPool];
+    config.processPool = WKWebView.sharedProcessPool;
     
     // JS配置
     WKPreferences *preference = [[WKPreferences alloc]init];

@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDailTextList:(NSArray<NSString *> *)list;
 
 /// 重置速度
-/// @param speed
+/// @param speed 速度
 - (void)reSetSpeed:(CGFloat )speed;
 
 @end

@@ -90,6 +90,10 @@
     }
 }
 
++ (NSString *)clsName {
+    return NSStringFromClass([self class]);
+}
+
 + (BOOL)exchangeMethod:(SEL)target with:(SEL)repalce {
     Method tragetMethod = class_getInstanceMethod(self, target);
     Method replaceMethod = class_getInstanceMethod(self, repalce);
