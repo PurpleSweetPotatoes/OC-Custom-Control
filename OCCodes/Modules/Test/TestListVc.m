@@ -58,10 +58,7 @@ UITableViewDelegate
 #pragma mark - *** NetWork method
 
 - (void)testMethod {
-    NSString * str = @"FA012345";
-    NSLog(@"%@",[str convertBytesToData]);
-    str = @"FA01a";
-    NSLog(@"%@",[str convertBytesToData]);
+
 }
 
 #pragma mark - *** Event Action
