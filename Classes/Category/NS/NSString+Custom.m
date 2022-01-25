@@ -1119,7 +1119,7 @@ static int EscapeMapCompare(const void *ucharVoid, const void *mapVoid) {
 #pragma mark - url编码解码
 
 - (NSString *)urlEncoded {
-    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"\"#,<>@[\\]^`{|}"] invertedSet];
+    NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:@"\"<>@[\\]^`{|}"] invertedSet];
     return [self stringByAddingPercentEncodingWithAllowedCharacters:set];
 }
 
