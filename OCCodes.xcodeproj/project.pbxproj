@@ -106,6 +106,7 @@
 		E25F233727688FD200C3E984 /* BaseVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F233627688FD200C3E984 /* BaseVc.m */; };
 		E25F233A2768900B00C3E984 /* TestListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F23392768900B00C3E984 /* TestListVc.m */; };
 		E25F233D2768906300C3E984 /* CenterInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F233C2768906300C3E984 /* CenterInfoVc.m */; };
+		E29AEC6027B5FD4E0008B950 /* BQUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = E29AEC5F27B5FD4E0008B950 /* BQUserDefault.m */; };
 		E2B5BA322783F212006F2EE7 /* CollectionViewVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B5BA312783F212006F2EE7 /* CollectionViewVc.m */; };
 		E2B5BA372783F4AC006F2EE7 /* BQWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B5BA362783F4AC006F2EE7 /* BQWaterFallLayout.m */; };
 		E2B5BA392783F7FA006F2EE7 /* collection_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2B5BA382783F7FA006F2EE7 /* collection_1.jpg */; };
@@ -345,6 +346,8 @@
 		E25F23392768900B00C3E984 /* TestListVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestListVc.m; sourceTree = "<group>"; };
 		E25F233B2768906300C3E984 /* CenterInfoVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CenterInfoVc.h; sourceTree = "<group>"; };
 		E25F233C2768906300C3E984 /* CenterInfoVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CenterInfoVc.m; sourceTree = "<group>"; };
+		E29AEC5E27B5FD4E0008B950 /* BQUserDefault.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQUserDefault.h; sourceTree = "<group>"; };
+		E29AEC5F27B5FD4E0008B950 /* BQUserDefault.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BQUserDefault.m; sourceTree = "<group>"; };
 		E2B5BA302783F212006F2EE7 /* CollectionViewVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewVc.h; sourceTree = "<group>"; };
 		E2B5BA312783F212006F2EE7 /* CollectionViewVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewVc.m; sourceTree = "<group>"; };
 		E2B5BA352783F4AC006F2EE7 /* BQWaterFallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BQWaterFallLayout.h; sourceTree = "<group>"; };
@@ -730,6 +733,8 @@
 				E25F2227276871C100C3E984 /* Reachability.m */,
 				E25F2231276871C100C3E984 /* Record */,
 				E25F223B276871C100C3E984 /* WebViewUntis */,
+				E29AEC5E27B5FD4E0008B950 /* BQUserDefault.h */,
+				E29AEC5F27B5FD4E0008B950 /* BQUserDefault.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1147,6 +1152,7 @@
 				E25F22B4276871C100C3E984 /* AopMethodHook.m in Sources */,
 				E25F22B9276871C100C3E984 /* BQUrlHandle.m in Sources */,
 				E21A076B276ADB0500D01F83 /* BQLaunchAd.m in Sources */,
+				E29AEC6027B5FD4E0008B950 /* BQUserDefault.m in Sources */,
 				E250D019276C75CE00AC1F40 /* BQVideoView.m in Sources */,
 				E25F22AF276871C100C3E984 /* PHAsset+Picker.m in Sources */,
 				E25F2287276871C100C3E984 /* UIDevice+Custom.m in Sources */,

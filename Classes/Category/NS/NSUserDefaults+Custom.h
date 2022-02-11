@@ -20,6 +20,10 @@ typedef void(^UserDefaultsBlock)(NSUserDefaults * user);
 
 + (void)setObjc:(id)objc key:(NSString *)key;
 
++ (void)removeKey:(NSString *)key;
+
++ (void)removeKeys:(NSArray<NSString *> *)keys;
+
 + (void)setInfoWithDic:(NSDictionary *)dic;
 
 + (id)objectForKey:(NSString *)key;

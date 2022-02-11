@@ -11,14 +11,16 @@
 #import "TestListVc.h"
 
 #import "BQCrashHelper.h"
+#import "BQCrashHelper.h"
+#import "BQUserDefault.h"
+#import "NSArray+Custom.h"
 #import "NSData+Custom.h"
+#import "NSString+Custom.h"
 #import "NSString+Custom.h"
 #import "UITableView+Custom.h"
 #import "VcInfoCell.h"
 #import "VcModel.h"
-#import "BQCrashHelper.h"
-#import "NSString+Custom.h"
-#import "NSArray+Custom.h"
+
 @interface TestListVc ()
 <
 UITableViewDelegate
@@ -49,7 +51,6 @@ UITableViewDelegate
     ];
     
     [self configUI];
-    [self testMethod];
     [BQCrashHelper startCrashRecord];
     
     [self testMethod];
@@ -58,7 +59,15 @@ UITableViewDelegate
 #pragma mark - *** NetWork method
 
 - (void)testMethod {
-
+    NSLog(@"开始测试");
+    
+    NSLog(@"名称:%@",BQUserDefault.share.name);
+    NSLog(@"电话:%@",BQUserDefault.share.phone);
+    BQUserDefault.share.name = nil;
+    NSLog(@"置空后名称:%@",BQUserDefault.share.name);
+    
+    
+    NSLog(@"测试结束");
 }
 
 #pragma mark - *** Event Action

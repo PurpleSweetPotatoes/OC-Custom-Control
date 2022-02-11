@@ -18,6 +18,22 @@
     }];
 }
 
++ (void)removeKey:(NSString *)key {
+    [self synchInfo:^(NSUserDefaults * _Nonnull user) {
+        [user removeObjectForKey:key];
+        [user synchronize];
+    }];
+}
+
++ (void)removeKeys:(NSArray<NSString *> *)keys {
+    [self synchInfo:^(NSUserDefaults * _Nonnull user) {
+        for (NSString * key in keys) {
+            [user removeObjectForKey:key];
+        }
+        [user synchronize];
+    }];
+}
+
 + (void)setInfoWithDic:(NSDictionary *)dic {
     [self synchInfo:^(NSUserDefaults * _Nonnull user) {
         [dic enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
