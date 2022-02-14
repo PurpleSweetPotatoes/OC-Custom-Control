@@ -52,22 +52,15 @@ UITableViewDelegate
     
     [self configUI];
     [BQCrashHelper startCrashRecord];
-    
+    NSLog(@"开始测试");
     [self testMethod];
+    NSLog(@"测试结束");
 }
 
 #pragma mark - *** NetWork method
 
 - (void)testMethod {
-    NSLog(@"开始测试");
-    
-    NSLog(@"名称:%@",BQUserDefault.share.name);
-    NSLog(@"电话:%@",BQUserDefault.share.phone);
-    BQUserDefault.share.name = nil;
-    NSLog(@"置空后名称:%@",BQUserDefault.share.name);
-    
-    
-    NSLog(@"测试结束");
+
 }
 
 #pragma mark - *** Event Action

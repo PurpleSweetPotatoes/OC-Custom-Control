@@ -16,7 +16,7 @@ typedef void(^UserDefaultsBlock)(NSUserDefaults * user);
 
 @interface NSUserDefaults (Custom)
 
-+ (void)synchInfo:(UserDefaultsBlock)block;
++ (void)batchProcess:(UserDefaultsBlock)block;
 
 + (void)setObjc:(id)objc key:(NSString *)key;
 

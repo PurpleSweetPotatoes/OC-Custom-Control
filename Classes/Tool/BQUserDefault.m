@@ -31,6 +31,21 @@
     return user;
 }
 
++ (void)clearInfos {
+    [BQUserDefault.share clearInfos];
+}
+
+- (void)clearInfos {
+    NSArray * array = [_nameDic allValues];
+    NSSet *set = [NSSet setWithArray:array];
+    NSArray *localKeys = [set allObjects];
+    [NSUserDefaults batchProcess:^(NSUserDefaults * _Nonnull user) {
+        for (NSString * key in localKeys) {
+            [user removeObjectForKey:key];
+        }
+    }];
+}
+
 - (void)changeGetterAndSetter {
     unsigned int count = 0;
     objc_property_t * propertys = class_copyPropertyList([self class], &count);
@@ -51,15 +66,14 @@
         // get IMP修改
         NSString * name = [NSString stringWithUTF8String:property_getName(property)];
         SEL orginGet = NSSelectorFromString(name);
-        _nameDic[name] = name;
+        _nameDic[name] = [self spaceKey:name];
         class_replaceMethod([self class], orginGet, getImp, getTypes);
         
         // set IMP修改
         NSString * setName = [NSString stringWithFormat:@"set%@:",[name stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[name substringToIndex:1] capitalizedString]]];
         SEL orginSet = NSSelectorFromString(setName);
-        _nameDic[setName] = name;
+        _nameDic[setName] = [self spaceKey:name];
         class_replaceMethod([self class], orginSet, setImp, setTypes);
-    
     }
 }
 
@@ -77,6 +91,10 @@
     NSString * key = NSStringFromSelector(_cmd);
     NSString * name = _nameDic[key];
     return [NSUserDefaults objectForKey:name];
+}
+
+- (NSString *)spaceKey:(NSString *)key {
+    return [NSString stringWithFormat:@"%@_%@", NSStringFromClass([self class]), key];
 }
 
 @end
