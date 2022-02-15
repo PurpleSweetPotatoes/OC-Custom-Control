@@ -23,7 +23,7 @@ typedef void(^ImgBlock)(UIImage * img);
 #pragma mark - *** DefineInfo
 
 /** ---------------- 安全线程回调  ---------------- */
-#define MainQueueSafe(block)\
+#define DispatchMainQueue(block)\
     if (dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == dispatch_queue_get_label(dispatch_get_main_queue())) {\
         block();\
     } else {\

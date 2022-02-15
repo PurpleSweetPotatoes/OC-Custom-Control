@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 清理属性key本地信息缓存
 + (void)clearInfos;
 
+@property (nonatomic, copy) NSString * name;
+@property (nonatomic, copy) NSString * myTest;
 @end
 
 NS_ASSUME_NONNULL_END

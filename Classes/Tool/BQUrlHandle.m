@@ -52,15 +52,11 @@ static NSString * _wxId;
 }
 
 + (void)openUrlStr:(NSString *)openUrl {
-    if (@available(iOS 10.0, *)) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl] options:@{} completionHandler:^(BOOL success) {
-            if (!success) {
-                NSLog(@"打开应用失败!");
-            }
-        }];
-    } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
-    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl] options:@{} completionHandler:^(BOOL success) {
+        if (!success) {
+            NSLog(@"打开应用失败!");
+        }
+    }];
 }
 
 + (BOOL)handleOpenURL:(NSURL *)url options:(nullable NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {

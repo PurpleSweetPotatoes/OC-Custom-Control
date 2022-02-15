@@ -90,6 +90,16 @@
     }
 }
 
+- (void)setProperty:(id)val key:(NSString *)key {
+    Ivar ivar = class_getInstanceVariable([self class], [NSString stringWithFormat:@"_%@",key].UTF8String);
+    object_setIvar(self, ivar, val);
+}
+
+- (id)getPropertyWithKey:(NSString *)key {
+    Ivar ivar = class_getInstanceVariable([self class], [NSString stringWithFormat:@"_%@",key].UTF8String);
+    return object_getIvar(self, ivar);
+}
+
 + (NSString *)clsName {
     return NSStringFromClass([self class]);
 }

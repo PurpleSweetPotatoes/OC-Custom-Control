@@ -21,20 +21,6 @@
 
 @implementation UIViewController (Custom)
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    StatusColorType type = self.statuType;
-    switch (type) {
-        case StatusColorType_Normal:
-            return UIStatusBarStyleDefault;
-            break;
-        case StatusColorType_White:
-            return UIStatusBarStyleLightContent;
-            break;
-        default:
-            break;
-    }
-}
-
 + (UIViewController *)currentDisPalyVc {
     UIViewController * output = [UIApplication sharedApplication].keyWindow.rootViewController;
     output = [self vcTypeChoose:output];
@@ -126,16 +112,6 @@
 }
 
 #pragma mark - Associate Object
-
-- (StatusColorType)statuType {
-    return [objc_getAssociatedObject(self, _cmd) intValue];
-}
-
-- (void)setStatuType:(StatusColorType)statuType {
-    objc_setAssociatedObject(self, @selector(statuType), @(statuType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
-    [self setNeedsStatusBarAppearanceUpdate];
-}
 
 - (UIView *)barBgView {
     return objc_getAssociatedObject(self, _cmd);

@@ -9,7 +9,7 @@
     
 
 #import "BQNavMapView.h"
-
+#import "BQUrlHandle.h"
 #import <MapKit/MapKit.h>
 
 @interface BQNavMapView ()
@@ -46,12 +46,7 @@
 
 - (void)mapBtnAction:(UIButton *)sender {
     if (sender.tag < self.openUrls.count) { // 三方地图
-        NSURL * url = [NSURL URLWithString:self.openUrls[sender.tag]];
-        if (@available(iOS 10.0, *)) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:url];
-        }
+        [BQUrlHandle openUrlStr:self.openUrls[sender.tag]];
     } else if (sender.tag == self.openUrls.count) { //苹果地图
         float lat = [self.latitude floatValue];
         float lon = [self.longitude floatValue];

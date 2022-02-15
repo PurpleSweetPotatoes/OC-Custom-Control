@@ -122,9 +122,7 @@
     config.userContentController = [[WKUserContentController alloc] init];
     config.preferences = preference;
     
-    if (@available(iOS 10.0, *)) {
-        config.dataDetectorTypes = WKDataDetectorTypePhoneNumber;
-    }
+    config.dataDetectorTypes = WKDataDetectorTypePhoneNumber;
     
     return config;
 }

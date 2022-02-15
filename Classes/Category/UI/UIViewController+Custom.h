@@ -10,14 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, StatusColorType) {
-    StatusColorType_Normal,
-    StatusColorType_White,
-};
-
 @interface UIViewController (Custom)
 
-@property (nonatomic, assign          ) StatusColorType statuType;///< 状态栏颜色
 @property (nonatomic, readonly, assign) CGFloat         navbarBottom;///< 导航栏底部高度
 @property (nonatomic, readonly, assign) CGFloat         tabbarHeight;///< tabbar栏高度
 @property (nonatomic, readonly, getter=isPhoneX) BOOL   phoneX;

@@ -203,7 +203,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
 - (CGPoint)transtionPoint:(CGPoint)point size:(CGSize)size {
     if (point.x > size.width || point.y > size.height) {
         if ([self.delegate respondsToSelector:@selector(cameraChangeStatusFail:)]) {
-            MainQueueSafe(^{
+            DispatchMainQueue(^{
                 [self.delegate cameraChangeStatusFail:@"调整点位不正确"];
             });
             return CGPointZero;
@@ -224,7 +224,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
         block();
         [self.device unlockForConfiguration];
     } else if([self.delegate respondsToSelector:@selector(cameraChangeStatusFail:)]){
-        MainQueueSafe(^{
+        DispatchMainQueue(^{
             [self.delegate cameraChangeStatusFail:err.localizedDescription];
         });
     } else {
@@ -270,7 +270,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
         self.recordStatus = RecordStatus_Completed;
         [self.assetWriter finishWritingWithCompletionHandler:^{
             NSLog(@"停止录制完成");
-            MainQueueSafe(^{
+            DispatchMainQueue(^{
                 if ([self.delegate respondsToSelector:@selector(cameraRecordVideoCompleted:)]) {
                     [self.delegate cameraRecordVideoCompleted:[self videoFilePath]];
                 }
@@ -316,7 +316,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
         if (!error) {
             img = [UIImage imageWithData:data];
         }
-        MainQueueSafe(^{
+        DispatchMainQueue(^{
             [self.delegate cameraPhotoImage:img error:error];
         });
     }
@@ -368,7 +368,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
                 NSTimeInterval duration = CMTimeGetSeconds(time);
                 if (duration - self.recordDuration >= 0.1) {
                     self.recordDuration = duration;
-                    MainQueueSafe(^{
+                    DispatchMainQueue(^{
                         [self.delegate cameraRecordTimeChange:duration];
                     });
                 }
@@ -467,7 +467,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
         NSLog(@"扫描到%@: %@", code.type == AVMetadataObjectTypeQRCode?@"二维码":@"条形码", code.stringValue);
         NSLog(@"位置:%@", NSStringFromCGRect(code.bounds));
         if ([self.delegate respondsToSelector:@selector(cameraScanInfo:bounds:)]) {
-            MainQueueSafe(^{
+            DispatchMainQueue(^{
                 [self.delegate cameraScanInfo:code.stringValue bounds:code.bounds];
             });
         }
@@ -509,7 +509,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
         [self.session commitConfiguration];
     } else {
         if ([self.delegate respondsToSelector:@selector(cameraLoadFail:)]) {
-            MainQueueSafe(^{
+            DispatchMainQueue(^{
                 [self.delegate cameraLoadFail:err.localizedDescription];
             });
         }

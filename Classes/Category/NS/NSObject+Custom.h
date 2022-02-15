@@ -33,6 +33,15 @@
 /**  将对象转化为字符串 */
 - (NSString *)jsonString;
 
+/// 设置属性值
+/// @param val 值
+/// @param key 属性名称
+- (void)setProperty:(id)val key:(NSString *)key;
+
+/// 获取属性值
+/// @param key 属性名称
+- (id)getPropertyWithKey:(NSString *)key;
+
 /// 类名字符串
 + (NSString *)clsName;
 

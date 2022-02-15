@@ -60,7 +60,11 @@ UITableViewDelegate
 #pragma mark - *** NetWork method
 
 - (void)testMethod {
-
+    BQUserDefault.share.name = @"测试";
+    BQUserDefault.share.myTest = @"asd";
+    NSLog(@"设置后:%@,%@", BQUserDefault.share.name, BQUserDefault.share.myTest);
+    [BQUserDefault clearInfos];
+    NSLog(@"清空后:%@,%@", BQUserDefault.share.name, BQUserDefault.share.myTest);
 }
 
 #pragma mark - *** Event Action

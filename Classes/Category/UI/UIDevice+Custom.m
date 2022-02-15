@@ -14,6 +14,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Contacts/Contacts.h>
 #import <Photos/Photos.h>
+#import "BQUrlHandle.h"
 
 //首先导入头文件信息
 #include <ifaddrs.h>
@@ -248,12 +249,7 @@
     [alertController addAction:cancleAction];
     
     UIAlertAction * setAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        if (@available(iOS 10.0, *)) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:url];
-        }
+        [BQUrlHandle openUrlStr:UIApplicationOpenSettingsURLString];
     }];
     [alertController addAction:setAction];
     
