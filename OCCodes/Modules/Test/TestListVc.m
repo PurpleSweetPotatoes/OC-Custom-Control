@@ -12,6 +12,7 @@
 
 #import "BQCrashHelper.h"
 #import "BQCrashHelper.h"
+#import "BQProgressView.h"
 #import "BQUserDefault.h"
 #import "NSArray+Custom.h"
 #import "NSData+Custom.h"
@@ -20,6 +21,7 @@
 #import "UITableView+Custom.h"
 #import "VcInfoCell.h"
 #import "VcModel.h"
+#import "BQTimer.h"
 
 @interface TestListVc ()
 <
@@ -28,6 +30,8 @@ UITableViewDelegate
 >
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSArray<VcModel *> * list;
+@property (nonatomic, strong) BQTimer * timer;
+@property (nonatomic, strong) BQProgressView * proV;
 @end
 
 @implementation TestListVc
@@ -40,7 +44,6 @@ UITableViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.list = @[
         [VcModel modelWithDic:@{@"clsName":@"DatePickView",@"titleName":@"时间选择控件",@"descStr":@"时间选择"}]
         ,[VcModel modelWithDic:@{@"clsName":@"VideoPlayerVc",@"titleName":@"播放器控件",@"descStr":@"视频播放"}]
@@ -58,14 +61,6 @@ UITableViewDelegate
 }
 
 #pragma mark - *** NetWork method
-
-- (void)testMethod {
-    BQUserDefault.share.name = @"测试";
-    BQUserDefault.share.myTest = @"asd";
-    NSLog(@"设置后:%@,%@", BQUserDefault.share.name, BQUserDefault.share.myTest);
-    [BQUserDefault clearInfos];
-    NSLog(@"清空后:%@,%@", BQUserDefault.share.name, BQUserDefault.share.myTest);
-}
 
 #pragma mark - *** Event Action
 
@@ -96,6 +91,36 @@ UITableViewDelegate
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - *** Instance method
+
+- (void)testMethod {
+    UIView * view = [[UIView alloc] initWithFrame:self.view.bounds];
+    view.backgroundColor = [UIColor blackColor];
+    
+    BQProgressView * proV = [[BQProgressView alloc] initWithFrame:CGRectMake(0, 0, 30, 30) type:BQProgressTypeCircleText];
+    proV.center = view.center;
+    [view addSubview:proV];
+    self.proV = proV;
+    self.timer = [BQTimer configWithScheduleTime:1 target:self selector:@selector(timeChange)];
+    [self.timer start];
+    
+    [self.view addSubview:view];
+}
+
+- (void)timeChange {
+    CGFloat percent = arc4random() % 101 / 100.0;
+    NSLog(@"进度:%lf",percent);
+    [self.proV setPercent:percent];
+}
+
+- (void)userDefalutTest {
+    BQUserDefault.share.name = @"测试";
+    BQUserDefault.share.myTest = @"asd";
+    NSLog(@"设置后:%@,%@", BQUserDefault.share.name, BQUserDefault.share.myTest);
+    [BQUserDefault clearInfos];
+    NSLog(@"清空后:%@,%@", BQUserDefault.share.name, BQUserDefault.share.myTest);
+}
+
+
 
 #pragma mark - *** UI method
 

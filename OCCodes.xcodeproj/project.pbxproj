@@ -106,6 +106,7 @@
 		E25F233727688FD200C3E984 /* BaseVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F233627688FD200C3E984 /* BaseVc.m */; };
 		E25F233A2768900B00C3E984 /* TestListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F23392768900B00C3E984 /* TestListVc.m */; };
 		E25F233D2768906300C3E984 /* CenterInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E25F233C2768906300C3E984 /* CenterInfoVc.m */; };
+		E275D82827BC8D42004A0004 /* BQProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E275D82727BC8D42004A0004 /* BQProgressView.m */; };
 		E29AEC6027B5FD4E0008B950 /* BQUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = E29AEC5F27B5FD4E0008B950 /* BQUserDefault.m */; };
 		E2B5BA322783F212006F2EE7 /* CollectionViewVc.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B5BA312783F212006F2EE7 /* CollectionViewVc.m */; };
 		E2B5BA372783F4AC006F2EE7 /* BQWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B5BA362783F4AC006F2EE7 /* BQWaterFallLayout.m */; };
@@ -346,6 +347,8 @@
 		E25F23392768900B00C3E984 /* TestListVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestListVc.m; sourceTree = "<group>"; };
 		E25F233B2768906300C3E984 /* CenterInfoVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CenterInfoVc.h; sourceTree = "<group>"; };
 		E25F233C2768906300C3E984 /* CenterInfoVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CenterInfoVc.m; sourceTree = "<group>"; };
+		E275D82627BC8D42004A0004 /* BQProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQProgressView.h; sourceTree = "<group>"; };
+		E275D82727BC8D42004A0004 /* BQProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BQProgressView.m; sourceTree = "<group>"; };
 		E29AEC5E27B5FD4E0008B950 /* BQUserDefault.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BQUserDefault.h; sourceTree = "<group>"; };
 		E29AEC5F27B5FD4E0008B950 /* BQUserDefault.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BQUserDefault.m; sourceTree = "<group>"; };
 		E2B5BA302783F212006F2EE7 /* CollectionViewVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewVc.h; sourceTree = "<group>"; };
@@ -542,6 +545,8 @@
 				E25F21C9276871C100C3E984 /* BQBannerView.m */,
 				E25F21C7276871C100C3E984 /* BQCirLabel.h */,
 				E25F21D5276871C100C3E984 /* BQCirLabel.m */,
+				E275D82627BC8D42004A0004 /* BQProgressView.h */,
+				E275D82727BC8D42004A0004 /* BQProgressView.m */,
 				E2F6AED0278C156D00547039 /* BQDashBoradView.h */,
 				E2F6AED1278C156D00547039 /* BQDashBoradView.m */,
 				E25F21D2276871C100C3E984 /* BQFPSLabel.h */,
@@ -1143,6 +1148,7 @@
 				E250CFCD276C3E7C00AC1F40 /* VideoPlayerVc.m in Sources */,
 				E25F22AA276871C100C3E984 /* BQCrashHelper.m in Sources */,
 				E21A076E276AE3F500D01F83 /* BQLaunchConfig.m in Sources */,
+				E275D82827BC8D42004A0004 /* BQProgressView.m in Sources */,
 				E2B5BA622783FD3E006F2EE7 /* CollectionImgCell.m in Sources */,
 				E2B5BA6B278424E7006F2EE7 /* LaunchAdVc.m in Sources */,
 				E25F22AE276871C100C3E984 /* BQImgPickerCell.m in Sources */,

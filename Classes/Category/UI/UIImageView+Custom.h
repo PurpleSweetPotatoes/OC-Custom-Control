@@ -21,7 +21,17 @@
 /// @param name 图片名称
 /// @param bundle 包名
 - (void)setGifImgWithName:(NSString *)name inBundle:(NSBundle *)bundle;
+
+#if __has_include(<SDWebImage/UIImageView+WebCache.h>)
+
+/// 基于sdwebimage封装
+- (void)setImgWithUrl:(NSString *)url;
+
+- (void)setImgWithUrl:(NSString *)url holdImg:(UIImage *)holdImg;
+
+#endif
 @end
+
 
 
 @interface BQShowImageView : UIView

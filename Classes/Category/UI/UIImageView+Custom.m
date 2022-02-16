@@ -8,6 +8,11 @@
 
 #import "UIImageView+Custom.h"
 
+
+#if __has_include(<SDWebImage/UIImageView+WebCache.h>)
+#import <SDWebImage/UIImageView+WebCache.h>
+#endif
+
 @implementation UIImageView (Custom)
 
 - (void)canShowImage {
@@ -121,6 +126,21 @@
     CGRect imageViewFrame = [self.superview convertRect:self.frame toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
     [BQShowImageView showImage:self.image frame:imageViewFrame];
 }
+
+#if __has_include(<SDWebImage/UIImageView+WebCache.h>)
+
+- (void)setImgWithUrl:(NSString *)url {
+    [self setImgWithUrl:url holdImg:nil];
+}
+
+- (void)setImgWithUrl:(NSString *)url holdImg:(UIImage *)holdImg {
+    if (url.length == 0) {
+        return;
+    }
+    [self sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:holdImg];
+}
+#endif
+
 @end
 
 
