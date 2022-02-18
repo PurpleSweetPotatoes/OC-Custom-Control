@@ -23,12 +23,13 @@
     dispatch_once(&onceToken, ^{
         SEL selA = @selector(sendAction:to:forEvent:);
         SEL selB = @selector(mySendAction:to:forEvent:);
-        Method methodA =   class_getInstanceMethod(self,selA);
+        Method methodA = class_getInstanceMethod(self, selA);
         Method methodB = class_getInstanceMethod(self, selB);
+        // 子类未实现时加入该方法,否则就是往父类查找该方法进行替换,避免污染
         BOOL isAdd = class_addMethod(self, selA, method_getImplementation(methodB), method_getTypeEncoding(methodB));
         if (isAdd) {
             class_replaceMethod(self, selB, method_getImplementation(methodA), method_getTypeEncoding(methodA));
-        }else{
+        } else {
             method_exchangeImplementations(methodA, methodB);
         }
     });

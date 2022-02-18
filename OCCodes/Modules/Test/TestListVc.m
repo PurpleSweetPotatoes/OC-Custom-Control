@@ -12,7 +12,6 @@
 
 #import "BQCrashHelper.h"
 #import "BQCrashHelper.h"
-#import "BQProgressView.h"
 #import "BQUserDefault.h"
 #import "NSArray+Custom.h"
 #import "NSData+Custom.h"
@@ -31,7 +30,6 @@ UITableViewDelegate
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSArray<VcModel *> * list;
 @property (nonatomic, strong) BQTimer * timer;
-@property (nonatomic, strong) BQProgressView * proV;
 @end
 
 @implementation TestListVc
@@ -93,23 +91,7 @@ UITableViewDelegate
 #pragma mark - *** Instance method
 
 - (void)testMethod {
-    UIView * view = [[UIView alloc] initWithFrame:self.view.bounds];
-    view.backgroundColor = [UIColor blackColor];
     
-    BQProgressView * proV = [[BQProgressView alloc] initWithFrame:CGRectMake(0, 0, 30, 30) type:BQProgressTypeCircleText];
-    proV.center = view.center;
-    [view addSubview:proV];
-    self.proV = proV;
-    self.timer = [BQTimer configWithScheduleTime:1 target:self selector:@selector(timeChange)];
-    [self.timer start];
-    
-    [self.view addSubview:view];
-}
-
-- (void)timeChange {
-    CGFloat percent = arc4random() % 101 / 100.0;
-    NSLog(@"进度:%lf",percent);
-    [self.proV setPercent:percent];
 }
 
 - (void)userDefalutTest {

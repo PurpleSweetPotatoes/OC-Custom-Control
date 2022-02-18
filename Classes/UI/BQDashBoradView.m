@@ -87,7 +87,7 @@
         self.startAngle = M_PI_2 + M_PI_4;
         self.endAngle = M_PI * 2 + M_PI_4;
         _preSpeed = 0;
-        _center = self.thisCenter;
+        _center = self.midPoint;
         
         [self configUI];
     }

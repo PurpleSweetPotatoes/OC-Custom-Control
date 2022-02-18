@@ -25,7 +25,7 @@
     self.frame = rect;
 }
 
-- (CGPoint)thisCenter {
+- (CGPoint)midPoint {
     return CGPointMake(self.width * 0.5,self.height * 0.5);
 }
 

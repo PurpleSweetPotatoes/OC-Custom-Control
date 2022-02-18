@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, GradientShadowDirection) {
 @property (nonatomic, assign          ) CGFloat height;
 @property (nonatomic, assign          ) CGFloat right;
 @property (nonatomic, assign          ) CGFloat bottom;
-@property (nonatomic, readonly, assign) CGPoint thisCenter;
+@property (nonatomic, readonly, assign) CGPoint midPoint;
 
 #pragma mark - 圆角
 
