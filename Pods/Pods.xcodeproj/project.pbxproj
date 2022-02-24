@@ -3,63 +3,71 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1490F1D1894DE7F5147FC5519E3DC9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		B04469D6C930AFC42D2DD8A22DF939AB /* Pods-OCCodes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46FA043471D92C7831B15B573145CABA /* Pods-OCCodes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA8490AFE5D14ECD09687D94E6495BFC /* Pods-OCCodes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 86461EE327C5F671A5B13E177AE72ADA /* Pods-OCCodes-dummy.m */; };
+		4F737F36B6DA3A7784E617C352107075 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		BF593772102A85A4EEE0B59C93BC32AA /* Pods-OCCodes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 86461EE327C5F671A5B13E177AE72ADA /* Pods-OCCodes-dummy.m */; };
+		D02E03688DBD08E1B06185653D29E734 /* Pods-OCCodes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46FA043471D92C7831B15B573145CABA /* Pods-OCCodes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0E4CCED1AED8D491B6BBF1990D8A7D01 /* PBXContainerItemProxy */ = {
+		05E39DF4729D1598AF402AA828D79DE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 18491E62308A38E2FA43CE408F5A1713 /* SDWebImage.xcodeproj */;
+			containerPortal = A07D382D6FADD6DE805404F8B207EED3 /* SDWebImage.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 4ECF4E662EEBE4FA58102FF984D920CC;
 			remoteInfo = SDWebImage;
 		};
-		3CD90BC4FB670874DF4550927979F024 /* PBXContainerItemProxy */ = {
+		B52353ECA99C77280D1A16F41F296D51 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5DE4BA86A55EBDF4013684A04CC2D426 /* AFNetworking.xcodeproj */;
+			containerPortal = E5A45B6B154FDFFDC668307B7A3BFE6C /* AFNetworking.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = B561AD1B13C486A61C9BF66B4E6D8F89;
 			remoteInfo = AFNetworking;
 		};
-		55C31DB5A1CC8AC06537F54E01840EC5 /* PBXContainerItemProxy */ = {
+		C4E218E5727D9589557EC4FA9F055B55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 677898D47ED9655A5877F3F47406D804 /* YYModel.xcodeproj */;
+			containerPortal = E615E5A7463D23F81985CFF1C977C128 /* YYModel.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = B24F71FDC23D2B2E241DE51DECC7ED5F;
 			remoteInfo = YYModel;
 		};
+		E818883BAAF3F7DE066C4D49475A413C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85DFF9404A5E7551D30D688DFC1F6FBE /* lottie-ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2FFD4CF15B40CE17E04F3BC6AAF7035A;
+			remoteInfo = "lottie-ios";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18491E62308A38E2FA43CE408F5A1713 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		21E0CC03D4101406C75958A5B52C797A /* Pods-OCCodes-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OCCodes-frameworks.sh"; sourceTree = "<group>"; };
 		24A05F5B9EA1DC72BA66C443F1D89480 /* Pods-OCCodes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OCCodes.release.xcconfig"; sourceTree = "<group>"; };
 		263D85C5B928054253E455F4522A8778 /* Pods_OCCodes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_OCCodes.framework; path = "Pods-OCCodes.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B556E7F0C313B55818A3BCE0320C19 /* Pods-OCCodes-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OCCodes-acknowledgements.plist"; sourceTree = "<group>"; };
 		46FA043471D92C7831B15B573145CABA /* Pods-OCCodes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OCCodes-umbrella.h"; sourceTree = "<group>"; };
-		5DE4BA86A55EBDF4013684A04CC2D426 /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AFNetworking; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
 		623496C2944D5C24DCCA3F5590853CE8 /* Pods-OCCodes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OCCodes.debug.xcconfig"; sourceTree = "<group>"; };
-		677898D47ED9655A5877F3F47406D804 /* YYModel */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YYModel; path = YYModel.xcodeproj; sourceTree = "<group>"; };
 		67A56ABDB9C600B79EAFADACE61D8111 /* Pods-OCCodes-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OCCodes-acknowledgements.markdown"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		85DFF9404A5E7551D30D688DFC1F6FBE /* lottie-ios */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "lottie-ios"; path = "lottie-ios.xcodeproj"; sourceTree = "<group>"; };
 		86461EE327C5F671A5B13E177AE72ADA /* Pods-OCCodes-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OCCodes-dummy.m"; sourceTree = "<group>"; };
 		8CE233CEF8C71A5EF2EB65C9B1DD76EC /* Pods-OCCodes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-OCCodes.modulemap"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A07D382D6FADD6DE805404F8B207EED3 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		C9F8762CA5F3E5C92BC56159095DE6F0 /* Pods-OCCodes-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OCCodes-Info.plist"; sourceTree = "<group>"; };
+		E5A45B6B154FDFFDC668307B7A3BFE6C /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AFNetworking; path = AFNetworking.xcodeproj; sourceTree = "<group>"; };
+		E615E5A7463D23F81985CFF1C977C128 /* YYModel */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YYModel; path = YYModel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DD03FA956322C17E4351AA2573E5FF45 /* Frameworks */ = {
+		70F90E9FD229E0E97E5EA9411FD95461 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1490F1D1894DE7F5147FC5519E3DC9E /* Foundation.framework in Frameworks */,
+				4F737F36B6DA3A7784E617C352107075 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +120,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				F360B82E5F62EEF1D34C9261E9834A98 /* Pods */,
+				E00B2779FA75BEA97B0D0FDD6991EBD0 /* Pods */,
 				731DA47821DE08F641C63FFD27B12536 /* Products */,
 				325242FD61105A2B6717E629787F3403 /* Targets Support Files */,
 			);
@@ -126,12 +134,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F360B82E5F62EEF1D34C9261E9834A98 /* Pods */ = {
+		E00B2779FA75BEA97B0D0FDD6991EBD0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5DE4BA86A55EBDF4013684A04CC2D426 /* AFNetworking */,
-				18491E62308A38E2FA43CE408F5A1713 /* SDWebImage */,
-				677898D47ED9655A5877F3F47406D804 /* YYModel */,
+				E5A45B6B154FDFFDC668307B7A3BFE6C /* AFNetworking */,
+				85DFF9404A5E7551D30D688DFC1F6FBE /* lottie-ios */,
+				A07D382D6FADD6DE805404F8B207EED3 /* SDWebImage */,
+				E615E5A7463D23F81985CFF1C977C128 /* YYModel */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -139,11 +148,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7AD2F41907ADF286C8090F35243CF362 /* Headers */ = {
+		40E4A45DC5AD2C48E985E5D9E5422862 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B04469D6C930AFC42D2DD8A22DF939AB /* Pods-OCCodes-umbrella.h in Headers */,
+				D02E03688DBD08E1B06185653D29E734 /* Pods-OCCodes-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,19 +161,20 @@
 /* Begin PBXNativeTarget section */
 		7600FBE1C3C3F07C2BCD291B1DC98C74 /* Pods-OCCodes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0702B50D62DA45892E645D47B06556CA /* Build configuration list for PBXNativeTarget "Pods-OCCodes" */;
+			buildConfigurationList = 09C909D06481BFF7B5F739F690D8FDC6 /* Build configuration list for PBXNativeTarget "Pods-OCCodes" */;
 			buildPhases = (
-				7AD2F41907ADF286C8090F35243CF362 /* Headers */,
-				3AB4A7AEF223E425F9523E8CFC98CC5A /* Sources */,
-				DD03FA956322C17E4351AA2573E5FF45 /* Frameworks */,
-				19E84A85F4B2F46054CCC67C8E81572C /* Resources */,
+				40E4A45DC5AD2C48E985E5D9E5422862 /* Headers */,
+				2B702745B7C6B2153CC356DB18060628 /* Sources */,
+				70F90E9FD229E0E97E5EA9411FD95461 /* Frameworks */,
+				FF931A11514AD6C3AAD5BA8D4885B63C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4AF2629AD3618068AC22D550267B7117 /* PBXTargetDependency */,
-				9F48156A3E653B88C2C58E1C8B115EDA /* PBXTargetDependency */,
-				64F1116A3F5B1BA54A36FC233EF46B9A /* PBXTargetDependency */,
+				84531A6EE40ED4DC6B5812EEA6E1F732 /* PBXTargetDependency */,
+				13714BC686FDC743AB37753D0C45A3E5 /* PBXTargetDependency */,
+				C70F9D68F39870B4DD26B2C2A41F56DE /* PBXTargetDependency */,
+				38F3AF07644CAAAB5908507368503B3C /* PBXTargetDependency */,
 			);
 			name = "Pods-OCCodes";
 			productName = "Pods-OCCodes";
@@ -181,7 +191,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -193,13 +203,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProjectRef = 5DE4BA86A55EBDF4013684A04CC2D426 /* AFNetworking */;
+					ProjectRef = 85DFF9404A5E7551D30D688DFC1F6FBE /* lottie-ios */;
 				},
 				{
-					ProjectRef = 18491E62308A38E2FA43CE408F5A1713 /* SDWebImage */;
+					ProjectRef = E5A45B6B154FDFFDC668307B7A3BFE6C /* AFNetworking */;
 				},
 				{
-					ProjectRef = 677898D47ED9655A5877F3F47406D804 /* YYModel */;
+					ProjectRef = A07D382D6FADD6DE805404F8B207EED3 /* SDWebImage */;
+				},
+				{
+					ProjectRef = E615E5A7463D23F81985CFF1C977C128 /* YYModel */;
 				},
 			);
 			projectRoot = "";
@@ -210,7 +223,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		19E84A85F4B2F46054CCC67C8E81572C /* Resources */ = {
+		FF931A11514AD6C3AAD5BA8D4885B63C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,36 +233,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3AB4A7AEF223E425F9523E8CFC98CC5A /* Sources */ = {
+		2B702745B7C6B2153CC356DB18060628 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA8490AFE5D14ECD09687D94E6495BFC /* Pods-OCCodes-dummy.m in Sources */,
+				BF593772102A85A4EEE0B59C93BC32AA /* Pods-OCCodes-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4AF2629AD3618068AC22D550267B7117 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AFNetworking;
-			targetProxy = 3CD90BC4FB670874DF4550927979F024 /* PBXContainerItemProxy */;
-		};
-		64F1116A3F5B1BA54A36FC233EF46B9A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = YYModel;
-			targetProxy = 55C31DB5A1CC8AC06537F54E01840EC5 /* PBXContainerItemProxy */;
-		};
-		9F48156A3E653B88C2C58E1C8B115EDA /* PBXTargetDependency */ = {
+		13714BC686FDC743AB37753D0C45A3E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SDWebImage;
-			targetProxy = 0E4CCED1AED8D491B6BBF1990D8A7D01 /* PBXContainerItemProxy */;
+			targetProxy = 05E39DF4729D1598AF402AA828D79DE5 /* PBXContainerItemProxy */;
+		};
+		38F3AF07644CAAAB5908507368503B3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lottie-ios";
+			targetProxy = E818883BAAF3F7DE066C4D49475A413C /* PBXContainerItemProxy */;
+		};
+		84531A6EE40ED4DC6B5812EEA6E1F732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			targetProxy = B52353ECA99C77280D1A16F41F296D51 /* PBXContainerItemProxy */;
+		};
+		C70F9D68F39870B4DD26B2C2A41F56DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = YYModel;
+			targetProxy = C4E218E5727D9589557EC4FA9F055B55 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5EBDB6642260B90623ECD746B581673F /* Release */ = {
+		1775D419574BF1DF291996E7ACA9BBA7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24A05F5B9EA1DC72BA66C443F1D89480 /* Pods-OCCodes.release.xcconfig */;
 			buildSettings = {
@@ -287,7 +305,7 @@
 			};
 			name = Release;
 		};
-		72084D5F4E3C816F80A29CBA3141C7A0 /* Debug */ = {
+		7AEFD81F61D28C798D9A0BB2A899AF49 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 623496C2944D5C24DCCA3F5590853CE8 /* Pods-OCCodes.debug.xcconfig */;
 			buildSettings = {
@@ -455,11 +473,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0702B50D62DA45892E645D47B06556CA /* Build configuration list for PBXNativeTarget "Pods-OCCodes" */ = {
+		09C909D06481BFF7B5F739F690D8FDC6 /* Build configuration list for PBXNativeTarget "Pods-OCCodes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72084D5F4E3C816F80A29CBA3141C7A0 /* Debug */,
-				5EBDB6642260B90623ECD746B581673F /* Release */,
+				7AEFD81F61D28C798D9A0BB2A899AF49 /* Debug */,
+				1775D419574BF1DF291996E7ACA9BBA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

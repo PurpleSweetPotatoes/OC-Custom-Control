@@ -49,6 +49,7 @@ UITableViewDelegate
         ,[VcModel modelWithDic:@{@"clsName":@"KeyBoardManagerVc",@"titleName":@"键盘管理控件",@"descStr":@"键盘管理器+文本输入限制"}]
         ,[VcModel modelWithDic:@{@"clsName":@"CollectionViewVc",@"titleName":@"CollectionView布局",@"descStr":@"列表布局设计"}]
         ,[VcModel modelWithDic:@{@"clsName":@"SpeedVc",@"titleName":@"速度检测",@"descStr":@"gps检测"}]
+        ,[VcModel modelWithDic:@{@"clsName":@"LottieVc",@"titleName":@"Lottie动画",@"descStr":@"lottie测试"}]
     ];
     
     [self configUI];

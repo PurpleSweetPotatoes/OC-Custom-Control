@@ -16,10 +16,19 @@ CACHE_KEYS:
       - AFNetworking/Security (4.0.1)
       - AFNetworking/Serialization (4.0.1)
       - AFNetworking/UIKit (4.0.1)
+  lottie-ios:
+    BUILD_SETTINGS_CHECKSUM:
+      lottie-ios:
+        :debug: 0785b172596b9bc537986dc34a1bb343
+        :release: 0785b172596b9bc537986dc34a1bb343
+    CHECKSUM: a50d5c0160425cd4b01b852bb9578963e6d92d31
+    PROJECT_NAME: lottie-ios
+    SPECS:
+      - lottie-ios (2.5.3)
   Pods-OCCodes:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: 724ede42d051147cbe32be77355bfd86
-      Release: 724ede42d051147cbe32be77355bfd86
+      Debug: a9eb41b4d854fad3618bc8bc36417a3c
+      Release: a9eb41b4d854fad3618bc8bc36417a3c
   SDWebImage:
     BUILD_SETTINGS_CHECKSUM:
       SDWebImage:
@@ -39,6 +48,6 @@ CACHE_KEYS:
     PROJECT_NAME: YYModel
     SPECS:
       - YYModel (1.0.4)
-OBJECT_VERSION: 51
+OBJECT_VERSION: 50
 PLUGINS:
   {}

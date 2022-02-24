@@ -2,6 +2,10 @@ AFNetworking:
   LABEL: AFNetworking
   PROJECT_PATH: AFNetworking.xcodeproj
   UUID: B561AD1B13C486A61C9BF66B4E6D8F89
+lottie-ios:
+  LABEL: lottie-ios
+  PROJECT_PATH: lottie-ios.xcodeproj
+  UUID: 2FFD4CF15B40CE17E04F3BC6AAF7035A
 Pods-OCCodes:
   LABEL: Pods-OCCodes
   PROJECT_PATH: Pods.xcodeproj

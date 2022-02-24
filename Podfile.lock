@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - lottie-ios (2.5.3)
   - SDWebImage (5.12.1):
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
@@ -21,20 +22,23 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - lottie-ios (~> 2.5.3)
   - SDWebImage
   - YYModel
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - lottie-ios
     - SDWebImage
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: c6591da41f62e8d515adf1785d1d62b7f6deae71
+PODFILE CHECKSUM: 8ef31623b0899c0fa4142b7ced42255e8d590e7f
 
 COCOAPODS: 1.10.1

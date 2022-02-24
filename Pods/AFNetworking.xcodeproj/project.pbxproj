@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -292,7 +292,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 3A76877F7CA6CFE0AB465588432EBCFE /* Build configuration list for PBXProject "AFNetworking" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (

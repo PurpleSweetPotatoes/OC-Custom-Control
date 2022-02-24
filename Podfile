@@ -9,7 +9,8 @@ target 'OCCodes' do
   pod 'AFNetworking'
   pod 'SDWebImage'
   pod 'YYModel'
-  
+  # 最后oc版本r 测试debug包增加5M
+  pod 'lottie-ios', '~> 2.5.3'
 end
 
 install! ‘cocoapods’,
